@@ -40,7 +40,6 @@ function ProductView({ product }: any) {
                         //     height="300px"
                         //     title="Contemplative Reptile"
                         // />
-
                     }
                 </div>
 
@@ -64,8 +63,6 @@ function ProductView({ product }: any) {
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Quantity" value={`${quantity}m`} />
                             <span className="h-5 w-5 inline-block text-center align-middle cursor-pointer bg-black text-white">+</span>
                         </div>
-
-
 
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                     </div>

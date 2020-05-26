@@ -9,32 +9,19 @@ import Link from 'next/link';
 
 
 function ProducItem({ product }) {
-    console.log("single prod", product)
+    // console.log("single prod", product)
 
     const [currentColor, setCurrentcolor] = useState(null);
     const [currentImage, setCurrentImage] = useState(null);
 
     const [colors, setColors] = useState(null);
-    // set uniqu ecolors and map
-    // function setUniqueColors() {
-    //     let colorSet = new Set([]);
-    //     for (const variation of product.variations) {
-    //         if (variation.attributes.attribute_pa_color) {
-    //             colorSet.add(variation.attributes.attribute_pa_color);
-    //         }
-    //     }
-
-    //     setColors(Array.from(colorSet));
-
-    // }
-
 
     function setUniquecolors() {
-        if (product.custom_variations) {
+        if (product.custom_variations.length !== 0) {
             let colorSet = new Set([]);
 
             for (const variation of product.custom_variations) {
-                if (variation.attributes.attribute_pa_color) {
+                if (variation['attributes'].attribute_pa_color) {
                     colorSet.add(variation.attributes.attribute_pa_color);
                 }
             }
@@ -48,10 +35,9 @@ function ProducItem({ product }) {
 
     function getImage() {
 
-        if (product.custom_variations) {
+        if (product.custom_variations.length !== 0) {
             if (currentColor) {
                 let obj = product && product.custom_variations.find(product => product["attributes"].attribute_pa_color === currentColor)
-                console.log("SSD", obj.image)
                 setCurrentImage(obj.image)
             } else {
                 setCurrentImage(product.custom_variations[0].image)
@@ -73,8 +59,6 @@ function ProducItem({ product }) {
         getImage()
     }, [currentColor])
 
-    console.log("p", product)
-
     return (
 
 
@@ -93,7 +77,12 @@ function ProducItem({ product }) {
                     <div className="px-6 py-4">
                         <div className="font-bold text-xl mb-2">{product.name}</div>
                         <p className="text-gray-700 text-base">
-                            {product.price}
+
+                            <div dangerouslySetInnerHTML={{ __html: product.currency }} />
+                            {
+                                product.variationPrice === "" ? <h3>{product.price}</h3> : <h3>{`${product.variationPrice.min} - ${product.variationPrice.max}`}</h3>
+                            }
+
                         </p>
                     </div>
 
