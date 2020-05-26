@@ -32,6 +32,16 @@ const Shop: NextPage = ({ products }) => {
                             </div>
                         </div>
 
+                        <div>
+
+                            <button>Prev</button>
+                            <div>
+                                <div>1</div>
+                                <div>2</div>
+                            </div>
+                            <button>Next</button>
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-3 grid-cols-gap-2">
 
                             {

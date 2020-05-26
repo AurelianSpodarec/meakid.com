@@ -76,13 +76,11 @@ function ProducItem({ product }) {
 
                     <div className="px-6 py-4">
                         <div className="font-bold text-xl mb-2">{product.name}</div>
+                        <div dangerouslySetInnerHTML={{ __html: product.currency }} />
                         <p className="text-gray-700 text-base">
-
-                            <div dangerouslySetInnerHTML={{ __html: product.currency }} />
                             {
-                                product.variationPrice === "" ? <h3>{product.price}</h3> : <h3>{`${product.variationPrice.min} - ${product.variationPrice.max}`}</h3>
+                                product.variationPrice === "" ? <span>{product.price}</span> : <span>{`${product.variationPrice.min} - ${product.variationPrice.max}`}</span>
                             }
-
                         </p>
                     </div>
 
