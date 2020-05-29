@@ -73,6 +73,14 @@ const Header: NextPage = ({ router }: any) => {
                 </div>
 
 
+                {/* 
+                <div>
+                    Filter
+
+                    Min: <input />
+                </div> */}
+
+
 
             </nav>
 

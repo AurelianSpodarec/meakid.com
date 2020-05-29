@@ -33,13 +33,6 @@ function ProductView({ product }: any) {
                 <div className="col-span-6">
                     {
                         <img src={product.variations ? product.variations[0].variation_gallery_images[0].src : product.image[0]} height="300px" />
-                        //     product.variations[0].variation_gallery_images.map((product, index) => {
-                        //         return <img
-                        //     key={index}
-                        //     src={product.url}
-                        //     height="300px"
-                        //     title="Contemplative Reptile"
-                        // />
                     }
                 </div>
 
