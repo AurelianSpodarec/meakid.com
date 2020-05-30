@@ -1,5 +1,7 @@
 import react, { useState, useEffect } from 'react'
-import { NextPage } from 'next'
+import { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 // import usePaginatedQuery from 'react-query'
 
 import WooCommerce from './../services/woocommerce/config_woocommerce';
@@ -9,18 +11,94 @@ import Router from 'next/router'
 
 
 function Pagination({ pages }) {
-    console.log("paginatoin", pages)
+    const router = useRouter()
+    const [currentPage, setPage] = useState(parseInt(router.query.custom_page));
 
-    // return pages
-    // for (let i = 0; i > pages; i++) {
-    //    <div>{i}</div>
-    // }
+    // console.log("sd", Router.router ? Router.router.query.custom_page : "null")
+    console.log(router)
+    useEffect(() => {
 
-    new Array.fill(pages).map((x, item) => {
-        return <div>{x}</div>
-    })
+        // const a = router ? router.query.custom_page : 1;
+        // setPage()
+    }, [])
+
+    let pagesArr = [];
+
+
+    for (let i = 0; i < pages; i++) {
+        pagesArr.push(i + 1)
+    }
+
+    // pagesArr.
+
+    function nextPage() {
+        console.log("next")
+        setPage(currentPage + 1)
+        Router.push({
+            pathname: '/shop',
+            query: { custom_page: currentPage }
+        })
+    }
+
+    function prevPage() {
+        console.log("prev")
+        setPage(currentPage - 1)
+        Router.push({
+            pathname: '/shop',
+            query: { custom_page: currentPage }
+        })
+    }
+
+    // Show max of 10 pages, last item show to be highest
+
+    return (
+        <nav className="relative z-0 inline-flex shadow-sm">
+            <div className="flex-1 flex justify-between">
+                <a onClick={prevPage} className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                    Previous
+                </a>
+
+                {pagesArr.slice(0, 10).map((_, item) => {
+                    return (
+
+                        <Link href={{
+                            pathname: '/shop',
+                            query: { custom_page: _ }
+                        }}>
+                            <button onClick={() => setPage(_)} type="button" style={{ backgroundColor: currentPage === _ ? 'grey' : "" }} className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                                {_}
+                            </button>
+                        </Link>
+                    )
+                })}
+
+                <button type="button" className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                    ...
+                </button>
+
+                <Link href={{
+                    pathname: '/shop',
+                    query: { custom_page: pages }
+                }}>
+                    <button type="button" style={{ backgroundColor: currentPage === pages ? 'grey' : "" }} className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                        {pages}
+                    </button>
+                </Link>
+
+                <a onClick={nextPage} className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                    Next
+                </a>
+            </div>
+        </nav>
+    )
+
+    // return <div>{pages}</div>
 
 }
+
+// function CustomLink() {
+
+// }
 
 const Shop: NextPage = ({ products }) => {
     console.log(products)
@@ -30,23 +108,7 @@ const Shop: NextPage = ({ products }) => {
     //     usePaginatedQuery(['products', page], () => WooCommerce.get(`custom-product-list?custom_page=${page}`))
 
 
-    function nextPage() {
-        console.log("next")
-        setPage(page + 1)
-        Router.push({
-            pathname: '/shop',
-            query: { custom_page: page }
-        })
-    }
 
-    function prevPage() {
-        console.log("prev")
-        setPage(page - 1)
-        Router.push({
-            pathname: '/shop',
-            query: { custom_page: page }
-        })
-    }
 
     const [text, setText] = useState("");
 
@@ -54,7 +116,7 @@ const Shop: NextPage = ({ products }) => {
         setText(e.value)
     }
 
-    if (!products) return " Loading";
+    if (!products || products.lenght === 0) return " Loading";
 
     return (
         <div>
@@ -92,15 +154,14 @@ const Shop: NextPage = ({ products }) => {
                         </div>
 
                         <div>
-                            <button onClick={prevPage}>Prev</button>
-                            {/* <div>
-                                <div>1</div>
-                                <div>2</div>
-                            </div> */}
+
+
 
                             {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
-                            <Pagination pages={10} />
-                            <button onClick={nextPage}>Next</button>
+                            <Pagination pages={20} />
+
+
+
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 grid-cols-gap-2">
@@ -133,7 +194,7 @@ const Shop: NextPage = ({ products }) => {
             </div>
 
 
-        </div>
+        </div >
     )
 }
 
