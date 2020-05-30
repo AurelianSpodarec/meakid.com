@@ -51,7 +51,7 @@ function ProductView({ product }: any) {
 
                     <div>
                         <div className="mb-4">
-                            <p>Stock quantity: {product.stock_quantity}</p>
+                            <p>Stock quantity: {product.variations ? "load obj" : product.stock_quantity}</p>
                             <span className="h-5 w-5 inline-block text-center align-middle cursor-pointer bg-black text-white">-</span>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Quantity" value={`${quantity}m`} />
                             <span className="h-5 w-5 inline-block text-center align-middle cursor-pointer bg-black text-white">+</span>

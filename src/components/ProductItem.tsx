@@ -3,11 +3,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 
-// function getColors(colors) {
-//     return colors.
-// }
-
-
 function ProducItem({ product }) {
     // console.log("single prod", product)
 
@@ -17,6 +12,8 @@ function ProducItem({ product }) {
     const [colors, setColors] = useState(null);
 
     function setUniquecolors() {
+        setColors(null)
+
         if (product.custom_variations.length !== 0) {
             let colorSet = new Set([]);
 
@@ -28,13 +25,12 @@ function ProducItem({ product }) {
 
             setColors(Array.from(colorSet));
         } else {
-            setColors(product.color)
+            // setColors(product.color)
         }
     }
 
-
     function getImage() {
-
+        setCurrentImage(null)
         if (product.custom_variations.length !== 0) {
             if (currentColor) {
                 let obj = product && product.custom_variations.find(product => product["attributes"].attribute_pa_color === currentColor)
@@ -42,26 +38,21 @@ function ProducItem({ product }) {
             } else {
                 setCurrentImage(product.custom_variations[0].image)
             }
-
         } else {
             let obj = product.image[0]
             setCurrentImage(obj)
         }
-
     }
 
     useEffect(() => {
         setUniquecolors()
-    }, [])
+    }, [product])
 
     useEffect(() => {
-
         getImage()
-    }, [currentColor])
+    }, [currentColor, product])
 
     return (
-
-
 
         <div className="max-w-sm rounded overflow-hidden ">
 
@@ -89,14 +80,13 @@ function ProducItem({ product }) {
 
             <div>
                 {
-                    product.color ?
+                    product.color && colors === null ?
                         <div className="h-5 w-5" style={{ backgroundColor: `${colors}` }}></div>
                         :
 
                         colors && colors.map((color, index) =>
                             <button onClick={() => setCurrentcolor(color)} key={index} style={{ border: color === currentColor ? "2px solid gray" : "", height: '50px', width: '50px', backgroundColor: `${color}` }}></button>
                         )
-
                 }
             </div>
 
