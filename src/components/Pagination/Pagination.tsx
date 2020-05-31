@@ -21,7 +21,7 @@ function Pagination({ pages }) {
         setPage(currentPage + 1)
         Router.push({
             pathname: '/shop',
-            query: { custom_page: currentPage }
+            query: { ...Router.query, custom_page: currentPage }
         })
     }
 
@@ -30,7 +30,7 @@ function Pagination({ pages }) {
         setPage(currentPage - 1)
         Router.push({
             pathname: '/shop',
-            query: { custom_page: currentPage }
+            query: { ...Router.query, custom_page: currentPage }
         })
     }
 

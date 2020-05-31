@@ -7,7 +7,7 @@ import WooCommerce from './../../services/woocommerce/config_woocommerce';
 
 const Sidebar = ({ filterOptions }) => {
 
-    console.log("filterrrrrrrr", filterOptions)
+    console.log("filterrrrrrrr", filterOptions.colors)
 
 
 
@@ -17,6 +17,16 @@ const Sidebar = ({ filterOptions }) => {
             <h2>Filtering</h2>
 
             <div>
+                <h3>Colors</h3>
+                {
+                    filterOptions.colors.map((item, x) =>
+
+                        <div style={{ backgroundColor: `${item.slug}` }} className="h-5 w-5 cursor-pointer">
+
+                        </div>
+
+                    )
+                }
                 {/* <div>
                     Min Price: <input onChange={(e) => updateValue(e)} value={text} />
                 </div>
@@ -29,12 +39,4 @@ const Sidebar = ({ filterOptions }) => {
 }
 
 export default Sidebar;
-
-// Sidebar.getInitialProps = async (ctx) => {
-//     return WooCommerce.get("filter-options")
-//         .then(response => ({ filterOptions: response.data }))
-//         .catch(error => ({ filterOptions: error.response.data }));
-// }
-
-
 
