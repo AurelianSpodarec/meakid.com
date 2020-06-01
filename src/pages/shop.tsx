@@ -85,13 +85,13 @@ function ProductList({ products }) {
 }
 
 Shop.getInitialProps = async (ctx) => {
-    console.log("ctx", ctx.query.custom_page)
+    console.log("ctx", ctx.query.page)
     // return WooCommerce.get(`custom-product-list?custom_page=${ctx.query.custom_page}`)
     //     .then(response => ({ products: response.data }))
     //     .catch(error => ({ products: error.response.data }));
 
     const [dataProducts, dataFilterOptions] = await Promise.all([
-        WooCommerce.get(`custom-product-list?custom_page=${ctx.query.custom_page}`).then(response => ({ dataProducts: response.data })),
+        WooCommerce.get(`custom-product-list?page=${ctx.query.page}&colors=${ctx.query.colors}`).then(response => ({ dataProducts: response.data })),
         WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),
     ]);
 
