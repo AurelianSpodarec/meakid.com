@@ -35,7 +35,6 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                     <main className="col-span-12 md:col-span-8">
 
-                        <p>Total Pages: {Math.floor((products.limit / products.total) * 10)}</p>
 
                         <div className="grid grid-cols-12">
                             <div className="grid col-span-6">
@@ -47,6 +46,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                             </div>
                         </div>
+
 
                         <div>
                             {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
@@ -86,20 +86,12 @@ function ProductList({ products }) {
 
 Shop.getInitialProps = async (ctx) => {
     console.log("ctx", ctx.query.page)
-    // return WooCommerce.get(`custom-product-list?custom_page=${ctx.query.custom_page}`)
-    //     .then(response => ({ products: response.data }))
-    //     .catch(error => ({ products: error.response.data }));
 
     const [dataProducts, dataFilterOptions] = await Promise.all([
         WooCommerce.get(`custom-product-list?page=${ctx.query.page}&colors=${ctx.query.colors}`).then(response => ({ dataProducts: response.data })),
+        // WooCommerce.get(`custom-product-list?page=${ctx.query.page}`).then(response => ({ dataProducts: response.data })),
         WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),
     ]);
 
     return { dataProducts, dataFilterOptions };
 }
-
-
-// return WooCommerce.get("filter-options")
-// .then(response => ({ filterOptions: response.data }))
-// .catch(error => ({ filterOptions: error.response.data }));
-// }
