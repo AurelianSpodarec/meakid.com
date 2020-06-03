@@ -53,7 +53,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                             <Pagination pages={20} />
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 grid-cols-gap-2">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <ProductList products={products} />
                         </div>
 
@@ -76,7 +76,6 @@ function ProductList({ products }) {
         products.products && products.products.length ?
 
             products.products.map((product, index) => {
-                // console.log("Map", product)
                 return <ProducItem key={index} product={product} />
             })
             : 'Loading'
@@ -85,7 +84,8 @@ function ProductList({ products }) {
 }
 
 Shop.getInitialProps = async (ctx) => {
-    console.log("ctx", ctx.query.page)
+    console.log("ctxxxxxxxxxxxxxxxx", ctx.query)
+
 
     const [dataProducts, dataFilterOptions] = await Promise.all([
         WooCommerce.get(`custom-product-list?page=${ctx.query.page}&colors=${ctx.query.colors}`).then(response => ({ dataProducts: response.data })),

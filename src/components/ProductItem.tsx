@@ -58,21 +58,39 @@ function ProducItem({ product }) {
 
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
                 <div>
+
                     <img
-                        className="w-full"
-                        height="300px"
-                        src={currentImage}
+                        className="w-full object-cover"
+                        style={{ height: '250px' }}
+                        src={currentImage ? currentImage : "https://via.placeholder.com/150"}
                         title="Contemplative Reptile"
+                        alt="Sunset in the mountains"
                     />
 
-                    <div className="px-6 py-4">
-                        <div className="font-bold text-xl mb-2">{product.name}</div>
-                        <div dangerouslySetInnerHTML={{ __html: product.currency }} />
-                        <p className="text-gray-700 text-base">
-                            {
-                                product.variationPrice === "" ? <span>{product.price}</span> : <span>{`${product.variationPrice.min} - ${product.variationPrice.max}`}</span>
-                            }
-                        </p>
+
+                    <div className="py-2">
+                        <div className="text-xl text-gray-900 font-bold text-xl">{product.name}</div>
+
+                        <div className="inline-flex">
+
+                            <p className="text-sm text-gray-600 text-base">
+                                {
+                                    product.variationPrice === "" ?
+                                        <span>
+                                            <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div>
+                                        </span> :
+                                        <span>
+                                            {
+                                                product.variationPrice.min == product.variationPrice.max ?
+                                                    <p dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.variationPrice.min).toFixed(2)}` }} />
+                                                    :
+                                                    <p dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.variationPrice.min).toFixed(2)} - ${product.currency}${parseInt(product.variationPrice.min).toFixed(2)}` }} />
+                                            }
+                                        </span>
+
+                                }
+                            </p>
+                        </div>
                     </div>
 
                 </div>
@@ -83,18 +101,22 @@ function ProducItem({ product }) {
                     product.color && colors === null ?
                         <div className="h-5 w-5" style={{ backgroundColor: `${colors}` }}></div>
                         :
-
                         colors && colors.map((color, index) =>
-                            <button onClick={() => setCurrentcolor(color)} key={index} style={{ border: color === currentColor ? "2px solid gray" : "", height: '50px', width: '50px', backgroundColor: `${color}` }}></button>
+                            <button
+
+                                className={"p-2" + (color === currentColor ? "border border-solid border-4 border-gray-600" : "") + " rounded-full mr-1 outline-none"}
+                                onClick={() => setCurrentcolor(color)}
+                                key={index}
+
+                            >
+                                <div
+                                    className={"h-4 w-4 rounded-full outline-none" + (color === currentColor ? " border border-solid border border-gray-600" : "")}
+                                    style={{ backgroundColor: `${color}` }}
+                                />
+                            </button>
                         )
                 }
             </div>
-
-            <div>
-                <button>Add to cart</button>
-            </div>
-
-
         </div>
 
 
