@@ -87,8 +87,10 @@ Shop.getInitialProps = async (ctx) => {
     console.log("ctxxxxxxxxxxxxxxxx", ctx.query)
 
 
+
     const [dataProducts, dataFilterOptions] = await Promise.all([
-        WooCommerce.get(`custom-product-list?page=${ctx.query.page}&colors=${ctx.query.colors}`).then(response => ({ dataProducts: response.data })),
+        WooCommerce.get(`custom-product-list?page=${ctx.query.page}&colors=${ctx.query.colors}`)
+            .then(response => ({ dataProducts: response.data })),
         // WooCommerce.get(`custom-product-list?page=${ctx.query.page}`).then(response => ({ dataProducts: response.data })),
         WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),
     ]);

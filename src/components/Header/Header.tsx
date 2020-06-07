@@ -85,6 +85,14 @@ const Header: NextPage = ({ router }: any) => {
             </nav>
 
 
+            <div className="shopping-cart">
+                <div>Shopping Cart</div>
+
+                <div>
+
+                </div>
+            </div>
+
 
         </>
 

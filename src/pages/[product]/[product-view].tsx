@@ -1,35 +1,29 @@
 import React, { useState, useEffect, useMemo } from 'react';
-
-
-
+import { connect } from 'react-redux';
 import WooCommerce from './../../services/woocommerce/config_woocommerce';
 
-function ProductView({ product }: any) {
+import { addToCart } from './../../store/cart/cart.actions';
+
+
+function ProductView({ product, cart, addToCart }: any) {
+
 
     const [quantity, setQuantity] = useState(1)
 
     console.log('product', product)
 
-    function updateQuantity() {
-
-    }
-
-    function addQuantity() {
-
-    }
-
-    function subtractQuantity() {
-
-    }
-
-    function checkQuantity() {
-        // Only numbers, no more than stock value or below 1
-    }
+    console.log("cart", cart)
 
     return (
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-12">
 
+                <button onClick={() => addToCart(product.id)}>
+                    ADDDD
+                </button>
+                <div>
+                    $$$$$$$$$$$$$ Counter:
+                </div>
                 <div className="col-span-6">
                     {
                         <img src={product.variations ? product.variations[0].variation_gallery_images[0].src : product.image[0]} height="300px" />
@@ -65,16 +59,22 @@ function ProductView({ product }: any) {
     )
 }
 
-export default ProductView;
+const mapStateToProps = state => {
+    return {
+        cart: state.cart
+    }
+};
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (id) => { dispatch(addToCart(id)) },
+    }
+};
 
 ProductView.getInitialProps = async (ctx: any) => {
-
-
-    // console.log("Query Single Product", WooCommerce.get('route').then(res => ({ p: res.data })))
-    // return WooCommerce.get(`product/slug=${ctx.query['single-product']}`)
     return WooCommerce.get(`product/slug=${ctx.query['product-view']}/variations`)
-        // return WooCommerce.get(`products/${ctx.query['single-product']}`)
         .then(response => ({ product: response.data }))
         .catch(error => ({ product: error }));
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductView);

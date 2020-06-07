@@ -1,11 +1,20 @@
-import React from 'react'
+
 import { AppProps } from 'next/app'
 // import './../../styles/index.css'
 import './../../styles/index.css';
 import SiteLayout from '../components/SiteLayout';
 import { withRouter } from 'next/router'
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+import React from 'react'
+
+import { Provider } from "react-redux";
+
+import withRedux from "next-redux-wrapper";
+import { initStore } from './../store/store';
+
+// import { INCREMENT_COUNTER } from './../store/cart/cart.actions';
+
+function MyApp({ Component, pageProps, route, store }: AppProps) {
 
     // if (router.pathname.startsWith('/contact')) {
     //     return (
@@ -19,10 +28,12 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     // }
 
     return (
+        // <Provider store={store}>
         <SiteLayout>
             <Component {...pageProps} />
         </SiteLayout>
+        // </Provider>
     )
 }
 
-export default withRouter(MyApp)
+export default withRedux(initStore)(MyApp);
