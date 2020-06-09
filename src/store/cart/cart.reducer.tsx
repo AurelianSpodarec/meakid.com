@@ -2,7 +2,8 @@ import {
     ADD_TO_CART,
     FETCH_PRODUCT_REQUEST,
     FETCH_PRODUCT_SUCCESS,
-    FETCH_PRODUCT_FAILURE
+    FETCH_PRODUCT_FAILURE,
+    REMOVE_FROM_CART
 } from './cart.actions';
 
 const defaultState = {
@@ -42,33 +43,6 @@ const cartReducer = (state = defaultState, action) => {
                 }
             }
 
-
-        // return {
-        //     ...state,
-        //     items: [
-        //         ...state.items,
-        //         { 
-        //             exist['quantity'] = state[action.payload.id] ? state[action.payload.id].quantity + 1 : 1,
-        //         }
-        //     ]
-        // }
-
-        // return {
-        //     loading: false,
-        //     error: "",
-
-        // exist
-        // ? 
-        //     items:[...state.items, action.payload.quantity++]
-
-        //     : 
-        //     items: [...state.items, action.payload],
-
-        // }
-
-
-
-
         case FETCH_PRODUCT_FAILURE:
             return {
                 loading: false,
@@ -76,11 +50,13 @@ const cartReducer = (state = defaultState, action) => {
                 error: action.payload
             }
 
-        case ADD_TO_CART:
+        case REMOVE_FROM_CART:
+            let newItems = state.items.filter(product => product.id !== action.payload);
+            console.log("imte", newItems)
 
             return {
                 ...state,
-                items: [...state.items, action.id]
+                items: newItems
             }
 
 
@@ -92,4 +68,14 @@ const cartReducer = (state = defaultState, action) => {
 
 export default cartReducer;
 
-// If it already exist, then add quantity to
+
+// product = draft.items.find(
+//     item =>
+//         item.ID === action.payload.ID &&
+//         item.productOptionID === action.payload.productOptionID
+// );
+// if (product) {
+//     product.quantity === 1
+//         ? draft.items.splice(draft.items.indexOf(product), 1)
+//         : product.quantity--;
+// }

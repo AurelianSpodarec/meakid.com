@@ -24,12 +24,14 @@ export const addToCart = (id: number) => {
     }
 
 }
-// return {
-//     type: ADD_TO_CART,
-//     id
-// }
-// }
 
+export const removeFromCart = (id: number) => {
+
+    return {
+        type: REMOVE_FROM_CART,
+        payload: id
+    }
+}
 
 
 const fetchProductRequest = () => {

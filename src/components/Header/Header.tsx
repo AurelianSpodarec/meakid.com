@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { removeFromCart } from '../../store/cart/cart.actions';
 
-const Header: NextPage = ({ router, cart }: any) => {
+const Header: NextPage = ({ router, cart, removeFromCart }: any) => {
 
     console.log(router.pathname.startsWith('/contact'))
     return (
@@ -98,6 +99,8 @@ const Header: NextPage = ({ router, cart }: any) => {
                                         <div>Item ID:{item.id}</div>
                                         <div>Item ID:{item.name}</div>
                                         <div>Quantity: {item.quantity}</div>
+
+                                        <button onClick={() => removeFromCart(item.id)}>Remove from cart X</button>
                                     </div>
                                 )
                             })
@@ -115,6 +118,10 @@ const Header: NextPage = ({ router, cart }: any) => {
 
 // export default withRouter(Header)
 
+const mapDispatchToProps = {
+    removeFromCart
+}
+
 
 const mapStateToProps = state => {
     return {
@@ -124,5 +131,5 @@ const mapStateToProps = state => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(Header);

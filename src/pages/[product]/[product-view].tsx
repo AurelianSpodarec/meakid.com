@@ -65,14 +65,14 @@ ProductView.getInitialProps = async (ctx: any) => {
         .catch(error => ({ product: error }));
 }
 
+const mapDispatchToProps = {
+    addToCart
+}
+
 const mapStateToProps = state => {
     return {
         cart: state.cart
     }
 };
-
-const mapDispatchToProps = {
-    addToCart
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductView);
