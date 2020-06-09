@@ -2,14 +2,15 @@ import * as React from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
+const Header: NextPage = ({ router, cart }: any) => {
 
-const Header: NextPage = ({ router }: any) => {
     console.log(router.pathname.startsWith('/contact'))
     return (
 
         <>
-
             <nav className="fixed left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300">
 
                 <div className="pl-12 pr-8 align-middle flex justify-between">
@@ -89,7 +90,20 @@ const Header: NextPage = ({ router }: any) => {
                 <div>Shopping Cart</div>
 
                 <div>
-
+                    {
+                        cart.items && cart.items.length !== 0 ?
+                            cart.items.map((item, x) => {
+                                return (
+                                    <div>
+                                        <div>Item ID:{item.id}</div>
+                                        <div>Item ID:{item.name}</div>
+                                        <div>Quantity: {item.quantity}</div>
+                                    </div>
+                                )
+                            })
+                            :
+                            "Empty cart"
+                    }
                 </div>
             </div>
 
@@ -99,4 +113,16 @@ const Header: NextPage = ({ router }: any) => {
     )
 }
 
-export default withRouter(Header)
+// export default withRouter(Header)
+
+
+const mapStateToProps = state => {
+    return {
+        cart: state.cart
+    }
+};
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps)
+)(Header);

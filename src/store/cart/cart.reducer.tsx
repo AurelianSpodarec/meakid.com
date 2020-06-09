@@ -24,11 +24,50 @@ const cartReducer = (state = defaultState, action) => {
             }
 
         case FETCH_PRODUCT_SUCCESS:
-            return {
-                loading: false,
-                item: [...state.items, action.payload],
-                error: ""
+
+            let addedItem = state.items.find(item => item.id === action.payload.id)
+            let exist = state.items.find(item => action.payload.id === item.id)
+
+            if (exist) {
+                addedItem.quantity += 1
+                return {
+                    ...state,
+                    items: [...state.items]
+                }
+            } else {
+                action.payload.quantity = 1;
+                return {
+                    ...state,
+                    items: [...state.items, action.payload],
+                }
             }
+
+
+        // return {
+        //     ...state,
+        //     items: [
+        //         ...state.items,
+        //         { 
+        //             exist['quantity'] = state[action.payload.id] ? state[action.payload.id].quantity + 1 : 1,
+        //         }
+        //     ]
+        // }
+
+        // return {
+        //     loading: false,
+        //     error: "",
+
+        // exist
+        // ? 
+        //     items:[...state.items, action.payload.quantity++]
+
+        //     : 
+        //     items: [...state.items, action.payload],
+
+        // }
+
+
+
 
         case FETCH_PRODUCT_FAILURE:
             return {
@@ -38,8 +77,6 @@ const cartReducer = (state = defaultState, action) => {
             }
 
         case ADD_TO_CART:
-
-            // let exist = state.items.find(item => item.id === action.id)
 
             return {
                 ...state,
