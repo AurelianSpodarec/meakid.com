@@ -10,7 +10,7 @@ function ProductView({ product, cart, addToCart }: any) {
 
     const [quantity, setQuantity] = useState(1)
 
-    console.log('product', product)
+    // console.log('product', product)
 
     console.log("cart", cart)
 
@@ -59,22 +59,20 @@ function ProductView({ product, cart, addToCart }: any) {
     )
 }
 
+ProductView.getInitialProps = async (ctx: any) => {
+    return WooCommerce.get(`product/slug=${ctx.query['product-view']}/variations`)
+        .then(response => ({ product: response.data }))
+        .catch(error => ({ product: error }));
+}
+
 const mapStateToProps = state => {
     return {
         cart: state.cart
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addToCart: (id) => { dispatch(addToCart(id)) },
-    }
-};
-
-ProductView.getInitialProps = async (ctx: any) => {
-    return WooCommerce.get(`product/slug=${ctx.query['product-view']}/variations`)
-        .then(response => ({ product: response.data }))
-        .catch(error => ({ product: error }));
+const mapDispatchToProps = {
+    addToCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductView);

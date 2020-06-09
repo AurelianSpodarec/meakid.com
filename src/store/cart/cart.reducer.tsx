@@ -1,22 +1,45 @@
-import { ADD_TO_CART } from './cart.actions';
+import {
+    ADD_TO_CART,
+    FETCH_PRODUCT_REQUEST,
+    FETCH_PRODUCT_SUCCESS,
+    FETCH_PRODUCT_FAILURE
+} from './cart.actions';
 
 const defaultState = {
     items: [],
     total: 0,
+    loading: false
 }
 
-const cartReducer = (state = defaultState, action) => {
-    let product = undefined;
 
+
+const cartReducer = (state = defaultState, action) => {
+
+    // let product = undefined;
     switch (action.type) {
+        case FETCH_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case FETCH_PRODUCT_SUCCESS:
+            return {
+                loading: false,
+                item: [...state.items, action.payload],
+                error: ""
+            }
+
+        case FETCH_PRODUCT_FAILURE:
+            return {
+                loading: false,
+                items: [],
+                error: action.payload
+            }
+
         case ADD_TO_CART:
 
-            let exist = state.items.find(item => item.id === action.id)
-
-            exist
-                ? product.quantity++
-                : product.quantity = 0
-
+            // let exist = state.items.find(item => item.id === action.id)
 
             return {
                 ...state,
@@ -27,8 +50,9 @@ const cartReducer = (state = defaultState, action) => {
         default:
             return { ...state };
     }
-};
+
+}
 
 export default cartReducer;
 
-// If it already exist, then add quantity to it
+// If it already exist, then add quantity to

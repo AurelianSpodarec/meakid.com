@@ -9,35 +9,61 @@ export const CLEAR_CART = "Cart/CLEAR";
 
 
 
-const FETCH_PRODUCT_REQUEST = 'FETCH_PRODUCT_REQUEST';
-const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
-const FETCH_PRODUCT_FAILURE = 'FETCH_PRODUCT_FAILURE';
+export const FETCH_PRODUCT_REQUEST = 'FETCH_PRODUCT_REQUEST';
+export const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
+export const FETCH_PRODUCT_FAILURE = 'FETCH_PRODUCT_FAILURE';
+
 
 
 //Action Creator
 export const addToCart = (id: number) => {
-    return {
-        type: ADD_TO_CART,
-        id
+    console.log("Add to cart click actions")
+    return async dispatch => {
+        dispatch(fetchProduct(id));
+        // dispatch(addItemIdToCart)
     }
+
 }
+// return {
+//     type: ADD_TO_CART,
+//     id
+// }
+// }
+
+
 
 const fetchProductRequest = () => {
     return {
         type: FETCH_PRODUCT_REQUEST
     }
 }
+const fetchProductSuccess = users => {
+    return {
+        type: FETCH_PRODUCT_SUCCESS,
+        payload: users
+    }
+}
+
+const fetchUsersFailure = error => {
+    return {
+        type: FETCH_PRODUCT_FAILURE,
+        payload: error
+    }
+}
+
 
 //  
 
-const fetchProduct = () => {
+const fetchProduct = (id: number) => {
     return function (dispatch) {
-        WooCommerce('products/12')
+        dispatch(fetchProductRequest())
+        WooCommerce.get(`products/${id}`)
             .then(response => {
-
+                const item = response.data;
+                dispatch(fetchProductSuccess(item))
             })
             .catch(error => {
-
+                dispatch(fetchUsersFailure(error.message))
             })
     }
 }
