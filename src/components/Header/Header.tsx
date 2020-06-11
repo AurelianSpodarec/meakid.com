@@ -2,9 +2,12 @@ import * as React from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+
+
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { removeFromCart } from '../../store/cart/cart.actions';
+import Cart from '../Cart/Cart';
 
 const Header: NextPage = ({ router, cart, removeFromCart }: any) => {
 
@@ -75,40 +78,13 @@ const Header: NextPage = ({ router, cart, removeFromCart }: any) => {
                 </div>
 
 
-                {/* 
-                <div>
-                    Filter
-
-                    Min: <input />
-                </div> */}
+                <Cart />
 
 
 
             </nav>
 
 
-            <div className="shopping-cart">
-                <div>Shopping Cart</div>
-
-                <div>
-                    {
-                        cart.items && cart.items.length !== 0 ?
-                            cart.items.map((item, x) => {
-                                return (
-                                    <div>
-                                        <div>Item ID:{item.id}</div>
-                                        <div>Item ID:{item.name}</div>
-                                        <div>Quantity: {item.quantity}</div>
-
-                                        <button onClick={() => removeFromCart(item.id)}>Remove from cart X</button>
-                                    </div>
-                                )
-                            })
-                            :
-                            "Empty cart"
-                    }
-                </div>
-            </div>
 
 
         </>
@@ -118,18 +94,5 @@ const Header: NextPage = ({ router, cart, removeFromCart }: any) => {
 
 // export default withRouter(Header)
 
-const mapDispatchToProps = {
-    removeFromCart
-}
 
-
-const mapStateToProps = state => {
-    return {
-        cart: state.cart
-    }
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(Header);
+export default withRouter(Header);

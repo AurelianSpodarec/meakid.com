@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 
 import WooCommerce from './../services/woocommerce/config_woocommerce';
 import ProducItem from '../components/ProductItem';
-import { Pagination, Sidebar } from '../components';
+import { Pagination, Sidebar, ProductList } from '../components';
 
 
 const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
@@ -48,10 +48,9 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                         </div>
 
 
-                        <div>
-                            {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
-                            <Pagination pages={20} />
-                        </div>
+                        {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
+                        <Pagination pages={20} />
+
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <ProductList products={products} />
@@ -69,24 +68,8 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
 export default Shop;
 
-function ProductList({ products }) {
-    return (
-
-
-        products.products && products.products.length ?
-
-            products.products.map((product, index) => {
-                return <ProducItem key={index} product={product} />
-            })
-            : 'Loading'
-
-    )
-}
-
 Shop.getInitialProps = async (ctx) => {
     console.log("ctxxxxxxxxxxxxxxxx", ctx.query)
-
-
 
     const [dataProducts, dataFilterOptions] = await Promise.all([
         WooCommerce.get(`custom-product-list?page=${ctx.query.page}&colors=${ctx.query.colors}`)

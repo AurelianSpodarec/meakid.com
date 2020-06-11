@@ -52,13 +52,10 @@ const cartReducer = (state = defaultState, action) => {
 
         case REMOVE_FROM_CART:
             let newItems = state.items.filter(product => product.id !== action.payload);
-            console.log("imte", newItems)
-
             return {
                 ...state,
                 items: newItems
             }
-
 
         default:
             return { ...state };
