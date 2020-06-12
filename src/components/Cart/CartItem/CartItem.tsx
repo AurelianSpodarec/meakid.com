@@ -10,7 +10,7 @@ function CartItem({ product }) {
         <div className="max-w-sm rounded overflow-hidden ">
 
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
-                <div>
+                <div className="d-flex">
 
 
                     <img
@@ -21,7 +21,7 @@ function CartItem({ product }) {
                         alt="Sunset in the mountains"
                     />
 
-                    <div>
+                    <div className="text-left">
                         <p >{product.name}</p>
                         <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div>
                     </div>

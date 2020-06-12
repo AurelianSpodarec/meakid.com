@@ -16,7 +16,7 @@ function Cart({ cart, openCart, closeCart }) {
     }
 
     return (
-        <div className={`${cart.open ? "d-none" : "d-block"} p-5 min-h-screen fixed w-24 overflow-auto z-30 inset-y-0 bottom-0 right-0 w-full bg-white md:w-64`}>
+        <div className={`${cart.open ? "d-none" : "d-block"} p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white md:w-106`}>
 
             <div className="flex justify-between mb-5">
                 <h3>Your Cart</h3>

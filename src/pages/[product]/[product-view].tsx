@@ -18,12 +18,6 @@ function ProductView({ product, cart, addToCart }: any) {
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-12">
 
-                <button onClick={() => addToCart(product.id)}>
-                    ADDDD
-                </button>
-                <div>
-                    $$$$$$$$$$$$$ Counter:
-                </div>
                 <div className="col-span-6">
                     {
                         <img src={product.variations ? product.variations[0].variation_gallery_images[0].src : product.image[0]} height="300px" />
@@ -51,7 +45,7 @@ function ProductView({ product, cart, addToCart }: any) {
                             <span className="h-5 w-5 inline-block text-center align-middle cursor-pointer bg-black text-white">+</span>
                         </div>
 
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                        <button onClick={() => addToCart(product.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                     </div>
                 </div>
             </div>
