@@ -71,9 +71,9 @@ export default Shop;
 Shop.getInitialProps = async (ctx) => {
 
     const [dataProducts, dataFilterOptions] = await Promise.all([
-        WooCommerce.get(`custom-product-list?
-            ${ctx.query.page && `&page=${ctx.query.page}`}
-            ${ctx.query.colors && `&colors=${ctx.query.colors}`}`)
+        // WooCommerce.get(`custom-product-list?${ctx.query.page && `&page=${ctx.query.page}`}${ctx.query.colors && `&colors=${ctx.query.colors}`}`)
+        // WooCommerce.get(`custom-product-list?${ctx.query.page ? `page=${ctx.query.page}` : null}${ctx.query.colors && `&colors=${ctx.query.colors}`}`)
+        WooCommerce.get(`custom-product-list?${ctx.asPath.split('?')[1]}`)
             .then(response => ({ dataProducts: response.data })),
 
         WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),
