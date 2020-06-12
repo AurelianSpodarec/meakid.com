@@ -3,13 +3,16 @@ import {
     FETCH_PRODUCT_REQUEST,
     FETCH_PRODUCT_SUCCESS,
     FETCH_PRODUCT_FAILURE,
-    REMOVE_FROM_CART
+    REMOVE_FROM_CART,
+    OPEN_CART,
+    CLOSE_CART
 } from './cart.actions';
 
 const defaultState = {
     items: [],
     total: 0,
-    loading: false
+    loading: false,
+    open: false
 }
 
 
@@ -23,6 +26,7 @@ const cartReducer = (state = defaultState, action) => {
                 ...state,
                 loading: true
             }
+            break;
 
         case FETCH_PRODUCT_SUCCESS:
 
@@ -42,6 +46,7 @@ const cartReducer = (state = defaultState, action) => {
                     items: [...state.items, action.payload],
                 }
             }
+            break;
 
         case FETCH_PRODUCT_FAILURE:
             return {
@@ -49,6 +54,7 @@ const cartReducer = (state = defaultState, action) => {
                 items: [],
                 error: action.payload
             }
+            break;
 
         case REMOVE_FROM_CART:
             let newItems = state.items.filter(product => product.id !== action.payload);
@@ -56,6 +62,21 @@ const cartReducer = (state = defaultState, action) => {
                 ...state,
                 items: newItems
             }
+            break;
+
+        case OPEN_CART:
+            return {
+                ...state,
+                open: true
+            }
+            break;
+
+        case CLOSE_CART:
+            return {
+                ...state,
+                open: false
+            }
+            break;
 
         default:
             return { ...state };

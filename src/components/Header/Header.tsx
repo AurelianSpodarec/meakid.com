@@ -77,14 +77,10 @@ const Header: NextPage = ({ router, cart, removeFromCart }: any) => {
                     </div>
                 </div>
 
-
-                <Cart />
-
-
-
             </nav>
 
 
+            <Cart />
 
 
         </>

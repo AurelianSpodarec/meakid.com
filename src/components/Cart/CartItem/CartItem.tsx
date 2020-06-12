@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 
 function CartItem({ product }) {
-    // console.log("single prod", product)
+    console.log("single prod", product)
     return (
 
         <div className="max-w-sm rounded overflow-hidden ">
@@ -12,17 +12,18 @@ function CartItem({ product }) {
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
                 <div>
 
+
                     <img
-                        className="w-full object-cover"
-                        style={{ height: '250px' }}
+                        className="object-cover"
+                        style={{ height: '120px' }}
                         src={product.images[0].src}
                         title="Contemplative Reptile"
                         alt="Sunset in the mountains"
                     />
 
                     <div>
-                        <div>ID: {product.id}</div>
-                        <fib>Name: {product.name}</fib>
+                        <p >{product.name}</p>
+                        <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div>
                     </div>
 
                 </div>

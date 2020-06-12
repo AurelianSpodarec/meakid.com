@@ -6,8 +6,8 @@ export const ADD_TO_CART = "Cart/ADD";
 export const REMOVE_FROM_CART = "Cart/REMOVE";
 export const CLEAR_CART = "Cart/CLEAR";
 
-
-
+export const OPEN_CART = "Cart/Open";
+export const CLOSE_CART = "Cart/Close";
 
 export const FETCH_PRODUCT_REQUEST = 'FETCH_PRODUCT_REQUEST';
 export const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
@@ -20,7 +20,6 @@ export const addToCart = (id: number) => {
     console.log("Add to cart click actions")
     return async dispatch => {
         dispatch(fetchProduct(id));
-        // dispatch(addItemIdToCart)
     }
 
 }
@@ -32,6 +31,20 @@ export const removeFromCart = (id: number) => {
         payload: id
     }
 }
+
+
+export const openCart = () => {
+    return {
+        type: OPEN_CART
+    }
+}
+
+export const closeCart = () => {
+    return {
+        type: CLOSE_CART,
+    }
+}
+
 
 
 const fetchProductRequest = () => {
@@ -53,8 +66,6 @@ const fetchUsersFailure = error => {
     }
 }
 
-
-//  
 
 const fetchProduct = (id: number) => {
     return function (dispatch) {

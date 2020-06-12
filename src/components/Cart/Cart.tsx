@@ -3,51 +3,62 @@ import CartItem from "./CartItem/CartItem";
 import { withRouter } from 'next/router'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { removeFromCart } from '../../store/cart/cart.actions';
+import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
 
-function Cart({ cart }) {
+function Cart({ cart, openCart, closeCart }) {
+
+    const onIncreaseQuantity = () => {
+        console.log("Increae quantity")
+    }
+
+    const onDecreaseQuantity = () => {
+        console.log("Cart: Decreae quantity")
+    }
+
     return (
-        <div className="min-h-screen">
+        <div className={`${cart.open ? "d-none" : "d-block"} p-5 min-h-screen fixed w-24 overflow-auto z-30 inset-y-0 bottom-0 right-0 w-full bg-white md:w-64`}>
 
-            <div>
-                <h3>Shopping Cart</h3>
-                <div>X</div>
+            <div className="flex justify-between mb-5">
+                <h3>Your Cart</h3>
+                <div onClick={() => closeCart}>X</div>
             </div>
+
 
             {
                 cart.items && cart.items.length !== 0 ?
                     cart.items.map((item, x) => {
                         return (
-                            <div>
-                                <div>Item ID:{item.id}</div>
-                                <div>Item ID:{item.name}</div>
-                                <div>Quantity: {item.quantity}</div>
-
-                                <button onClick={() => removeFromCart(item.id)}>Remove from cart X</button>
-                            </div>
+                            <CartItem
+                                key={item.id}
+                                product={item}
+                            // onIncreaseQuantity={onIncreaseQuantity}
+                            // onDecreaseQuantity={onDecreaseQuantity}
+                            />
+                            // <button onClick={() => removeFromCart(item.id)}>Remove from cart X</button>
                         )
                     })
                     :
                     "Empty cart"
             }
 
-            <div>
-                <p>Total</p>
-                <p>£15.00</p>
+            <div className="flex justify-between">
+                <p className="text-uppercase">Total</p>
+                <p className="font-bold">£15.00</p>
             </div>
 
-            <div>
-                <button>Checkout</button>
-                <button>Your Cart</button>
+            <div className="">
+                <button className="mb-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Checkout</button>
+                <button className="mb-2 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">Your Cart</button>
             </div>
 
         </div>
     )
 }
 
-
 const mapDispatchToProps = {
-    removeFromCart
+    removeFromCart,
+    openCart,
+    closeCart
 }
 
 const mapStateToProps = state => {
