@@ -10,7 +10,7 @@ function ProductView({ product, cart, addToCart }: any) {
 
     const [quantity, setQuantity] = useState(1)
 
-    // console.log('product', product)
+    console.log('product', product)
 
     console.log("cart", cart)
 
@@ -20,7 +20,7 @@ function ProductView({ product, cart, addToCart }: any) {
 
                 <div className="col-span-6">
                     {
-                        <img src={product.variations ? product.variations[0].variation_gallery_images[0].src : product.image[0]} height="300px" />
+                        <img src={product.variations ? product.variations[0].image.url : product.image[0]} height="300px" />
                     }
                 </div>
 
