@@ -55,7 +55,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                         <div className="grid grid-cols-12">
                             <div className="grid col-span-6">
                                 {
-                                    dataProducts.products ?
+                                    products ?
                                         <p>Showing {products && ((products.page * products.limit) - products.limit) + 1} - {products.page * products.limit} of {products.total} result</p>
                                         :
                                         <p>Showing 0 - 0 of 0 result</p>

@@ -1,4 +1,5 @@
 import ProducItem from "./ProductItem/ProductItem";
+import NoProductsFound from "./NoProductsFound/NoProductsFound";
 
 
 // if exist, show products, if exist but loading show loading, else show not found
@@ -17,7 +18,7 @@ function ProductList({ products, loading }) {
             })
         }
 
-        return 'No products found'
+        return <NoProductsFound />
     }
 
     return (
