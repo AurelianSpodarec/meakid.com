@@ -34,14 +34,16 @@ export const removeFromCart = (id: number) => {
 
 
 export const openCart = () => {
+    console.log("open")
     return {
         type: OPEN_CART
     }
 }
 
 export const closeCart = () => {
+    // console.log("close")
     return {
-        type: CLOSE_CART,
+        type: CLOSE_CART
     }
 }
 

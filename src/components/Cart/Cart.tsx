@@ -1,12 +1,15 @@
-import CartItem from "./CartItem/CartItem";
 
 import { withRouter } from 'next/router'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+
 import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
 
-function Cart({ cart, openCart, closeCart }) {
+import CartItem from "./CartItem/CartItem";
 
+
+function Cart({ cart, openCart, closeCart }) {
+    console.log("carttt", cart)
     const onIncreaseQuantity = () => {
         console.log("Increae quantity")
     }
@@ -16,11 +19,11 @@ function Cart({ cart, openCart, closeCart }) {
     }
 
     return (
-        <div className={`${cart.open ? "d-none" : "d-block"} p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white md:w-106`}>
+        <div className={`${cart.open ? "d-block" : "hidden"} p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>
 
             <div className="flex justify-between mb-5">
                 <h3>Your Cart</h3>
-                <div onClick={() => closeCart}>X</div>
+                <div onClick={closeCart}>X</div>
             </div>
 
 

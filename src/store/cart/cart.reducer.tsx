@@ -19,7 +19,6 @@ const defaultState = {
 
 const cartReducer = (state = defaultState, action) => {
 
-    // let product = undefined;
     switch (action.type) {
         case FETCH_PRODUCT_REQUEST:
             return {
@@ -29,7 +28,6 @@ const cartReducer = (state = defaultState, action) => {
             break;
 
         case FETCH_PRODUCT_SUCCESS:
-
             let addedItem = state.items.find(item => item.id === action.payload.id)
             let exist = state.items.find(item => action.payload.id === item.id)
 

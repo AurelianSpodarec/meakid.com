@@ -16,28 +16,28 @@ const Sidebar = ({ filterOptions }) => {
     const [urlColors, setUrlColors] = useState([]);
 
 
-    const changeColor = (item) => {
-        setUrlColors([...urlColors, item.slug])
+    // const changeColor = (item) => {
+    //     setUrlColors([...urlColors, item.slug])
 
-        // console.log("UURUURRR", urlColors.join(","))
-    }
-
-
-    // useEffect(() => {
-    //     const url = urlColors.length !== 0 ? "" : urlColors.join(",");
-
-    //     Router.push({
-    //         pathname: '/shop',
-    //         query: { ...Router.query, colors: url }
-    //     })
-    // }, [urlColors])
-
-    // function changeColor(item) {
-    //     Router.push({
-    //         pathname: '/shop',
-    //         query: { ...Router.query, colors: item.slug }
-    //     })
+    //     // console.log("UURUURRR", urlColors.join(","))
     // }
+
+
+    useEffect(() => {
+        const url = urlColors.length !== 0 ? "" : urlColors.join(",");
+
+        Router.push({
+            pathname: '/shop',
+            query: { ...Router.query, colors: url }
+        })
+    }, [urlColors])
+
+    function changeColor(item) {
+        Router.push({
+            pathname: '/shop',
+            query: { ...Router.query, colors: item.slug }
+        })
+    }
 
     return (
         <div>
@@ -51,7 +51,7 @@ const Sidebar = ({ filterOptions }) => {
                 {
                     filterOptions.colors.map((item, x) =>
 
-                        <div key={item.slug} onClick={() => changeColor(item)} style={{ backgroundColor: `${item.slug}` }} className="h-5 w-5 cursor-pointer">
+                        <div key={item.slug} onClick={() => changeColor(item)} style={{ backgroundColor: `${item.slug}` }} className="h-6 w-6 rounded-full cursor-pointer">
 
                         </div>
 
