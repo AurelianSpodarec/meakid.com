@@ -18,8 +18,10 @@ function Cart({ cart, openCart, closeCart }) {
         console.log("Cart: Decreae quantity")
     }
 
+
+
     return (
-        <div className={`${cart.open ? "d-block" : "hidden"} p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>
+        <div className={`${cart.open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out  p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>
 
             <div className="flex justify-between mb-5">
                 <h3>Your Cart</h3>
