@@ -72,7 +72,6 @@ function ProducItem({ product }) {
                         <div className="text-xl text-gray-900 font-bold text-xl">{product.name}</div>
 
                         <div className="inline-flex">
-
                             <p className="text-sm text-gray-600 text-base">
                                 {
                                     product.variationPrice === "" ?
@@ -87,7 +86,6 @@ function ProducItem({ product }) {
                                                     <p dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.variationPrice.min).toFixed(2)} - ${product.currency}${parseInt(product.variationPrice.min).toFixed(2)}` }} />
                                             }
                                         </span>
-
                                 }
                             </p>
                         </div>
@@ -104,13 +102,14 @@ function ProducItem({ product }) {
                         colors && colors.map((color, index) =>
                             <button
 
-                                className={"p-2" + (color === currentColor ? "border border-solid border-4 border-gray-600" : "") + " rounded-full mr-1 outline-none"}
-                                onClick={() => setCurrentcolor(color)}
+                                className={(color === currentColor ? "border border-solid border-4 border-black-700" : "") + " border-2 border-gray-200 rounded-full mr-1 outline-none"}
+                                // onClick={() => setCurrentcolor(color)}
+                                onMouseEnter={() => setCurrentcolor(color)}
                                 key={index}
 
                             >
                                 <div
-                                    className={"h-4 w-4 rounded-full outline-none" + (color === currentColor ? " border border-solid border border-gray-600" : "")}
+                                    className={"h-4 w-4 rounded-full outline-none" + (color === currentColor ? " border border-solid border-2 border-gray-600" : "")}
                                     style={{ backgroundColor: `${color}` }}
                                 />
                             </button>

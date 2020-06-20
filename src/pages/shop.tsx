@@ -70,7 +70,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
 
                         {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
-                        <Pagination pages={20} />
+                        {/* <Pagination pages={20} /> */}
 
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
