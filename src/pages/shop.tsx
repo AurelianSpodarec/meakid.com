@@ -43,6 +43,9 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
         <div>
             <Banner />
             <div style={{ maxWidth: '1920px', margin: "0 auto" }} className="">
+
+
+
                 <div className="flex flex-row">
 
                     <aside style={{ minWidth: '240px' }} className="sm:d-none pl-12  ">
@@ -69,15 +72,15 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                             </div>
                         </div>
 
-
-                        {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
-                        {/* <Pagination pages={20} /> */}
+                        <div>
+                            <Pagination pages={Math.floor((products.limit / products.total) * 10)} />
+                            {/* <Pagination pages={20} /> */}
+                        </div>
 
 
                         <div className="flex flex-wrap px-12">
                             <ProductList products={products} loading={loading} />
                         </div>
-
 
                     </main>
 

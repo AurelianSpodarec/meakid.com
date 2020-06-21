@@ -11,7 +11,7 @@ function Banner({ product }) {
             <div>
                 <div className="container text-center">
                     FREE delivery after <strong>£100</strong> spent
-            </div>
+                </div>
             </div>
 
         </div>
