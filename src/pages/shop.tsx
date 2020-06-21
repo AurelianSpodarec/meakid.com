@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 
 import WooCommerce from './../services/woocommerce/config_woocommerce';
 import ProducItem from '../components/ProductList/ProductItem/ProductItem';
-import { Pagination, Sidebar, ProductList } from '../components';
+import { Pagination, Sidebar, ProductList, Banner } from '../components';
 
 
 const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
@@ -41,7 +41,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
     return (
         <div>
-
+            <Banner />
             <div style={{ maxWidth: '1920px', margin: "0 auto" }} className="">
                 <div className="flex">
 
@@ -73,7 +73,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                         {/* <Pagination pages={20} /> */}
 
 
-                        <div className="flex flex-wrap">
+                        <div className="flex flex-wrap ">
                             <ProductList products={products} loading={loading} />
                         </div>
 

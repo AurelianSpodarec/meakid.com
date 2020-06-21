@@ -50,13 +50,13 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                         <div className="flex">
 
                             <Link href="/">
-                                <a href="#" className={`${router.pathname === '/about' ? "border-b border-solid border-gray-800 " : ""} py-4  uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-gray-700 focus:outline-none transition duration-150 ease-in-out`}>Home</a>
+                                <a href="#" className={`${router.pathname === '/about' ? "border-b border-solid border-gray-800 " : ""} py-4  uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>Home</a>
                             </Link>
                             <Link href="/about">
-                                <a href="#" className={`${router.pathname === '/about' ? "border-b border-solid border-gray-800 " : ""} py-4  uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-gray-700 focus:outline-none transition duration-150 ease-in-out`}>About Us</a>
+                                <a href="#" className={`${router.pathname === '/about' ? "border-b border-solid border-gray-800 " : ""} py-4  uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>About Us</a>
                             </Link>
                             <Link href="/shop">
-                                <a href="#" className={`${router.pathname === '/shop' ? "border-b border-solid border-gray-800 " : ""} py-4  uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-gray-700 focus:outline-none transition duration-150 ease-in-out`}>Shop</a>
+                                <a href="#" className={`${router.pathname === '/shop' ? "border-b border-solid border-gray-800 " : ""} py-4  uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>Shop</a>
                             </Link>
                         </div>
                     </div>
