@@ -43,17 +43,18 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
         <div>
             <Banner />
             <div style={{ maxWidth: '1920px', margin: "0 auto" }} className="">
-                <div className="flex">
+                <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className="sm:d-none pl-12 col-span-12 md:col-span-3">
+                    <aside style={{ minWidth: '240px' }} className="sm:d-none pl-12  ">
                         <Sidebar filterOptions={filterOptions} />
                     </aside>
 
-                    <main className="col-span-12 pl-12 md:col-span-9">
+
+                    <main className="flex flex-col w-full">
 
 
-                        <div className="grid grid-cols-12">
-                            <div className="grid col-span-6">
+                        <div className="flex flex-row ">
+                            <div className=" ">
                                 {
                                     products ?
                                         <p>Showing {products && ((products.page * products.limit) - products.limit) + 1} - {products.page * products.limit} of {products.total} result</p>
@@ -62,7 +63,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                                 }
                             </div>
 
-                            <div className="grid col-span-6">
+                            <div className=" ">
                                 <p>Default sorting | Filters</p>
 
                             </div>
@@ -73,9 +74,10 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                         {/* <Pagination pages={20} /> */}
 
 
-                        <div className="flex flex-wrap ">
+                        <div className="flex flex-wrap px-12">
                             <ProductList products={products} loading={loading} />
                         </div>
+
 
                     </main>
 
