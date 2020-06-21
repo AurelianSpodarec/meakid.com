@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Link from 'next/link';
+import { getCustomColor } from '../../../utils/custom-colors';
 
 
 function ProducItem({ product }) {
@@ -54,14 +55,13 @@ function ProducItem({ product }) {
 
     return (
 
-        <div className="max-w-sm rounded overflow-hidden ">
+        <div className="w-1/3 max-w-sm rounded overflow-hidden px-2 mb-16">
 
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
                 <div>
 
                     <img
                         className="w-full object-cover"
-                        style={{ height: '250px' }}
                         src={currentImage ? currentImage : "https://via.placeholder.com/150"}
                         title="Contemplative Reptile"
                         alt="Sunset in the mountains"
@@ -110,7 +110,7 @@ function ProducItem({ product }) {
                             >
                                 <div
                                     className={"h-4 w-4 rounded-full outline-none" + (color === currentColor ? " border border-solid border-2 border-gray-600" : "")}
-                                    style={{ backgroundColor: `${color}` }}
+                                    style={{ backgroundColor: `${getCustomColor(color)}` }}
                                 />
                             </button>
                         )

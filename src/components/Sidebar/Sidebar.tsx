@@ -6,20 +6,20 @@ import Link from 'next/link';
 import Router from 'next/router'
 
 import { useRouter } from 'next/router';
-
+import { getCustomColor } from '../../utils/custom-colors';
 
 // if not found, just default to name
-const customColors = {
-    "black": "#000",
-    "white": "#fff",
-    "brown": "#ad8111",
-    "beige": "#f0deba",
-    "pink": "#fcc6de",
-    "grey": "#ccc",
-    "orange": "#F36B26",
-    "green": "#7BBA3C",
-    "red": "#E7352B"
-}
+
+// rainbow color
+// #grad1 {
+//     height: 50px;
+//     width: 50px;
+//     background-color: red; /* For browsers that do not support gradients */
+//     background-image: linear-gradient(red, orange, yellow, green, blue, indigo, violet); /* Standard syntax (must be last) */
+//     border-radius: 50%;
+//     transform: rotate(45deg);
+
+//   }
 
 
 const capitalize = (s) => {
@@ -69,19 +69,55 @@ const Sidebar = ({ filterOptions }) => {
             {/* on click this, reload the shop list */}
 
             <div>
-                <h3 className="font-bold">Colors</h3>
-                <div>
+                <h3 className="font-bold py-4">Style</h3>
+                <div className="flex flex-wrap py-2 ">
+
+                    <div className="md:flex md:items-center mb-6">
+                        <div className=""></div>
+                        <label className="block text-gray-500 font-bold">
+                            <input className="mr-2 leading-tight" type="checkbox" />
+                            <span className="text-sm">
+                                Plain Cotton
+                            </span>
+                        </label>
+                    </div>
+                    <div className="md:flex md:items-center mb-6">
+                        <div className=""></div>
+                        <label className="block text-gray-500 font-bold">
+                            <input className="mr-2 leading-tight" type="checkbox" />
+                            <span className="text-sm">
+                                Printed Cotton
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+                {/* <div>
+                        Min Price: <input onChange={(e) => updateValue(e)} value={text} />
+                    </div>
+                    <div>
+                        Max Price: <input onChange={updateValue} value={3} />
+                    </div> */}
+            </div>
+
+            <div>
+                <h3 className="font-bold py-4">Colors</h3>
+                <div className="flex flex-wrap py-2 ">
                     {
                         filterOptions.colors.map((item, x) =>
 
-                            <div className="text-center items-center flex flex-col h-24">
+                            <div className="w-1/3 cursor-pointer text-center items-center flex flex-col h-16 text-gray-800 hover:text-gray-600">
                                 <div
                                     key={item.slug}
                                     onClick={() => changeColor(item)}
-                                    style={{ backgroundColor: `${item.slug}` }}
-                                    className="h-8 w-8 rounded-full cursor-pointer">
+                                    style={{
+                                        backgroundColor: `${getCustomColor(item.slug)}`, border: "1px solid #e0e0e0"
+                                    }}
+                                    className="h-8 w-8 rounded-full cursor-pointer"
+
+                                >
                                 </div>
-                                <span>{capitalize(item.slug)}</span>
+                                <span className="text-xs ">{capitalize(item.slug)}</span>
                             </div>
                         )
                     }
@@ -99,5 +135,4 @@ const Sidebar = ({ filterOptions }) => {
 
 export default Sidebar;
 
-// white, add bg gray: #e0e0e0
-
+// rainbow color

@@ -42,14 +42,14 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
     return (
         <div>
 
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-12">
+            <div style={{ maxWidth: '1920px', margin: "0 auto" }} className="">
+                <div className="flex">
 
-                    <aside className="sm:d-none col-span-12 md:col-span-4">
+                    <aside style={{ minWidth: '240px' }} className="sm:d-none pl-12 col-span-12 md:col-span-3">
                         <Sidebar filterOptions={filterOptions} />
                     </aside>
 
-                    <main className="col-span-12 md:col-span-8">
+                    <main className="col-span-12 pl-12 md:col-span-9">
 
 
                         <div className="grid grid-cols-12">
@@ -73,7 +73,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                         {/* <Pagination pages={20} /> */}
 
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="flex flex-wrap">
                             <ProductList products={products} loading={loading} />
                         </div>
 
