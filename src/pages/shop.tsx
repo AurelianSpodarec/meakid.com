@@ -46,9 +46,13 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
 
 
+                <div>
+                    <h2 className="text-2xl font-bold">Fabrics</h2>
+                </div>
+
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className="sm:d-none pl-12  ">
+                    <aside style={{ minWidth: '240px' }} className="xs:d-none pl-12  ">
                         <Sidebar filterOptions={filterOptions} />
                     </aside>
 
@@ -56,8 +60,11 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                     <main className="flex flex-col w-full">
 
 
-                        <div className="flex flex-row ">
-                            <div className=" ">
+                        <div className="flex justify-between flex-row ">
+
+
+
+                            <div className="">
                                 {
                                     products ?
                                         <p>Showing {products && ((products.page * products.limit) - products.limit) + 1} - {products.page * products.limit} of {products.total} result</p>
@@ -72,16 +79,16 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
                             </div>
                         </div>
 
-                        <div>
-                            <Pagination pages={Math.floor((products.limit / products.total) * 10)} />
-                            {/* <Pagination pages={20} /> */}
-                        </div>
+
 
 
                         <div className="flex flex-wrap px-12">
                             <ProductList products={products} loading={loading} />
                         </div>
-
+                        <div>
+                            <Pagination pages={Math.floor((products.limit / products.total) * 10)} />
+                            {/* <Pagination pages={20} /> */}
+                        </div>
                     </main>
 
                 </div>

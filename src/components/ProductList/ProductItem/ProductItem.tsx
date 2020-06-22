@@ -55,7 +55,7 @@ function ProducItem({ product }) {
 
     return (
 
-        <div className="w-1/3 rounded overflow-hidden px-2 mb-16">
+        <div className="w-1/3 rounded overflow-hidden px-2 mb-8">
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
                 <div className="h-full">
 
@@ -69,7 +69,7 @@ function ProducItem({ product }) {
                         />
                     </div>
 
-                    <div className="py-2">
+                    <div className="py-2 flex justify-between">
                         <div className="text-xl text-gray-900 font-bold text-xl">{product.name}</div>
 
                         <div className="inline-flex">
@@ -120,7 +120,7 @@ function ProducItem({ product }) {
 
 
             </Link>
-        </div>
+        </div >
 
 
 

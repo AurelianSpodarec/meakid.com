@@ -12,6 +12,10 @@ import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
 import { initStore } from './../store/store';
 
+
+
+
+import 'swiper/css/swiper.css';
 // import { INCREMENT_COUNTER } from './../store/cart/cart.actions';
 
 function MyApp({ Component, pageProps, route, store }: AppProps) {
