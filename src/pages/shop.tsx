@@ -52,7 +52,7 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className="xs:d-none pl-12  ">
+                    <aside style={{ minWidth: '240px' }} className="hidden md:block pl-12  ">
                         <Sidebar filterOptions={filterOptions} />
                     </aside>
 
