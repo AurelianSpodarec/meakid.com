@@ -29,27 +29,16 @@ const Banner = ({ slides }) => {
         renderPrevButton: () => <button className={`swiper-button-prev h-4 ${className}`}></button>,
     }
 
-
-    function slide(text) {
-        return (
-            <div>
-                {text}
-            </div>
-        )
-    }
-
     return (
-        <div className=" bg-gray-100">
-            <div style={{ width: '50%' }} className="py-4  mx-auto overflow-hidden mb-16">
+        <div className="hidden sm:block bg-gray-100">
+            <div className="py-4 w-2/4 mx-auto overflow-hidden mb-16">
                 <div className="w-full text-center relative mx-auto">
-
 
                     <Swiper {...params} containerClass="h-4 px-2 flex content-center text-xs uppercase">
                         <div>FREE delivery after <strong>£100</strong> spent</div>
                         <div>3-5 day delivery*</div>
                         <div>Good news! We are dispatching normally and making sure contactless delivery</div>
                     </Swiper >
-
 
                 </div>
             </div>
