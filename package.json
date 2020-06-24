@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@woocommerce/woocommerce-rest-api": "^1.0.1",
+        "cxs": "^6.2.0",
         "next": "latest",
         "next-redux-wrapper": "^6.0.1",
         "react": "^16.13.1",

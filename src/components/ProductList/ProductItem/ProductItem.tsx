@@ -5,12 +5,13 @@ import { getCustomColor } from '../../../utils/custom-colors';
 
 
 function ProducItem({ product }) {
-    // console.log("single prod", product)
+    console.log("single prod", product)
 
     const [currentColor, setCurrentcolor] = useState(null);
     const [currentImage, setCurrentImage] = useState(null);
 
     const [colors, setColors] = useState(null);
+    const [images, setImages] = useState(null);
 
     function setUniquecolors() {
         setColors(null)
@@ -29,6 +30,10 @@ function ProducItem({ product }) {
             // setColors(product.color)
         }
     }
+
+    // function setImages() {
+
+    // }
 
     function getImage() {
         setCurrentImage(null)
@@ -106,10 +111,13 @@ function ProducItem({ product }) {
                                         key={index}
 
                                     >
-                                        <div
+                                        {/* <div
                                             className={"h-4 w-4 rounded-full outline-none" + (color === currentColor ? " border border-solid border-2 border-gray-600" : "")}
                                             style={{ backgroundColor: `${getCustomColor(color)}` }}
-                                        />
+                                        /> */}
+                                        {/* <img
+                                            src={product.}
+                                        /> */}
                                     </button>
                                 )
                         }
