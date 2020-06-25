@@ -31,7 +31,7 @@ const Banner = ({ slides }) => {
 
     return (
         <div className="hidden sm:block bg-gray-100">
-            <div className="py-4 w-2/4 mx-auto overflow-hidden mb-16">
+            <div className="py-4 w-2/4 mx-auto overflow-hidden">
                 <div className="w-full text-center relative mx-auto">
 
                     <Swiper {...params} containerClass="h-4 px-2 flex content-center text-xs uppercase">
