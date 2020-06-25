@@ -10,6 +10,11 @@ module.exports = {
             spacing: {
                 '2/3': '66.666667%',
                 'full': '100%'
+            },
+            inset: {
+                '0': 0,
+                auto: 'auto',
+                '1/2': '50%',
             }
         }
     },
