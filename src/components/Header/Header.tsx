@@ -42,61 +42,52 @@ function useOnClickOutside(ref, handler) {
 
 const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }: any) => {
     // console.log(cart.open)
-    const node = useRef();
-    const [navOpen, setNavOpen] = useState(false);
-    const [open, setOpen] = useState(false);
-    // function openCart() {
-    // openCart()
-    // }
+    const ref = useRef();
 
-    const handleClickOutside = e => {
-        console.log("clicking anywhere");
-        if (node.current.contains(e.target)) {
-            // inside click
-            return;
-        }
-        // outside click
-        setOpen(false);
-    };
+    const [open, setOpen] = useState(false);
+
+    useOnClickOutside(ref, () => setOpen(false));
 
     const openSidebar = () => {
         setOpen(true)
 
-
-
+        // let shade = document.createElement('div');
+        // shade.id = "1"
+        // shade.classList.add("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
+        // requestAnimationFrame(function () {
+        //     shade.classList.add("bg-opacity-75");
+        // });
+        // document.body.appendChild(shade)
     }
 
-    useEffect(() => {
-        let shade;
 
-        if (open) {
-            shade = document.createElement('div')
-            shade.classList.add("shade")
+
+    useEffect(() => {
+
+        if (!open) {
+            let el = document.getElementById("1")
+            if (!el) return
+
+            requestAnimationFrame(function () {
+                el.classList.remove("bg-opacity-75");
+            });
+            setTimeout(function () {
+                el.remove()
+            }, 1000)
+        } else {
+            let shade = document.createElement('div');
+            shade.id = "1"
             shade.classList.add("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
             requestAnimationFrame(function () {
                 shade.classList.add("bg-opacity-75");
             });
             document.body.appendChild(shade)
-        } else {
-            if (!shade) return
-            shade.classList.remove("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-200");
-            setOpen(false)
         }
+
+        // setOpen(false)
+
+
     }, [open])
-
-
-    useEffect(() => {
-        if (open) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-            openSidebar()
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [open]);
 
     return (
 
@@ -164,7 +155,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
             </header>
 
 
-            <div ref={node} className={`${open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out fixed w-68 bg-white right-0 top-0 bottom-0 z-20`}>
+            <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out fixed w-68 bg-white right-0 top-0 bottom-0 z-20`}>
                 s
             </div>
 
