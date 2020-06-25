@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
@@ -9,29 +9,94 @@ import { compose } from 'redux';
 import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
 import Cart from '../Cart/Cart';
 
+// Hook
+function useOnClickOutside(ref, handler) {
+    useEffect(
+        () => {
+            const listener = event => {
+                // Do nothing if clicking ref's element or descendent elements
+                if (!ref.current || ref.current.contains(event.target)) {
+                    return;
+                }
+
+                handler(event);
+            };
+
+            document.addEventListener('mousedown', listener);
+            document.addEventListener('touchstart', listener);
+
+            return () => {
+                document.removeEventListener('mousedown', listener);
+                document.removeEventListener('touchstart', listener);
+            };
+        },
+        // Add ref and handler to effect dependencies
+        // It's worth noting that because passed in handler is a new ...
+        // ... function on every render that will cause this effect ...
+        // ... callback/cleanup to run every render. It's not a big deal ...
+        // ... but to optimize you can wrap handler in useCallback before ...
+        // ... passing it into this hook.
+        [ref, handler]
+    );
+}
 
 const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }: any) => {
     // console.log(cart.open)
-
+    const node = useRef();
     const [navOpen, setNavOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    // function openCart() {
+    // openCart()
+    // }
 
-    function open() {
-        openCart()
-    }
+    const handleClickOutside = e => {
+        console.log("clicking anywhere");
+        if (node.current.contains(e.target)) {
+            // inside click
+            return;
+        }
+        // outside click
+        setOpen(false);
+    };
 
     const openSidebar = () => {
-        setNavOpen(true)
-        const shade = document.createElement('div')
-        shade.classList.add("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
-        requestAnimationFrame(function () {
-            shade.classList.add("bg-opacity-75");
-        });
-        document.body.appendChild(shade)
+        setOpen(true)
+
+
+
     }
 
-    const hideSidebar = () => {
-        document.body.classList.remove("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-200");
-    }
+    useEffect(() => {
+        let shade;
+
+        if (open) {
+            shade = document.createElement('div')
+            shade.classList.add("shade")
+            shade.classList.add("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
+            requestAnimationFrame(function () {
+                shade.classList.add("bg-opacity-75");
+            });
+            document.body.appendChild(shade)
+        } else {
+            if (!shade) return
+            shade.classList.remove("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-200");
+            setOpen(false)
+        }
+    }, [open])
+
+
+    useEffect(() => {
+        if (open) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+            openSidebar()
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [open]);
 
     return (
 
@@ -76,7 +141,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                             <svg className="h-full w-full" height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 100 100"><path d="M85.355 64.645c-5.445-5.446-11.927-9.478-19-11.918 7.575-5.217 12.551-13.948 12.551-23.82C78.906 12.966 65.94 0 50 0 34.061 0 21.094 12.967 21.094 28.906c0 9.873 4.976 18.604 12.55 23.821-7.071 2.44-13.553 6.472-19 11.918C5.202 74.088 0 86.645 0 100h7.813c0-23.262 18.925-42.188 42.187-42.188 23.262 0 42.188 18.926 42.188 42.188H100c0-13.355-5.201-25.912-14.645-35.355zM50 50c-11.631 0-21.094-9.462-21.094-21.094C28.906 17.275 38.37 7.813 50 7.813c11.631 0 21.094 9.462 21.094 21.093C71.094 40.538 61.63 50 50 50z" fill="#000" fillRule="nonzero"></path></svg>
                         </div>
 
-                        <div onClick={open} className="flex relative cursor-pointer cursor-pointer px-3  text-center  align-middle ">
+                        <div className="flex relative cursor-pointer cursor-pointer px-3  text-center  align-middle ">
                             {/* <span className="absolute rounded-full text-xs right-0 top-0 bg-black z-10 border-rounded align-middle h-5 w-5 border-radius  text-center  align-middle   text-white">4</span> */}
                             {/* <svg className="relative h-full w-full" height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" data-prefix="far" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M551.991 64H144.28l-8.726-44.608C133.35 8.128 123.478 0 112 0H12C5.373 0 0 5.373 0 12v24c0 6.627 5.373 12 12 12h80.24l69.594 355.701C150.796 415.201 144 430.802 144 448c0 35.346 28.654 64 64 64s64-28.654 64-64a63.681 63.681 0 0 0-8.583-32h145.167a63.681 63.681 0 0 0-8.583 32c0 35.346 28.654 64 64 64 35.346 0 64-28.654 64-64 0-18.136-7.556-34.496-19.676-46.142l1.035-4.757c3.254-14.96-8.142-29.101-23.452-29.101H203.76l-9.39-48h312.405c11.29 0 21.054-7.869 23.452-18.902l45.216-208C578.695 78.139 567.299 64 551.991 64zM208 472c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm256 0c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm23.438-200H184.98l-31.31-160h368.548l-34.78 160z" ></path></svg> */}
                             {/* <svg className="relative h-full w-full" height="20" width="20" viewBox="0 0 20 20" ria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"  ></path></svg> */}
@@ -99,7 +164,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
             </header>
 
 
-            <div className={`${navOpen ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out fixed w-68 bg-white right-0 top-0 bottom-0 z-20`}>
+            <div ref={node} className={`${open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out fixed w-68 bg-white right-0 top-0 bottom-0 z-20`}>
                 s
             </div>
 
