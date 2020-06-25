@@ -50,26 +50,14 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
 
     const openSidebar = () => {
         setOpen(true)
-
-        // let shade = document.createElement('div');
-        // shade.id = "1"
-        // shade.classList.add("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
-        // requestAnimationFrame(function () {
-        //     shade.classList.add("bg-opacity-75");
-        // });
-        // document.body.appendChild(shade)
     }
 
-
-
     useEffect(() => {
-
         if (!open) {
             let el = document.getElementById("1")
             if (!el) return
-
             requestAnimationFrame(function () {
-                el.classList.remove("bg-opacity-75");
+                el.classList.remove("bg-opacity-50");
             });
             setTimeout(function () {
                 el.remove()
@@ -77,22 +65,18 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
         } else {
             let shade = document.createElement('div');
             shade.id = "1"
-            shade.classList.add("bg-gray-900", "bg-opacity-0", "z-10", "absolute", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
+            shade.classList.add("fixed", "bg-gray-900", "bg-opacity-0", "z-30", "top-0", "right-0", "left-0", "bottom-0", "h-full", "ease-in-out", "transition", "duration-300");
             requestAnimationFrame(function () {
-                shade.classList.add("bg-opacity-75");
+                shade.classList.add("bg-opacity-50");
             });
             document.body.appendChild(shade)
         }
-
-        // setOpen(false)
-
-
     }, [open])
 
     return (
 
         <>
-            <header className="left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full">
+            <header className="fixed z-20 left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full">
 
                 <div className="pl-2 md:pl-12 pr-2 md:pr-4 align-middle flex justify-between h-16">
 
@@ -141,7 +125,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                             <svg className="relative h-full w-full z-5" height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-bag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  ><path fill="currentColor" d="M352 160v-32C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128v32H0v272c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V160h-96zm-192-32c0-35.29 28.71-64 64-64s64 28.71 64 64v32H160v-32zm160 120c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zm-192 0c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24z"  ></path></svg>
                         </div>
 
-                        <button onClick={openSidebar} className=" inline-flex items-center justify-center p-2 rounded-md text-gray-800  focus:outline-none   transition duration-150 ease-in-out" aria-label="Main menu" aria-expanded="false">
+                        <button onClick={openSidebar} className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800  focus:outline-none   transition duration-150 ease-in-out" aria-label="Main menu" aria-expanded="false">
                             <svg className="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
@@ -155,8 +139,25 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
             </header>
 
 
-            <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out fixed w-68 bg-white right-0 top-0 bottom-0 z-20`}>
-                s
+            <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out fixed w-68 bg-white right-0 top-0 bottom-0 z-40`}>
+                <ul className="flex flex-col divide-y divide-gray-400">
+
+                    <Link href="/">
+                        <a href="#" className={` bg-gray-100 py-4 h-full  flex  items-center uppercase px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
+                            Home
+                        </a>
+                    </Link>
+                    <Link href="/about">
+                        <a href="#" className={` bg-gray-100 py-4 h-full  flex  items-center uppercase px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
+                            About Us
+                        </a>
+                    </Link>
+                    <Link href="/shop">
+                        <a href="#" className={` bg-gray-100 py-4 h-full  flex  items-center uppercase px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
+                            Fabrics
+                        </a>
+                    </Link>
+                </ul>
             </div>
 
             <Cart />
