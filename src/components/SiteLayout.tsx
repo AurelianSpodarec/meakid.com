@@ -6,6 +6,7 @@ const SiteLayout = ({ children }: any) => (
     <div className="bg-white antialiased">
         <Header />
         <Banner />
+
         {children}
         <Footer />
     </div>
