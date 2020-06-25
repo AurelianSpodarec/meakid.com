@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 
 import WooCommerce from './../services/woocommerce/config_woocommerce';
 import ProducItem from '../components/ProductList/ProductItem/ProductItem';
-import { Pagination, Sidebar, ProductList, Banner } from '../components';
+import { Pagination, Sidebar, ProductList } from '../components';
 
 
 const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
@@ -41,7 +41,6 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
     return (
         <div>
-            <Banner />
             <div style={{ maxWidth: '1920px', margin: "0 auto" }} className="">
 
 

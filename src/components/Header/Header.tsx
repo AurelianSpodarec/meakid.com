@@ -89,17 +89,17 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                         <ul className="flex h-full items-center">
 
                             <Link href="/">
-                                <a href="#" className={`${router.pathname === '/about' ? "border-b border-solid border-gray-900 " : ""} hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full  flex  items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
+                                <a href="#" className={` hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full flex items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
                                     Home
                                 </a>
                             </Link>
                             <Link href="/about">
-                                <a href="#" className={`${router.pathname === '/about' ? "border-b border-solid border-gray-900 " : ""} hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full  flex  items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
+                                <a href="#" className={` hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full flex items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
                                     About Us
                                 </a>
                             </Link>
                             <Link href="/shop">
-                                <a href="#" className={`${router.pathname === '/shop' ? "border-b border-solid border-gray-900 " : ""} hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full  flex  items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
+                                <a href="#" className={` hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full flex items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
                                     Fabrics
                                 </a>
                             </Link>
