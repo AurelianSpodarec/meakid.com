@@ -1,12 +1,12 @@
 import react, { useState, useEffect } from 'react'
 import { NextPage } from 'next';
 
-import WooCommerce from './../services/woocommerce/config_woocommerce';
+import WooCommerce from '../services/woocommerce/config_woocommerce';
 import ProducItem from '../components/ProductList/ProductItem/ProductItem';
 import { Pagination, Sidebar, ProductList } from '../components';
 
 
-const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
+const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
 
     // console.log(dataProducts['dataProducts'], dataFilterOptions)
@@ -98,9 +98,9 @@ const Shop: NextPage = ({ dataProducts, dataFilterOptions }) => {
     )
 }
 
-export default Shop;
+export default Fabrics;
 
-Shop.getInitialProps = async (ctx) => {
+Fabrics.getInitialProps = async (ctx) => {
 
     const params = new URLSearchParams();
 
@@ -118,7 +118,8 @@ Shop.getInitialProps = async (ctx) => {
     }
 
     const [dataProducts, dataFilterOptions] = await Promise.all([
-        WooCommerce.get(`custom-product-list?${params}`)
+        // WooCommerce.get(`custom-product-list?${params}`)
+        WooCommerce.get(`custom-product-list`)
             .then(response => ({ dataProducts: response.data })),
 
         WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),

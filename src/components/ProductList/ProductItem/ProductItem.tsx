@@ -12,8 +12,8 @@ function ProducItem({ product }) {
 
     const [colors, setColors] = useState(null);
     const [images, setImages] = useState(null);
-
-    function setUniquecolors() {
+    console.log(images)
+    function setUniqueColors() {
         setColors(null)
 
         if (product.custom_variations.length !== 0) {
@@ -31,9 +31,23 @@ function ProducItem({ product }) {
         }
     }
 
-    // function setImages() {
+    function setUniqueImages() {
+        setImages(null)
 
-    // }
+        if (product.custom_variations.length !== 0) {
+            let imagesSet = new Set([]);
+
+            for (const variation of product.custom_variations) {
+                if (variation.image) {
+                    imagesSet.add(variation.image);
+                }
+            }
+
+            setImages(Array.from(imagesSet));
+        } else {
+            // setColors(product.color)
+        }
+    }
 
     function getImage() {
         setCurrentImage(null)
@@ -51,7 +65,8 @@ function ProducItem({ product }) {
     }
 
     useEffect(() => {
-        setUniquecolors()
+        setUniqueColors()
+        setUniqueImages()
     }, [product])
 
     useEffect(() => {
@@ -118,6 +133,17 @@ function ProducItem({ product }) {
                                         {/* <img
                                             src={product.}
                                         /> */}
+
+                                        {
+                                            images && images.map((image, x) => {
+                                                return <img
+                                                    className="h-8 w-8"
+                                                    src={image}
+                                                />
+                                            })
+                                        }
+
+
                                     </button>
                                 )
                         }

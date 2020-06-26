@@ -98,7 +98,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                                     About Us
                                 </a>
                             </Link>
-                            <Link href="/shop">
+                            <Link href="/fabrics">
                                 <a href="#" className={` hover:border-b hover:border-solid hover:border-gray-900 py-4 h-full flex items-center uppercase ml-4 px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
                                     Fabrics
                                 </a>
@@ -152,7 +152,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                             About Us
                         </a>
                     </Link>
-                    <Link href="/shop">
+                    <Link href="/fabrics">
                         <a href="#" className={` bg-gray-100 py-4 h-full  flex  items-center uppercase px-3 py-2 text-xs font-normal leading-5 text-bold text-gray-900 focus:outline-none transition duration-150 ease-in-out`}>
                             Fabrics
                         </a>

@@ -20,7 +20,7 @@ function Pagination({ pages }) {
         console.log("next")
         setPage(currentPage + 1)
         Router.push({
-            pathname: '/shop',
+            pathname: '/fabrics',
             query: { ...Router.query, page: currentPage }
         })
     }
@@ -29,7 +29,7 @@ function Pagination({ pages }) {
         console.log("prev")
         setPage(currentPage - 1)
         Router.push({
-            pathname: '/shop',
+            pathname: '/fabrics',
             query: { ...Router.query, page: currentPage }
         })
     }
@@ -47,7 +47,7 @@ function Pagination({ pages }) {
                     return (
 
                         <Link key={_} href={{
-                            pathname: '/shop',
+                            pathname: '/fabrics',
                             query: { page: _ }
                         }}>
                             <button onClick={() => setPage(_)} type="button" style={{ backgroundColor: currentPage === _ ? 'grey' : "" }} className="-ml-px inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
@@ -62,7 +62,7 @@ function Pagination({ pages }) {
                 </button>
 
                 <Link href={{
-                    pathname: '/shop',
+                    pathname: '/fabrics',
                     query: { custom_page: pages }
                 }}>
                     <button type="button" style={{ backgroundColor: currentPage === pages ? 'grey' : "" }} className="-ml-px inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">

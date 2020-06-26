@@ -49,14 +49,14 @@ const Sidebar = ({ filterOptions }) => {
         const url = urlColors.length !== 0 ? "" : urlColors.join(",");
 
         Router.push({
-            pathname: '/shop',
+            pathname: '/fabrics',
             query: { ...Router.query, colors: url }
         })
     }, [urlColors])
 
     function changeColor(item) {
         Router.push({
-            pathname: '/shop',
+            pathname: '/fabrics',
             query: { ...Router.query, colors: item.slug }
         })
     }
