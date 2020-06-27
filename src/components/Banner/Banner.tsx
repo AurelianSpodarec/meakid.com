@@ -22,8 +22,8 @@ const Banner = ({ slides }) => {
             disableOnInteraction: false
         },
         navigation: {
-            nextEl: '.swiper-button-next h-4',
-            prevEl: '.swiper-button-prev h-4'
+            nextEl: '.swiper-button-next .h-4',
+            prevEl: '.swiper-button-prev .h-4'
         },
         renderNextButton: () => <button className={`swiper-button-next h-4 ${className}`}></button>,
         renderPrevButton: () => <button className={`swiper-button-prev h-4 ${className}`}></button>,

@@ -44,10 +44,34 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
             <div style={{ maxWidth: '1920px', margin: "0 auto" }} className="">
 
 
+                <div className="pl-12 pr-12 my-8">
+                    <div className="flex justify-between flex-row ">
 
-                <div>
-                    <h2 className="text-2xl font-bold">Fabrics</h2>
+                        <div>
+                            <h2 className="text-1xl font-bold">Cotton</h2>
+                            <h2 className="text-2xl font-bold">Fabrics</h2>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between flex-row ">
+                        <div className="">
+                            {
+                                products ?
+                                    <p>Showing {products && ((products.page * products.limit) - products.limit) + 1} - {products.page * products.limit} of {products.total} result</p>
+                                    :
+                                    <p>Showing 0 - 0 of 0 result</p>
+                            }
+                        </div>
+
+                        <div className="px-2">
+
+                            <p>Sort By: <span className="text-gray-500">Newest</span></p>
+
+                        </div>
+                    </div>
                 </div>
+
+
 
                 <div className="flex flex-row">
 
@@ -59,24 +83,6 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
                     <main className="flex flex-col w-full">
 
 
-                        <div className="flex justify-between flex-row ">
-
-
-
-                            <div className="">
-                                {
-                                    products ?
-                                        <p>Showing {products && ((products.page * products.limit) - products.limit) + 1} - {products.page * products.limit} of {products.total} result</p>
-                                        :
-                                        <p>Showing 0 - 0 of 0 result</p>
-                                }
-                            </div>
-
-                            <div className=" ">
-                                <p>Default sorting | Filters</p>
-
-                            </div>
-                        </div>
 
 
 
