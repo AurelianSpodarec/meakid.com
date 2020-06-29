@@ -7,31 +7,10 @@ import Router from 'next/router'
 
 import { useRouter } from 'next/router';
 import { getCustomColor } from '../../utils/custom-colors';
-import cxs from 'cxs';
+// import cxs from 'cxs';
 
+import styles from './Sidebar.module.css';
 
-const checkBox = cxs({
-    width: '13px',
-    height: '13px',
-    'before': {
-        width: '6px',
-        borderTopLeftRadius: '1px',
-        borderBottomLeftRadius: '1px',
-        top: '5px',
-        left: '1px',
-        transform: 'rotate(49deg) scale(0, 1)',
-        content: "",
-        height: '2px',
-        backgroundColor: 'currentcolor',
-        display: 'block',
-        position: 'absolute',
-        transformOrigin: 'left center',
-    },
-    ':after': {
-        color: 'grey',
-        fontSize: '14px'
-    }
-})
 // if not found, just default to name
 
 // rainbow color
@@ -43,9 +22,7 @@ const checkBox = cxs({
 //     border-radius: 50%;
 //     transform: rotate(45deg);
 
-//   }
-
-
+//   } 
 
 const capitalize = (s) => {
     if (typeof s !== 'string') return ''
@@ -55,7 +32,53 @@ const capitalize = (s) => {
 
 const Sidebar = ({ filterOptions }) => {
 
-    // console.log("filterrrrrrrr", filterOptions.colors)
+
+    //     const checkBox = cxs({
+    //         display: 'inline-block',
+    //         color: 'rgb(255, 255, 255)',
+    //         position: 'absolute',
+    //         top: '50%',
+    //         left: '50%',
+    //         right: 'unset',
+    //         transform: 'translate3d(-50%, -50%, 0px)',
+    //         width: '13px',
+    //         height: '13px',
+
+    //         ':before': {
+
+    //             content: "",
+    //             height: '2px',
+    //             backgroundColor: 'black',
+    //             display: 'block',
+    //             position: 'absolute',
+    //             transformOrigin: 'left center',
+
+    //             width: '6px',
+    //             borderTopLeftRadius: '1px',
+    //             borderBottomLeftRadius: '1px',
+    //             top: '5px',
+    //             left: '1px',
+    //             transform: 'rotate(49deg) scale(1, 1)',
+    //         },
+    //         ':after': {
+    //             content: "",
+    //             height: '2px',
+    //             backgroundColor: 'black',
+    //             display: 'block',
+    //             position: 'absolute',
+    //             transformOrigin: 'left center',
+
+    //             width: '13px',
+    //             borderTopLeftRadius: '1px',
+    //             borderBottomLeftRadius: '1px',
+    //             top: '10px',
+    //             left: '4px',
+    //             transform: 'rotate(-49deg) scale(1, 1)',
+    //         }
+    //     })
+
+
+    console.log("filterrrrrrrr", filterOptions.colors)
 
     const router = useRouter()
 
@@ -144,15 +167,16 @@ const Sidebar = ({ filterOptions }) => {
                                     style={{
                                         backgroundColor: `${getCustomColor(item.slug)}`, border: "1px solid #e0e0e0"
                                     }}
-                                    className="h-8 w-8 rounded-full cursor-pointer"
+                                    className="h-8 w-8 relative rounded-full cursor-pointer"
 
                                 >
+                                    <div className={`${styles.checkmark} ${router.query.colors.includes(item.slug) ? "is-toggle" : ""}`}></div>
                                 </div>
                                 {/* if exist, mark */}
                                 {/* {console.log(router.query)} */}
 
                                 {/* {router.query.colors.includes(item.slug) ? "TES" : "no"} */}
-                                <span className={`text-xs ${checkBox}`}>{capitalize(item.slug)}</span>
+                                <span className="text-xs">{capitalize(item.slug)}</span>
                             </div>
                         )
                     }

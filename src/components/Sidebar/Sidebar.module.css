@@ -1,0 +1,48 @@
+.checkmark {
+    display: inline-block;
+        color: rgb(255, 255, 255);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: unset;
+        transform: translate3d(-50%, -50%, 0px);
+       height: 13px;
+       width: 13px;
+}
+
+.checkmark.is-toggle:before {
+    transform: rotate(49deg) scale(1, 1);
+}
+.checkmark.is-toggle:after {
+    transform: rotate(-49deg) scale(1, 1);
+}
+
+.checkmark:before,
+.checkmark:after {
+    content: "";
+    height: 2px;
+    background-color: white;
+    display: block;
+    position: absolute;
+    transform-origin: left center;
+}
+
+.checkmark:before {
+    width: 6px;
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    top: 5px;
+    left: 1px;
+    transform: rotate(49deg) scale(0, 1);
+
+}
+.checkmark:after {
+    width: 13px;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    top: 10px;
+    left: 4px;
+    transform: rotate(-49deg) scale(0, 1); 
+}
+    
+     
