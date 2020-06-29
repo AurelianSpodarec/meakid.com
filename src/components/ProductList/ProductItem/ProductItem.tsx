@@ -5,14 +5,14 @@ import { getCustomColor } from '../../../utils/custom-colors';
 
 
 function ProducItem({ product }) {
-    console.log("single prod", product)
+    // console.log("single prod", product)
 
     const [currentColor, setCurrentcolor] = useState(null);
     const [currentImage, setCurrentImage] = useState(null);
 
     const [colors, setColors] = useState(null);
     const [images, setImages] = useState(null);
-    console.log(images)
+    // console.log(images)
     function setUniqueColors() {
         setColors(null)
 

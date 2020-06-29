@@ -2,42 +2,66 @@ import react, { useState, useEffect } from 'react'
 import { NextPage } from 'next';
 
 import WooCommerce from '../services/woocommerce/config_woocommerce';
-import ProducItem from '../components/ProductList/ProductItem/ProductItem';
-import { Pagination, Sidebar, ProductList } from '../components';
 
+import { Pagination, Sidebar, ProductList } from '../components';
+import { useRouter } from 'next/router'
+
+import queryString from 'query-string';
 
 const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
-
-    // console.log(dataProducts['dataProducts'], dataFilterOptions)
-
     console.log(dataProducts)
 
-    // const products = dataProducts['dataProducts']
+
+    const router = useRouter()
+
+
     const filterOptions = dataFilterOptions['dataFilterOptions']
 
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false)
 
-    const [text, setText] = useState("");
+    const [query, setQuery] = useState('');
 
-    const [loading, setLoading] = useState(true)
 
-    function updateValue(e) {
-        setText(e.value)
+    // console.log("router", query, queryString.parseUrl(router.query, { parseFragmentIdentifier: true }))
+    // console.log("router", queryString.stringify(router.query))
+
+
+    const fetchProducts = async () => {
+        const a = await WooCommerce.get(`custom-product-list?${queryString.stringify(router.query)}`)
+            .then(response => (
+                response.data
+            ))
+        setProducts(a)
     }
 
-    useEffect(() => {
 
-        if (products) {
-            setLoading(true);
-        }
+    useEffect(() => {
+        fetchProducts()
         setLoading(false);
+    }, [router.query])
 
-    }, [products])
 
-    useEffect(() => {
-        setProducts(dataProducts['dataProducts'])
-    }, [dataProducts['dataProducts']]);
+    // var url = new URL("https://geo.example.org/api")
+    // var params = {lat:35.696233, long:139.570431}
+
+    // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    // fetch(url).then(/* … */)
+
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         setIsLoading(true);
+
+    //         const result = await axios(url);
+
+    //         setData(result.data);
+    //         setIsLoading(false);
+    //     };
+
+    //     fetchData();
+    // }, [url]);
 
     return (
         <div>
@@ -82,18 +106,14 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                     <main className="flex flex-col w-full">
 
-
-
-
-
-
-                        <div className="flex flex-wrap px-12">
-                            <ProductList products={products} loading={loading} />
-                        </div>
                         <div>
-                            <Pagination pages={Math.floor((products.limit / products.total) * 10)} />
-                            {/* <Pagination pages={20} /> */}
+                            {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
+                            <Pagination pages={20} />
                         </div>
+                        <div className="flex flex-wrap px-12">
+                            <ProductList products={products && products.products} loading={loading} />
+                        </div>
+
                     </main>
 
                 </div>
@@ -108,28 +128,9 @@ export default Fabrics;
 
 Fabrics.getInitialProps = async (ctx) => {
 
-    const params = new URLSearchParams();
-
-    if (ctx.query.colors) {
-        params.set("colors", ctx.query.colors);
-    }
-    if (ctx.query.page) {
-        params.set("page", ctx.query.page);
-    }
-    if (ctx.query['price[min]']) {
-        params.set("price[min]", ctx.query['price[min]']);
-    }
-    if (ctx.query['price[max]']) {
-        params.set("price[max]", ctx.query['price[max]']);
-    }
-
-    const [dataProducts, dataFilterOptions] = await Promise.all([
-        // WooCommerce.get(`custom-product-list?${params}`)
-        WooCommerce.get(`custom-product-list`)
-            .then(response => ({ dataProducts: response.data })),
-
+    const [dataFilterOptions] = await Promise.all([
         WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),
     ]);
 
-    return { dataProducts, dataFilterOptions };
+    return { dataFilterOptions };
 }

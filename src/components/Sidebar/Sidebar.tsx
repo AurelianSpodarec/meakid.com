@@ -7,7 +7,31 @@ import Router from 'next/router'
 
 import { useRouter } from 'next/router';
 import { getCustomColor } from '../../utils/custom-colors';
+import cxs from 'cxs';
 
+
+const checkBox = cxs({
+    width: '13px',
+    height: '13px',
+    'before': {
+        width: '6px',
+        borderTopLeftRadius: '1px',
+        borderBottomLeftRadius: '1px',
+        top: '5px',
+        left: '1px',
+        transform: 'rotate(49deg) scale(0, 1)',
+        content: "",
+        height: '2px',
+        backgroundColor: 'currentcolor',
+        display: 'block',
+        position: 'absolute',
+        transformOrigin: 'left center',
+    },
+    ':after': {
+        color: 'grey',
+        fontSize: '14px'
+    }
+})
 // if not found, just default to name
 
 // rainbow color
@@ -22,6 +46,7 @@ import { getCustomColor } from '../../utils/custom-colors';
 //   }
 
 
+
 const capitalize = (s) => {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
@@ -32,7 +57,7 @@ const Sidebar = ({ filterOptions }) => {
 
     // console.log("filterrrrrrrr", filterOptions.colors)
 
-
+    const router = useRouter()
 
 
     const [urlColors, setUrlColors] = useState([]);
@@ -45,20 +70,26 @@ const Sidebar = ({ filterOptions }) => {
     // }
 
 
-    useEffect(() => {
-        const url = urlColors.length !== 0 ? "" : urlColors.join(",");
+    // useEffect(() => {
+    //     const url = urlColors.length !== 0 ? "" : urlColors.join(",");
 
-        Router.push({
-            pathname: '/fabrics',
-            query: { ...Router.query, colors: url }
-        })
-    }, [urlColors])
+    //     Router.push({
+    //         pathname: '/fabrics',
+    //         query: { ...Router.query, colors: url }
+    //     })
+    // }, [urlColors])
 
-    function changeColor(item) {
-        Router.push({
-            pathname: '/fabrics',
-            query: { ...Router.query, colors: item.slug }
-        })
+    // function changeColor(item) {
+    //     Router.push({
+    //         pathname: '/fabrics',
+    //         query: { ...Router.query, colors: item.slug }
+    //     })
+    // }
+
+
+
+    if (!filterOptions) {
+        return "ss"
     }
 
     return (
@@ -117,7 +148,11 @@ const Sidebar = ({ filterOptions }) => {
 
                                 >
                                 </div>
-                                <span className="text-xs ">{capitalize(item.slug)}</span>
+                                {/* if exist, mark */}
+                                {/* {console.log(router.query)} */}
+
+                                {/* {router.query.colors.includes(item.slug) ? "TES" : "no"} */}
+                                <span className={`text-xs ${checkBox}`}>{capitalize(item.slug)}</span>
                             </div>
                         )
                     }
@@ -134,5 +169,3 @@ const Sidebar = ({ filterOptions }) => {
 }
 
 export default Sidebar;
-
-// rainbow color
