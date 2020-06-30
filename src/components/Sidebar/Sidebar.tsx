@@ -46,32 +46,39 @@ const Sidebar = ({ filterOptions }) => {
 
     // Get the old url, and replace with new url
 
-    console.log(router)
-    const changeColor = (item) => {
+    console.log(router.query)
 
-        // If color does not exist, add it to the URL
-        // If color exist, remove it from the URL
+    const changeColor = (clickedColor) => {
 
+        let newQuery;
+        const activeColors = router.query.colors;
+        const activeColorsArray = activeColors.split(',');
 
-        // console.log("UURUURRR", urlColors.join(","))
+        const exist = activeColorsArray.filter(color => color === clickedColor);
+
+        if (exist.length === 0) {
+            const b = [...activeColorsArray, clickedColor]
+            newQuery = b.join(",")
+            Router.push({
+                pathname: '/fabrics',
+                query: { ...Router.query, colors: newQuery }
+            })
+        } else if (exist) {
+            const newActiveColorsArray = activeColorsArray.filter(colors => colors !== clickedColor)
+            newQuery = newActiveColorsArray.join(',')
+
+            Router.push({
+                pathname: '/fabrics',
+                query: { ...Router.query, colors: newQuery }
+            })
+        } else {
+            Router.push({
+                pathname: '/fabrics',
+                query: { ...Router.query }
+            })
+        }
+
     }
-
-    // useEffect(() => {
-    //     const url = urlColors.length !== 0 ? "" : urlColors.join(",");
-
-    //     Router.push({
-    //         pathname: '/fabrics',
-    //         query: { ...Router.query, colors: url }
-    //     })
-    // }, [urlColors])
-
-    // function changeColor(item) {
-    //     Router.push({
-    //         pathname: '/fabrics',
-    //         query: { ...Router.query, colors: item.slug }
-    //     })
-    // }
-
 
 
     if (!filterOptions) {
@@ -126,7 +133,7 @@ const Sidebar = ({ filterOptions }) => {
                             <div className="w-1/3 cursor-pointer text-center items-center flex flex-col h-16 text-gray-800 hover:text-gray-600">
                                 <div
                                     key={item.slug}
-                                    onClick={() => changeColor(item)}
+                                    onClick={() => changeColor(item.slug)}
                                     style={{
                                         backgroundColor: `${getCustomColor(item.slug)}`, border: "1px solid #e0e0e0"
                                     }}
@@ -150,7 +157,7 @@ const Sidebar = ({ filterOptions }) => {
                                             .checkmark:after {
                                                 content: "";
                                                 height: 2px;
-                                                background-color: white;
+                                                background-color: ${item.slug === "white" ? 'black' : 'white'};
                                                 display: block;
                                                 position: absolute;
                                                 transform-origin: left center;
