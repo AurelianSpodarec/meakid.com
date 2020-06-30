@@ -5,21 +5,24 @@ import { getCustomColor } from '../../../utils/custom-colors';
 
 
 function ProducItem({ product }) {
-    // console.log("single prod", product)
+    console.log("single prod", product)
 
     const [currentColor, setCurrentcolor] = useState(null);
     const [currentImage, setCurrentImage] = useState(null);
 
     const [colors, setColors] = useState(null);
-    const [images, setImages] = useState(null);
-    // console.log(images)
+    const [images, setImages] = useState([]);
+
+
+    const [variationImages, setVariationImages] = useState(null);
+    console.log("imgm", images)
 
 
     // go though the colors and grab the immage and do
     // {
     //     color: 'green',
     //     image: 'url'
-    // }
+    // }    
 
 
     function setUniqueColors() {
@@ -47,9 +50,15 @@ function ProducItem({ product }) {
             let imagesSet = new Set([]);
 
             for (const variation of product.custom_variations) {
+                let obj = {};
                 if (variation.image) {
-                    imagesSet.add(variation.image);
+                    obj.image = variation.image
                 }
+                if (variation['attributes'].attribute_pa_color) {
+                    obj.color = variation['attributes'].attribute_pa_color
+                }
+                console.log("img set", imagesSet)
+                imagesSet.add(obj);
             }
 
             setImages(Array.from(imagesSet));
@@ -84,7 +93,7 @@ function ProducItem({ product }) {
 
     return (
 
-        <div className="w-1/2 lg:w-1/3 xl:w-1/4 rounded overflow-hidden px-2 mb-8">
+        <div className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
                 <div className="h-full">
 
@@ -126,30 +135,24 @@ function ProducItem({ product }) {
                             product.color && colors === null ?
                                 <div className="h-5 w-5" style={{ backgroundColor: `${colors}` }}></div>
                                 :
-                                colors && colors.map((color, index) =>
+                                images && images.map((item, index) =>
+
                                     <button
 
-                                        className={(color === currentColor ? "border border-solid border-4 border-black-700" : "") + " border-2 border-gray-200 rounded-full mr-1 outline-none"}
+                                        className={(item.color === currentColor ? "border border-solid border-4 border-black-700" : "") + " border-2 border-gray-200 rounded-full mr-1 outline-none"}
                                         // onClick={() => setCurrentcolor(color)}
-                                        onMouseEnter={() => setCurrentcolor(color)}
+                                        onMouseEnter={() => setCurrentcolor(item.color)}
                                         key={index}
 
                                     >
-                                        {/* <div
-                                            className={"h-4 w-4 rounded-full outline-none" + (color === currentColor ? " border border-solid border-2 border-gray-600" : "")}
-                                            style={{ backgroundColor: `${getCustomColor(color)}` }}
-                                        /> */}
-                                        {/* <img
-                                            src={product.}
-                                        /> */}
 
                                         {
-                                            images && images.map((image, x) => {
-                                                return <img
-                                                    className="h-8 w-8"
-                                                    src={image}
-                                                />
-                                            })
+
+                                            <img
+                                                className="h-16 w-16"
+                                                src={item.image}
+                                            />
+
                                         }
 
 
