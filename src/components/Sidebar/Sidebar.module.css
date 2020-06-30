@@ -33,7 +33,7 @@
     border-bottom-left-radius: 1px;
     top: 5px;
     left: 1px;
-    transform: rotate(49deg) scale(0, 1);
+    transform: rotate(49deg) scale(1, 1);
 
 }
 .checkmark:after {
@@ -42,7 +42,7 @@
     border-bottom-right-radius: 1px;
     top: 10px;
     left: 4px;
-    transform: rotate(-49deg) scale(0, 1); 
+    transform: rotate(-49deg) scale(1, 1); 
 }
     
      

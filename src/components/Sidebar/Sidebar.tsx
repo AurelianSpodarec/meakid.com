@@ -33,50 +33,6 @@ const capitalize = (s) => {
 const Sidebar = ({ filterOptions }) => {
 
 
-    //     const checkBox = cxs({
-    //         display: 'inline-block',
-    //         color: 'rgb(255, 255, 255)',
-    //         position: 'absolute',
-    //         top: '50%',
-    //         left: '50%',
-    //         right: 'unset',
-    //         transform: 'translate3d(-50%, -50%, 0px)',
-    //         width: '13px',
-    //         height: '13px',
-
-    //         ':before': {
-
-    //             content: "",
-    //             height: '2px',
-    //             backgroundColor: 'black',
-    //             display: 'block',
-    //             position: 'absolute',
-    //             transformOrigin: 'left center',
-
-    //             width: '6px',
-    //             borderTopLeftRadius: '1px',
-    //             borderBottomLeftRadius: '1px',
-    //             top: '5px',
-    //             left: '1px',
-    //             transform: 'rotate(49deg) scale(1, 1)',
-    //         },
-    //         ':after': {
-    //             content: "",
-    //             height: '2px',
-    //             backgroundColor: 'black',
-    //             display: 'block',
-    //             position: 'absolute',
-    //             transformOrigin: 'left center',
-
-    //             width: '13px',
-    //             borderTopLeftRadius: '1px',
-    //             borderBottomLeftRadius: '1px',
-    //             top: '10px',
-    //             left: '4px',
-    //             transform: 'rotate(-49deg) scale(1, 1)',
-    //         }
-    //     })
-
 
     console.log("filterrrrrrrr", filterOptions.colors)
 
@@ -86,12 +42,19 @@ const Sidebar = ({ filterOptions }) => {
     const [urlColors, setUrlColors] = useState([]);
 
 
-    // const changeColor = (item) => {
-    //     setUrlColors([...urlColors, item.slug])
 
-    //     // console.log("UURUURRR", urlColors.join(","))
-    // }
 
+    // Get the old url, and replace with new url
+
+    console.log(router)
+    const changeColor = (item) => {
+
+        // If color does not exist, add it to the URL
+        // If color exist, remove it from the URL
+
+
+        // console.log("UURUURRR", urlColors.join(","))
+    }
 
     // useEffect(() => {
     //     const url = urlColors.length !== 0 ? "" : urlColors.join(",");
@@ -170,12 +133,52 @@ const Sidebar = ({ filterOptions }) => {
                                     className="h-8 w-8 relative rounded-full cursor-pointer"
 
                                 >
-                                    <div className={`${styles.checkmark} ${router.query.colors.includes(item.slug) ? "is-toggle" : ""}`}></div>
+                                    <div className="checkmark">
+                                        <style jsx>{` 
+                                            .checkmark {
+                                                display: inline-block;
+                                                    color: rgb(255, 255, 255);
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    right: unset;
+                                                    transform: translate3d(-50%, -50%, 0px);
+                                                   height: 13px;
+                                                   width: 13px;
+                                            }
+                                            .checkmark:before,
+                                            .checkmark:after {
+                                                content: "";
+                                                height: 2px;
+                                                background-color: white;
+                                                display: block;
+                                                position: absolute;
+                                                transform-origin: left center;
+                                            }
+                                            .checkmark:before {
+                                                width: 6px;
+                                                border-top-left-radius: 1px;
+                                                border-bottom-left-radius: 1px;
+                                                top: 5px;
+                                                left: 1px;
+                                                transform: rotate(49deg) ${router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"};
+                                            
+                                            }
+                                            .checkmark:after {
+                                                width: 13px;
+                                                border-top-right-radius: 1px;
+                                                border-bottom-right-radius: 1px;
+                                                top: 10px;
+                                                left: 4px;
+                                                transform: rotate(-49deg) ${router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"} ;
+                                            }       
+                                        `}</style>
+                                    </div>
                                 </div>
                                 {/* if exist, mark */}
                                 {/* {console.log(router.query)} */}
-
-                                {/* {router.query.colors.includes(item.slug) ? "TES" : "no"} */}
+                                {/* 
+                                {router.query.colors.includes(item.slug) ? "YES" : "no"} */}
                                 <span className="text-xs">{capitalize(item.slug)}</span>
                             </div>
                         )
