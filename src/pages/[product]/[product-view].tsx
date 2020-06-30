@@ -15,39 +15,51 @@ function ProductView({ product, cart, addToCart }: any) {
     console.log("cart", cart)
 
     return (
-        <div className="container mx-auto px-4">
-            <div className="grid grid-cols-12">
+        <div className="mx-auto lg:px-12 lg:py-16">
+            <div className="block lg:flex">
 
-                <div className="col-span-6">
+                <section className="w-full relative flex-1">
                     {
-                        <img src={product.variations ? product.variations[0].image.url : product.image[0]} height="300px" />
+                        <img src={product.variations ? product.variations[0].image.url : product.image[0]} className="w-full" />
                     }
-                </div>
+                </section>
 
-                <div className="col-span-6">
+                <section className="p-4 relative w-full lg:ml-24 lg:w-94 lg:p-0">
 
                     <div>
-                        <h2>{product.name}</h2>
-                        <span>{product.price}</span>
+                        <h5 className="text-sm uppercase">Meakid Fabrics</h5>
+                        <h1 className="text-xl uppercase color-gray-900 font-bold">{product.name}</h1>
+                    </div>
+
+                    <div className="my-4">
+                        {/* <span>{product.price.toFixed(2)}</span> */}
+                        <span className="text-xl text-gray-700">£15.00</span>
                     </div>
 
                     <div>
+                        <div>
+                            <h5>Select Size</h5>
+                            <div>Size Guide</div>
+                        </div>
+                        <div>
+                            Image variations
+                        </div>
+                    </div>
+
+                    {/* <div>
                         <p> Weight: {product.weight} g/m2</p>
                         <p>Width: {product.width}</p>
 
-                    </div>
+                    </div> */}
 
                     <div>
                         <div className="mb-4">
                             <p>Stock quantity: {product.variations ? "load obj" : product.stock_quantity}</p>
-                            <span className="h-5 w-5 inline-block text-center align-middle cursor-pointer bg-black text-white">-</span>
-                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Quantity" value={`${quantity}m`} />
-                            <span className="h-5 w-5 inline-block text-center align-middle cursor-pointer bg-black text-white">+</span>
                         </div>
 
-                        <button onClick={() => addToCart(product.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                        <button onClick={() => addToCart(product.id)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                     </div>
-                </div>
+                </section>
             </div>
         </div >
     )

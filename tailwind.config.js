@@ -3,6 +3,7 @@ module.exports = {
         extend: {
             width: {
                 "68": "17rem",
+                "94": "23.5rem",
                 "100": "25rem",
                 "104": "26rem",
                 "106": "26.5rem"
@@ -24,3 +25,4 @@ module.exports = {
     plugins: [],
 
 };
+

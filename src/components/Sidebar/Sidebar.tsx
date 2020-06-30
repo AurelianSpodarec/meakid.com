@@ -90,7 +90,7 @@ const Sidebar = ({ filterOptions }) => {
 
 
     if (!filterOptions) {
-        return "ss"
+        return "ss";
     }
 
     return (
