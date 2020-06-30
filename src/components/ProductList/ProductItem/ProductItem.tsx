@@ -13,6 +13,15 @@ function ProducItem({ product }) {
     const [colors, setColors] = useState(null);
     const [images, setImages] = useState(null);
     // console.log(images)
+
+
+    // go though the colors and grab the immage and do
+    // {
+    //     color: 'green',
+    //     image: 'url'
+    // }
+
+
     function setUniqueColors() {
         setColors(null)
 
@@ -75,7 +84,7 @@ function ProducItem({ product }) {
 
     return (
 
-        <div className="w-1/3 rounded overflow-hidden px-2 mb-8">
+        <div className="w-1/2 lg:w-1/3 xl:w-1/4 rounded overflow-hidden px-2 mb-8">
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
                 <div className="h-full">
 

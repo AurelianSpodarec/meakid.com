@@ -24,12 +24,8 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
     const [query, setQuery] = useState('');
 
 
-    // console.log("router", query, queryString.parseUrl(router.query, { parseFragmentIdentifier: true }))
-    // console.log("router", queryString.stringify(router.query))
-
-
     const fetchProducts = async () => {
-        const a = await WooCommerce.get(`custom-product-list?${queryString.stringify(router.query)}`)
+        const a = await WooCommerce.get(`custom-product-list${!Object.keys(router.query).length ? "" : "?"}${queryString.stringify(router.query)}`)
             .then(response => (
                 response.data
             ))

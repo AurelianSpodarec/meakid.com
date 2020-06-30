@@ -51,10 +51,18 @@ const Sidebar = ({ filterOptions }) => {
     const changeColor = (clickedColor) => {
 
         let newQuery;
-        const activeColors = router.query.colors;
-        const activeColorsArray = activeColors.split(',');
 
-        const exist = activeColorsArray.filter(color => color === clickedColor);
+
+        // If colors empty, create colors with the new value
+        // If there are no colors, error check that so it doesn't return the colors
+
+        const activeColors = router.query.colors;
+
+
+        const activeColorsArray = activeColors ? activeColors.split(',') : false;
+
+        const exist = activeColors ? activeColorsArray.filter(color => color === clickedColor) : false;
+
 
         if (exist.length === 0) {
             const b = [...activeColorsArray, clickedColor]
@@ -144,14 +152,14 @@ const Sidebar = ({ filterOptions }) => {
                                         <style jsx>{` 
                                             .checkmark {
                                                 display: inline-block;
-                                                    color: rgb(255, 255, 255);
-                                                    position: absolute;
-                                                    top: 50%;
-                                                    left: 50%;
-                                                    right: unset;
-                                                    transform: translate3d(-50%, -50%, 0px);
-                                                   height: 13px;
-                                                   width: 13px;
+                                                color: rgb(255, 255, 255);
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 50%;
+                                                right: unset;
+                                                transform: translate3d(-50%, -50%, 0px);
+                                                height: 13px;
+                                                width: 13px;
                                             }
                                             .checkmark:before,
                                             .checkmark:after {
@@ -168,7 +176,7 @@ const Sidebar = ({ filterOptions }) => {
                                                 border-bottom-left-radius: 1px;
                                                 top: 5px;
                                                 left: 1px;
-                                                transform: rotate(49deg) ${router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"};
+                                                transform: rotate(49deg) ${router.query.colors && router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"};
                                             
                                             }
                                             .checkmark:after {
@@ -177,7 +185,7 @@ const Sidebar = ({ filterOptions }) => {
                                                 border-bottom-right-radius: 1px;
                                                 top: 10px;
                                                 left: 4px;
-                                                transform: rotate(-49deg) ${router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"} ;
+                                                transform: rotate(-49deg) ${router.query.colors && router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"} ;
                                             }       
                                         `}</style>
                                     </div>
