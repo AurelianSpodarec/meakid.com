@@ -139,26 +139,30 @@ function ProducItem({ product }) {
 
                                     <button
 
-                                        className={(item.color === currentColor ? "border border-solid border-4 border-black-700" : "") + " border-2 border-gray-200 rounded-full mr-1 outline-none"}
+                                        className={(item.color === currentColor ? "border border-solid border-4 border-black-700" : "") + " hidden xl:inline-block border-2 border-gray-200 rounded-full mr-1 outline-none"}
                                         // onClick={() => setCurrentcolor(color)}
                                         onMouseEnter={() => setCurrentcolor(item.color)}
                                         key={index}
 
                                     >
-
                                         {
-
                                             <img
-                                                className="h-16 w-16"
+                                                className="h-8 w-8"
                                                 src={item.image}
                                             />
-
                                         }
 
-
                                     </button>
+
                                 )
                         }
+                        {images &&
+                            <p className="xl:hidden text-gray-500">
+                                {images.length}
+                                Colors
+                        </p>
+                        }
+
                     </div>
 
                 </div>

@@ -95,7 +95,7 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className="hidden md:block pl-12  ">
+                    <aside style={{ minWidth: '240px' }} className="fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative">
                         <Sidebar filterOptions={filterOptions} />
                     </aside>
 

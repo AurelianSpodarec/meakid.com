@@ -94,62 +94,67 @@ const Sidebar = ({ filterOptions }) => {
     }
 
     return (
-        <div>
-
-            <h2>Filtering</h2>
-
-            {/* on click this, reload the shop list */}
-
-            <div>
-                <h3 className="font-bold py-4">Style</h3>
-                <div className="flex flex-wrap py-2 ">
-
-                    <div className="md:flex md:items-center mb-6">
-                        <div className=""></div>
-                        <label className="block text-gray-500 font-bold">
-                            <input className="mr-2 leading-tight" type="checkbox" />
-                            <span className="text-sm">
-                                Plain Cotton
-                            </span>
-                        </label>
-                    </div>
-                    <div className="md:flex md:items-center mb-6">
-                        <div className=""></div>
-                        <label className="block text-gray-500 font-bold">
-                            <input className="mr-2 leading-tight" type="checkbox" />
-                            <span className="text-sm">
-                                Printed Cotton
-                            </span>
-                        </label>
-                    </div>
-
+        <div className="pt-24 lg:pt-0">
+            <div className="relative">
+                <div className="absolute flex right-0 top-0 bg-gray-900 rounded-full h-8 w-8 text-white justify-center items-center">
+                    <span className="font-bold text-xl">x</span>
                 </div>
-                {/* <div>
+
+                <div>
+                    <h2>Filtering</h2>
+
+                    {/* on click this, reload the shop list */}
+
+                    <div>
+                        <h3 className="font-bold py-4">Style</h3>
+                        <div className="flex flex-wrap py-2 ">
+
+                            <div className="md:flex md:items-center mb-6">
+                                <div className=""></div>
+                                <label className="block text-gray-500 font-bold">
+                                    <input className="mr-2 leading-tight" type="checkbox" />
+                                    <span className="text-sm">
+                                        Plain Cotton
+                            </span>
+                                </label>
+                            </div>
+                            <div className="md:flex md:items-center mb-6">
+                                <div className=""></div>
+                                <label className="block text-gray-500 font-bold">
+                                    <input className="mr-2 leading-tight" type="checkbox" />
+                                    <span className="text-sm">
+                                        Printed Cotton
+                            </span>
+                                </label>
+                            </div>
+
+                        </div>
+                        {/* <div>
                         Min Price: <input onChange={(e) => updateValue(e)} value={text} />
                     </div>
                     <div>
                         Max Price: <input onChange={updateValue} value={3} />
                     </div> */}
-            </div>
+                    </div>
 
-            <div>
-                <h3 className="font-bold py-4">Colors</h3>
-                <div className="flex flex-wrap py-2 ">
-                    {
-                        filterOptions.colors.map((item, x) =>
+                    <div>
+                        <h3 className="font-bold py-4">Colors</h3>
+                        <div className="flex flex-wrap py-2 ">
+                            {
+                                filterOptions.colors.map((item, x) =>
 
-                            <div className="w-1/3 cursor-pointer text-center items-center flex flex-col h-16 text-gray-800 hover:text-gray-600">
-                                <div
-                                    key={item.slug}
-                                    onClick={() => changeColor(item.slug)}
-                                    style={{
-                                        backgroundColor: `${getCustomColor(item.slug)}`, border: "1px solid #e0e0e0"
-                                    }}
-                                    className="h-8 w-8 relative rounded-full cursor-pointer"
+                                    <div className="w-1/3 cursor-pointer text-center items-center flex flex-col h-16 text-gray-800 hover:text-gray-600">
+                                        <div
+                                            key={item.slug}
+                                            onClick={() => changeColor(item.slug)}
+                                            style={{
+                                                backgroundColor: `${getCustomColor(item.slug)}`, border: "1px solid #e0e0e0"
+                                            }}
+                                            className="h-8 w-8 relative rounded-full cursor-pointer"
 
-                                >
-                                    <div className="checkmark">
-                                        <style jsx>{` 
+                                        >
+                                            <div className="checkmark">
+                                                <style jsx>{` 
                                             .checkmark {
                                                 display: inline-block;
                                                 color: rgb(255, 255, 255);
@@ -188,23 +193,29 @@ const Sidebar = ({ filterOptions }) => {
                                                 transform: rotate(-49deg) ${router.query.colors && router.query.colors.includes(item.slug) ? "scale(1, 1)" : "scale(0, 1)"} ;
                                             }       
                                         `}</style>
-                                    </div>
-                                </div>
-                                {/* if exist, mark */}
-                                {/* {console.log(router.query)} */}
-                                {/* 
+                                            </div>
+                                        </div>
+                                        {/* if exist, mark */}
+                                        {/* {console.log(router.query)} */}
+                                        {/* 
                                 {router.query.colors.includes(item.slug) ? "YES" : "no"} */}
-                                <span className="text-xs">{capitalize(item.slug)}</span>
-                            </div>
-                        )
-                    }
-                </div>
-                {/* <div>
+                                        <span className="text-xs">{capitalize(item.slug)}</span>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        {/* <div>
                         Min Price: <input onChange={(e) => updateValue(e)} value={text} />
                     </div>
                     <div>
                         Max Price: <input onChange={updateValue} value={3} />
                     </div> */}
+                    </div>
+                </div>
+
+                <div className="bg-white border-solid border-t-2 border-gray-300 py-4 px-8">
+                    <button className="bg-gray-900 px-12 w-full rounded-full py-2 text-white">Apply</button>
+                </div>
             </div>
         </div >
     )
