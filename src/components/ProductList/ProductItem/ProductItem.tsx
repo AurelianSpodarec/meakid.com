@@ -5,7 +5,7 @@ import { getCustomColor } from '../../../utils/custom-colors';
 
 
 function ProducItem({ product }) {
-    console.log("single prod", product)
+    // console.log("single prod", product)
 
     const [currentColor, setCurrentcolor] = useState(null);
     const [currentImage, setCurrentImage] = useState(null);
@@ -47,27 +47,26 @@ function ProducItem({ product }) {
         setImages(null)
 
         if (product.custom_variations.length !== 0) {
-            let imagesSet = new Set([]);
+
+            const arr = [];
 
             for (const variation of product.custom_variations) {
-                let obj = {};
+                const exist = arr.find(obj => obj.color === variation['attributes'].attribute_pa_color)
 
-                if (variation.image) {
-                    obj.image = variation.image
+                if (!exist) {
+                    let obj = {};
+
+                    obj.image = variation.image;
+                    obj.color = variation['attributes'].attribute_pa_color;
+
+                    arr.push(obj)
                 }
 
-                if (variation['attributes'].attribute_pa_color) {
-                    obj.color = variation['attributes'].attribute_pa_color
-                }
-
-                console.log("img set", imagesSet)
-                imagesSet.add(obj);
             }
 
-            setImages(Array.from(imagesSet));
-        } else {
-            // setColors(product.color)
+            setImages(arr);
         }
+
     }
 
     function getImage() {
