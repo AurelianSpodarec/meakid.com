@@ -51,12 +51,15 @@ function ProducItem({ product }) {
 
             for (const variation of product.custom_variations) {
                 let obj = {};
+
                 if (variation.image) {
                     obj.image = variation.image
                 }
+
                 if (variation['attributes'].attribute_pa_color) {
                     obj.color = variation['attributes'].attribute_pa_color
                 }
+
                 console.log("img set", imagesSet)
                 imagesSet.add(obj);
             }
@@ -107,7 +110,7 @@ function ProducItem({ product }) {
                         />
                     </div>
 
-                    <div className="py-2 flex justify-between">
+                    <div className="py-2 flex flex-col lg:flex-row lg:justify-between">
                         <div className="text-xl text-gray-900 font-bold text-xl">{product.name}</div>
 
                         <div className="inline-flex">

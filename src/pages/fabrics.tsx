@@ -77,23 +77,24 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
                             <h2 className="text-1xl font-bold">Cotton</h2>
                             <h2 className="text-2xl font-bold">Fabrics</h2>
                         </div>
+                        <div className="px-2 flex flex-row items-end">
+                            <div onClick={toggleFilterOpen}>Toggle tilter</div>
+                            <p>Sort By: <span className="text-gray-500">Newest</span></p>
+
+                        </div>
                     </div>
 
                     <div className="flex justify-between flex-row ">
-                        <div className="">
+                        {/* <div className="">
                             {
                                 products ?
                                     <p>Showing {products && ((products.page * products.limit) - products.limit) + 1} - {products.page * products.limit} of {products.total} result</p>
                                     :
                                     <p>Showing 0 - 0 of 0 result</p>
                             }
-                        </div>
+                        </div> */}
 
-                        <div className="px-2">
-                            <div onClick={toggleFilterOpen}>Toggle tilter</div>
-                            <p>Sort By: <span className="text-gray-500">Newest</span></p>
 
-                        </div>
                     </div>
                 </div>
 
@@ -108,12 +109,14 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                     <main className="flex flex-col w-full">
 
+
+                        <div className="flex flex-wrap px-12">
+                            <ProductList products={products && products.products} loading={loading} />
+                        </div>
+
                         <div>
                             {/* <Pagination pages={Math.floor((products.limit / products.total) * 10)} /> */}
                             <Pagination pages={20} />
-                        </div>
-                        <div className="flex flex-wrap px-12">
-                            <ProductList products={products && products.products} loading={loading} />
                         </div>
 
                     </main>
