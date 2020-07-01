@@ -41,9 +41,16 @@ const Sidebar = ({ filterOptions }) => {
 
     const [urlColors, setUrlColors] = useState([]);
 
+    const [selectedColorsNumber, setSelectedColorsNumber] = useState("");
 
+    useEffect(() => {
+        if (router.query.colors) {
+            const activeColors = router.query.colors;
+            const activeColorsArray = activeColors ? activeColors.split(',') : false;
 
-
+            setSelectedColorsNumber(activeColorsArray.length)
+        }
+    }, [router.query.colors])
     // Get the old url, and replace with new url
 
     console.log(router.query)
@@ -96,7 +103,7 @@ const Sidebar = ({ filterOptions }) => {
     return (
         <div className="pt-24 lg:pt-0">
             <div className="relative">
-                <div className="absolute flex right-0 top-0 bg-gray-900 rounded-full h-8 w-8 text-white justify-center items-center">
+                <div className="absolute flex right-0 top-0 bg-gray-900 rounded-full h-8 w-8 text-white justify-center items-center lg:hidden">
                     <span className="font-bold text-xl">x</span>
                 </div>
 
@@ -106,7 +113,7 @@ const Sidebar = ({ filterOptions }) => {
                     {/* on click this, reload the shop list */}
 
                     <div>
-                        <h3 className="font-bold py-4">Style</h3>
+                        <h3 className="py-4">Style</h3>
                         <div className="flex flex-wrap py-2 ">
 
                             <div className="md:flex md:items-center mb-6">
@@ -115,7 +122,7 @@ const Sidebar = ({ filterOptions }) => {
                                     <input className="mr-2 leading-tight" type="checkbox" />
                                     <span className="text-sm">
                                         Plain Cotton
-                            </span>
+                                    </span>
                                 </label>
                             </div>
                             <div className="md:flex md:items-center mb-6">
@@ -129,16 +136,12 @@ const Sidebar = ({ filterOptions }) => {
                             </div>
 
                         </div>
-                        {/* <div>
-                        Min Price: <input onChange={(e) => updateValue(e)} value={text} />
-                    </div>
-                    <div>
-                        Max Price: <input onChange={updateValue} value={3} />
-                    </div> */}
+
                     </div>
 
                     <div>
-                        <h3 className="font-bold py-4">Colors</h3>
+                        <h3 className="py-4">Colors {selectedColorsNumber !== "" ? `(${selectedColorsNumber})` : ""}</h3>
+
                         <div className="flex flex-wrap py-2 ">
                             {
                                 filterOptions.colors.map((item, x) =>
@@ -213,7 +216,7 @@ const Sidebar = ({ filterOptions }) => {
                     </div>
                 </div>
 
-                <div className="bg-white border-solid border-t-2 border-gray-300 py-4 px-8">
+                <div className="bg-white border-solid border-t-2 border-gray-300 py-4 px-8 lg:hidden">
                     <button className="bg-gray-900 px-12 w-full rounded-full py-2 text-white">Apply</button>
                 </div>
             </div>

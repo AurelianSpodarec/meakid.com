@@ -24,6 +24,8 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
     const [query, setQuery] = useState('');
 
 
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
+
     const fetchProducts = async () => {
         const a = await WooCommerce.get(`custom-product-list${!Object.keys(router.query).length ? "" : "?"}${queryString.stringify(router.query)}`)
             .then(response => (
@@ -37,6 +39,10 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
         fetchProducts()
         setLoading(false);
     }, [router.query])
+
+    function toggleFilterOpen() {
+        setIsFilterOpen(!isFilterOpen)
+    }
 
 
     // var url = new URL("https://geo.example.org/api")
@@ -84,7 +90,7 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
                         </div>
 
                         <div className="px-2">
-
+                            <div onClick={toggleFilterOpen}>Toggle tilter</div>
                             <p>Sort By: <span className="text-gray-500">Newest</span></p>
 
                         </div>
@@ -95,7 +101,7 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
 
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className="fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative">
+                    <aside style={{ minWidth: '240px' }} className="transform translate-y-full lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative">
                         <Sidebar filterOptions={filterOptions} />
                     </aside>
 
