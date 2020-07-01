@@ -5,13 +5,13 @@ import { getCustomColor } from '../../../utils/custom-colors';
 
 
 function ProducItem({ product }) {
-    // console.log("single prod", product)
+    console.log("single prod", product)
 
     const [currentColor, setCurrentcolor] = useState(null);
     const [currentImage, setCurrentImage] = useState(null);
 
     const [colors, setColors] = useState(null);
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState(null);
 
 
     const [variationImages, setVariationImages] = useState(null);
@@ -44,29 +44,22 @@ function ProducItem({ product }) {
     }
 
     function setUniqueImages() {
-        setImages(null)
-
         if (product.custom_variations.length !== 0) {
+            setImages(
+                Object.values(
+                    product.custom_variations.reduce((acc, variation) => {
+                        const color = variation.attributes.attribute_pa_color;
 
-            const arr = [];
+                        acc[color] = {
+                            image: variation.image,
+                            color,
+                        };
 
-            for (const variation of product.custom_variations) {
-                const exist = arr.find(obj => obj.color === variation['attributes'].attribute_pa_color)
-
-                if (!exist) {
-                    let obj = {};
-
-                    obj.image = variation.image;
-                    obj.color = variation['attributes'].attribute_pa_color;
-
-                    arr.push(obj)
-                }
-
-            }
-
-            setImages(arr);
+                        return acc;
+                    }, {})
+                )
+            );
         }
-
     }
 
     function getImage() {
@@ -110,10 +103,10 @@ function ProducItem({ product }) {
                     </div>
 
                     <div className="py-2 flex flex-col lg:flex-row lg:justify-between">
-                        <div className="text-xl text-gray-900 font-bold text-xl">{product.name}</div>
+                        <div className="text-gray-900 font-bold text-base">{product.name}</div>
 
                         <div className="inline-flex">
-                            <p className="text-sm text-gray-600 text-base">
+                            <p className="text-sm text-gray-900 font-semi-bold text-sm">
                                 {
                                     product.variationPrice === "" ?
                                         <span>
