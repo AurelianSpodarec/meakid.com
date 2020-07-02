@@ -92,7 +92,7 @@ function ProductView({ product, cart, addToCart }: any) {
     console.log("sizes", sizes && sizes)
     return (
         <div>
-            <div className="mx-auto lg:px-12 lg:py-16">
+            <div style={{ maxWidth: '1440px' }} className="mx-auto lg:px-12 lg:py-16">
                 <div className="block lg:flex">
 
                     <section className="w-full relative flex-1">
@@ -119,7 +119,7 @@ function ProductView({ product, cart, addToCart }: any) {
 
                                     <button
 
-                                        className={(item.color === selectedColor ? "border border-solid border-4 border-black-700" : "") + " hidden xl:inline-block border-2 border-gray-200 rounded-full mr-1 outline-none"}
+                                        className={(item.color === selectedColor ? "border-solid border-2 border-gray-900" : "") + " hidden xl:inline-block border-2 border-gray-200 mr-1 outline-none"}
                                         // onClick={() => setCurrentcolor(color)}
                                         onClick={() => setSelectedColor(item.color)}
                                         key={index}
@@ -138,6 +138,8 @@ function ProductView({ product, cart, addToCart }: any) {
                             }
                         </div>
 
+                        {/* if size not selected, when adding it to basket, show error, please select a size */}
+
                         <div>
                             <div className="flex flex-row justify-between mb-3">
                                 <h5 className="uppercase text-xs text-gray-700">Select Size <span style={{ fontSize: "10px" }}>(in cm)</span></h5>
@@ -146,9 +148,9 @@ function ProductView({ product, cart, addToCart }: any) {
                             <div className="flex">
                                 {
                                     sizes && sizes.map((size, index) =>
-                                        <div className="flex-1 border-2 border text-center leading-10">
+                                        <button className="flex-1 mx-1 border-2 border text-center leading-10">
                                             {size}
-                                        </div>
+                                        </button>
                                     )
                                 }
                             </div>

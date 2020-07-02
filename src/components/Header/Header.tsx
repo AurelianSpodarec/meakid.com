@@ -80,9 +80,11 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
 
                 <div className="pl-2 md:pl-12 pr-2 md:pr-4 align-middle flex justify-between h-16">
 
-                    <div className="flex items-center h-full">
-                        <img style={{ maxWidth: "60px", padding: "8px" }} src="https://i.imgur.com/aCuOZKn.png" />
-                        {/* <span>Meakid</span> */}
+                    <div className="flex items-center h-full cursor-pointer">
+                        <Link href="/">
+                            <img style={{ maxWidth: "60px", padding: "8px" }} src="https://i.imgur.com/aCuOZKn.png" />
+                            {/* <span>Meakid</span> */}
+                        </Link>
                     </div>
 
                     <nav className="hidden lg:block sm:ml-6">

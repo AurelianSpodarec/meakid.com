@@ -134,8 +134,7 @@ function ProducItem({ product }) {
 
                                     <button
 
-                                        className={(item.color === currentColor ? "border border-solid border-4 border-black-700" : "") + " hidden xl:inline-block border-2 border-gray-200 rounded-full mr-1 outline-none"}
-                                        // onClick={() => setCurrentcolor(color)}
+                                        className={(item.color === currentColor ? " border-solid border-4 border-black-700" : "") + " hidden xl:inline-block border-2 border-gray-200 mr-1 outline-none"}
                                         onMouseEnter={() => setCurrentcolor(item.color)}
                                         key={index}
 
