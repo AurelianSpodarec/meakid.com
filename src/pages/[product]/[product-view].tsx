@@ -19,6 +19,29 @@ function getAllProductSizes(product, selectedColor) {
 }
 
 
+// by color, and by size if exist
+function getVariationProduct(product, selectedColor, selectedSize) {
+    let variationProduct;
+
+    for (const variation of product.variations) {
+
+        if (!selectedSize) {
+            if (variation.attributes.attribute_pa_color === selectedColor) {
+
+                variationProduct = variation
+            }
+        } else {
+            if (variation.attributes.attribute_pa_color === selectedColor && variation.attributes.attribute_pa_size === selectedSize) {
+
+                variationProduct = variation
+            }
+        }
+    }
+
+    return variationProduct;
+}
+
+
 
 function ProductView({ product, cart, addToCart }: any) {
     console.log('product', product)
@@ -37,12 +60,6 @@ function ProductView({ product, cart, addToCart }: any) {
 
     const sizes = useMemo(() => getAllProductSizes(product, selectedColor), [product, selectedColor])
 
-    // Change color and display new price and all
-    // changing size is just selecting the size    
-
-
-
-
     function onLoadInitialValues() {
         setMainImage(product.variations ? product.variations[0].image.url : product.image[0])
 
@@ -51,15 +68,9 @@ function ProductView({ product, cart, addToCart }: any) {
         }
     }
 
-    // function onChangeImage(color) {
-
-
-    //     let im = product && product.find(item => item.variations.attribute_pa_color === color)
-    //     setMainImage(im.variations.image.src)
-
-    // }
-
-
+    function onChangeImage() {
+        setMainImage(currentProduct && currentProduct.image.src)
+    }
 
     function setUniqueImages() {
         if (product && product.variations.length !== 0) {
@@ -80,9 +91,22 @@ function ProductView({ product, cart, addToCart }: any) {
         }
     }
 
+    function onSizeChange(size) {
+        setSelectedSize(size)
+    }
+
     useEffect(() => {
-        // onChangeImage()
-    }, [selectedColor])
+        onChangeImage()
+        setCurrentProduct(getVariationProduct(product, selectedColor, selectedSize))
+    }, [selectedColor, selectedSize])
+
+    useEffect(() => {
+        setSelectedSize(null)
+    }, [mainImage])
+
+    useEffect(() => {
+        onChangeImage()
+    }, [currentProduct])
 
     useEffect(() => {
         setUniqueImages()
@@ -110,7 +134,7 @@ function ProductView({ product, cart, addToCart }: any) {
 
                         <div className="my-4">
                             {/* <span>{product.price.toFixed(2)}</span> */}
-                            <span className="text-xl text-gray-700">£15.00</span>
+                            <span className="text-xl text-gray-700">£{currentProduct && currentProduct.display_price.toFixed(2)}</span>
                         </div>
 
                         <div className="mb-6">
@@ -119,7 +143,7 @@ function ProductView({ product, cart, addToCart }: any) {
 
                                     <button
 
-                                        className={(item.color === selectedColor ? "border-solid border-2 border-gray-900" : "") + " hidden xl:inline-block border-2 border-gray-200 mr-1 outline-none"}
+                                        className={(item.color === selectedColor ? "border-solid border-2 border-gray-900" : "") + " inline-block border-2 border-gray-200 mr-1 outline-none"}
                                         // onClick={() => setCurrentcolor(color)}
                                         onClick={() => setSelectedColor(item.color)}
                                         key={index}
@@ -148,7 +172,7 @@ function ProductView({ product, cart, addToCart }: any) {
                             <div className="flex">
                                 {
                                     sizes && sizes.map((size, index) =>
-                                        <button className="flex-1 mx-1 border-2 border text-center leading-10">
+                                        <button onClick={() => onSizeChange(size)} className={`flex-1 mx-1 border-2 border text-center leading-10`}>
                                             {size}
                                         </button>
                                     )
@@ -161,9 +185,20 @@ function ProductView({ product, cart, addToCart }: any) {
                                 <p>Stock quantity: {product.variations ? "load obj" : product.stock_quantity}</p>
                             </div> */}
 
+                        <div className="flex flex-row">
+                            <input></input>
+                            <button onClick={() => addToCart(product.id)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                        </div>
+
                         <div>
 
-                            <button onClick={() => addToCart(product.id)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                            <div>
+                                <div>
+                                    <h3>Description</h3>
+                                    <div>Body</div>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
                 </div>
