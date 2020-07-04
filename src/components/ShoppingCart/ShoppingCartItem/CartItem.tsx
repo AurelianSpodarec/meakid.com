@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 
-function CartItem({ product }) {
+function ShoppingCartItem({ product }) {
     console.log("single prod", product)
     return (
 
@@ -13,13 +13,13 @@ function CartItem({ product }) {
                 <div className="d-flex">
 
 
-                    <img
+                    {/* <img
                         className="object-cover"
                         style={{ height: '120px' }}
                         src={product.images[0].src}
                         title="Contemplative Reptile"
                         alt="Sunset in the mountains"
-                    />
+                    /> */}
 
                     <div className="text-left">
                         <p >{product.name}</p>
@@ -35,4 +35,4 @@ function CartItem({ product }) {
     );
 }
 
-export default CartItem;
+export default ShoppingCartItem;

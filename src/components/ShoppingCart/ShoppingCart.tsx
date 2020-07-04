@@ -5,10 +5,11 @@ import { compose } from 'redux';
 
 import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
 
-import CartItem from "./CartItem/CartItem";
+import CartItem from "./ShoppingCartItem/CartItem";
+import Link from 'next/link';
 
 
-function Cart({ cart, openCart, closeCart }) {
+function ShoppingCart({ cart, openCart, closeCart }) {
     console.log("carttt", cart)
     const onIncreaseQuantity = () => {
         console.log("Increae quantity")
@@ -33,6 +34,7 @@ function Cart({ cart, openCart, closeCart }) {
                 cart.items && cart.items.length !== 0 ?
                     cart.items.map((item, x) => {
                         return (
+
                             <CartItem
                                 key={item.id}
                                 product={item}
@@ -53,7 +55,11 @@ function Cart({ cart, openCart, closeCart }) {
 
             <div className="">
                 <button className="mb-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Checkout</button>
-                <button className="mb-2 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">Your Cart</button>
+                <Link href="/cart">
+                    <button className="mb-2 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">
+                        Your Cart
+                    </button>
+                </Link>
             </div>
 
         </div>
@@ -75,4 +81,4 @@ const mapStateToProps = state => {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
-)(Cart);
+)(ShoppingCart);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import WooCommerce from './../../services/woocommerce/config_woocommerce';
 
-import { addToCart } from './../../store/cart/cart.actions';
+import { addToCart, openCart } from './../../store/cart/cart.actions';
 
 
 function getAllProductSizes(product, selectedColor) {
@@ -41,10 +41,10 @@ function getVariationProduct(product, selectedColor, selectedSize) {
     return variationProduct;
 }
 
+const allSizes = ["50x160cm", "50x80cm", "100x160cm"];
 
-
-function ProductView({ product, cart, addToCart }: any) {
-    console.log('product', product)
+function ProductView({ product, cart, openCart, addToCart }: any) {
+    // console.log('product', product)
 
 
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -57,6 +57,8 @@ function ProductView({ product, cart, addToCart }: any) {
     const [selectedColor, setSelectedColor] = useState(null);
     const [quantity, setQuantity] = useState(1)
 
+    console.log('product, size, color, quantity, id, variationid', selectedSize, selectedColor, quantity)
+    console.log('current product', currentProduct)
 
     const sizes = useMemo(() => getAllProductSizes(product, selectedColor), [product, selectedColor])
 
@@ -95,6 +97,16 @@ function ProductView({ product, cart, addToCart }: any) {
         setSelectedSize(size)
     }
 
+    function onAddToCart(product) {
+        if (selectedSize) {
+            addToCart(product.id)
+            openCart()
+        }
+        // product id
+        // variation id
+        // quantity
+    }
+
     useEffect(() => {
         onChangeImage()
         setCurrentProduct(getVariationProduct(product, selectedColor, selectedSize))
@@ -112,6 +124,15 @@ function ProductView({ product, cart, addToCart }: any) {
         setUniqueImages()
         onLoadInitialValues()
     }, [])
+
+    // function renderSizes() {
+    //     for
+
+    //         <button onClick={() => onSizeChange(size)} className={`${selectedSize === size ? "bg-black text-white" : ""} ${currentProduct && currentProduct.max_qty === "" ? 'bg-black' : ""} flex-1 mx-1 border-2 border text-center leading-10`}>
+    //             {size}
+    //         </button>
+
+    // }
 
     console.log("sizes", sizes && sizes)
     return (
@@ -131,6 +152,16 @@ function ProductView({ product, cart, addToCart }: any) {
                             <h5 className="text-sm uppercase">Meakid Fabrics</h5>
                             <h1 className="text-xl uppercase color-gray-900 font-bold">{product.name}</h1>
                         </div>
+
+
+                        {/* If its 0, write out of stock */}
+
+                        {
+                            selectedSize &&
+                            currentProduct && currentProduct.max_qty !== "" &&
+                            currentProduct.max_qty < 1000 && <div>Only {currentProduct.max_qty} left!</div>
+                        }
+
 
                         <div className="my-4">
                             {/* <span>{product.price.toFixed(2)}</span> */}
@@ -164,21 +195,36 @@ function ProductView({ product, cart, addToCart }: any) {
 
                         {/* if size not selected, when adding it to basket, show error, please select a size */}
 
-                        <div>
+                        <div className="mb-8">
                             <div className="flex flex-row justify-between mb-3">
                                 <h5 className="uppercase text-xs text-gray-700">Select Size <span style={{ fontSize: "10px" }}>(in cm)</span></h5>
                                 <div className="underline text-xs text-black">Size Guide</div>
                             </div>
-                            <div className="flex">
-                                {
-                                    sizes && sizes.map((size, index) =>
-                                        <button onClick={() => onSizeChange(size)} className={`flex-1 mx-1 border-2 border text-center leading-10`}>
-                                            {size}
-                                        </button>
-                                    )
-                                }
-                            </div>
+                            {
+                                // currentProduct && currentProduct.max_qty === "" ? <div>Out of stock!</div> :
+
+                                <div className="flex">
+                                    {/* {
+                                        sizes && sizes.map((size, index) =>
+                                            <button onClick={() => onSizeChange(size)} className={`${selectedSize === size ? "bg-black text-white" : ""} flex-1 mx-1 border-2 border text-center leading-10`}>
+                                                {size}
+                                            </button>
+                                        )
+                                    } */}
+
+                                    {
+                                        allSizes.map((size, index) =>
+
+                                            <button onClick={() => onSizeChange(size)} className={`${selectedSize === size ? "bg-black text-white" : ""} ${currentProduct && currentProduct.max_qty === "" ? 'bg-black' : ""} flex-1 mx-1 border-2 border text-center leading-10`}>
+                                                {size}
+                                            </button>
+                                        )
+                                    }
+                                </div>
+                            }
+
                         </div>
+
 
 
                         {/* <div className="mb-4">
@@ -187,8 +233,14 @@ function ProductView({ product, cart, addToCart }: any) {
 
                         <div className="flex flex-row">
                             <input></input>
-                            <button onClick={() => addToCart(product.id)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                            <button onClick={() => onAddToCart(product)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                         </div>
+                        {/* If user tries to add to cart, and size is not selected, display error, if user selects the size, hide the error */}
+
+                        {
+                            !selectedSize &&
+                            <p>Please select a size to add to cart</p>
+                        }
 
                         <div>
 
@@ -223,7 +275,8 @@ ProductView.getInitialProps = async (ctx: any) => {
 }
 
 const mapDispatchToProps = {
-    addToCart
+    addToCart,
+    openCart
 }
 
 const mapStateToProps = state => {

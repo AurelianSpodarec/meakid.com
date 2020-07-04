@@ -1,15 +1,15 @@
 import Banner from './Banner/Banner';
-import Cart from './Cart/Cart';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
-import Pagination from './Pagination/Pagination';
-import Sidebar from './Sidebar/Sidebar';
-import ProductList from './ProductList/ProductList';
 import Hero from './Hero/Hero';
+import Pagination from './Pagination/Pagination';
+import ProductList from './ProductList/ProductList';
+import ShoppingCart from './ShoppingCart/ShoppingCart';
+import Sidebar from './Sidebar/Sidebar';
 
 export {
     Banner,
-    Cart,
+    ShoppingCart,
     Footer,
     Header,
     Hero,
