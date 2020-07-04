@@ -69,7 +69,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
             setSelectedColor(product.variations[0].attributes.attribute_pa_color)
         }
     }
-
+    console.log("sizes", sizes)
     function onChangeImage() {
         setMainImage(currentProduct && currentProduct.image.src)
     }
@@ -124,6 +124,17 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
         setUniqueImages()
         onLoadInitialValues()
     }, [])
+
+
+    const inStockProductSizesMap = sizes.reduce((acc, curr) => {
+        acc[curr] = curr
+        return acc
+    }, {})
+
+    const allSizesCollection = allSizes.reduce((acc, curr) => {
+        return acc.concat({ inStock: !!inStockProductSizesMap[curr], size: curr })
+    }, [])
+    console.log("@£££@@£££@£@@£@£", inStockProductSizesMap, allSizesCollection)
 
     // function renderSizes() {
     //     for
@@ -213,10 +224,10 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
                                     } */}
 
                                     {
-                                        allSizes.map((size, index) =>
+                                        allSizesCollection.map((item, index) =>
 
-                                            <button onClick={() => onSizeChange(size)} className={`${selectedSize === size ? "bg-black text-white" : ""} ${currentProduct && currentProduct.max_qty === "" ? 'bg-black' : ""} flex-1 mx-1 border-2 border text-center leading-10`}>
-                                                {size}
+                                            <button onClick={() => onSizeChange(item.size)} className={`${selectedSize === item.size && "bg-black text-white"} ${!item.inStock && 'bg-black'} flex-1 mx-1 border-2 border text-center leading-10`}>
+                                                {item.size}
                                             </button>
                                         )
                                     }
