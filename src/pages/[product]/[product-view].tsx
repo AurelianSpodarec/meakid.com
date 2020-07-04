@@ -167,11 +167,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
 
                         {/* If its 0, write out of stock */}
 
-                        {
-                            selectedSize &&
-                            currentProduct && currentProduct.max_qty !== "" &&
-                            currentProduct.max_qty < 1000 && <div>Only {currentProduct.max_qty} left!</div>
-                        }
+
 
 
                         <div className="my-4">
@@ -206,6 +202,15 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
 
                         {/* if size not selected, when adding it to basket, show error, please select a size */}
 
+                        <div style={{ backgroundColor: "#fbebab" }} className="w-full text-center my-6">
+
+                            {
+                                selectedSize &&
+                                currentProduct && currentProduct.max_qty !== "" &&
+                                currentProduct.max_qty < 1000 && <div className="py-2">Low inventory! {currentProduct.max_qty} left!</div>
+                            }
+                        </div>
+
                         <div className="mb-8">
                             <div className="flex flex-row justify-between mb-3">
                                 <h5 className="uppercase text-xs text-gray-700">Select Size <span style={{ fontSize: "10px" }}>(in cm)</span></h5>
@@ -226,7 +231,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
                                     {
                                         allSizesCollection.map((item, index) =>
 
-                                            <button onClick={() => onSizeChange(item.size)} className={`${selectedSize === item.size && "bg-black text-white"} ${!item.inStock && 'bg-black'} flex-1 mx-1 border-2 border text-center leading-10`}>
+                                            <button disabled={!item.inStock} onClick={() => onSizeChange(item.size)} className={`${selectedSize === item.size && "bg-black text-white"} ${!item.inStock && 'text-gray-400 bg-gray-200 cursor-default'} flex-1 mx-1 border-2 border text-center leading-10`}>
                                                 {item.size}
                                             </button>
                                         )
@@ -253,7 +258,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
                             <p>Please select a size to add to cart</p>
                         }
 
-                        <div>
+                        {/* <div>
 
                             <div>
                                 <div>
@@ -262,7 +267,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
                                 </div>
                             </div>
 
-                        </div>
+                        </div> */}
                     </section>
                 </div>
             </div>
