@@ -16,10 +16,10 @@ export const FETCH_PRODUCT_FAILURE = 'FETCH_PRODUCT_FAILURE';
 
 
 //Action Creator
-export const addToCart = (id: number) => {
+export const addToCart = (productID: number, variationID: number) => {
     console.log("Add to cart click actions")
     return async dispatch => {
-        dispatch(fetchProduct(id));
+        dispatch(fetchProduct(productID, variationID));
     }
 
 }
@@ -69,10 +69,10 @@ const fetchUsersFailure = error => {
 }
 
 
-const fetchProduct = (id: number) => {
+const fetchProduct = (productID: number, variationID: number) => {
     return function (dispatch) {
         dispatch(fetchProductRequest())
-        WooCommerce.get(`products/${id}`)
+        WooCommerce.get(`products/${productID}/variations/${variationID}`)
             .then(response => {
                 const item = response.data;
                 dispatch(fetchProductSuccess(item))

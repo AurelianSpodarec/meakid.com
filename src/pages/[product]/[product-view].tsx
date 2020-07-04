@@ -97,9 +97,9 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
         setSelectedSize(size)
     }
 
-    function onAddToCart(product) {
+    function onAddToCart() {
         if (selectedSize) {
-            addToCart(product.id)
+            addToCart(product.id, currentProduct.variation_id)
             openCart()
         }
         // product id
@@ -134,7 +134,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
     const allSizesCollection = allSizes.reduce((acc, curr) => {
         return acc.concat({ inStock: !!inStockProductSizesMap[curr], size: curr })
     }, [])
-    console.log("@£££@@£££@£@@£@£", inStockProductSizesMap, allSizesCollection)
+    // console.log("@£££@@£££@£@@£@£", currentProduct.variation_id)
 
     // function renderSizes() {
     //     for
@@ -249,7 +249,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
 
                         <div className="flex flex-row">
                             <input></input>
-                            <button onClick={() => onAddToCart(product)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                            <button onClick={() => onAddToCart(currentProduct)} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                         </div>
                         {/* If user tries to add to cart, and size is not selected, display error, if user selects the size, hide the error */}
 

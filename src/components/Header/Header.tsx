@@ -7,7 +7,7 @@ import { withRouter } from 'next/router'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
-import Cart from '../Cart/Cart';
+import ShoppingCart from './../ShoppingCart/ShoppingCart';
 
 // Hook
 function useOnClickOutside(ref, handler) {
@@ -169,7 +169,7 @@ const Header: NextPage = ({ router, cart, openCart, closeCart, removeFromCart }:
                 </ul>
             </div>
 
-            <Cart />
+            <ShoppingCart />
 
 
         </>

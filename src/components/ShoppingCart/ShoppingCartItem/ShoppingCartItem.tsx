@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 
 function ShoppingCartItem({ product }) {
-    console.log("single prod", product)
+    console.log("cart item prod", product.image.src)
     return (
 
         <div className="max-w-sm rounded overflow-hidden ">
@@ -13,13 +13,13 @@ function ShoppingCartItem({ product }) {
                 <div className="d-flex">
 
 
-                    {/* <img
+                    <img
                         className="object-cover"
                         style={{ height: '120px' }}
-                        src={product.images[0].src}
+                        src={product.image.src}
                         title="Contemplative Reptile"
                         alt="Sunset in the mountains"
-                    /> */}
+                    />
 
                     <div className="text-left">
                         <p >{product.name}</p>

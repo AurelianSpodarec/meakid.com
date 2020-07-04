@@ -5,7 +5,7 @@ import { compose } from 'redux';
 
 import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
 
-import CartItem from "./ShoppingCartItem/CartItem";
+import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 import Link from 'next/link';
 
 
@@ -35,7 +35,7 @@ function ShoppingCart({ cart, openCart, closeCart }) {
                     cart.items.map((item, x) => {
                         return (
 
-                            <CartItem
+                            <ShoppingCartItem
                                 key={item.id}
                                 product={item}
                             // onIncreaseQuantity={onIncreaseQuantity}

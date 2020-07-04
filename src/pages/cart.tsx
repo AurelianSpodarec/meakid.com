@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { removeFromCart, openCart, closeCart } from '../store/cart/cart.actions';
+import Link from 'next/link';
 
 
 
@@ -39,9 +40,10 @@ const Cart: NextPage = ({ cart, openCart, closeCart }) => {
                     "Empty cart"
             }
 
-            sdd
-dss
 
+            <Link href="/checkout">
+                <button>Checkout</button>
+            </Link>
 
         </div>
     )
