@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 
 function ShoppingCartItem({ product }) {
-    console.log("cart item prod", product.image.src)
+    console.log("cart item prod", product)
     return (
 
         <div className="max-w-sm rounded overflow-hidden ">
 
             <Link as={`/product/${product.slug}`} href="/[product]/[product-view]">
-                <div className="d-flex">
+                <div className="flex flex-row">
 
 
                     <img

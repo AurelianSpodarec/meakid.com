@@ -41,10 +41,10 @@ function getVariationProduct(product, selectedColor, selectedSize) {
     return variationProduct;
 }
 
-const allSizes = ["50x160cm", "50x80cm", "100x160cm"];
+const allSizes = ["50x80", "50x160", "100x160"];
 
 function ProductView({ product, cart, openCart, addToCart }: any) {
-    // console.log('product', product)
+    console.log('product', product)
 
 
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -57,8 +57,8 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
     const [selectedColor, setSelectedColor] = useState(null);
     const [quantity, setQuantity] = useState(1)
 
-    console.log('product, size, color, quantity, id, variationid', selectedSize, selectedColor, quantity)
-    console.log('current product', currentProduct)
+    // console.log('product, size, color, quantity, id, variationid', selectedSize, selectedColor, quantity)
+    // console.log('current product', currentProduct)
 
     const sizes = useMemo(() => getAllProductSizes(product, selectedColor), [product, selectedColor])
 
@@ -69,7 +69,7 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
             setSelectedColor(product.variations[0].attributes.attribute_pa_color)
         }
     }
-    console.log("sizes", sizes)
+
     function onChangeImage() {
         setMainImage(currentProduct && currentProduct.image.src)
     }
@@ -128,10 +128,29 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
 
     const inStockProductSizesMap = sizes.reduce((acc, curr) => {
         acc[curr] = curr
+        console.log("in stcok", acc)
         return acc
     }, {})
 
+    // if it doesn't exist, make disabled
+    // check currentPRoduct quantity as well
+
+    // const allSizes = ["50x80", "50x160", "100x160"];
+    // function checkStockByQuantity() {
+    //     product && product.variation.map((item, index) => {
+    //         console.log("stock by qanity", item.is_in_stock)
+    //     })
+    // }
+
+    // useEffect(() => {
+    //     checkStockByQuantity()
+    // }, [])
+
+
+
     const allSizesCollection = allSizes.reduce((acc, curr) => {
+        // console.log("sizes coll", currentProduct.max_qty === "", !!inStockProductSizesMap[curr])
+        // const a = currentProduct.max_qty === "";
         return acc.concat({ inStock: !!inStockProductSizesMap[curr], size: curr })
     }, [])
     // console.log("@£££@@£££@£@@£@£", currentProduct.variation_id)
@@ -145,7 +164,6 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
 
     // }
 
-    console.log("sizes", sizes && sizes)
     return (
         <div>
             <div style={{ maxWidth: '1440px' }} className="mx-auto lg:px-12 lg:py-16">
@@ -227,12 +245,12 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
                                             </button>
                                         )
                                     } */}
-
                                     {
-                                        allSizesCollection.map((item, index) =>
-
-                                            <button disabled={!item.inStock} onClick={() => onSizeChange(item.size)} className={`${selectedSize === item.size && "bg-black text-white"} ${!item.inStock && 'text-gray-400 bg-gray-200 cursor-default'} flex-1 mx-1 border-2 border text-center leading-10`}>
+                                        currentProduct && allSizesCollection.map((item, index) =>
+                                            <button disabled={!item.inStock || !currentProduct.max_qty === ""} onClick={() => onSizeChange(item.size)} className={`${selectedSize === item.size && "bg-black text-white"} ${!item.inStock && 'text-gray-400 bg-gray-200 cursor-default'} flex-1 mx-1 border-2 border text-center leading-10`}>
                                                 {item.size}
+                                                {console.log("@£@£@££@££@£££@£@£EFDFSDFDFGFSFGFDGFDGSDFGSFDGFDS", item, currentProduct && currentProduct.max_qty === "")}
+
                                             </button>
                                         )
                                     }
