@@ -32,5 +32,10 @@
         "tailwindcss": "^1.4.6",
         "typescript": "3.7.3"
     },
-    "license": "ISC"
+    "license": "ISC",
+    "proxy": {
+        "/wp-json/wc/v3/*": {
+            "target": "http://localhost:8888"
+        }
+    }
 }

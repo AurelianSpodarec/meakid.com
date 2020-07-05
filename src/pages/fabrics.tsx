@@ -31,6 +31,7 @@ const Fabrics: NextPage = ({ dataProducts, dataFilterOptions }) => {
             .then(response => (
                 response.data
             ))
+        console.log("fafafa", a)
         setProducts(a)
     }
 
