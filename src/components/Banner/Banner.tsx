@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import { withRouter, useRouter } from 'next/router'
 import Swiper from 'react-id-swiper';
 import cxs from 'cxs'
 
 const Banner = ({ slides }) => {
+    const router = useRouter();
 
     const className = cxs({
         ':after': {
@@ -30,6 +32,8 @@ const Banner = ({ slides }) => {
     }
 
     return (
+
+        router.route !== "/checkout" &&
         <div className="hidden sm:block bg-gray-100">
             <div className="py-4 w-2/4 mx-auto overflow-hidden">
                 <div className="w-full text-center relative mx-auto">
@@ -43,6 +47,7 @@ const Banner = ({ slides }) => {
                 </div>
             </div>
         </div>
+
 
 
     );
