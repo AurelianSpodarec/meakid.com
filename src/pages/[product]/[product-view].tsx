@@ -132,6 +132,8 @@ function ProductView({ product, cart, openCart, addToCart }: any) {
         return acc
     }, {})
 
+    // product.variations.is_in_stock - if false, have a cross
+
     // if it doesn't exist, make disabled
     // check currentPRoduct quantity as well
 

@@ -4,10 +4,10 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 
-import { connect } from 'react-redux';
+import { connect } from '../ShoppingCart/node_modules/react-redux';
 import { compose } from 'redux';
 import { removeFromCart, openCart, closeCart } from '../../store/cart/cart.actions';
-import Cart from '../Cart/Cart';
+import Cart from '../ShoppingCart/ShoppingCart';
 import { HeapProfiler } from 'inspector';
 
 

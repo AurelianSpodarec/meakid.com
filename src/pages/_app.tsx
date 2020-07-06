@@ -7,7 +7,7 @@ import { withRouter } from 'next/router'
 
 import React from 'react'
 
-import { Provider } from "react-redux";
+import { Provider } from "../components/ShoppingCart/node_modules/react-redux";
 
 import withRedux from "next-redux-wrapper";
 import { initStore } from './../store/store';
