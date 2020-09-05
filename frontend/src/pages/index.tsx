@@ -11,13 +11,30 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main>
+            <header>
+                <nav>
+
+                    {/* 
+                    
+                        - Home
+                        - Shop
+                            - [category]
+                                -[product]
+                        - Contact
+
+                    
+                    
+                    */}
+                </nav>
+            </header>
+
+            <section>
                 <h1 className="text-5xl text-center text-accent-1">
                     Next.js + Tailwind CSS
                 </h1>
+            </section>
 
 
-            </main>
 
         </Layout>
     )
