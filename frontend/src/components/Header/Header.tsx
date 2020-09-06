@@ -7,7 +7,7 @@ const Header = () => {
 
     return (
         <header className="fixed z-20 left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full">
-            <div className="mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <div className="mx-auto flex flex-wrap p-5 flex-row items-center">
 
                 <HeaderLogo />
 

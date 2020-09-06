@@ -16,11 +16,7 @@ function Category() {
             <section>
 
                 <h1 className="text-5xl text-center text-accent-1">
-                    CategoryCategory
                     Category
-                    Category
-                    Category
-                    
                 </h1>
             </section>
 
@@ -31,3 +27,5 @@ function Category() {
 }
 
 export default Category;
+
+// get the category name, and fetch it for the productss

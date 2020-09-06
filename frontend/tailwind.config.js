@@ -4,7 +4,28 @@ module.exports = {
         purgeLayersByDefault: true,
     },
     purge: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
-    theme: {},
-    variants: {},
+    theme: {
+        extend: {
+            width: {
+                "68": "17rem",
+                "94": "23.5rem",
+                "100": "25rem",
+                "104": "26rem",
+                "106": "26.5rem"
+            },
+            spacing: {
+                '2/3': '66.666667%',
+                'full': '100%'
+            },
+            inset: {
+                '0': 0,
+                auto: 'auto',
+                '1/2': '50%',
+            }
+        }
+    },
+    variants: {
+        borderStyle: ['responsive', 'hover'],
+    },
     plugins: [],
 }
