@@ -1,12 +1,16 @@
 import { Provider } from 'react-redux'
-
+import Head from 'next/head'
 import store from '../store'
+
+import './../../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
     return (
+
         <Provider store={store}>
             <Component {...pageProps} />
         </Provider>
+
     )
 }
 

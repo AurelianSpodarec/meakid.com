@@ -3,30 +3,12 @@ import { Layout } from '../components'
 
 
 
-export default function Home() {
+function Index() {
     return (
         <Layout>
             <Head>
                 <title>Create Next App</title>
-                <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <header>
-                <nav>
-
-                    {/* 
-                    
-                        - Home
-                        - Shop
-                            - [category]
-                                -[product]
-                        - Contact
-
-                    
-                    
-                    */}
-                </nav>
-            </header>
 
             <section>
                 <h1 className="text-5xl text-center text-accent-1">
@@ -35,7 +17,8 @@ export default function Home() {
             </section>
 
 
-
         </Layout>
     )
 }
+
+export default Index;
