@@ -3,12 +3,11 @@ import react, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { Layout } from '../components'
+
+import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce';
 import queryString from 'query-string';
 
-import { Layout } from '../components'
-import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce';
-
-// TODO: create a function that loads categories data name, slug, id and uses it to retrive the correct data such as product list
 
 function Category() {
 
@@ -18,8 +17,7 @@ function Category() {
     let category = router.query.category;
 
     const fetchProducts = async () => {
-        // const products = await WooCommerce.get(`products/categories?slug=${category}`).then(res => res.data);
-        const products = await WooCommerce.get(`products-list`).then(res => res.data);
+        const products = await WooCommerce.get(`products-list?category=${category}`).then(res => res.data);
         setProductList(products)
     }
 
@@ -36,15 +34,17 @@ function Category() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-
-
             <section>
 
                 <h1 className="text-5xl text-center text-accent-1">
-                    Category
+                    {category}
                 </h1>
-            </section>
 
+                <div>
+
+                </div>
+
+            </section>
 
 
         </Layout>
@@ -52,5 +52,3 @@ function Category() {
 }
 
 export default Category;
-
-// get the category name, and fetch it for the productss
