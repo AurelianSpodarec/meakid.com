@@ -27,5 +27,5 @@ yarn-error.log*
 
 
 # IGNORING WP DEFAULT CODE and just getting the theme
-backend/*
-!backend/wp-content/themes/level5-theme
+# backend/*
+# !backend/wp-content/themes/level5-theme
