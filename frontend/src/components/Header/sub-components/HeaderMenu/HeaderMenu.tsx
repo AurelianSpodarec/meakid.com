@@ -20,6 +20,12 @@ const HeaderMenu = () => {
                 label="Fabrics"
             />
             <HeaderLink
+                as="/uncategorized"
+                href="/[category]"
+                title="Uncategorized"
+                label="Uncategorized"
+            />
+            <HeaderLink
                 href="/contact"
                 title="Contact"
                 label="Contact"
