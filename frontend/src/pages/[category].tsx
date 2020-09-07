@@ -3,6 +3,7 @@ import react, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import queryString from 'query-string';
 
 import { Layout } from '../components'
 import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce';
@@ -17,8 +18,8 @@ function Category() {
     let category = router.query.category;
 
     const fetchProducts = async () => {
-        const products = await WooCommerce.get(`products/categories?slug=${category}`).then(res => res.data);
-
+        // const products = await WooCommerce.get(`products/categories?slug=${category}`).then(res => res.data);
+        const products = await WooCommerce.get(`products-list`).then(res => res.data);
         setProductList(products)
     }
 
