@@ -30,7 +30,7 @@ function Category() {
 
         const response = await WooCommerce.get(`products-list?category=${category}`);
 
-        console.log("res", response.data.products)
+
         if (response.data.products.length === 0) {
             setProductListStatus(PRODUCT_LIST_STATES.failure);
         } else {
@@ -48,12 +48,7 @@ function Category() {
 
 
     return (
-        <Layout>
-            <Head>
-                <title>Create Next App</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
+        <Layout title={category}>
             <section>
 
                 <h1 className="text-5xl text-center text-accent-1">
