@@ -1,8 +1,10 @@
-import Layout from './Layout';
 
 import Hero from './Hero/Hero';
+import ProductListing from './Product/ProductListing/ProductListing';
+import Layout from './Layout';
 
 export {
-    Layout,
-    Hero
+    Hero,
+    ProductListing,
+    Layout
 }
