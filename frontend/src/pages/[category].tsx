@@ -9,26 +9,43 @@ import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce'
 import queryString from 'query-string';
 
 
+const PRODUCT_LIST_STATES = {
+    fetching: 'fetching',
+    success: 'success',
+    failure: 'failure',
+}
+
+// Good Article about fetching: https://kyleshevlin.com/enumerate-dont-booleanate
+
 function Category() {
 
     const [productList, setProductList] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [productListStatus, setProductListStatus] = useState(PRODUCT_LIST_STATES.fetching)
 
     const router = useRouter()
     let category = router.query.category;
 
     const fetchProducts = async () => {
-        setIsLoading(true)
-        const products = await WooCommerce.get(`products-list?category=${category}`).then(res => res.data);
-        setProductList(products)
+        setProductListStatus(PRODUCT_LIST_STATES.fetching)
+
+        const response = await WooCommerce.get(`products-list?category=${category}`);
+
+        console.log("res", response.data.products)
+        if (response.data.products.length === 0) {
+            setProductListStatus(PRODUCT_LIST_STATES.failure);
+        } else {
+            setProductList(response.data.products);
+            setProductListStatus(PRODUCT_LIST_STATES.success);
+        }
     }
+
+
 
     useEffect(() => {
         fetchProducts()
-        setIsLoading(false)
+        // setProductList([])
     }, [category])
 
-    console.log("products", productList)
 
     return (
         <Layout>
@@ -43,8 +60,17 @@ function Category() {
                     {category}
                 </h1>
 
-                <div>
-                    <ProductListing data={productList} isLoading={isLoading} />
+
+                <div className="flex flex-row">
+
+                    <aside style={{ minWidth: '240px' }} className="transform translate-y-full lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative">
+                        <h3>Sidebar</h3>
+                    </aside>
+
+                    <div className="flex flex-col w-full">
+                        <ProductListing data={productList} productListStatus={productListStatus} />
+                    </div>
+
                 </div>
 
             </section>

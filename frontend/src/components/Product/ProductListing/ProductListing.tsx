@@ -5,37 +5,27 @@ import ProductItem from "../sub-components/ProductItem/ProductItem";
 
 
 
-const ProductListing = ({ data, isLoading }) => {
+const ProductListing = ({ data, productListStatus }) => {
 
-    console.log("data", data.products, isLoading)
+    console.log("data", data, productListStatus)
 
     function renderProductList() {
-
-
-        // if (isLoading) {
-        //     console.log(1)
-        // } else if (data.products) {
-        //     console.log(2)
-        // } else {
-        //     return "Nothing"
-        // }
-
-        // if (isLoading) {
-        //     console.log(1)
-        return [...Array(9)].map((x, i) => {
-            return <ProductItem isLoading={true} />
-            // return <h1>HE</h1>
-            //     })
-            // } else if (data.products) {
-            //     return data.products.map(product => {
-            //         <ProductItem product={product} isLoading={isLoading} />
-        })
-        // }
+        if (productListStatus === 'fetching') {
+            return [...Array(9)].map((x, i) => {
+                return <ProductItem key={i} productListStatus={productListStatus} />
+            })
+        } else if (productListStatus === 'success') {
+            return data && data.map(product => {
+                return <ProductItem key={product.slug} product={product} productListStatus={productListStatus} />
+            })
+        } else if (productListStatus === 'failure') {
+            return <h1>No Products found ;-(</h1>
+        }
     }
 
     return (
 
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 mx-auto">
             <div className="flex flex-wrap -m-4">
 
 

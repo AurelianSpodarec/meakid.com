@@ -1,15 +1,17 @@
 import Link from "next/link";
 
 
+// If product is fetching, show loading state
+// if product fetched, show the product component
+// if it was fetched, but got no product, show a 'no products found' component. 
 
 
+const ProductItem = ({ product, productListStatus, key }) => {
+    // console.log("product/;", product, productListStatus)
 
-const ProductItem = ({ product, isLoading }) => {
-    console.log(product, isLoading)
-
-    if (isLoading) {
+    if (productListStatus === 'fetching') {
         return (
-            <div className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
+            <div key={key} className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
                 <section className="flex flex-wrap justify-center max-w-xl mx-auto">
                     <div className=" w-full animate-pulse">
                         <figure style={{ paddingBottom: '100%' }} className="shadow rounded-md hover:shadow-lg h-48 bg-gray-400 transform transition-all duration-500 hover:scale-110 hover:ease-out"></figure>
@@ -29,17 +31,18 @@ const ProductItem = ({ product, isLoading }) => {
 
     else {
         return (
-            <div className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
-
+            <div key={product.name} className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
                 <Link href="s">
                     <a title="">
-                        <div className="block relative h-48 rounded overflow-hidden">
-                            <img className="object-cover object-center w-full h-full block" src={product && product.featured_image} />
+
+                        <div style={{ paddingBottom: '100%' }} className="block relative h-48 rounded overflow-hidden">
+                            <img className="absolute object-cover object-center w-full h-full block" src={product.featured_image} />
                         </div>
 
-                        <div>
-                            <h1>{product & product.name}</h1>
+                        <div className="py-2">
+                            <span className="text-gray-900 font-bold text-base">{product.name}</span>
                         </div>
+
                     </a>
                 </Link>
             </div>
