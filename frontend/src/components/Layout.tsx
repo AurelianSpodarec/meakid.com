@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 
+import { capitalizeFirstLetter } from '../utils/helpers';
+
 type Props = {
     title?: string;
 };
@@ -14,7 +16,7 @@ const Layout: React.FunctionComponent<Props> = ({
         <div className="bg-white antialiased">
 
             <Head>
-                <title>{title} | Meakid</title>
+                <title>{capitalizeFirstLetter(title)} - Meakid</title>
                 <meta name="description" content="UK Fabrics"></meta>
                 <meta name="keywords" content="fabrics, sewing" />
 

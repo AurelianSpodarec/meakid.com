@@ -30,7 +30,6 @@ function Category() {
 
         const response = await WooCommerce.get(`products-list?category=${category}`);
 
-
         if (response.data.products.length === 0) {
             setProductListStatus(PRODUCT_LIST_STATES.failure);
         } else {
@@ -39,13 +38,9 @@ function Category() {
         }
     }
 
-
-
     useEffect(() => {
         fetchProducts()
-        // setProductList([])
     }, [category])
-
 
     return (
         <Layout title={category}>

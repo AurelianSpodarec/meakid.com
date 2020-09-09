@@ -7,8 +7,6 @@ import ProductItem from "../sub-components/ProductItem/ProductItem";
 
 const ProductListing = ({ data, productListStatus }) => {
 
-    console.log("data", data, productListStatus)
-
     function renderProductList() {
         if (productListStatus === 'fetching') {
             return [...Array(9)].map((x, i) => {
