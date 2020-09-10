@@ -1,5 +1,6 @@
 import react, { useEffect, useState } from "react";
 import Link from "next/link";
+import WooCommerce from "../../../../services/meakid-wordpress/config_meakid_woocommerce";
 
 
 // If product is fetching, show loading state
@@ -7,86 +8,106 @@ import Link from "next/link";
 // if it was fetched, but got no product, show a 'no products found' component. 
 
 
-const ProductItem = ({ product, productListStatus, key }) => {
-    // console.log("product/;", product, productListStatus)
 
+const ImageItem = ({ id, url, productVariations, onMouseEnter }: any) => {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false)
+    }, [url])
+
+    return (
+
+
+        <div onMouseEnter={onMouseEnter} className="bg-gray-500 inline-block mr-1">
+
+            {
+                loading ?
+
+                    <svg className="animate-spin m-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    :
+                    <div className="h-8 w-8">
+                        <img src={url} />
+                    </div>
+            }
+
+        </div>
+
+
+    )
+
+
+
+
+}
+
+const ProductItem = ({ product, productListStatus, key }) => {
     console.log("Product Data", product)
 
     const [productVariations, setProductVariations] = useState([])
+    const [imageVariation, setImageVariation] = useState([])
+    const [featuredImage, setFeaturedImage] = useState()
 
-    // Count how many images there are with different id e.g 40,40, 41, 43 - total is 3, because 40 is being counted as one time
-    // Get all the images once, fetch it, get the color
-
-    // When user hovers item, fetch the images
-    // change featured image when the user hover over the image 
-    // {
-    //     color: "green",
-    //     image: "url"
-    // }
-    // count array quantity
-
-    function onHover() {
-        console.log("hover")
-
-    }
-
-    function fetchProductImages() {
-
-    }
 
     function getProductVariations() {
         if (product && product.product_variation.length === 0) return
 
         let productVariationsSet = new Set([])
 
-        for (const productVariation of product.product_variation) {
-            if (productVariation.attributes.attribute_pa_colors) {
+        const filteredArr = product.product_variation.filter(el => {
+            const duplicate = productVariationsSet.has(el.attributes.attribute_pa_colors);
+            productVariationsSet.add(el.attributes.attribute_pa_colors);
+            return !duplicate;
+        });
 
-
-                productVariationsSet.add(
-                    productVariation.attributes.attribute_pa_colors = {
-                        color: productVariation.attributes.attribute_pa_colors,
-                        image_id: productVariation.image_id
-                    }
-                );
-
-
-            }
-        }
-
-        setProductVariations(Array.from(productVariationsSet));
-        console.log("ppppp", productVariations, productVariationsSet)
-
-        // attributes - attribute_pa_colors | attributes_pa_size
-        // image_id
-
-        // {
-        // color: "",
-        // image_id: ""
-        // }
+        setProductVariations(Array.from(filteredArr));
+        console.log("ppppp", filteredArr, productVariationsSet)
     }
 
+    useEffect(() => {
+        fetchProductImages()
+    }, [])
+
+    async function fetchProductImages() {
+        if (productVariations.length === 0) return
+
+        for (const i in productVariations) {
+            let res = await WooCommerce.get(`image/${productVariations[i].image_id}`)
+            setImageVariation(imageVariation => [...imageVariation, res.data[0]])
+        }
+
+    }
+    console.log("imageVariation", imageVariation)
 
 
-    function renderProductVariationImages() {
+    function changeFeaturedImage(url) {
+        setFeaturedImage(url)
+    }
+
+    const renderImagesVariation = () => {
+        if (productVariations.length === 0) return
+
         return (
             <div>
-
-                {/* loading while fetching images */}
-                <div className="bg-gray-500 inline-block">
-                    <svg className="animate-spin  m-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                <p>Colors: {productVariations.length}</p>
+                <div className="bg-gray-500 inline-block mr-1">
+                    {
+                        imageVariation && imageVariation.map(url =>
+                            <ImageItem url={url} onMouseEnter={() => changeFeaturedImage(url)} />
+                        )
+                    }
                 </div>
-
-            </div >
+            </div>
         )
     }
 
     function renderFeaturedImage() {
         return (
-            <img className="absolute object-cover object-center w-full h-full block" src={product.featured_image} />
+            <img className="absolute object-cover object-center w-full h-full block" src={featuredImage} />
         )
     }
 
@@ -108,9 +129,14 @@ const ProductItem = ({ product, productListStatus, key }) => {
 
     }
 
+    function onHover() {
+        console.log("hover")
+    }
+
     useEffect(() => {
         if (productListStatus === 'success') {
             getProductVariations()
+            setFeaturedImage(product.featured_image)
         }
     }, [])
 
@@ -149,7 +175,7 @@ const ProductItem = ({ product, productListStatus, key }) => {
 
 
                         <div>
-                            {renderProductVariationImages()}
+                            {renderImagesVariation()}
                         </div>
 
 
