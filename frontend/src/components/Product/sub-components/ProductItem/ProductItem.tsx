@@ -40,17 +40,30 @@ const ImageItem = ({ id, url, productVariations, onMouseEnter }: any) => {
 
     )
 
-
-
-
 }
+
+const ImageList = ({ imageVariation, changeFeaturedImage }) => {
+    return (
+        <div className="bg-gray-500 inline-block mr-1">
+            {
+                imageVariation.map(url => {
+                    return <ImageItem url={url} onMouseEnter={() => changeFeaturedImage(url)} />
+                })
+            }
+        </div>
+    )
+}
+
 
 const ProductItem = ({ product, productListStatus, key }) => {
     console.log("Product Data", product)
 
     const [productVariations, setProductVariations] = useState([])
     const [imageVariation, setImageVariation] = useState([])
+
     const [featuredImage, setFeaturedImage] = useState()
+
+    const [imageVariationFetched, setImageVariationFetched] = useState(false)
 
 
     function getProductVariations() {
@@ -68,20 +81,35 @@ const ProductItem = ({ product, productListStatus, key }) => {
         console.log("ppppp", filteredArr, productVariationsSet)
     }
 
+
+    function onHover() {
+        if (!imageVariationFetched) {
+            getProductVariations()
+            setImageVariationFetched(true);
+        }
+
+
+    }
+
+    console.log(imageVariationFetched)
+
     useEffect(() => {
-        fetchProductImages()
+        if (productListStatus === 'success') {
+            setFeaturedImage(product.featured_image)
+        }
     }, [])
 
-    async function fetchProductImages() {
-        if (productVariations.length === 0) return
+    useEffect(() => {
+        fetchProductImages()
+    }, [productVariations])
 
+    async function fetchProductImages() {
         for (const i in productVariations) {
             let res = await WooCommerce.get(`image/${productVariations[i].image_id}`)
             setImageVariation(imageVariation => [...imageVariation, res.data[0]])
         }
 
     }
-    console.log("imageVariation", imageVariation)
 
 
     function changeFeaturedImage(url) {
@@ -89,27 +117,29 @@ const ProductItem = ({ product, productListStatus, key }) => {
     }
 
     const renderImagesVariation = () => {
-        if (productVariations.length === 0) return
-
         return (
             <div>
                 <p>Colors: {productVariations.length}</p>
+                {/* <ImageList imageVariation={imageVariation} changeFeaturedImage={changeFeaturedImage} /> */}
+
                 <div className="bg-gray-500 inline-block mr-1">
                     {
-                        imageVariation && imageVariation.map(url =>
-                            <ImageItem url={url} onMouseEnter={() => changeFeaturedImage(url)} />
-                        )
+                        imageVariation.map(url => {
+                            return <ImageItem url={url} onMouseEnter={() => changeFeaturedImage(url)} />
+                        })
                     }
                 </div>
             </div>
         )
     }
 
+
     function renderFeaturedImage() {
         return (
             <img className="absolute object-cover object-center w-full h-full block" src={featuredImage} />
         )
     }
+
 
     function renderPrice() {
         return (
@@ -129,16 +159,6 @@ const ProductItem = ({ product, productListStatus, key }) => {
 
     }
 
-    function onHover() {
-        console.log("hover")
-    }
-
-    useEffect(() => {
-        if (productListStatus === 'success') {
-            getProductVariations()
-            setFeaturedImage(product.featured_image)
-        }
-    }, [])
 
 
     if (productListStatus === 'fetching') {
@@ -164,6 +184,7 @@ const ProductItem = ({ product, productListStatus, key }) => {
                 <Link as={`/shop/${product.category}/${product.slug}`} href="/shop/[productCategory]/[productSlug]">
                     <a title={`/${product.category}/${product.slug}`}>
 
+
                         <div style={{ paddingBottom: '100%' }} className="block relative h-48 rounded overflow-hidden">
                             {renderFeaturedImage()}
                         </div>
@@ -172,7 +193,6 @@ const ProductItem = ({ product, productListStatus, key }) => {
                             <span className="text-gray-900 font-bold text-lg">{product.name}</span>
                             {renderPrice()}
                         </div>
-
 
                         <div>
                             {renderImagesVariation()}

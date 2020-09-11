@@ -11,6 +11,56 @@
   */
 
 
+  ///////////////////////////////////////////////////
+//
+// Get Products by Slug
+//
+///////////////////////////////////////////////////
+
+function getProductBySlug( $slug ) {
+    global $product;
+
+    $args = array (
+        'post_type' => 'product',
+        'name' => $slug['slug']
+    );
+
+    $post = get_posts($args);
+    $product = wc_get_product( $post[0]->ID );
+
+    $res = [];
+
+    if($product->has_child()) {
+        $variations = $product->get_available_variations();
+    } else {
+        $variations = [];
+    }
+
+    array_push($res , [
+        'name' => $product->get_name(),
+        'price' => $product->get_price(),
+
+        'regular_price' => $product->get_regular_price(),
+        'sale_price' => $product->get_sale_price(),
+        'sale_from' => $product->get_date_on_sale_from(),
+        'sale_to' => $product->get_date_on_sale_to(),
+
+        'stock_quantity' => $product->get_stock_quantity(),
+        
+        'colors' => array($product->get_attribute( 'colors' )),
+        'images' => $product->get_image(),
+        // 'variations' => $product->get_children(),
+        "variations" => $variations,
+    ]);
+      
+
+    if ( empty( $post ) ) {
+        return null;
+    }
+    return $res;
+ 
+}
+
 
 
 ///////////////////////////////////////////////////
@@ -21,19 +71,36 @@
 function getProductsList( $args ) {
     global $product;
 
+    $limit = 9;
+    $offset = 0;
+    $orderby = 'date';
+    $order = 'DESC';
+    
+
+    if ( isset( $args['category'])) {
+        $category_slug = $args['category'];
+    }
+
 
     $query = new WC_Product_Query( array(
-        'limit' => 10,
-        'orderby' => 'date',
-        'order' => 'DESC',
+        'limit' => $limit,
+        'orderby' => $orderby,
+        'order' => $order,
+        'product_cat' => $category_slug,
         'return' => 'ids',
     ) ); 
     $products = $query->get_products();
 
 
     $productResults = array(
-        "products" => []
+        "products" => [],
+        "response" => "ok",
+        "status" => 200,
+      
     );
+
+    // TODO: If there is a variation, set the featured image to be first image of the variation image
+    // e.g. featured image, if variation exist, set the first variation image as featured image and send the response
 
 
     if ( !empty($products)) :
@@ -61,7 +128,8 @@ function getProductsList( $args ) {
                 foreach($variations as $variation) {
                     $var = [
                         "attributes" => $variation['attributes'],
-                        "image"      => $variation['image']['src'],
+                        // "image"      => $variation['image']['src'],
+                        "image_id"   => $variation['image_id'],
                     ];
                     $product_variation[] = $var;
                 }
@@ -72,11 +140,18 @@ function getProductsList( $args ) {
                 $color = $custom_product->get_attribute('Color');
             }
 
+            $product_category_fetch = get_the_terms($custom_product->get_id(), 'product_cat');
+            $product_cat = $product_category_fetch[0]->slug;
 
             array_push( $productResults['products'], [
                 'id'                => $custom_product->get_id(),
                 'slug'              => $custom_product->get_slug(),
                 'name'              => $custom_product->get_name(),
+                'price'             => $custom_product->get_price(),
+                'currency'          => get_woocommerce_currency_symbol(),
+                'variation_price'    => $variationPrice,
+                'color'             => $color,
+                'category'          => $product_cat,
                 'featured_image'    => $attachment[0],
                 'product_variation' => $product_variation
             ]);
@@ -110,7 +185,19 @@ function getArgs() {
 }
 
 
+///////////////////////////////////////////////////
+//
+// Get Image
+//
+///////////////////////////////////////////////////
+function getImage( $args ) {
+    global $product;
 
+    // $attachment_ids[0] = get_post_thumbnail_id( $productID );
+    $img = wp_get_attachment_image_src($args['id'], false );
+
+    return $img;
+}
 
 ///////////////////////////////////////////////////
 //
@@ -119,10 +206,18 @@ function getArgs() {
 ///////////////////////////////////////////////////
 
 function register_routes() { 
+    register_rest_route( 'wc/v3', '/product/slug=(?P<slug>[a-zA-Z0-9-]+)', array(
+        'method' => 'GET',
+        'callback' => 'getProductBySlug',
+    ));   
     register_rest_route( 'wc/v3', '/products-list', array(
         'method' => 'GET',
         'callback' => 'getProductsList',
         'args' => getArgs(),
+    ));  
+    register_rest_route( 'wc/v3', '/image/(?P<id>[0-9-]+)', array(
+        'method' => 'GET',
+        'callback' => 'getImage'
     ));   
 }
 add_action('rest_api_init', 'register_routes');

@@ -1,0 +1,20 @@
+2020-09-08T23:26:25+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Variable::get_category() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:93
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): getProductsList(Object(WP_REST_Request))
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api.php(339): WP_REST_Server->serve_request('/wc/v3/products...')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(287): rest_api_loaded(Object(WP))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/clas in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 93
+
+2020-09-08T23:29:49+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Term as array in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:90
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): getProductsList(Object(WP_REST_Request))
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api.php(339): WP_REST_Server->serve_request('/wc/v3/products...')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(287): rest_api_loaded(Object(WP))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp.php(388): do_ in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 90
+

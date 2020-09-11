@@ -334,3 +334,43 @@ Stack trace:
 #5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
 #6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-inc in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 45
 
+2020-09-07T21:44:30+00:00 CRITICAL Uncaught Error: Call to a member function has_child() on bool in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:63
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): getProductsList(Object(WP_REST_Request))
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api.php(339): WP_REST_Server->serve_request('/wc/v3/products...')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(287): rest_api_loaded(Object(WP))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp.php(388):  in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 63
+
+2020-09-07T21:44:30+00:00 CRITICAL Uncaught Error: Call to a member function has_child() on bool in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:63
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): getProductsList(Object(WP_REST_Request))
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api.php(339): WP_REST_Server->serve_request('/wc/v3/products...')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(287): rest_api_loaded(Object(WP))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp.php(388):  in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 63
+
+2020-09-07T21:44:52+00:00 CRITICAL Uncaught Error: Call to a member function has_child() on bool in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:68
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): getProductsList(Object(WP_REST_Request))
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api.php(339): WP_REST_Server->serve_request('/wc/v3/products...')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(287): rest_api_loaded(Object(WP))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp.php(388):  in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 68
+
+2020-09-07T21:44:53+00:00 CRITICAL Uncaught Error: Call to a member function has_child() on bool in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:68
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): getProductsList(Object(WP_REST_Request))
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api.php(339): WP_REST_Server->serve_request('/wc/v3/products...')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(287): rest_api_loaded(Object(WP))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#6 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/class-wp.php(388):  in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php on line 68
+
