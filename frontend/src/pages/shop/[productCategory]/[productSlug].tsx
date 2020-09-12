@@ -36,7 +36,7 @@ function getVariationProduct(product, selectedColor, selectedSize) {
 function ProductSlug({ data }) {
 
     const product = data[0];
-    console.log(product)
+    // console.log(product)
 
     const router = useRouter();
     const productCategory = router.query.productCategory
@@ -44,28 +44,32 @@ function ProductSlug({ data }) {
     const [currentProduct, setCurrentProduct] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
-    const [variationImages, setVariationImages] = useState(null)
-    const [featuredImage, setFeaturedImage] = useState(null)
 
-    const hasVariations = product.variations.length === 0;
+    const [featuredImage, setFeaturedImage] = useState(null)
+    const [variationImages, setVariationImages] = useState(null)
+
+    const hasVariations = product.variations.length > 0;
 
 
     function onLoadInitialValues() {
-        setFeaturedImage(product.variations.length !== 0 ? product.variations[0].image.url : product.featured_image)
+        console.log(hasVariations)
+        setFeaturedImage(hasVariations ? product.variations[0].image.url : product.featured_image)
 
 
-        if (!selectedColor && product.variations.length !== 0) {
+        if (hasVariations && !selectedColor) {
             setSelectedColor(product.variations[0].attributes.attribute_pa_colors)
         }
     }
 
 
     function onChangeImage() {
-        setFeaturedImage(currentProduct && currentProduct.image.src)
+        if (hasVariations) {
+            setFeaturedImage(currentProduct && currentProduct.image.src)
+        }
     }
 
     function setUniqueImages() {
-        if (product.variations && product.variations.length !== 0) {
+        if (product.variations && hasVariations) {
             console.log("sdsfsdfsfadafdf", product.variations)
             setVariationImages(
                 Object.values(
