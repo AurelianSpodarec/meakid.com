@@ -6,40 +6,97 @@ import { useRouter } from 'next/router'
 
 import { Layout } from '../../../components';
 import WooCommerce from '../../../services/meakid-wordpress/config_meakid_woocommerce';
-import ProductSizeList from '../../../components/Product/ProductView/ProductSizeList/ProductSizeList';
-import ProductLowInventory from '../../../components/Product/ProductView/ProductLowInventory/ProductLowInventory';
-import ProductImageVariation from '../../../components/Product/ProductView/ProductImageVariation/ProductImageVariation';
 
+import {
+    ProductFeaturedImage,
+    ProductSizeList,
+    ProductLowInventory,
+    ProductImageVariation,
+} from '../../../components/Product/ProductView/index.js'
 
-// import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce';
+function getVariationProduct(product, selectedColor, selectedSize) {
+    let variationProduct;
+
+    for (const variation of product.variations) {
+
+        if (!selectedSize) {
+            if (variation.attributes.attribute_pa_colors === selectedColor) {
+                variationProduct = variation
+            }
+        } else {
+            if (variation.attributes.attribute_pa_colors === selectedColor && variation.attributes.attribute_pa_size === selectedSize) {
+                variationProduct = variation
+            }
+        }
+    }
+
+    return variationProduct;
+}
 
 function ProductSlug({ data }) {
 
     const product = data[0];
     console.log(product)
+
     const router = useRouter();
+    const productCategory = router.query.productCategory
 
     const [currentProduct, setCurrentProduct] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
+    const [variationImages, setVariationImages] = useState(null)
+    const [featuredImage, setFeaturedImage] = useState(null)
 
-
-    const productCategory = router.query.productCategory
-
+    const hasVariations = product.variations.length === 0;
 
 
     function onLoadInitialValues() {
+        setFeaturedImage(product.variations.length !== 0 ? product.variations[0].image.url : product.featured_image)
 
+
+        if (!selectedColor && product.variations.length !== 0) {
+            setSelectedColor(product.variations[0].attributes.attribute_pa_colors)
+        }
     }
 
-    function renderAddQuantity() {
 
+    function onChangeImage() {
+        setFeaturedImage(currentProduct && currentProduct.image.src)
     }
 
+    function setUniqueImages() {
+        if (product.variations && product.variations.length !== 0) {
+            console.log("sdsfsdfsfadafdf", product.variations)
+            setVariationImages(
+                Object.values(
+                    product.variations.reduce((acc, variation) => {
+                        const color = variation.attributes.attribute_pa_colors;
 
-    function renderFeaturedImage() {
-        return <img src={product.featured_image} className="w-full" />
+                        acc[color] = {
+                            image: variation.image.src,
+                            color,
+                        };
+
+                        return acc;
+                    }, {})
+                )
+            );
+        }
     }
+
+    useEffect(() => {
+        onChangeImage()
+        setCurrentProduct(getVariationProduct(product, selectedColor, selectedSize))
+    }, [selectedColor, selectedSize])
+
+    useEffect(() => {
+        onChangeImage()
+    }, [currentProduct])
+
+    useEffect(() => {
+        onLoadInitialValues()
+        setUniqueImages()
+    }, [])
 
     return (
         <Layout title={product.name}>
@@ -48,7 +105,7 @@ function ProductSlug({ data }) {
 
 
                     <div className="w-full relative flex-1">
-                        {renderFeaturedImage()}
+                        <ProductFeaturedImage image={featuredImage} />
                     </div>
 
 
@@ -60,7 +117,13 @@ function ProductSlug({ data }) {
 
 
                         <div>
-                            <ProductImageVariation />
+                            <ProductImageVariation
+                                product={product}
+                                selectedSize={selectedSize}
+                                variationImages={variationImages}
+                                selectedColor={selectedColor}
+                                setSelectedColor={(color) => setSelectedColor(color)}
+                            />
                         </div>
 
                         <div>

@@ -1,8 +1,5 @@
 import Link from "next/link";
-import ProductItem from "../sub-components/ProductItem/ProductItem";
-
-
-
+import ProductItem from "./sub-components/ProductItem/ProductItem";
 
 
 const ProductListing = ({ data, productListStatus }) => {

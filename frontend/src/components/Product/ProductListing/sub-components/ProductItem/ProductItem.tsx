@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react";
 import Link from "next/link";
-import WooCommerce from "../../../../services/meakid-wordpress/config_meakid_woocommerce";
+import WooCommerce from "../../../../../services/meakid-wordpress/config_meakid_woocommerce";
 
 
 // If product is fetching, show loading state
