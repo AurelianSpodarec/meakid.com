@@ -1,21 +1,41 @@
+import React, { useState, useEffect, useMemo } from 'react';
 import ProductSizeItem from "./sub-components/ProductSizeItem"
 
 
-function ProductSizeList({ product, selectedColor }) {
+function ProductSizeList({ product, selectedColor, onSizeChange, currentProduct, currentProductVariations, selectedSize }) {
     const fabricsAllSizes = ["50x80", "50x160", "100x160"];
 
+    console.log("fabricsAllSizes", fabricsAllSizes)
+    console.log("currentProductVariations", currentProductVariations)
     function getAllProductSizes() {
         let allColorSizes = [];
 
         for (const variation of product.variations) {
             if (variation.attributes.attribute_pa_color === selectedColor) {
-                console.log("ss", variation)
-                allColorSizes.push(variation.attributes.attribute_pa_size)
+                allColorSizes.push(variation)
             }
         }
-
         return allColorSizes;
     }
+
+    const sizes = useMemo(() => getAllProductSizes(product, selectedColor), [product, selectedColor])
+
+    const inStockProductSizesMap = sizes.reduce((acc, curr) => {
+        console.log("sizes", acc)
+        acc[curr] = curr
+        return acc
+    }, {});
+
+    const getSelectedProductVariations = () => {
+        let selectedProductVariations = []
+        const f = product.variations.filter(product => product.attribute_pa_color === selectedColor)
+    }
+
+    const allSizesCollection = fabricsAllSizes.reduce((acc, curr) => {
+        return acc.concat({ inStock: !!inStockProductSizesMap[curr], size: curr, qty: curr })
+    }, [])
+
+
 
     return (
         <div className="mb-8">
@@ -26,8 +46,15 @@ function ProductSizeList({ product, selectedColor }) {
 
             <div className="flex">
                 {
-                    fabricsAllSizes.map(size => {
-                        return <ProductSizeItem size={size} />
+                    currentProduct && currentProductVariations.map((item, index) => {
+                        return (
+                            <ProductSizeItem
+                                onSizeChange={onSizeChange}
+                                item={item}
+                                currentProduct={currentProduct}
+                                selectedSize={selectedSize}
+                            />
+                        )
                     })
                 }
             </div>

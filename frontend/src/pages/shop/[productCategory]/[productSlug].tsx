@@ -42,6 +42,8 @@ function ProductSlug({ data }) {
     const productCategory = router.query.productCategory
 
     const [currentProduct, setCurrentProduct] = useState(null);
+    const [currentProductVariations, setCurrentProductVariations] = useState(null);
+
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
 
@@ -49,6 +51,7 @@ function ProductSlug({ data }) {
     const [variationImages, setVariationImages] = useState(null)
 
     const hasVariations = product.variations.length > 0;
+
 
 
     function onLoadInitialValues() {
@@ -61,6 +64,10 @@ function ProductSlug({ data }) {
         }
     }
 
+    function getCurrentProductVariations() {
+        const productVar = product.variations.filter(item => item.attributes.attribute_pa_colors === selectedColor);
+        setCurrentProductVariations(productVar);
+    }
 
     function onChangeImage() {
         if (hasVariations) {
@@ -75,12 +82,10 @@ function ProductSlug({ data }) {
                 Object.values(
                     product.variations.reduce((acc, variation) => {
                         const color = variation.attributes.attribute_pa_colors;
-
                         acc[color] = {
                             image: variation.image.src,
                             color,
                         };
-
                         return acc;
                     }, {})
                 )
@@ -88,14 +93,23 @@ function ProductSlug({ data }) {
         }
     }
 
+    function onSizeChange(size) {
+        setSelectedSize(size)
+    }
+
     useEffect(() => {
         onChangeImage()
+        getCurrentProductVariations()
         setCurrentProduct(getVariationProduct(product, selectedColor, selectedSize))
     }, [selectedColor, selectedSize])
 
     useEffect(() => {
         onChangeImage()
     }, [currentProduct])
+
+    useEffect(() => {
+        setSelectedSize(null)
+    }, [featuredImage])
 
     useEffect(() => {
         onLoadInitialValues()
@@ -119,6 +133,9 @@ function ProductSlug({ data }) {
                             <h1 className="text-xl uppercase color-gray-900 font-bold">{product.name}</h1>
                         </div>
 
+                        <div className="my-4">
+                            <span className="text-xl text-gray-700">£{currentProduct && currentProduct.display_price.toFixed(2)}</span>
+                        </div>
 
                         <div>
                             <ProductImageVariation
@@ -126,16 +143,26 @@ function ProductSlug({ data }) {
                                 selectedSize={selectedSize}
                                 variationImages={variationImages}
                                 selectedColor={selectedColor}
+                                currentProduct={currentProduct}
                                 setSelectedColor={(color) => setSelectedColor(color)}
                             />
                         </div>
 
                         <div>
-                            <ProductSizeList />
+                            <ProductSizeList
+                                product={product}
+                                onSizeChange={(size) => onSizeChange(size)}
+                                currentProduct={currentProduct}
+                                selectedSize={selectedSize}
+                                currentProductVariations={currentProductVariations}
+                            />
                         </div>
 
                         <div>
-                            <ProductLowInventory quantity="3" />
+                            <ProductLowInventory
+                                selectedSize={selectedSize}
+                                currentProduct={currentProduct}
+                            />
                         </div>
                     </div>
 

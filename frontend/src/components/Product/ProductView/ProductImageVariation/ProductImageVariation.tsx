@@ -1,8 +1,7 @@
-import ImageVariationItem from "./sub-components/ImageVariationItem";
 import { useEffect } from "react";
+import ImageVariationItem from "./sub-components/ImageVariationItem";
 
-function ProductImageVariation({ product, selectedSize, variationImages, selectedColor, setSelectedColor }) {
-    console.log(variationImages)
+function ProductImageVariation({ product, selectedSize, variationImages, selectedColor, setSelectedColor, currentProduct }) {
 
     function getAllProductVariations() {
         let variationProduct;
@@ -30,7 +29,7 @@ function ProductImageVariation({ product, selectedSize, variationImages, selecte
         <div className="mb-8">
             {
                 variationImages && variationImages.map(item => {
-                    return <ImageVariationItem item={item} selectedColor={selectedColor} onClick={setSelectedColor} />
+                    return <ImageVariationItem item={item} selectedColor={selectedColor} currentProduct={currentProduct} onClick={setSelectedColor} />
                 })
             }
         </div>

@@ -1,5 +1,5 @@
 
-function ImageVariationItem({ item, selectedColor, onClick }: any) {
+function ImageVariationItem({ currentProduct, item, selectedColor, onClick }: any) {
 
     return (
         <button
