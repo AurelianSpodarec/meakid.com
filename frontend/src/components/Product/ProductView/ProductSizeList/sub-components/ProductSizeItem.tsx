@@ -1,10 +1,12 @@
 import { current } from "@reduxjs/toolkit"
 
-function ProductSizeItem({ item, currentProduct, onSizeChange, selectedSize }) {
+function ProductSizeItem({ size, currentProduct, onSizeChange, selectedSize }) {
 
 
-    console.log("box", item)
+    console.log("box", size)
+    if (!size) return ""
     // console.log("WWW", currentProduct.max_qty == "")
+    const empty = size.max_qty === "";
     return (
         // <button
         //     disabled={!item.inStock || !currentProduct.max_qty === ""}
@@ -19,16 +21,20 @@ function ProductSizeItem({ item, currentProduct, onSizeChange, selectedSize }) {
         // </button>
         <button
             // disabled={!item.inStock || !currentProduct.max_qty === ""}
-            onClick={() => onSizeChange(item.attributes.attribute_pa_size)}
+            onClick={() => onSizeChange(size.attributes.attribute_pa_size)}
             className={`
-             ${selectedSize === item.attributes.attribute_pa_size && "bg-black text-white"} 
-             ${item.max_qty === "" && 'text-gray-400 bg-gray-200 cursor-not-allowed'} 
+            ${selectedSize === size.attributes.attribute_pa_size
+                && selectedSize !== empty && "bg-black text-white"} 
+            ${size.max_qty === "" && 'text-gray-400 bg-gray-200 cursor-not-allowed'} 
              flex-1 mx-1 border-2 border text-center leading-10`
             }
         >
-            {item.attributes.attribute_pa_size}
+            {size.attributes.attribute_pa_size}
         </button>
     )
 }
 
 export default ProductSizeItem
+
+// 
+// 

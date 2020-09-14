@@ -54,8 +54,11 @@ function ProductSlug({ data }) {
 
 
 
+    // 
+
+
     function onLoadInitialValues() {
-        console.log(hasVariations)
+        // console.log(hasVariations)
         setFeaturedImage(hasVariations ? product.variations[0].image.url : product.featured_image)
 
 
@@ -66,7 +69,14 @@ function ProductSlug({ data }) {
 
     function getCurrentProductVariations() {
         const productVar = product.variations.filter(item => item.attributes.attribute_pa_colors === selectedColor);
+        // console.log("getCurrentProductVariations", productVar)
         setCurrentProductVariations(productVar);
+    }
+
+    function getCurrentVariationBySize() {
+        const productVar = product.variations.find(item => item.attributes.attribute_pa_size === selectedSize);
+        // console.log("getCurrentVariationBySize", productVar)
+        // setCurrentProductVariations(productVar);
     }
 
     function onChangeImage() {
@@ -99,6 +109,7 @@ function ProductSlug({ data }) {
 
     useEffect(() => {
         onChangeImage()
+        getCurrentVariationBySize()
         getCurrentProductVariations()
         setCurrentProduct(getVariationProduct(product, selectedColor, selectedSize))
     }, [selectedColor, selectedSize])
