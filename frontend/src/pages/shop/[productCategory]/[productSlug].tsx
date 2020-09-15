@@ -175,6 +175,11 @@ function ProductSlug({ data }) {
                                 currentProduct={currentProduct}
                             />
                         </div>
+
+                        <div>
+                            <button>Add to Bag</button>
+                        </div>
+
                     </div>
 
 

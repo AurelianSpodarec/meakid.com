@@ -3,33 +3,26 @@ import { current } from "@reduxjs/toolkit"
 function ProductSizeItem({ size, currentProduct, onSizeChange, selectedSize }) {
 
 
-    console.log("box", size)
-    if (!size) return ""
-    // console.log("WWW", currentProduct.max_qty == "")
-    const empty = size.max_qty === "";
+    let empty = size && size.max_qty === "";
+    let productSize = size && size.attributes.attribute_pa_size;
+
     return (
-        // <button
-        //     disabled={!item.inStock || !currentProduct.max_qty === ""}
-        //     onClick={() => onSizeChange(item.size)}
-        //     className={`
-        //         ${selectedSize === item.size && "bg-black text-white"} 
-        //         ${!item.inStock || !currentProduct.max_qty === "" || !currentProduct.max_qty === 0 && 'text-gray-400 bg-gray-200 cursor-default'} 
-        //         flex-1 mx-1 border-2 border text-center leading-10`
-        //     }
-        // >
-        //     {item.size}
-        // </button>
         <button
-            // disabled={!item.inStock || !currentProduct.max_qty === ""}
-            onClick={() => onSizeChange(size.attributes.attribute_pa_size)}
+            disabled={empty}
+            onClick={() => onSizeChange(productSize)}
             className={`
-            ${selectedSize === size.attributes.attribute_pa_size
+            ${selectedSize === productSize
                 && selectedSize !== empty && "bg-black text-white"} 
-            ${size.max_qty === "" && 'text-gray-400 bg-gray-200 cursor-not-allowed'} 
-             flex-1 mx-1 border-2 border text-center leading-10`
+            ${size && size.max_qty === "" && 'text-gray-400 bg-gray-200 cursor-not-allowed'} 
+             flex-1 mx-1 border-2 border text-center leading-10 relative`
             }
         >
-            {size.attributes.attribute_pa_size}
+            {productSize}
+            {empty &&
+                <svg style={{ width: "100%", height: "100%", position: 'absolute', top: 0 }}>
+                    <line x1="0" y1="100%" x2="100%" y2="0" style={{ stroke: "#e1e1e1", strokeWidth: 1 }}></line>
+                </svg>
+            }
         </button>
     )
 }
