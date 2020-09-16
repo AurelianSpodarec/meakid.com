@@ -36,9 +36,13 @@ function getProductBySlug( $slug ) {
         $variations = [];
     }
 
+    $attachment_ids[0] = get_post_thumbnail_id( $product->get_id() );
+    $attachment        = wp_get_attachment_image_src($attachment_ids[0], false )[0];
+
     array_push($res , [
         'name' => $product->get_name(),
         'price' => $product->get_price(),
+        'featured_image' => $attachment,
 
         'regular_price' => $product->get_regular_price(),
         'sale_price' => $product->get_sale_price(),
