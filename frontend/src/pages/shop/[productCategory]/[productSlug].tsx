@@ -107,6 +107,16 @@ function ProductSlug({ data }) {
         setSelectedSize(size)
     }
 
+    function onAddToCart() {
+        // if (selectedSize) {
+        //     addToCart(product.id, currentProduct.variation_id)
+        //     openCart()
+        // }
+        // product id
+        // variation id
+        // quantity
+    }
+
     useEffect(() => {
         onChangeImage()
         getCurrentVariationBySize()
@@ -177,7 +187,9 @@ function ProductSlug({ data }) {
                         </div>
 
                         <div>
-                            <button>Add to Bag</button>
+                            <div className="flex flex-row">
+                                <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                            </div>
                         </div>
 
                     </div>
