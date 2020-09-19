@@ -14,6 +14,20 @@ import {
     ProductImageVariation,
 } from '../../../components/Product/ProductView/index.js'
 
+
+import {
+    addItemToCart,
+    removeItemFromCart,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    clearCart,
+    loadCard,
+    selectProducts,
+    addToCartAsync
+} from './../../../lib/slices/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
+
 function getVariationProduct(product, selectedColor, selectedSize) {
     let variationProduct;
 
@@ -33,28 +47,55 @@ function getVariationProduct(product, selectedColor, selectedSize) {
     return variationProduct;
 }
 
+
+
+
+
 function ProductSlug({ data }) {
 
     const product = data[0];
-    // console.log(product)
+
 
     const router = useRouter();
     const productCategory = router.query.productCategory
 
-    const [currentProduct, setCurrentProduct] = useState(null);
+    // const [selectedProductID, setSelectedProdctID] = useState(null);
+    // const [selectedProductVariationID, setSelectedProductVariationID] = useState(null);
+    // const [selectedProductQuantity, setSelectedProductQuantity] = useState(1);
+
+
+    const [currentProduct, setCurrentProduct] = useState();
     const [currentProductVariations, setCurrentProductVariations] = useState(null);
+    const [productQuantity, setProductQuantity] = useState(1);
 
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
+
 
     const [featuredImage, setFeaturedImage] = useState(null)
     const [variationImages, setVariationImages] = useState(null)
 
     const hasVariations = product.variations.length > 0;
 
+    const dispatch = useDispatch()
 
-
-    // 
+    function onAddToCart() {
+        // if (selectedSize) {
+        let productItem = {
+            product_id: product.id,
+            // variation_id: currentProduct.variation_id || null,
+            quantity: 1,
+        }
+        // dispatch(addItemToCart(productItem))
+        dispatch(addToCartAsync(product.id))
+        //     addToCart(product.id, currentProduct.variation_id)
+        //     openCart()
+        // }
+        // product id
+        // variation id
+        // quantity
+        console.log("product", productItem)
+    }
 
 
     function onLoadInitialValues() {
@@ -107,16 +148,6 @@ function ProductSlug({ data }) {
         setSelectedSize(size)
     }
 
-    function onAddToCart() {
-        // if (selectedSize) {
-        //     addToCart(product.id, currentProduct.variation_id)
-        //     openCart()
-        // }
-        // product id
-        // variation id
-        // quantity
-    }
-
     useEffect(() => {
         onChangeImage()
         getCurrentVariationBySize()
@@ -135,6 +166,8 @@ function ProductSlug({ data }) {
     useEffect(() => {
         onLoadInitialValues()
         setUniqueImages()
+
+        // setSelectedProdctID(product.id)
     }, [])
 
     return (
