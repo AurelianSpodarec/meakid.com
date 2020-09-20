@@ -1,0 +1,12 @@
+2020-09-18T16:53:31+00:00 CRITICAL Cannot redeclare add_localhost_origin() (previously declared in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:240) in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/themes/meakid-theme/functions.php on line 13
+
+2020-09-18T16:53:44+00:00 CRITICAL Cannot redeclare add_cors_http_header() (previously declared in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:246) in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/themes/meakid-theme/functions.php on line 6
+
+2020-09-18T16:53:51+00:00 CRITICAL Cannot redeclare add_cors_http_header() (previously declared in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:246) in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/themes/meakid-theme/functions.php on line 6
+
+2020-09-18T16:57:42+00:00 CRITICAL Cannot redeclare add_localhost_origin() (previously declared in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:240) in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/themes/meakid-theme/functions.php on line 13
+
+2020-09-18T17:12:26+00:00 CRITICAL Cannot redeclare add_localhost_origin() (previously declared in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:240) in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/themes/meakid-theme/functions.php on line 13
+
+2020-09-18T17:12:35+00:00 CRITICAL Cannot redeclare add_localhost_origin() (previously declared in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/meakid/meakid.php:240) in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/themes/meakid-theme/functions.php on line 13
+

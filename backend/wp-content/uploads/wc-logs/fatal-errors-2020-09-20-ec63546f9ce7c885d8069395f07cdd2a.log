@@ -1,0 +1,71 @@
+2020-09-20T00:03:10+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_idd() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:221
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/WebDev/meakid in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 221
+
+2020-09-20T00:04:19+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/WebDev/meak in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
+2020-09-20T00:04:24+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/WebDev/meak in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
+2020-09-20T00:04:46+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::wp_get_posts_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/We in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
+2020-09-20T00:05:29+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::wp_get_posts_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/We in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
+2020-09-20T00:05:43+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::wp_get_posts_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/We in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
+2020-09-20T00:06:12+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_the_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/WebDev/ in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
+2020-09-20T00:06:59+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function get_the_terms(), 1 passed in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225 and exactly 2 expected in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/category-template.php:1268
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(225): get_the_terms(44)
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/ in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/category-template.php on line 1268
+
+2020-09-20T00:07:17+00:00 CRITICAL Uncaught Error: Call to undefined function wp_get_terms() in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php:225
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/WebDev/meakid.com/backend in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
+
