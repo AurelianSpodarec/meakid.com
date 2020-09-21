@@ -1,11 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { emitWarning } from 'process';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
+
+
+
+export const fetchCart = createAsyncThunk(
+    'cart/fetchCartStatus',
+    async (thunkAPI) => {
+        const res = await fetch('http://localhost:8888/wp-json/cocart/v1/get-cart?thumb=true', {
+            "method": "GET",
+            "credentials": 'include',
+            "headers": {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+        }).then(res => res.json());
+        console.log("fetchCart", res)
+        return res;
+    }
+)
+
+export const fetchCartItemById = createAsyncThunk(
+    'cart/fetchByIdStatus',
+    async (userID, thunkAPI) => {
+        const res = await fetch("http://localhost:8888/wp-json/cocart/v1/add-item?thumb=true", {
+            "method": "POST",
+            "credentials": 'include',
+            "headers": {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            "body": JSON.stringify({ "product_id": userID })
+        }).then(res => res.json());
+        console.log(res)
+        return res;
+    }
+)
 
 const initialState = {
-    products: [], // product to display
-    cartData: [], // Product id, product variation id, quantity
-    cartCookie: "", //??? I guess we need a session right
-    isCartOpen: false // sidebar cart open/close
+    products: [],
+    cartData: [],
+    cartCookie: "",
+    isCartOpen: false
 };
 
 const cartSlice = createSlice({
@@ -13,10 +48,6 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addItemToCart: (state, id) => {
-            // check if the item exists, if yes, add quantity +
-            state.cartData = [...state.cartData, id]
-            console.log("state cart", state.cartData)
-            addToCartAsync()
 
         },
         removeItemFromCart: (state, id) => {
@@ -29,11 +60,29 @@ const cartSlice = createSlice({
             // if quantity is 1 and you decrease it, stop at 1
         },
         clearCart: (state) => {
-            state.cartData = []
-            state.products = []
+
         },
         loadCard: () => {
 
+        }
+    },
+    extraReducers: {
+        [fetchCartItemById.fulfilled]: (state, action) => {
+
+            // check if exist, if it does, replace it with new
+            let existItem = state.products.find(item => console.log(item.key) === action.payload.key);
+            console.log("Ssss", state.products)
+
+
+            if (state.products.find(item => item.key === action.payload.key)) {
+                // state.products[existItem].quantity + 1
+                return;
+            } else {
+                state.products.unshift(action.payload)
+            }
+        },
+        [fetchCart.fulfilled]: (state, action) => {
+            Object.entries(action.payload).forEach(it => state.products.push(it[1]))
         }
     }
 })
@@ -44,59 +93,46 @@ export const {
     increaseItemQuantity,
     decreaseItemQuantity,
     clearCart,
-    loadCard
+    loadCard,
 } = cartSlice.actions
 
 export const selectProducts = (state) => state.cart.products
 
-export const addToCartAsync = (id) => async (dispatch) => {
-
-    const data = {
-        "product_id": 44,
-        "quantity": 1
-    }
-    const res = await fetch("http://localhost:8888/wp-json/cocart/v1/add-item", {
-        "method": "POST",
-        "credentials": 'include',
-        "headers": {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        "body": JSON.stringify(data)
-    }).then(res => res.json()).then(mess => console.log("!!!!", mess))
 
 
+// const fetchCart = async () => {
+//     await getCart()
+// }
 
-    console.log(res)
-    // console.log("!!!!", res.json())
-    // const content = await getResponseContent(res)
 
-    // if (res.ok) {
+// useEffect(() => {
+//     fetchCart()
+// }, [])
 
-    //     return content
-    // }
-    // console.log("@£@££@@££@", res)
+// export const addToCartAsync = (id) => async (dispatch) => {
+//     console.log("addToCartAsync")
 
-}
+//     const data = {
+//         "product_id": 46,
+//         "quantity": 1
+//     }
+//     const res = await fetch("http://localhost:8888/wp-json/cocart/v1/add-item", {
+//         "method": "POST",
+//         "credentials": 'include',
+//         "headers": {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json'
+//         },
+//         "body": JSON.stringify(data)
+//     })
+//         .then(res => res.json())
+//         .then(mess => console.log("!!!!", mess))
+
+//     // console.log(res)
+// }
+
+
 
 
 
 export default cartSlice.reducer
-
-const getResponseContent = async function (response) {
-    const contentType = response.headers.get('Content-Type')
-
-    if (contentType) {
-        if (contentType.match('image')) {
-            return await response.blob()
-        }
-
-        if (contentType.match('application/json')) {
-            return await response.json()
-        }
-
-        if (contentType.match('application/zip')) {
-            return await response.blob()
-        }
-    }
-} 

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-
 import Link from 'next/link';
+
+import CartItem from './CartItem/CartItem';
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -15,55 +16,40 @@ import {
 } from './../../lib/slices/cartSlice'
 
 
-function CartItem({ item }) {
-    return (
-        <div>
-            <img src={item.product_image} />
-            <h1>{item.product_name}</h1>
-            <p></p>
-        </div>
-    )
-}
 
 const Cart = () => {
 
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
 
-    const [cartData, setCartData] = useState({})
 
-    const getCart = async () => {
-        const res = await fetch('http://localhost:8888/wp-json/cocart/v1/get-cart?thumb=true', {
-            "method": "GET",
-            "credentials": 'include',
-            "headers": {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-        }).then(res => res.json());
-        setCartData(res)
-    }
-
-    const fetchCart = async () => {
-        await getCart()
-    }
-
-    console.log("cartData", cartData)
-
-    useEffect(() => {
-        fetchCart()
-    }, [])
-
-    // console.log("cart", products)
     return (
-        <div className="cart">
-            <h1>Cart</h1>
+        <div className="transform transition duration-500 ease-in-out  p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106">
+            <div className="flex justify-between mb-5">
+                <h3>Your Cart</h3>
+                {/* <div onClick={closeCart}>X</div> */}
+            </div>
             <div>
                 {
-                    products && Object.keys(cartData).map((item, index) => {
-                        return <CartItem item={cartData[item]} />
+                    products && products.map((item, index) => {
+                        return <CartItem item={item} />
                     })
                 }
+            </div>
+            <div className="flex justify-between">
+                <p className="text-uppercase">Total</p>
+                <p className="font-bold">£15.00</p>
+            </div>
+
+            <div className="">
+                <Link href="/checkout">
+                    <button className="mb-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Checkout</button>
+                </Link>
+                <Link href="/cart">
+                    <button className="mb-2 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">
+                        Your Cart
+                    </button>
+                </Link>
             </div>
         </div>
     )

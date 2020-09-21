@@ -3,6 +3,9 @@ import Head from 'next/head'
 import store from '../store'
 
 import './../../styles/globals.css';
+import { fetchCart } from '../lib/slices/cartSlice';
+
+store.dispatch(fetchCart())
 
 function MyApp({ Component, pageProps }) {
     return (

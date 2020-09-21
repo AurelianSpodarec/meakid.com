@@ -23,7 +23,8 @@ import {
     clearCart,
     loadCard,
     selectProducts,
-    addToCartAsync
+    // addToCartAsync,
+    fetchCartItemById
 } from './../../../lib/slices/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -48,21 +49,12 @@ function getVariationProduct(product, selectedColor, selectedSize) {
 }
 
 
-
-
-
 function ProductSlug({ data }) {
 
     const product = data[0];
 
-
     const router = useRouter();
     const productCategory = router.query.productCategory
-
-    // const [selectedProductID, setSelectedProdctID] = useState(null);
-    // const [selectedProductVariationID, setSelectedProductVariationID] = useState(null);
-    // const [selectedProductQuantity, setSelectedProductQuantity] = useState(1);
-
 
     const [currentProduct, setCurrentProduct] = useState();
     const [currentProductVariations, setCurrentProductVariations] = useState(null);
@@ -79,29 +71,15 @@ function ProductSlug({ data }) {
 
     const dispatch = useDispatch()
 
+    console.log("s", product)
     function onAddToCart() {
-        // if (selectedSize) {
-        let productItem = {
-            product_id: product.id,
-            // variation_id: currentProduct.variation_id || null,
-            quantity: 1,
-        }
-        // dispatch(addItemToCart(productItem))
-        dispatch(addToCartAsync(product.id))
-        //     addToCart(product.id, currentProduct.variation_id)
-        //     openCart()
-        // }
-        // product id
-        // variation id
-        // quantity
-        console.log("product", productItem)
+        console.log(product.id)
+        dispatch(fetchCartItemById(product.id))
     }
-
+    // console.log("QWWQW", dispatch(selectProducts))
 
     function onLoadInitialValues() {
-        // console.log(hasVariations)
         setFeaturedImage(hasVariations ? product.variations[0].image.url : product.featured_image)
-
 
         if (hasVariations && !selectedColor) {
             setSelectedColor(product.variations[0].attributes.attribute_pa_colors)
@@ -110,14 +88,11 @@ function ProductSlug({ data }) {
 
     function getCurrentProductVariations() {
         const productVar = product.variations.filter(item => item.attributes.attribute_pa_colors === selectedColor);
-        // console.log("getCurrentProductVariations", productVar)
         setCurrentProductVariations(productVar);
     }
 
     function getCurrentVariationBySize() {
         const productVar = product.variations.find(item => item.attributes.attribute_pa_size === selectedSize);
-        // console.log("getCurrentVariationBySize", productVar)
-        // setCurrentProductVariations(productVar);
     }
 
     function onChangeImage() {
@@ -166,9 +141,10 @@ function ProductSlug({ data }) {
     useEffect(() => {
         onLoadInitialValues()
         setUniqueImages()
-
-        // setSelectedProdctID(product.id)
     }, [])
+
+
+    let productTotalPrice = productQuantity * product.price || currentProduct.display_price;
 
     return (
         <Layout title={product.name}>
@@ -220,6 +196,18 @@ function ProductSlug({ data }) {
                         </div>
 
                         <div>
+
+                            <div className="flex">
+                                <div className="">
+                                    <span>Quantity</span>
+                                    <input value={1} />
+                                </div>
+                                <div>
+                                    <span>Total Price:</span>
+                                    <span>£{productTotalPrice.toFixed(2)}</span>
+                                </div>
+                            </div>
+
                             <div className="flex flex-row">
                                 <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                             </div>

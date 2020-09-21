@@ -87,11 +87,7 @@ const ProductItem = ({ product, productListStatus, key }) => {
             getProductVariations()
             setImageVariationFetched(true);
         }
-
-
     }
-
-    console.log(imageVariationFetched)
 
     useEffect(() => {
         if (productListStatus === 'success') {
