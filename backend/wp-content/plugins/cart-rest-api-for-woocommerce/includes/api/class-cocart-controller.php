@@ -228,6 +228,7 @@ class CoCart_API_Controller {
                 $cart_contents[ $item_key ]['product_price'] = (float)$_product->get_price();
                 $cart_contents[ $item_key ]['currency'] = html_entity_decode( strip_tags( get_woocommerce_currency_symbol() ) );
                 // $cart_contents[ $item_key ]['product_currency'] =   apply_filters( 'cocart_product_slug', $_product->get_woocommerce_currency_symbol(), $_product, $cart_item, $item_key );
+               $cart_contents[ $item_key ]['attributes'] = apply_filters( 'cocart_attributes',  $_product->get_attributes(), $_product, $cart_item, $item_key );
 
 				// If main product thumbnail is requested then add it to each item in cart.
 				if ( $show_thumb ) {

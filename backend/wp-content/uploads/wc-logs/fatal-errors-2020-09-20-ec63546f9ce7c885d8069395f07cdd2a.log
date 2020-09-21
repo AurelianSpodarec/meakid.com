@@ -69,3 +69,18 @@ Stack trace:
 #3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(376): WP_REST_Server->dispatch(Object(WP_REST_Request))
 #4 /Users/Dorota/Desktop/WebDev/meakid.com/backend in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 225
 
+2020-09-20T03:34:07+00:00 CRITICAL Uncaught Error: Call to a member function has_weight() on int in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/woocommerce/includes/wc-template-functions.php:3372
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(231): wc_display_product_attributes(44)
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#3 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-includes/rest-api/class-wp-rest-server.php(1050): CoCart_API_Controller->get_cart(Object(WP_REST_Request))
+#4 /Users/Dorota/Desktop/WebDev/meakid.co in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 3372
+
+2020-09-20T03:35:30+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function wc_get_product_terms(), 1 passed in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php on line 231 and at least 2 expected in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/woocommerce/includes/wc-term-functions.php:176
+Stack trace:
+#0 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(231): wc_get_product_terms(44)
+#1 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(157): CoCart_API_Controller->return_cart_contents(Object(WP_REST_Request), Array, '')
+#2 /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/cart-rest-api-for-woocommerce/includes/api/class-cocart-controller.php(106): CoCart_API_Controller->get_cart_contents(Object(WP_REST_Request), '')
+#3 /Users in /Users/Dorota/Desktop/WebDev/meakid.com/backend/wp-content/plugins/woocommerce/includes/wc-term-functions.php on line 176
+

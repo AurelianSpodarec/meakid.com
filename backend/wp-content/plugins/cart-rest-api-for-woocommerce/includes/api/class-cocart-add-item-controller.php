@@ -259,9 +259,29 @@ class CoCart_Add_Item_Controller extends CoCart_API_Controller {
 		$item_added['product_name']  = apply_filters( 'cocart_item_added_product_name', $_product->get_name(), $_product, $item_key );
 		$item_added['product_title'] = apply_filters( 'cocart_item_added_product_title', $_product->get_title(), $_product, $item_key );
 
-		// Add product price.
-		$item_added['product_price'] = html_entity_decode( strip_tags( wc_price( $_product->get_price() ) ) );
+        $item_added['product_slug'] = apply_filters( 'cocart_product_slug', $_product->get_slug(), $_product, $cart_item, $item_key );
+        $item_added['product_categories'] = apply_filters( 'cocart_product_categories', get_the_terms($_product->get_id(), 'product_cat'), $_product, $cart_item, $item_key );
+        
+     
+        $item_added['product_price'] = (float)$_product->get_price();
+        $item_added['currency'] = html_entity_decode( strip_tags( get_woocommerce_currency_symbol() ) );
+        // $item_added['product_currency'] =   apply_filters( 'cocart_product_slug', $_product->get_woocommerce_currency_symbol(), $_product, $cart_item, $item_key );
+       $item_added['attributes'] = apply_filters( 'cocart_attributes',  $_product->get_attributes(), $_product, $cart_item, $item_key );
 
+       $thumbnail_id = apply_filters( 'cocart_item_thumbnail', $_product->get_image_id(), $cart_item, $item_key );
+
+       $thumbnail_src = wp_get_attachment_image_src( $thumbnail_id, apply_filters( 'cocart_item_thumbnail_size', 'woocommerce_thumbnail' ) );
+
+       /**
+        * Filters the source of the product thumbnail.
+        *
+        * @since 2.1.0
+        * @param string $thumbnail_src URL of the product thumbnail.
+        */
+       $thumbnail_src = apply_filters( 'cocart_item_thumbnail_src', $thumbnail_src[0], $cart_item, $item_key );
+
+       // Add main product image as a new variable.
+       $item_added['product_image'] = esc_url( $thumbnail_src );
 		// This filter allows additional data to be returned.
 		$item_added = apply_filters( 'cocart_item_added', $item_added, $item_key );
 
