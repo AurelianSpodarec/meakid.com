@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link';
 
-import CartItem from './CartItem/CartItem';
+import BasketItem from './BasketItem/BasketItem';
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,11 +13,11 @@ import {
     // clearCart,
     // loadCard,
     selectProducts
-} from './../../lib/slices/cartSlice'
+} from '../../lib/slices/cartSlice'
 
 
 
-const Cart = () => {
+const Basket = () => {
 
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
@@ -26,13 +26,13 @@ const Cart = () => {
     return (
         <div className="transform transition duration-500 ease-in-out  p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106">
             <div className="flex justify-between mb-5">
-                <h3>Your Cart</h3>
+                <h3>Your Basket</h3>
                 {/* <div onClick={closeCart}>X</div> */}
             </div>
             <div>
                 {
                     products && products.map((item, index) => {
-                        return <CartItem item={item} />
+                        return <BasketItem item={item} />
                     })
                 }
             </div>
@@ -56,4 +56,4 @@ const Cart = () => {
 
 };
 
-export default Cart;
+export default Basket;

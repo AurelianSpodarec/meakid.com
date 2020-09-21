@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link';
 import HeaderMenu from './sub-components/HeaderMenu/HeaderMenu';
 import HeaderLogo from './sub-components/HeaderLogo/HeaderLogo';
-import Cart from '../Cart/Cart';
+import Basket from '../Basket/Basket';
 
 const Header = () => {
 
@@ -41,7 +41,7 @@ const Header = () => {
                 </div>
             </header>
 
-            <Cart />
+            <Basket />
         </>
     )
 

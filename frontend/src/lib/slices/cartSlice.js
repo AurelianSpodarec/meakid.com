@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
 
 
 
@@ -76,6 +76,7 @@ const cartSlice = createSlice({
 
             if (state.products.find(item => item.key === action.payload.key)) {
                 // state.products[existItem].quantity + 1
+                console.log('after', current(state))
                 return;
             } else {
                 state.products.unshift(action.payload)
