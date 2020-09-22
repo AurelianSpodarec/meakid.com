@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
 
+import {
+    getItemByID,
+    deleteItemByKey
+} from '../../services/meakid-cocart/api/item';
+
 
 
 
@@ -19,9 +24,29 @@ export const fetchCart = createAsyncThunk(
     }
 )
 
+
 export const fetchCartItemById = createAsyncThunk(
     'cart/fetchByIdStatus',
-    async (userID, thunkAPI) => {
+    async (itemID, thunkAPI) => {
+        const res = await getItemByID(itemID)
+        return res;
+    }
+
+)
+
+export const deleteCartItem = createAsyncThunk(
+    'cart/deleteCartItem',
+    async (itemKey, thunkAPI) => {
+        console.log("WWWQQQQQWEQWEQWE@£@!£@!£!@£!@£")
+        const res = await deleteItemByKey(itemKey);
+        console.log("!!!!!!!!", res)
+        return res;
+    }
+)
+
+export const updateCartItem = createAsyncThunk(
+    'cart/updateCartItem',
+    async (itemKey, itemQuantity, thunkAPI) => {
         const res = await fetch("http://localhost:8888/wp-json/cocart/v1/add-item?thumb=true", {
             "method": "POST",
             "credentials": 'include',
@@ -29,19 +54,29 @@ export const fetchCartItemById = createAsyncThunk(
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            "body": JSON.stringify({ "product_id": userID })
+            "body": JSON.stringify(
+                {
+                    "cart_item_key": itemKey,
+                    "quantity": itemQuantity,
+                }
+            )
         }).then(res => res.json());
         console.log(res)
         return res;
     }
 )
 
+
+
 const initialState = {
     products: [],
     cartData: [],
-    cartCookie: "",
-    isCartOpen: false
+    // loading: true,
+    error: null,
+    isCartOpen: false,
 };
+
+// const cartItemUpdate
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -67,22 +102,31 @@ const cartSlice = createSlice({
         }
     },
     extraReducers: {
+        // [fetchCartItemById.pending]: (state, action) => {
+        //     const index = state.products.findIndex(item => item.key === action.payload.key);
+        //     if (index >= 0) {
+        //         state.products[index].quantity += 1
+        //     } else {
+        //         state.products.unshift(action.payload)
+        //     }
+        // },
+        [deleteCartItem.fulfilled]: (state, action) => {
+            return
+            // const index = state.products.findIndex(item => item.key === action.payload.key);
+            // if (index) {
+            //     // state.products[index].key = action.payload.key
+            // }
+        },
         [fetchCartItemById.fulfilled]: (state, action) => {
-
-            // check if exist, if it does, replace it with new
-            let existItem = state.products.find(item => console.log(item.key) === action.payload.key);
-            console.log("Ssss", state.products)
-
-
-            if (state.products.find(item => item.key === action.payload.key)) {
-                // state.products[existItem].quantity + 1
-                console.log('after', current(state))
-                return;
+            const index = state.products.findIndex(item => item.key === action.payload.key);
+            if (index >= 0) {
+                state.products[index].quantity = action.payload.quantity
             } else {
                 state.products.unshift(action.payload)
             }
         },
         [fetchCart.fulfilled]: (state, action) => {
+            console.log("WWW")
             Object.entries(action.payload).forEach(it => state.products.push(it[1]))
         }
     }
@@ -98,42 +142,6 @@ export const {
 } = cartSlice.actions
 
 export const selectProducts = (state) => state.cart.products
-
-
-
-// const fetchCart = async () => {
-//     await getCart()
-// }
-
-
-// useEffect(() => {
-//     fetchCart()
-// }, [])
-
-// export const addToCartAsync = (id) => async (dispatch) => {
-//     console.log("addToCartAsync")
-
-//     const data = {
-//         "product_id": 46,
-//         "quantity": 1
-//     }
-//     const res = await fetch("http://localhost:8888/wp-json/cocart/v1/add-item", {
-//         "method": "POST",
-//         "credentials": 'include',
-//         "headers": {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'
-//         },
-//         "body": JSON.stringify(data)
-//     })
-//         .then(res => res.json())
-//         .then(mess => console.log("!!!!", mess))
-
-//     // console.log(res)
-// }
-
-
-
 
 
 export default cartSlice.reducer

@@ -2,20 +2,23 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import Link from 'next/link';
 
+import {
+    fetchCartItemById,
+    deleteCartItem
+} from './../../../lib/slices/cartSlice'
+
+import { useDispatch, useSelector } from 'react-redux'
+
 
 function BasketItem({ item }) {
 
-    // async function removeFromCart() {
-    //     const res = await fetch(`http://localhost:8888/wp-json/cocart/v1/item?cart_item_key=${item.key}`, {
-    //         "method": "DELETE",
-    //         "credentials": 'include',
-    //         "headers": {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json'
-    //         },
 
-    //     }).then(res => res.json()).then(mess => console.log("!!!!", mess))
-    // }
+    const dispatch = useDispatch()
+
+    function removeFromCart() {
+        dispatch(deleteCartItem(item.key))
+    }
+
     let productTotalPrice = item.quantity * item.product_price ? item.product_price : 1
 
     return (
