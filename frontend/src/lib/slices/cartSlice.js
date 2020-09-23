@@ -5,43 +5,23 @@ import {
     deleteItemByKey
 } from '../../services/meakid-cocart/api/item';
 
-
+import { getCart } from '../../services/meakid-cocart/api/cart';
 
 
 export const fetchCart = createAsyncThunk(
     'cart/fetchCartStatus',
     async (thunkAPI) => {
-        const res = await fetch('http://localhost:8888/wp-json/cocart/v1/get-cart?thumb=true', {
-            "method": "GET",
-            "credentials": 'include',
-            "headers": {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-        }).then(res => res.json());
-        console.log("fetchCart", res)
+        const res = await getCart();
         return res;
     }
 )
-
 
 export const fetchCartItemById = createAsyncThunk(
     'cart/fetchByIdStatus',
     async (itemID, thunkAPI) => {
-        const res = await getItemByID(itemID)
-        return res;
+        return getItemByID(itemID)
     }
 
-)
-
-export const deleteCartItem = createAsyncThunk(
-    'cart/deleteCartItem',
-    async (itemKey, thunkAPI) => {
-        console.log("WWWQQQQQWEQWEQWE@£@!£@!£!@£!@£")
-        const res = await deleteItemByKey(itemKey);
-        console.log("!!!!!!!!", res)
-        return res;
-    }
 )
 
 export const updateCartItem = createAsyncThunk(
@@ -61,31 +41,38 @@ export const updateCartItem = createAsyncThunk(
                 }
             )
         }).then(res => res.json());
-        console.log(res)
+        return res;
+    }
+)
+
+export const deleteCartItem = createAsyncThunk(
+    'cart/deleteCartItem',
+    async (itemKey, thunkAPI) => {
+        const res = await deleteItemByKey(itemKey);
+        console.log("!!!!!!!!", res)
         return res;
     }
 )
 
 
 
-const initialState = {
-    products: [],
-    cartData: [],
-    // loading: true,
-    error: null,
-    isCartOpen: false,
-};
 
 // const cartItemUpdate
 
 const cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: {
+        products: [],
+        cartData: [],
+        // loading: true,
+        error: null,
+        isCartOpen: false,
+    },
     reducers: {
         addItemToCart: (state, id) => {
 
         },
-        removeItemFromCart: (state, id) => {
+        removeItemFromCart: (state, key) => {
 
         },
         increaseItemQuantity: (state, id, quantity) => {
@@ -97,28 +84,24 @@ const cartSlice = createSlice({
         clearCart: (state) => {
 
         },
-        loadCard: () => {
 
-        }
     },
     extraReducers: {
-        // [fetchCartItemById.pending]: (state, action) => {
-        //     const index = state.products.findIndex(item => item.key === action.payload.key);
-        //     if (index >= 0) {
-        //         state.products[index].quantity += 1
-        //     } else {
-        //         state.products.unshift(action.payload)
-        //     }
-        // },
+
         [deleteCartItem.fulfilled]: (state, action) => {
-            return
-            // const index = state.products.findIndex(item => item.key === action.payload.key);
-            // if (index) {
-            //     // state.products[index].key = action.payload.key
-            // }
+            const index = state.products.findIndex(item => item.key === action.payload.key);
+            console.log("BBBBBB", action)
+        },
+        [fetchCartItemById.pending]: (state, action) => {
+            const index = state.products.findIndex(item => item.product_id === action.meta.arg);
+
+            if (index >= 0) {
+                state.products[index].quantity += 1
+            }
         },
         [fetchCartItemById.fulfilled]: (state, action) => {
             const index = state.products.findIndex(item => item.key === action.payload.key);
+            console.log("rrrrr", index)
             if (index >= 0) {
                 state.products[index].quantity = action.payload.quantity
             } else {

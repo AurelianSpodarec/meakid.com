@@ -71,9 +71,8 @@ function ProductSlug({ data }) {
 
     const dispatch = useDispatch()
 
-    console.log("s", product)
+    // console.log("s", product)
     function onAddToCart() {
-        console.log(product.id)
         dispatch(fetchCartItemById(product.id))
     }
     // console.log("QWWQW", dispatch(selectProducts))

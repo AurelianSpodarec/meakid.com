@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function BasketItem({ item }) {
 
-
+    console.log(item)
     const dispatch = useDispatch()
 
     function removeFromCart() {
