@@ -23,6 +23,17 @@ export const sliceAddItem = createAsyncThunk(
     }
 )
 
+export const increaseItemQuantity = createAsyncThunk(
+    'item/increaseItemQuantity',
+    async (itemKey, itemQuantity, thunkAPI) => {
+        const res = await fetch();
+
+        return res;
+
+    }
+
+)
+
 
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
@@ -110,8 +121,15 @@ const cartSlice = createSlice({
             }
         },
         [deleteCartItem.fulfilled]: (state, action) => {
-            const index = state.products.findIndex(item => item.key === action.payload.key);
-            console.log("BBBBBB", action)
+            const index = state.products.findIndex(item => item.key === action.meta.arg);
+            console.log(action)
+            const filteredProducts = state.products.filter(item => {
+                return item.key !== action.meta.arg
+
+            })
+            // console.log("BBBBBB", current(filt))
+            console.log(filteredProducts)
+            state.products = filteredProducts
         },
     }
 })
@@ -119,7 +137,6 @@ const cartSlice = createSlice({
 export const {
     addItemToCart,
     removeItemFromCart,
-    increaseItemQuantity,
     decreaseItemQuantity,
     clearCart,
     loadCard,

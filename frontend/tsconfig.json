@@ -23,6 +23,7 @@
         "**/*.ts",
         "**/*.tsx",
         "src/components/Product/ProductView/index.js",
+        "src/services/meakid-cocart/config_meakid_cocart.js",
     ],
     "exclude": [
         "node_modules"

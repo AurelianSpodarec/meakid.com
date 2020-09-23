@@ -11,6 +11,11 @@ async function updateItemByKey(itemKey, data) {
     return res;
 }
 
+async function updateItemQuantity(itemKey, quantity) {
+    const res = await CoCartRequest(`item?cart_item_key=${itemKey}&quantity=${quantity}`, 'DELETE');
+    return res;
+}
+
 async function deleteItemByKey(itemKey) {
     const res = await CoCartRequest(`item?cart_item_key=${itemKey}`, 'DELETE');
     return res;
@@ -19,5 +24,6 @@ async function deleteItemByKey(itemKey) {
 export {
     addItem,
     updateItemByKey,
+    updateItemQuantity,
     deleteItemByKey
 }
