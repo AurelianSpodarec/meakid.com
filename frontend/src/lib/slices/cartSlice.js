@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
 
 import {
-    getItemByID,
+    addItem,
     deleteItemByKey
 } from '../../services/meakid-cocart/api/item';
 
@@ -16,13 +16,13 @@ export const fetchCart = createAsyncThunk(
     }
 )
 
-export const fetchCartItemById = createAsyncThunk(
-    'cart/fetchByIdStatus',
-    async (itemID, thunkAPI) => {
-        return getItemByID(itemID)
+export const sliceAddItem = createAsyncThunk(
+    'cart/sliceAddItem',
+    async (data, thunkAPI) => {
+        return addItem(data)
     }
-
 )
+
 
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
@@ -87,19 +87,20 @@ const cartSlice = createSlice({
 
     },
     extraReducers: {
-
-        [deleteCartItem.fulfilled]: (state, action) => {
-            const index = state.products.findIndex(item => item.key === action.payload.key);
-            console.log("BBBBBB", action)
+        [fetchCart.fulfilled]: (state, action) => {
+            let arr = [];
+            Object.entries(action.payload).forEach(item => arr.push(item[1]))
+            state.products = arr.reverse();
         },
-        [fetchCartItemById.pending]: (state, action) => {
-            const index = state.products.findIndex(item => item.product_id === action.meta.arg);
+        [sliceAddItem.pending]: (state, action) => {
+            console.log(action)
+            const index = state.products.findIndex(item => item.product_id === action.meta.arg.product_id);
 
             if (index >= 0) {
                 state.products[index].quantity += 1
             }
         },
-        [fetchCartItemById.fulfilled]: (state, action) => {
+        [sliceAddItem.fulfilled]: (state, action) => {
             const index = state.products.findIndex(item => item.key === action.payload.key);
             console.log("rrrrr", index)
             if (index >= 0) {
@@ -108,10 +109,10 @@ const cartSlice = createSlice({
                 state.products.unshift(action.payload)
             }
         },
-        [fetchCart.fulfilled]: (state, action) => {
-            console.log("WWW")
-            Object.entries(action.payload).forEach(it => state.products.push(it[1]))
-        }
+        [deleteCartItem.fulfilled]: (state, action) => {
+            const index = state.products.findIndex(item => item.key === action.payload.key);
+            console.log("BBBBBB", action)
+        },
     }
 })
 

@@ -24,7 +24,7 @@ import {
     loadCard,
     selectProducts,
     // addToCartAsync,
-    fetchCartItemById
+    sliceAddItem
 } from './../../../lib/slices/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -71,9 +71,24 @@ function ProductSlug({ data }) {
 
     const dispatch = useDispatch()
 
-    // console.log("s", product)
+    console.log("s", currentProduct)
     function onAddToCart() {
-        dispatch(fetchCartItemById(product.id))
+        let itemOptions = {
+            "product_id": product.id,
+            "quantity": 1,
+            "variation_id": currentProduct.variation_id,
+            "variation": {
+                "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+                "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+            }
+        }
+
+        if (hasVariations) {
+            dispatch(sliceAddItem(itemOptions))
+
+        } else {
+            dispatch(sliceAddItem(itemOptions))
+        }
     }
     // console.log("QWWQW", dispatch(selectProducts))
 

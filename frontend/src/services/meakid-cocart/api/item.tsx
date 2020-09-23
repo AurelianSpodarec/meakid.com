@@ -1,10 +1,8 @@
 import CoCartRequest from "./../requests/request";
 
 
-async function getItemByID(itemID) {
-    const res = await CoCartRequest("add-item?thumb=true", 'POST', {
-        "product_id": itemID
-    })
+async function addItem(data) {
+    const res = await CoCartRequest("add-item?thumb=true", 'POST', data)
     return res;
 }
 
@@ -19,7 +17,7 @@ async function deleteItemByKey(itemKey) {
 }
 
 export {
-    getItemByID,
+    addItem,
     updateItemByKey,
     deleteItemByKey
 }

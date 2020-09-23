@@ -23,33 +23,33 @@ function BasketItem({ item }) {
 
     return (
         <div className="max-w-sm rounded overflow-hidden ">
-            <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]">
-                <a title="Product Item">
-                    <div className="flex flex-row">
-                        <img
-                            className="object-cover mr-5"
-                            style={{ height: '120px' }}
-                            src={item.product_image}
-                            title="Contemplative Reptile"
-                            alt="Sunset in the mountains"
-                        />
+            {/* <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]"> */}
+            <a title="Product Item">
+                <div className="flex flex-row">
+                    <img
+                        className="object-cover mr-5"
+                        style={{ height: '120px' }}
+                        src={item.product_image}
+                        title="Contemplative Reptile"
+                        alt="Sunset in the mountains"
+                    />
 
-                        <div className="text-left">
-                            <a>
-                                <p>{item.product_name}</p>
-                                {/* <p>{`${item.currency}${item.product_price.toFixed(2)}`}</p> */}
+                    <div className="text-left">
+                        <a>
+                            <p>{item.product_name}</p>
+                            {/* <p>{`${item.currency}${item.product_price.toFixed(2)}`}</p> */}
                             Quantity
                             <input value={item.quantity} />
 
-                                <p onClick={() => removeFromCart()}>Remove</p>
-                            </a>
-                            <p>Total Price: {item.currency + productTotalPrice.toFixed(2)}</p>
-                            {/* <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div> */}
-                        </div>
-
+                            <p onClick={() => removeFromCart()}>Remove</p>
+                        </a>
+                        <p>Total Price: {item.currency + productTotalPrice.toFixed(2)}</p>
+                        {/* <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div> */}
                     </div>
-                </a>
-            </Link>
+
+                </div>
+            </a>
+            {/* </Link> */}
 
         </div>
     )
