@@ -12,6 +12,7 @@ export const fetchCart = createAsyncThunk(
     'cart/fetchCartStatus',
     async (thunkAPI) => {
         const res = await getCart();
+        console.log(res)
         return res;
     }
 )
@@ -104,16 +105,13 @@ const cartSlice = createSlice({
             state.products = arr.reverse();
         },
         [sliceAddItem.pending]: (state, action) => {
-            console.log(action)
             const index = state.products.findIndex(item => item.product_id === action.meta.arg.product_id);
-
             if (index >= 0) {
                 state.products[index].quantity += 1
             }
         },
         [sliceAddItem.fulfilled]: (state, action) => {
             const index = state.products.findIndex(item => item.key === action.payload.key);
-            console.log("rrrrr", index)
             if (index >= 0) {
                 state.products[index].quantity = action.payload.quantity
             } else {
@@ -121,14 +119,10 @@ const cartSlice = createSlice({
             }
         },
         [deleteCartItem.fulfilled]: (state, action) => {
-            const index = state.products.findIndex(item => item.key === action.meta.arg);
-            console.log(action)
             const filteredProducts = state.products.filter(item => {
                 return item.key !== action.meta.arg
 
             })
-            // console.log("BBBBBB", current(filt))
-            console.log(filteredProducts)
             state.products = filteredProducts
         },
     }

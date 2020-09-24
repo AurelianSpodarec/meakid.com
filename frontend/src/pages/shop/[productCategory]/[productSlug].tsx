@@ -71,22 +71,31 @@ function ProductSlug({ data }) {
 
     const dispatch = useDispatch()
 
-    console.log("s", currentProduct)
+    console.log("s", product, currentProduct)
     function onAddToCart() {
-        let itemOptions = {
-            "product_id": product.id,
-            "quantity": 1,
-            "variation_id": currentProduct.variation_id,
-            "variation": {
-                "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-                "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-            }
-        }
+
 
         if (hasVariations) {
+            let itemOptions = {
+                "product_id": product.id,
+                "quantity": 1,
+                "variation_id": currentProduct.variation_id,
+                "variation": {
+                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+                }
+            }
             dispatch(sliceAddItem(itemOptions))
 
         } else {
+            let itemOptions = {
+                "product_id": product.id,
+                "quantity": 1,
+                "variation": {
+                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+                }
+            }
             dispatch(sliceAddItem(itemOptions))
         }
     }
