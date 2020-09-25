@@ -12,19 +12,20 @@ import {
     // decreaseItemQuantity,
     // clearCart,
     // loadCard,
-    selectProducts
+    selectProducts,
+    cartOpenState
 } from '../../lib/slices/cartSlice'
 
 
 
-const Basket = () => {
+const Basket = ({ ref }) => {
 
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
-
+    const open = useSelector(cartOpenState)
 
     return (
-        <div className="transform transition duration-500 ease-in-out  p-5 min-h-screen fixed overflow-auto z-30 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106">
+        <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} transform transition duration-500 ease-in-out  p-5 min-h-screen fixed overflow-auto z-50 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>
             <div className="flex justify-between mb-5">
                 <h3>Your Basket</h3>
                 {/* <div onClick={closeCart}>X</div> */}

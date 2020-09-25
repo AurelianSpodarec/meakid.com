@@ -4,13 +4,8 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-    // addItemToCart,
-    // removeItemFromCart,
-    // increaseItemQuantity,
-    // decreaseItemQuantity,
-    // clearCart,
-    // loadCard,
-    selectProducts
+    selectProducts,
+
 } from '../../lib/slices/cartSlice'
 
 import CartItem from './CartItem';
@@ -20,7 +15,6 @@ const CartList = () => {
 
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
-
 
     return (
         <div className="">
