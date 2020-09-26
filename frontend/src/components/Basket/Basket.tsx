@@ -6,19 +6,40 @@ import BasketItem from './BasketItem/BasketItem';
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-    // addItemToCart,
-    // removeItemFromCart,
-    // increaseItemQuantity,
-    // decreaseItemQuantity,
-    // clearCart,
-    // loadCard,
+    closeCart,
     selectProducts,
     cartOpenState
 } from '../../lib/slices/cartSlice'
 
 
+function useOnClickOutside(ref, handler) {
+    useEffect(
+        () => {
+            const listener = event => {
+                // Do nothing if clicking ref's element or descendent elements
+                if (!ref.current || ref.current.contains(event.target)) {
+                    return;
+                }
 
-const Basket = ({ ref }) => {
+                handler(event);
+            };
+
+            document.addEventListener('mousedown', listener);
+            document.addEventListener('touchstart', listener);
+
+            return () => {
+                document.removeEventListener('mousedown', listener);
+                document.removeEventListener('touchstart', listener);
+            };
+        },
+        [ref, handler]
+    );
+}
+
+const Basket = () => {
+
+    const ref = useRef();
+    useOnClickOutside(ref, () => dispatch(closeCart()));
 
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
