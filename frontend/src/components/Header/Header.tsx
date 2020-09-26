@@ -29,8 +29,11 @@ const Header = () => {
     }
 
     useEffect(() => {
+        let body = document.getElementsByTagName('body')[0];
+
         if (!open) {
             dispatch(closeCart())
+            body.classList.remove("overflow-hidden");
             let el = document.getElementById("1")
             if (!el) return
             requestAnimationFrame(function () {
@@ -47,6 +50,7 @@ const Header = () => {
                 shade.classList.add("bg-opacity-50");
             });
             document.body.appendChild(shade)
+            body.classList.add("overflow-hidden");
         }
     }, [open])
 

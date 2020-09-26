@@ -78,7 +78,7 @@ const cartSlice = createSlice({
         cartData: [],
         // loading: true,
         error: null,
-        open: true,
+        open: false,
     },
     reducers: {
         openCart: (state) => {

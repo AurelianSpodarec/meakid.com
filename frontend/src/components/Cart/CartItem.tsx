@@ -9,18 +9,18 @@ const CartItem = ({ item }) => {
     return (
         <tr className="">
             <td>
-                <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]">
-                    <a title="product item">
-                        <img src={item.product_image} />
-                    </a>
-                </Link>
+                {/* <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]"> */}
+                <a title="product item">
+                    <img src={item.product_image} />
+                </a>
+                {/* </Link> */}
             </td>
             <td>
-                <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]">
-                    <a title="product item">
-                        <h2>{item.product_name}</h2>
-                    </a>
-                </Link>
+                {/* <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]"> */}
+                <a title="product item">
+                    <h2>{item.product_name}</h2>
+                </a>
+                {/* </Link> */}
                 <div>
                     <p>Size</p>
                     <span>{item.currency}{item.product_price.toFixed(2)}</span>

@@ -16,14 +16,7 @@ import {
 
 
 import {
-    addItemToCart,
-    removeItemFromCart,
-    increaseItemQuantity,
-    decreaseItemQuantity,
-    clearCart,
-    loadCard,
-    selectProducts,
-    // addToCartAsync,
+    openCart,
     sliceAddItem
 } from './../../../lib/slices/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -73,7 +66,9 @@ function ProductSlug({ data }) {
 
     console.log("s", product, currentProduct)
     function onAddToCart() {
-
+        if (selectedSize) {
+            dispatch(openCart())
+        }
 
         if (hasVariations) {
             let itemOptions = {
