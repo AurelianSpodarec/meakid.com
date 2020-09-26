@@ -7,7 +7,8 @@ import Basket from '../Basket/Basket';
 import {
     openCart,
     closeCart,
-    cartOpenState
+    cartOpenState,
+    selectTotalProductsQuantity
 } from './../../lib/slices/cartSlice';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -19,6 +20,7 @@ const Header = () => {
     const dispatch = useDispatch()
 
     const open = useSelector(cartOpenState)
+    const productInCart = useSelector(selectTotalProductsQuantity)
 
     function toggleCart() {
         if (open) {
@@ -73,8 +75,12 @@ const Header = () => {
                         </div>
 
                         <div onClick={toggleCart} className="flex relative cursor-pointer cursor-pointer px-3  text-center  align-middle ">
-                            <span className="absolute rounded-full text-xs right-0 top-50 bottom-0 left-50 z-10    h-5 w-5 border-radius  text-center  align-middle text-white">4</span>
-                            <svg className="relative h-full w-full z-5" height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-bag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  ><path fill="currentColor" d="M352 160v-32C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128v32H0v272c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V160h-96zm-192-32c0-35.29 28.71-64 64-64s64 28.71 64 64v32H160v-32zm160 120c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zm-192 0c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24z"  ></path></svg>
+                            {/* <svg className="relative h-full w-full z-5" height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-bag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"  ><path fill="currentColor" d="M352 160v-32C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128v32H0v272c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V160h-96zm-192-32c0-35.29 28.71-64 64-64s64 28.71 64 64v32H160v-32zm160 120c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zm-192 0c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24z"  ></path></svg> */}
+                            <svg height="30" width="25" viewBox="0 0 100 100"><path d="M85 24.789H68.993v-5.66C68.993 8.581 60.474 0 50.003 0c-10.47 0-18.988 8.581-18.988 19.13v5.659H15V100h70V24.789zm-45-5.407C40 12.841 44.423 10 49.937 10 55.452 10 60 12.84 60 19.382V25H40v-5.618z" fill="#000" fillRule="nonzero"></path></svg>
+                            <span className="absolute rounded-full text-xs right-0 top-50 bottom-0 left-0 z-10 h-5 text-center align-middle text-white">
+                                <p className="text-white">{productInCart}</p>
+                            </span>
+
                         </div>
 
                         <button className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800  focus:outline-none   transition duration-150 ease-in-out" aria-label="Main menu" aria-expanded="false">
