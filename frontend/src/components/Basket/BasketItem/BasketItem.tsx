@@ -3,7 +3,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link';
 
 import {
-    deleteCartItem
+    deleteCartItem,
+    updateCartItem
 } from './../../../lib/slices/cartSlice'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,8 +19,10 @@ function BasketItem({ item }) {
         dispatch(deleteCartItem(item.key))
     }
 
-
-    let productTotalPrice = item.quantity * item.product_price ? item.product_price : 1
+    // get the current product and update its quantity +/- 1
+    function increaseQuantity() {
+        dispatch(updateCartItem(item.key, 5))
+    }
 
     return (
         <div className="max-w-sm rounded overflow-hidden border-b border-gray-400 mb-8 py-6">
@@ -36,9 +39,9 @@ function BasketItem({ item }) {
 
                     <div className="text-left">
                         <a>
-                            <p className="text-base mb-2">{item.product_name}</p>
-                            {/* <p>{item.attributes && item.attributes.pa_colors ? item.attributes.pa_colors : ""}</p> */}
-                            {/* <p>{item.attributes && item.attributes[0].pa_size}</p> */}
+                            <p className="text-base mb-2">{item.product_title}</p>
+                            <p>{item.attributes && item.attributes.pa_colors ? item.attributes.pa_colors : ""}</p>
+                            <p>{item.attributes && item.attributes.pa_size}cm</p>
                             <p className="text-xs">{`${item.currency}${item.product_price.toFixed(2)}`} GBP</p>
                             <div className="flex mt-2 mb-1">
                                 <div className="border w-8 h-8 fill-current flex transform transition duration-200 ease-in-out text-gray-600 cursor-pointer items-center justify-center hover:bg-gray-800 hover:text-gray-100">

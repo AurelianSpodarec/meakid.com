@@ -35,7 +35,6 @@ export const increaseItemQuantity = createAsyncThunk(
 
 )
 
-
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
     async (itemKey, itemQuantity, thunkAPI) => {
@@ -68,7 +67,6 @@ export const deleteCartItem = createAsyncThunk(
 
 
 
-
 // const cartItemUpdate
 
 const cartSlice = createSlice({
@@ -76,14 +74,17 @@ const cartSlice = createSlice({
     initialState: {
         products: [],
         cartData: [],
-        // loading: true,
+        loading: true,
         error: null,
-        open: false,
+        open: false
     },
     reducers: {
+        getCurrentProduct: (state, key) => {
+
+
+        },
         openCart: (state) => {
             state.open = true
-            console.log(current(state))
         },
         closeCart: (state) => {
             state.open = false
@@ -145,7 +146,17 @@ export const {
     loadCard,
 } = cartSlice.actions
 
+
 export const selectProducts = (state) => state.cart.products
+
 export const cartOpenState = (state) => state.cart.open
+
+export const selectTotalPrice = state =>
+    state.cart.products ?
+        state.cart.products.reduce(
+            (accumulator, product) => accumulator + (product.quantity * product.product_price), 0
+        )
+        : 0
+
 
 export default cartSlice.reducer

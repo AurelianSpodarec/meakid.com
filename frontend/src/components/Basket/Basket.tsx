@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     closeCart,
     selectProducts,
-    cartOpenState
+    cartOpenState,
+    selectTotalPrice
 } from '../../lib/slices/cartSlice'
 
 
@@ -43,9 +44,19 @@ const Basket = () => {
 
     const dispatch = useDispatch()
     const products = useSelector(selectProducts)
+    const totalPrice = useSelector(selectTotalPrice)
+
     const open = useSelector(cartOpenState)
 
 
+
+    // outside of your component
+
+
+    // in your component
+
+
+    console.log("basket total price", totalPrice)
     return (
         <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} overflow-y-hidden transform transition duration-500 ease-in-out min-h-screen fixed overflow-auto z-50 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>
 
@@ -73,7 +84,7 @@ const Basket = () => {
                 <div>
                     <div className="flex justify-between border-b pb-4 mb-8">
                         <p className="text-sm font-bold uppercase">Total</p>
-                        <p className="font-bold">£15.00</p>
+                        <p className="font-bold">£{totalPrice}</p>
                     </div>
 
                     <div className="">
