@@ -151,13 +151,13 @@ export const selectProducts = (state) => state.cart.products
 
 export const cartOpenState = (state) => state.cart.open
 
-export const selectTotalPrice = state => {
+export const selectTotalPrice = state =>
     state.cart.products ?
         state.cart.products.reduce(
             (accumulator, product) => accumulator + (product.quantity * product.product_price), 0
         )
         : 0
-}
+
 
 export const selectTotalProductsQuantity = (state) => state.cart.products.length;
 

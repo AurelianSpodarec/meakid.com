@@ -46,8 +46,8 @@ function ProductSlug({ data }) {
 
     const product = data[0];
 
+    const dispatch = useDispatch()
     const router = useRouter();
-    const productCategory = router.query.productCategory
 
     const [currentProduct, setCurrentProduct] = useState();
     const [currentProductVariations, setCurrentProductVariations] = useState(null);
@@ -56,15 +56,15 @@ function ProductSlug({ data }) {
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
 
-
     const [featuredImage, setFeaturedImage] = useState(null)
     const [variationImages, setVariationImages] = useState(null)
 
     const hasVariations = product.variations.length > 0;
+    const productCategory = router.query.productCategory
 
-    const dispatch = useDispatch()
 
     console.log("s", product, currentProduct)
+
     function onAddToCart() {
         if (selectedSize) {
             dispatch(openCart())
@@ -73,7 +73,7 @@ function ProductSlug({ data }) {
         if (hasVariations) {
             let itemOptions = {
                 "product_id": product.id,
-                "quantity": 1,
+                "quantity": productQuantity,
                 "variation_id": currentProduct.variation_id,
                 "variation": {
                     "attribute_colors": currentProduct.attributes.attribute_pa_colors,
@@ -85,7 +85,7 @@ function ProductSlug({ data }) {
         } else {
             let itemOptions = {
                 "product_id": product.id,
-                "quantity": 1,
+                "quantity": productQuantity,
                 "variation": {
                     "attribute_colors": currentProduct.attributes.attribute_pa_colors,
                     "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
@@ -141,11 +141,32 @@ function ProductSlug({ data }) {
         setSelectedSize(size)
     }
 
+
+    function increaseProductQuantity() {
+        if (selectedSize) {
+            if (productQuantity !== 99) {
+                setProductQuantity(productQuantity + 1)
+            }
+        }
+
+    }
+
+    function decreaseProductQuantity() {
+        if (selectedSize) {
+            if (productQuantity !== 1) {
+                setProductQuantity(productQuantity - 1)
+            }
+        }
+    }
+
+    let totalPrice = !selectedSize ? currentProduct.display_price * productQuantity : currentProduct.display_price * productQuantity
+
     useEffect(() => {
         onChangeImage()
         getCurrentVariationBySize()
         getCurrentProductVariations()
         setCurrentProduct(getVariationProduct(product, selectedColor, selectedSize))
+        setProductQuantity(1)
     }, [selectedColor, selectedSize])
 
     useEffect(() => {
@@ -162,7 +183,7 @@ function ProductSlug({ data }) {
     }, [])
 
 
-    let productTotalPrice = productQuantity * product.price || currentProduct.display_price;
+    // let productTotalPrice = productQuantity * currentProduct.display_price
 
     return (
         <Layout title={product.name}>
@@ -175,7 +196,7 @@ function ProductSlug({ data }) {
                     </div>
 
 
-                    <div className="p-4 relative w-full lg:ml-24 lg:w-94 lg:p-0">
+                    <aside className="p-4 relative w-full lg:ml-24 lg:w-94 lg:p-0">
                         <div>
                             <h5 className="text-sm uppercase">Meakid {productCategory}</h5>
                             <h1 className="text-xl uppercase color-gray-900 font-bold">{product.name}</h1>
@@ -213,25 +234,31 @@ function ProductSlug({ data }) {
                             />
                         </div>
 
-                        <div>
 
+                        <div className="flex mb-6">
                             <div className="flex">
-                                <div className="">
-                                    <span>Quantity</span>
-                                    <input value={1} />
+                                <div onClick={() => decreaseProductQuantity()} className="border w-12 h-12 fill-current flex transform transition duration-200 ease-in-out text-gray-600 cursor-pointer items-center justify-center hover:bg-gray-800 hover:text-gray-100">
+                                    -
                                 </div>
-                                <div>
-                                    <span>Total Price:</span>
-                                    <span>£{productTotalPrice.toFixed(2)}</span>
+                                <p className="flex items-center justify-center cursor-default border text-xs w-12 h-12 text-center">{productQuantity}</p>
+                                <div onClick={() => increaseProductQuantity()} className="border w-12 h-12 fill-current flex transform transition duration-200 ease-in-out text-gray-600 cursor-pointer items-center justify-center hover:bg-gray-800 hover:text-gray-100">
+                                    +
                                 </div>
                             </div>
-
-                            <div className="flex flex-row">
-                                <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                            <div className="flex md:ml-2 items-center">
+                                <p className="font-bold mr-2 ">Total:</p><span>£{totalPrice.toFixed(2)}GBP</span>
                             </div>
                         </div>
 
-                    </div>
+
+                        <div className="flex flex-row">
+                            <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                        </div>
+                    </aside>
+
+
+
+
 
 
                 </div>
