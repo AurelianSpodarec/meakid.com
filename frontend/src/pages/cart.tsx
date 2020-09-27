@@ -8,7 +8,12 @@ function Cart() {
     return (
         <Layout>
             <div className="container mx-auto px-4">
-                <h1>Shopping Cart</h1>
+
+
+                <div className="text-center my-5 w-full">
+                    <h3 className="uppercase font-bold text-3xl">Shopping Cart</h3>
+                </div>
+
 
                 <CartList />
             </div>

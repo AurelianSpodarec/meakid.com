@@ -7,8 +7,8 @@ const CartItem = ({ item }) => {
 
     let productSubtotal = item.product_price * item.quantity;
     return (
-        <tr className="">
-            <td>
+        <tr className="border borer-b">
+            <td className="p-6 w-56">
                 {/* <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]"> */}
                 <a title="product item">
                     <img src={item.product_image} />
@@ -18,19 +18,19 @@ const CartItem = ({ item }) => {
             <td>
                 {/* <Link as={`/shop/${item.product_categories[0].slug}/${item.product_slug}`} href="/shop/[productCategory]/[productSlug]"> */}
                 <a title="product item">
-                    <h2>{item.product_name}</h2>
+                    <h3 className="font-bold">{item.product_name}</h3>
                 </a>
                 {/* </Link> */}
                 <div>
-                    <p>Size</p>
-                    <span>{item.currency}{item.product_price.toFixed(2)}</span>
+                    <p>{item.attributes.pa_colors}</p>
+                    <p>{item.attributes.pa_size}</p>
+                    <p className="text-xs">{item.currency}{item.product_price.toFixed(2)} GBP</p>
                 </div>
             </td>
-            <td>
-                Quantity
+            <td className="border text-center">
                 {item.quantity}
             </td>
-            <td>
+            <td className="border text-center">
                 {item.currency}{productSubtotal.toFixed(2)}
             </td>
         </tr>

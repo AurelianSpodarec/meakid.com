@@ -159,7 +159,7 @@ function ProductSlug({ data }) {
         }
     }
 
-    let totalPrice = !selectedSize ? currentProduct.display_price * productQuantity : currentProduct.display_price * productQuantity
+    let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
 
     useEffect(() => {
         onChangeImage()
