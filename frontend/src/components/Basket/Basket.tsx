@@ -48,14 +48,6 @@ const Basket = () => {
 
     const open = useSelector(cartOpenState)
 
-
-
-    // outside of your component
-
-
-    // in your component
-
-
     console.log("basket total price", totalPrice)
     return (
         <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} overflow-y-hidden transform transition duration-500 ease-in-out min-h-screen fixed overflow-auto z-50 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>

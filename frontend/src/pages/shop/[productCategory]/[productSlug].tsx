@@ -180,7 +180,37 @@ function ProductSlug({ data }) {
     useEffect(() => {
         onLoadInitialValues()
         setUniqueImages()
+
+        test()
     }, [])
+
+
+    async function test() {
+        const data = {
+            "line_items": [
+                {
+                    "product_id": 17,
+                    "variation_id": 28,
+                    "quantity": 1
+                }
+            ]
+        }
+        // const res = await WooCommerce.post('orders', data).then(res => res).catch(e => e)
+
+        // console.log("SSS", res)
+
+
+        const res = await WooCommerce.post("orders", data)
+            .then((response) => {
+                console.log("Then", response);
+            })
+            .catch((error) => {
+                console.log("Error:", error.response);
+            });
+
+        console.log("SSS", res)
+    }
+
 
 
     // let productTotalPrice = productQuantity * currentProduct.display_price
