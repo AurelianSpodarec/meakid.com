@@ -53,3 +53,4 @@ if ( ! function_exists( 'CoCart' ) ) {
 		include_once( untrailingslashit( plugin_dir_path( COCART_FILE ) ) . '/includes/admin/class-cocart-admin.php' );
 	}
 }
+
