@@ -12,7 +12,6 @@ export const fetchCart = createAsyncThunk(
     'cart/fetchCartStatus',
     async (thunkAPI) => {
         const res = await getCart();
-        console.log("fetchCart", res)
         return res;
     }
 )
@@ -28,9 +27,7 @@ export const increaseItemQuantity = createAsyncThunk(
     'item/increaseItemQuantity',
     async (itemKey, itemQuantity, thunkAPI) => {
         const res = await fetch();
-
         return res;
-
     }
 
 )
@@ -60,7 +57,6 @@ export const deleteCartItem = createAsyncThunk(
     'cart/deleteCartItem',
     async (itemKey, thunkAPI) => {
         const res = await deleteItemByKey(itemKey);
-        console.log("!!!!!!!!", res)
         return res;
     }
 )

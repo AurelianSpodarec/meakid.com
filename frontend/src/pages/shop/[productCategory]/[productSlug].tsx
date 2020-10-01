@@ -181,7 +181,7 @@ function ProductSlug({ data }) {
         onLoadInitialValues()
         setUniqueImages()
 
-        test()
+        // test()
     }, [])
 
 
@@ -200,15 +200,15 @@ function ProductSlug({ data }) {
         // console.log("SSS", res)
 
 
-        const res = await WooCommerce.post("orders", data)
-            .then((response) => {
-                console.log("Then", response);
-            })
-            .catch((error) => {
-                console.log("Error:", error.response);
-            });
+        // const res = await WooCommerce.post("orders", data)
+        //     .then((response) => {
+        //         console.log("Then", response);
+        //     })
+        //     .catch((error) => {
+        //         console.log("Error:", error.response);
+        //     });
 
-        console.log("SSS", res)
+        // console.log("SSS", res)
     }
 
 
