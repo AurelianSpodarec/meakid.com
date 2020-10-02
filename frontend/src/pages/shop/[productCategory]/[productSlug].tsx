@@ -70,6 +70,18 @@ function ProductSlug({ data }) {
             dispatch(openCart())
         }
 
+        // let itemOptions = {
+        //     "product_id": product.id,
+        //     "quantity": productQuantity,
+        //     "variation": {
+        //         "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+        //         "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+        //     }
+        // }
+        // if (itemOptions.variation_id) itemOptions.variation_id = variation_id
+
+        // dispatch(sliceAddItem(itemOptions))
+
         if (hasVariations) {
             let itemOptions = {
                 "product_id": product.id,

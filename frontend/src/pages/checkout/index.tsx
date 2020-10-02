@@ -1,9 +1,33 @@
 import reac, { useState } from 'react';
 import { Layout } from '../../components'
+import CheckoutProgressBar from '../../components/Checkout/CheckoutProgressBar/CheckoutProgressBar';
+import CheckoutStepInformation from '../../components/Checkout/steps/CheckoutStepInformation/CheckoutStepInformation';
+import CheckoutStepShipping from '../../components/Checkout/steps/CheckoutStepShipping/CheckoutStepShipping';
+import CheckoutStepComplete from '../../components/Checkout/steps/CheckoutStepComplete/CheckoutStepComplete';
+import CheckoutStepPayment from '../../components/Checkout/steps/CheckoutStepPayment/CheckoutStepPayment';
 
 function Checkout() {
 
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(2);
+
+    function renderStep() {
+        switch (currentStep) {
+            case 2:
+                return <CheckoutStepInformation />
+                break;
+            case 3:
+                return <CheckoutStepShipping />
+                break;
+            case 4:
+                return <CheckoutStepPayment />
+                break;
+            case 5:
+                return <CheckoutStepComplete />
+                break;
+            default:
+                return <CheckoutStepInformation />
+        }
+    }
 
     return (
         <Layout>
@@ -11,12 +35,12 @@ function Checkout() {
                 <div className="grid grid-cols-12 gap-4">
 
                     <section className="col-span-7">
-                        <div>
-                            Steps
+                        <div style={{ marginLeft: "-10%", width: '120%' }}>
+                            <CheckoutProgressBar currentStep={currentStep} />
                         </div>
 
                         <div>
-                            Info
+                            {renderStep()}
                         </div>
                     </section>
 
