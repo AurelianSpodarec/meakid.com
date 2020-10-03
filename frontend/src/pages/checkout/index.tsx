@@ -34,7 +34,7 @@ function Checkout() {
             <div className="container mx-auto px-4" style={{ maxWidth: '1150px' }}>
                 <div className="grid grid-cols-12 gap-4">
 
-                    <section className="col-span-7">
+                    <section className="col-span-7 pr-20">
                         <div style={{ marginLeft: "-10%", width: '120%' }}>
                             <CheckoutProgressBar currentStep={currentStep} />
                         </div>
@@ -44,7 +44,7 @@ function Checkout() {
                         </div>
                     </section>
 
-                    <aside className="col-span-5">
+                    <aside className="col-span-5 pl-10" style={{ background: "#fafafa" }}>
 
                         <div className="mb-4 pb-4 border-b">
                             <p>Products</p>

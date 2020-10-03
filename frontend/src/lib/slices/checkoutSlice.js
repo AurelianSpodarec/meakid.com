@@ -13,6 +13,12 @@ const checkoutSlice = createSlice({
     name: 'checkout',
     initialState: {
         products: [],
+        order: {
+            "payment_method": "" || undefined,
+            billing: {
+                "first_name": "" || undefined
+            }
+        }
     },
     reducers: {
         getCurrentProduct: (state, key) => {

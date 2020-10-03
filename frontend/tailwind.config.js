@@ -21,6 +21,7 @@ module.exports = {
                 '0': 0,
                 auto: 'auto',
                 '1/2': '50%',
+                '5': '5px'
             }
         }
     },

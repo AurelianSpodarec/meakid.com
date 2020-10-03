@@ -41,7 +41,7 @@ function CheckoutProgressBar({ currentStep }) {
 
 
     return (
-        <div className="relative">
+        <div className="relative mb-12">
             <div className="flex justify-between w-full relative z-10">
                 {
                     checkoutSteps.map(item =>
