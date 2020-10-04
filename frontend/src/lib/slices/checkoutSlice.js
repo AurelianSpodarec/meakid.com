@@ -1,38 +1,65 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
 
 
-export const fetchCart = createAsyncThunk(
-    'cart/fetchCartStatus',
-    async (thunkAPI) => {
-        const res = await getCart();
-        return res;
-    }
-)
-
 const checkoutSlice = createSlice({
     name: 'checkout',
     initialState: {
         products: [],
+        billingAddressAsDelivery: true,
         order: {
-            "payment_method": "" || undefined,
+            payment_method: "",
+            payment_method_title: "",
+            set_paid: false,
             billing: {
-                "first_name": "" || undefined
-            }
-        }
+                first_name: "",
+                last_name: "",
+                address_1: "",
+                address_2: "",
+                city: "",
+                state: "",
+                postcode: "",
+                country: "",
+                email: "",
+                phone: "",
+            },
+            shipping: {
+                first_name: "",
+                last_name: "",
+                address_1: "",
+                address_2: "",
+                city: "",
+                state: "",
+                postcode: "",
+                country: "",
+            },
+            line_items: [],
+            shipping_lines: [
+                {
+                    method_id: "flat_rate",
+                    method_title: "Flat Rate",
+                    total: 10
+                }
+            ]
+        },
     },
     reducers: {
-        getCurrentProduct: (state, key) => {
-
+        updatePayment: (state, { payload }) => {
 
         },
-
-    },
-
+        updateBilling: (state, { payload }) => {
+            console.log(current(state.order.billing))
+            console.log("Payload", payload)
+            state.order.billing = { ...state.order.billing, ...payload };
+        },
+    }
 })
 
-export const {
-    openCheckout,
+export const selectBillingInfo = (state) => state.checkout.order.billing
+export const selectOrderInfo = (state) => state.checkout.order
 
+
+export const {
+    updateBilling,
 } = checkoutSlice.actions
 
 
