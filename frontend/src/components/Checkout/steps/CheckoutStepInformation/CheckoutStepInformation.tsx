@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     selectBillingInfo,
     updateBilling,
+    updateShipping,
 } from './../../../../lib/slices/checkoutSlice'
+import { useState } from 'react';
 
 const INITIAL_STATE = {
     first_name: "",
@@ -22,16 +24,17 @@ const INITIAL_STATE = {
 
 function CheckoutStepInformation() {
 
-    const { handleChange, handleSubmit, values } = useForm(save, INITIAL_STATE)
     const dispatch = useDispatch()
-
+    const { handleChange, handleSubmit, values } = useForm(save, INITIAL_STATE)
 
     function save() {
-        console.log("SAVE")
-        dispatch(updateBilling(INITIAL_STATE));
+        const shippingValues = values;
+        delete shippingValues.email
+        delete shippingValues.phone
+
+        dispatch(updateShipping(shippingValues))
+        dispatch(updateBilling(values));
     }
-
-
 
     return (
         <section>
@@ -62,7 +65,7 @@ function CheckoutStepInformation() {
                 <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-6">
                         <div className="relative my-2">
-                            <select name="country" className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            <select name="country" value={values.country} onChange={handleChange} className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                 <option>United Kingdom</option>
                                 <option>Jersey</option>
                                 <option>Isle of Man</option>

@@ -47,10 +47,15 @@ const checkoutSlice = createSlice({
 
         },
         updateBilling: (state, { payload }) => {
-            console.log(current(state.order.billing))
-            console.log("Payload", payload)
+            console.log(current(state.order))
             state.order.billing = { ...state.order.billing, ...payload };
         },
+        updateShipping: (state, { payload }) => {
+            state.order.shipping = { ...state.order.shipping, ...payload };
+        },
+        updateLineItems: (state, { payload }) => {
+            state.order.line_items = { ...state.order.line_items, ...payload };
+        }
     }
 })
 
@@ -60,6 +65,8 @@ export const selectOrderInfo = (state) => state.checkout.order
 
 export const {
     updateBilling,
+    updateShipping,
+    updateLineItems
 } = checkoutSlice.actions
 
 

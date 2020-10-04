@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 
-const Input = ({ label, onChange, name, placeholder, type, value }) => {
+const Input = ({ label, onChange, name, placeholder, type, value }: any) => {
 
     // if its not selected, padding to be same for py
     const isEmpty = value;
