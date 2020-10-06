@@ -3,11 +3,11 @@ import Link from 'next/link';
 import HeaderLink from './HeaderLink/HeaderLink';
 
 
-const HeaderMenu = () => {
+const HeaderMenu = ({ openMenu }) => {
 
     return (
 
-        <nav className="md:ml-auto md:mr-auto fixed lg:static top-0 bottom-0 bg-gray-100 left-0 flex flex-wrap items-center text-base justify-center">
+        <nav className={` hidden lg:block  md:ml-auto md:mr-auto lg:static top-0 bottom-0 left-0 flex flex-wrap items-center text-base justify-center`}>
             <HeaderLink
                 href="/"
                 title="Home Page"

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link';
 import HeaderMenu from './sub-components/HeaderMenu/HeaderMenu';
+import HeaderMobileMenu from './sub-components/HeaderMenu/HeaderMobileMenu';
 import HeaderLogo from './sub-components/HeaderLogo/HeaderLogo';
 import Basket from '../Basket/Basket';
 
@@ -24,11 +25,22 @@ const Header = () => {
     const open = useSelector(cartOpenState)
     const productInCart = useSelector(selectTotalProductsQuantity)
 
+
+    const [openMenu, setOpenMenu] = useState(false);
+
     function toggleCart() {
         if (open) {
             dispatch(closeCart())
         } else {
             dispatch(openCart())
+        }
+    }
+
+    function toggleMenu() {
+        if (openMenu) {
+            setOpenMenu(false)
+        } else {
+            setOpenMenu(true)
         }
     }
 
@@ -64,7 +76,7 @@ const Header = () => {
         <>
 
             <header className={`fixed z-20 left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full`}>
-                <div className="mx-auto flex flex-wrap p-4 flex-row items-center">
+                <div className="justify-between mx-auto flex flex-wrap p-4 flex-row items-center">
 
                     <HeaderLogo />
 
@@ -90,7 +102,7 @@ const Header = () => {
 
                                 </div>
 
-                                <button className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800  focus:outline-none   transition duration-150 ease-in-out" aria-label="Main menu" aria-expanded="false">
+                                <button onClick={() => toggleMenu()} className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-800  focus:outline-none   transition duration-150 ease-in-out" aria-label="Main menu" aria-expanded="false">
                                     <svg className="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                                     </svg>
@@ -98,8 +110,10 @@ const Header = () => {
                             </div>
                         </>
                     }
+                    <HeaderMobileMenu openMenu={openMenu} />
                 </div>
             </header>
+
 
             <Basket />
         </>
