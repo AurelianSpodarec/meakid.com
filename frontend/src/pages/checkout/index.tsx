@@ -10,7 +10,7 @@ import CheckoutProductList from '../../components/Checkout/CheckoutProducts/Chec
 
 function Checkout() {
 
-    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStep, setCurrentStep] = useState(3);
 
     function renderStep() {
         switch (currentStep) {
@@ -36,7 +36,7 @@ function Checkout() {
             <div className="container mx-auto px-4" style={{ maxWidth: '1150px' }}>
                 <div className="grid grid-cols-12 gap-4">
 
-                    <section className="col-span-7 pr-20">
+                    <section className="col-span-12 lg:col-span-7 lg:pr-20">
                         <div style={{ marginLeft: "-10%", width: '120%' }}>
                             <CheckoutProgressBar currentStep={currentStep} />
                         </div>
@@ -46,7 +46,7 @@ function Checkout() {
                         </div>
                     </section>
 
-                    <aside className="col-span-5 pl-10 border-l" style={{ background: "#fafafa" }}>
+                    <aside className="checkout-sidebar  col-span-12 lg:col-span-5  pl-10 border-l" style={{ background: "#fafafa" }}>
                         <div>
                             <div className="mb-4 pb-4 border-b">
                                 <CheckoutProductList />

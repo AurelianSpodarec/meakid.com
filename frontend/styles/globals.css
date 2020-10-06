@@ -3,3 +3,19 @@
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
+
+.checkout-sidebar::after {
+    left: 0;
+    background-position: left top;
+    -webkit-box-shadow: 1px 0 0 #e1e1e1 inset;
+    box-shadow: 1px 0 0 #e1e1e1 inset;
+    content: "";
+    display: block;
+    width: 300%;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    background: #fafafa;
+    z-index: -1;
+}
