@@ -1,35 +1,84 @@
-import reac, { useState } from 'react';
+import reac, { useEffect, useState } from 'react';
 import { Input, Layout } from '../../components'
 
 import CheckoutProgressBar from '../../components/Checkout/CheckoutProgressBar/CheckoutProgressBar';
-import CheckoutStepInformation from '../../components/Checkout/steps/CheckoutStepInformation/CheckoutStepInformation';
-import CheckoutStepShipping from '../../components/Checkout/steps/CheckoutStepShipping/CheckoutStepShipping';
-import CheckoutStepComplete from '../../components/Checkout/steps/CheckoutStepComplete/CheckoutStepComplete';
-import CheckoutStepPayment from '../../components/Checkout/steps/CheckoutStepPayment/CheckoutStepPayment';
+import CheckoutStepInformation from '../../components/Checkout/steps/CheckoutStepInformation';
+import CheckoutStepShipping from '../../components/Checkout/steps/CheckoutStepShipping';
+import CheckoutStepComplete from '../../components/Checkout/steps/CheckoutStepComplete';
+import CheckoutStepPayment from '../../components/Checkout/steps/CheckoutStepPayment';
 import CheckoutProductList from '../../components/Checkout/CheckoutProducts/CheckoutProductList';
+import CheckoutFooter from '../../components/Checkout/steps/sub-components/CheckoutFooter';
+import { current } from 'immer';
+
+const checkoutSteps = [
+    {
+        step: 1,
+        name: "Cart",
+        completed: false,
+        route: "/cart"
+
+    },
+    {
+        step: 2,
+        name: "Information",
+        completed: false,
+        route: "/contact-info"
+    },
+    {
+        step: 3,
+        name: "Shipping",
+        completed: false,
+        route: "/checkout-shipping"
+    },
+    {
+        step: 4,
+        name: "Payment",
+        completed: false,
+        route: "/checkout-payment"
+    },
+    {
+        step: 5,
+        name: "Complete",
+        completed: false,
+        route: "/checkout-complete"
+    }
+]
 
 function Checkout() {
 
-    const [currentStep, setCurrentStep] = useState(3);
+    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStepObject, setCurrentStepObject] = useState()
 
     function renderStep() {
         switch (currentStep) {
             case 2:
-                return <CheckoutStepInformation />
+                return <CheckoutStepInformation checkoutSteps={checkoutSteps} />
                 break;
             case 3:
-                return <CheckoutStepShipping />
+                return <CheckoutStepShipping checkoutSteps={checkoutSteps} />
                 break;
             case 4:
-                return <CheckoutStepPayment />
+                return <CheckoutStepPayment checkoutSteps={checkoutSteps} />
                 break;
             case 5:
-                return <CheckoutStepComplete />
+                return <CheckoutStepComplete checkoutSteps={checkoutSteps} />
                 break;
             default:
-                return <CheckoutStepInformation />
+                return <CheckoutStepInformation checkoutSteps={checkoutSteps} />
         }
     }
+
+    function onNextStep() {
+        setCurrentStep(currentStep + 1)
+    }
+
+    function onPrevStep() {
+        setCurrentStep(currentStep - 1)
+    }
+
+    // useEffect(() => {
+    //     getCurrentStepObject()
+    // }, [currentStep])
 
     return (
         <Layout>
@@ -38,11 +87,12 @@ function Checkout() {
 
                     <section className="col-span-12 lg:col-span-7 lg:pr-20">
                         <div style={{ marginLeft: "-10%", width: '120%' }}>
-                            <CheckoutProgressBar currentStep={currentStep} />
+                            <CheckoutProgressBar checkoutSteps={checkoutSteps} currentStep={currentStep} />
                         </div>
 
                         <div>
                             {renderStep()}
+                            <CheckoutFooter currentStep={currentStep} nextStep={onNextStep} prevStep={onPrevStep} />
                         </div>
                     </section>
 

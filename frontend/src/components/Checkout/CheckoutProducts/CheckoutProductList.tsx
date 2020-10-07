@@ -7,7 +7,7 @@ import {
     cartOpenState,
     selectTotalPrice
 } from '../../../lib/slices/cartSlice'
-import CheckoutProductItem from './CheckoutProductItem/CheckoutProductItem'
+import CheckoutProductItem from './CheckoutProductItem'
 
 function CheckoutProductList() {
     const products = useSelector(selectProducts)

@@ -1,10 +1,10 @@
-import ReviewBlock from "../sub-components/ReviewBlock";
+import ReviewBlock from "./sub-components/ReviewBlock";
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
     selectOrderInfo
-} from './../../../../lib/slices/checkoutSlice';
+} from '../../../lib/slices/checkoutSlice';
 
 function CheckoutStepShipping() {
 
