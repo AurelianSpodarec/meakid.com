@@ -3,14 +3,36 @@ import ReviewBlock from "./sub-components/ReviewBlock";
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+    nextStep,
+    prevStep,
+    selectBillingInfo,
+    updateBilling,
+    updateShipping,
     selectOrderInfo
-} from '../../../lib/slices/checkoutSlice';
+} from '../../../lib/slices/checkoutSlice'
+
+import CheckoutFooter from "./sub-components/CheckoutFooter";
 
 function CheckoutStepShipping() {
 
     const dispatch = useDispatch()
     const orderInfo = useSelector(selectOrderInfo)
-    console.log("selectOrderInfo", orderInfo.billing)
+
+    function save() {
+
+    }
+
+    function onNext() {
+        console.log("next")
+        save()
+        dispatch(nextStep())
+    }
+
+    function onPrev() {
+        save()
+        dispatch(prevStep())
+    }
+
 
     return (
         <div>
@@ -32,6 +54,9 @@ function CheckoutStepShipping() {
                 </button>
 
             </div>
+
+
+            <CheckoutFooter onPrev={onPrev} onNext={onNext} />
         </div>
     )
 }

@@ -7,7 +7,15 @@ import CheckoutStepShipping from '../../components/Checkout/steps/CheckoutStepSh
 import CheckoutStepComplete from '../../components/Checkout/steps/CheckoutStepComplete';
 import CheckoutStepPayment from '../../components/Checkout/steps/CheckoutStepPayment';
 import CheckoutProductList from '../../components/Checkout/CheckoutProducts/CheckoutProductList';
-import CheckoutFooter from '../../components/Checkout/steps/sub-components/CheckoutFooter';
+
+
+import {
+    prevStep,
+    nextStep,
+    selectCheckoutStep
+} from './../../lib/slices/checkoutSlice'
+
+import { useDispatch, useSelector } from 'react-redux'
 import { current } from 'immer';
 
 const checkoutSteps = [
@@ -44,41 +52,36 @@ const checkoutSteps = [
     }
 ]
 
+// Create an order with the items and put in the checkout
+
+
 function Checkout() {
 
-    const [currentStep, setCurrentStep] = useState(2);
+    const dispatch = useDispatch();
+
+    const currentStep = useSelector(selectCheckoutStep)
+    console.log(currentStep)
+    // const [currentStep, setCurrentStep] = useState(2);
     const [currentStepObject, setCurrentStepObject] = useState()
 
     function renderStep() {
         switch (currentStep) {
             case 2:
-                return <CheckoutStepInformation checkoutSteps={checkoutSteps} />
+                return <CheckoutStepInformation />
                 break;
             case 3:
-                return <CheckoutStepShipping checkoutSteps={checkoutSteps} />
+                return <CheckoutStepShipping />
                 break;
             case 4:
-                return <CheckoutStepPayment checkoutSteps={checkoutSteps} />
+                return <CheckoutStepPayment />
                 break;
             case 5:
-                return <CheckoutStepComplete checkoutSteps={checkoutSteps} />
+                return <CheckoutStepComplete />
                 break;
             default:
-                return <CheckoutStepInformation checkoutSteps={checkoutSteps} />
+                return <CheckoutStepInformation />
         }
     }
-
-    function onNextStep() {
-        setCurrentStep(currentStep + 1)
-    }
-
-    function onPrevStep() {
-        setCurrentStep(currentStep - 1)
-    }
-
-    // useEffect(() => {
-    //     getCurrentStepObject()
-    // }, [currentStep])
 
     return (
         <Layout>
@@ -92,7 +95,6 @@ function Checkout() {
 
                         <div>
                             {renderStep()}
-                            <CheckoutFooter currentStep={currentStep} nextStep={onNextStep} prevStep={onPrevStep} />
                         </div>
                     </section>
 

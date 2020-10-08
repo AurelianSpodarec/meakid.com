@@ -1,14 +1,18 @@
-import useForm from '../../../hooks/useForm';
-import Input from '../../Input/Input';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 
+import useForm from '../../../hooks/useForm';
+import Input from '../../Input/Input';
+
+import CheckoutFooter from './sub-components/CheckoutFooter';
+
 import {
+    nextStep,
+    prevStep,
     selectBillingInfo,
     updateBilling,
-    updateShipping,
+    updateShipping
 } from '../../../lib/slices/checkoutSlice'
-import { useState } from 'react';
-import CheckoutFooter from './sub-components/CheckoutFooter';
 
 const INITIAL_STATE = {
     first_name: "",
@@ -23,19 +27,42 @@ const INITIAL_STATE = {
     phone: "",
 }
 
-function CheckoutStepInformation({ checkoutSteps }) {
+function CheckoutStepInformation({ currentStep, checkoutSteps }) {
 
     const dispatch = useDispatch()
-    const { handleChange, handleSubmit, values } = useForm(save, INITIAL_STATE)
+    const billingInfo = useSelector(selectBillingInfo)
+
+    const { handleChange, handleSubmit, values } = useForm(save, billingInfo)
 
     function save() {
         const shippingValues = values;
-        delete shippingValues.email
-        delete shippingValues.phone
+        // if (shippingValues.email) {
+        //     delete shippingValues.email
+        //     delete shippingValues.phone
+        // }
 
         dispatch(updateShipping(shippingValues))
         dispatch(updateBilling(values));
     }
+
+
+    console.log(billingInfo)
+    function onNext() {
+        console.log("next")
+        save()
+        dispatch(nextStep())
+    }
+
+    function onPrev() {
+        save()
+        dispatch(prevStep())
+    }
+
+    useEffect(() => {
+        // repopulate values from redux
+
+        // get info and repopulate it each time it loads into values
+    }, [])
 
     return (
         <section>
@@ -84,6 +111,8 @@ function CheckoutStepInformation({ checkoutSteps }) {
 
                 <Input placeholder="Phone" name="phone" value={values.phone} onChange={handleChange} />
             </div>
+
+            <CheckoutFooter currentStep={currentStep} onPrev={onPrev} onNext={onNext} />
 
         </section>
     )
