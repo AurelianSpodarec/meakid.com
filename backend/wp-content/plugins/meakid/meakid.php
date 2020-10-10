@@ -204,6 +204,19 @@ function getImage( $args ) {
     return $img;
 }
 
+
+
+///////////////////////////////////////////////////
+//
+// Pay with PayPal
+//
+///////////////////////////////////////////////////
+
+// return paypal token
+function proceedOrderWithPayPal( $args ) {
+
+}
+
 ///////////////////////////////////////////////////
 //
 // Register Routes
@@ -223,6 +236,10 @@ function register_routes() {
     register_rest_route( 'wc/v3', '/image/(?P<id>[0-9-]+)', array(
         'method' => 'GET',
         'callback' => 'getImage'
+    ));   
+    register_rest_route( 'wc/v3', '/pay/order/(?P<id>[0-9-]+)/paypal', array(
+        'method' => 'GET',
+        'callback' => 'proceedOrderWithPayPal'
     ));   
 }
 add_action('rest_api_init', 'register_routes');
