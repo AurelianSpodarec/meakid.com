@@ -215,6 +215,13 @@ function getImage( $args ) {
 // return paypal token
 function proceedOrderWithPayPal( $args ) {
 
+    // User sends order ID
+    // Take the order total price, and create a paypal token with that price
+    // send it back to the user
+    // user opens that in the browser
+    // the order gets paid 
+    // different function: update the order to complete
+
 }
 
 ///////////////////////////////////////////////////
