@@ -15,14 +15,14 @@ function BasketItem({ item }) {
     console.log(item.attributes.pa_colors && item.attributes.pa_colors)
     const dispatch = useDispatch()
 
-    function removeFromCart() {
-        dispatch(deleteCartItem(item.key))
-    }
+    // function removeFromCart() {
+    //     dispatch(deleteCartItem(item.key))
+    // }
 
     // get the current product and update its quantity +/- 1
-    function increaseQuantity() {
-        dispatch(updateCartItem(item.key, 5 + 1))
-    }
+    // function increaseQuantity() {
+    //     dispatch(updateCartItem(item.key, 5 + 1))
+    // }
 
     return (
         <div key={item.key} className="max-w-sm rounded overflow-hidden border-b border-gray-400 mb-8 py-6">
