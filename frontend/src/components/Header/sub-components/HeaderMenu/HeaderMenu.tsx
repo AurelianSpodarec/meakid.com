@@ -3,7 +3,7 @@ import Link from 'next/link';
 import HeaderLink from './HeaderLink/HeaderLink';
 
 
-const HeaderMenu = ({ openMenu }) => {
+const HeaderMenu = () => {
 
     return (
 

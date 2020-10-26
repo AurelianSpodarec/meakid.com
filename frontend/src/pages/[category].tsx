@@ -43,7 +43,8 @@ function Category() {
     }, [category])
 
     return (
-        <Layout title={category}>
+        // <Layout title={category}>
+        <Layout>
             <section>
 
                 <h1 className="text-5xl text-center text-accent-1">

@@ -27,7 +27,7 @@ const INITIAL_STATE = {
     phone: "",
 }
 
-function CheckoutStepInformation({ currentStep, checkoutSteps }) {
+function CheckoutStepInformation({ currentStep, checkoutSteps }: any) {
 
     const dispatch = useDispatch()
     const billingInfo = useSelector(selectBillingInfo)
@@ -112,7 +112,7 @@ function CheckoutStepInformation({ currentStep, checkoutSteps }) {
                 <Input placeholder="Phone" name="phone" value={values.phone} onChange={handleChange} />
             </div>
 
-            <CheckoutFooter currentStep={currentStep} onPrev={onPrev} onNext={onNext} />
+            <CheckoutFooter onPrev={onPrev} onNext={onNext} />
 
         </section>
     )

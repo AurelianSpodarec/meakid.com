@@ -1,5 +1,5 @@
 
-function ReviewBlock({ label, children, onClick, borderBottom }) {
+function ReviewBlock({ label, children, onClick, borderBottom }: any) {
     return (
         <div className={`flex justify-between text-sm py-3 ${borderBottom ? "border-b" : ""}`}>
             <div className="flex">

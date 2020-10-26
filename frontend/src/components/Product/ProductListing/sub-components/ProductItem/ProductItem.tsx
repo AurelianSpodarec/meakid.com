@@ -42,7 +42,7 @@ const ImageItem = ({ id, url, productVariations, onMouseEnter }: any) => {
 
 }
 
-const ImageList = ({ imageVariation, changeFeaturedImage }) => {
+const ImageList = ({ imageVariation, changeFeaturedImage }: any) => {
     return (
         <div className="bg-gray-500 inline-block mr-1">
             {
@@ -55,7 +55,7 @@ const ImageList = ({ imageVariation, changeFeaturedImage }) => {
 }
 
 
-const ProductItem = ({ product, productListStatus, key }) => {
+const ProductItem = ({ product, productListStatus, key }: any) => {
     console.log("Product Data", product)
 
     const [productVariations, setProductVariations] = useState([])

@@ -53,7 +53,7 @@ function BasketItem({ item }) {
                                 </div>
                         </div>
 
-                        <p className="text-xs" onClick={() => removeFromCart()}>Remove</p>
+                        {/* <p className="text-xs" onClick={() => removeFromCart()}>Remove</p> */}
                     </a>
                     {/* <p>Total Price: {item.currency + productTotalPrice.toFixed(2)}</p> */}
                     {/* <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div> */}

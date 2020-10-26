@@ -11,14 +11,14 @@ function Index() {
             </Head>
 
             <section>
-                <Hero
+                {/* <Hero
                     image="https://cdn.pixabay.com/photo/2016/11/19/08/00/towel-1838210_960_720.jpg"
                     title="
                 New Adapt 
                 OMBRE SEAMLESS"
                     subTitle="Confidence that never fades."
                     buttonName="Shop"
-                />
+                /> */}
             </section>
         </Layout>
     )

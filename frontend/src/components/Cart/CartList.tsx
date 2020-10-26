@@ -23,7 +23,7 @@ const CartList = () => {
             <table className="table-auto w-full border">
                 <thead className="bg-gray-300 w-100">
                     <tr>
-                        <th className="text-left p-4 text-black font-light uppercase text-sm" colSpan="2">Item</th>
+                        <th className="text-left p-4 text-black font-light uppercase text-sm">Item</th>
                         <th className="text-center p-4 text-black font-light uppercase text-sm">Quantity</th>
                         <th className="text-center p-4 text-black font-light uppercase text-sm">Subtotal</th>
                     </tr>
@@ -41,7 +41,7 @@ const CartList = () => {
             <table className="table-auto border mb-2">
                 <tfoot>
                     <tr>
-                        <td colSpan="2">Continue Shopping</td>
+                        <td>Continue Shopping</td>
                         <td className="font-bold uppercase">Total</td>
                         <td><p className="font-bold">£{totalPrice.toFixed(2)} GBP</p></td>
                     </tr>

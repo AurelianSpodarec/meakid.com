@@ -49,7 +49,16 @@ function ProductSlug({ data }) {
     const dispatch = useDispatch()
     const router = useRouter();
 
-    const [currentProduct, setCurrentProduct] = useState();
+    const [currentProduct, setCurrentProduct] = useState(
+        {
+            "product_id": undefined,
+            "quantity": undefined,
+            "variation_id": undefined,
+            "attributes": {
+                "attribute_pa_colors": undefined,
+                "attribute_pa_size:": undefined
+            }
+        });
     const [currentProductVariations, setCurrentProductVariations] = useState(null);
     const [productQuantity, setProductQuantity] = useState(1);
 
@@ -63,7 +72,7 @@ function ProductSlug({ data }) {
     const productCategory = router.query.productCategory
 
 
-    console.log("s", product, currentProduct)
+    // console.log("s", product, currentProduct)
 
     function onAddToCart() {
         if (selectedSize) {
@@ -82,29 +91,29 @@ function ProductSlug({ data }) {
 
         // dispatch(sliceAddItem(itemOptions))
 
-        if (hasVariations) {
-            let itemOptions = {
-                "product_id": product.id,
-                "quantity": productQuantity,
-                "variation_id": currentProduct.variation_id,
-                "variation": {
-                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-                }
-            }
-            dispatch(sliceAddItem(itemOptions))
+        // if (hasVariations) {
+        //     let itemOptions = {
+        //         "product_id": product.id,
+        //         "quantity": productQuantity,
+        //         "variation_id": currentProduct.variation_id,
+        //         "variation": {
+        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+        //         }
+        //     }
+        //     dispatch(sliceAddItem(itemOptions))
 
-        } else {
-            let itemOptions = {
-                "product_id": product.id,
-                "quantity": productQuantity,
-                "variation": {
-                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-                }
-            }
-            dispatch(sliceAddItem(itemOptions))
-        }
+        // } else {
+        //     let itemOptions = {
+        //         "product_id": product.id,
+        //         "quantity": productQuantity,
+        //         "variation": {
+        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+        //         }
+        //     }
+        //     dispatch(sliceAddItem(itemOptions))
+        // }
     }
     // console.log("QWWQW", dispatch(selectProducts))
 
@@ -126,9 +135,9 @@ function ProductSlug({ data }) {
     }
 
     function onChangeImage() {
-        if (hasVariations) {
-            setFeaturedImage(currentProduct && currentProduct.image.src)
-        }
+        // if (hasVariations) {
+        //     setFeaturedImage(currentProduct && currentProduct.image.src)
+        // }
     }
 
     function setUniqueImages() {
@@ -171,7 +180,7 @@ function ProductSlug({ data }) {
         }
     }
 
-    let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
+    // let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
 
     useEffect(() => {
         onChangeImage()
@@ -245,7 +254,7 @@ function ProductSlug({ data }) {
                         </div>
 
                         <div className="my-4">
-                            <span className="text-xl text-gray-700">£{currentProduct && currentProduct.display_price.toFixed(2)}</span>
+                            {/* <span className="text-xl text-gray-700">£{currentProduct && currentProduct.display_price.toFixed(2)}</span> */}
                         </div>
 
                         <div>
@@ -260,13 +269,13 @@ function ProductSlug({ data }) {
                         </div>
 
                         <div>
-                            <ProductSizeList
+                            {/* <ProductSizeList
                                 product={product}
                                 onSizeChange={(size) => onSizeChange(size)}
                                 currentProduct={currentProduct}
                                 selectedSize={selectedSize}
                                 currentProductVariations={currentProductVariations}
-                            />
+                            /> */}
                         </div>
 
                         <div>
@@ -288,7 +297,7 @@ function ProductSlug({ data }) {
                                 </div>
                             </div>
                             <div className="flex md:ml-2 items-center">
-                                <p className="font-bold mr-2 ">Total:</p><span>£{totalPrice.toFixed(2)}GBP</span>
+                                {/* <p className="font-bold mr-2 ">Total:</p><span>£{totalPrice.toFixed(2)}GBP</span> */}
                             </div>
                         </div>
 
