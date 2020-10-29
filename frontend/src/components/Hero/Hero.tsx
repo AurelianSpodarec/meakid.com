@@ -3,7 +3,14 @@ import { NextPage } from 'next'
 
 import Link from 'next/link'
 
-const Hero: NextPage = ({ title, subTitle, buttonName, image }: any) => {
+interface Hero {
+    title?: string,
+    subTitle?: string,
+    buttonName?: string,
+    image?: string
+}
+
+const Hero: React.FC<Hero> = ({ title, subTitle, buttonName, image }) => {
 
     return (
 

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8888/wp-json/cocart";
+const API_URL = "http://api.meakid.co.uk/wp-json/cocart";
 const API_VERSION = "v1";
 
 export default {

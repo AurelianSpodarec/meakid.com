@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import ProductSizeItem from "./sub-components/ProductSizeItem"
 
 
-function ProductSizeList({ product, selectedColor, onSizeChange, currentProduct, currentProductVariations, selectedSize }) {
+function ProductSizeList({ product, selectedColor, onSizeChange, currentProduct, currentProductVariations, selectedSize }: any) {
     const fabricsAllSizes = ["50x80", "50x160", "100x160"];
     const [sortedProductVariation, setSortedProductVariation] = useState([])
 

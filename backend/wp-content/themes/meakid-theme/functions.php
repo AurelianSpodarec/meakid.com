@@ -143,9 +143,17 @@
 // add_action('init','add_cors_http_header');
 
 function add_cors_http_header(){
+    // $http_origin = $_SERVER['HTTP_ORIGIN'];
+
+
     $method = $_SERVER['REQUEST_METHOD'];
     if ($method == "OPTIONS") {
-        header('Access-Control-Allow-Origin: http://localhost:3000');
+        // header('Access-Control-Allow-Origin: http://localhost:3000');
+        header('Access-Control-Allow-Origin: https://meakid.co.uk');
+        // if ($http_origin == "http://www.domain1.com" || $http_origin == "http://www.domain2.com" || $http_origin == "http://www.domain3.com")
+        //     {  
+        //         header("Access-Control-Allow-Origin: $http_origin");
+        //     }
         // header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
         // header("Access-Control-Allow-Headers: true");
         header( 'Access-Control-Allow-Credentials: true' );

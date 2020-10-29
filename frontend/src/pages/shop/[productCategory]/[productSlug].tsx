@@ -22,6 +22,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 
+
+
 function getVariationProduct(product, selectedColor, selectedSize) {
     let variationProduct;
 
@@ -41,6 +43,16 @@ function getVariationProduct(product, selectedColor, selectedSize) {
     return variationProduct;
 }
 
+interface ProductModel {
+    display_price?: number,
+    product_id?: number,
+    quantity?: number,
+    variation_id?: number,
+    attributes?: {
+        attribute_pa_colors?: string,
+        attribute_pa_size?: string
+    }
+}
 
 function ProductSlug({ data }) {
 
@@ -49,16 +61,7 @@ function ProductSlug({ data }) {
     const dispatch = useDispatch()
     const router = useRouter();
 
-    const [currentProduct, setCurrentProduct] = useState(
-        {
-            "product_id": undefined,
-            "quantity": undefined,
-            "variation_id": undefined,
-            "attributes": {
-                "attribute_pa_colors": undefined,
-                "attribute_pa_size:": undefined
-            }
-        });
+    const [currentProduct, setCurrentProduct] = useState({});
     const [currentProductVariations, setCurrentProductVariations] = useState(null);
     const [productQuantity, setProductQuantity] = useState(1);
 
@@ -91,29 +94,29 @@ function ProductSlug({ data }) {
 
         // dispatch(sliceAddItem(itemOptions))
 
-        // if (hasVariations) {
-        //     let itemOptions = {
-        //         "product_id": product.id,
-        //         "quantity": productQuantity,
-        //         "variation_id": currentProduct.variation_id,
-        //         "variation": {
-        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-        //         }
-        //     }
-        //     dispatch(sliceAddItem(itemOptions))
+        if (hasVariations) {
+            let itemOptions = {
+                "product_id": product.id,
+                "quantity": productQuantity,
+                "variation_id": currentProduct.variation_id,
+                "variation": {
+                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+                }
+            }
+            dispatch(sliceAddItem(itemOptions))
 
-        // } else {
-        //     let itemOptions = {
-        //         "product_id": product.id,
-        //         "quantity": productQuantity,
-        //         "variation": {
-        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-        //         }
-        //     }
-        //     dispatch(sliceAddItem(itemOptions))
-        // }
+        } else {
+            let itemOptions = {
+                "product_id": product.id,
+                "quantity": productQuantity,
+                "variation": {
+                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+                }
+            }
+            dispatch(sliceAddItem(itemOptions))
+        }
     }
     // console.log("QWWQW", dispatch(selectProducts))
 
@@ -180,8 +183,6 @@ function ProductSlug({ data }) {
         }
     }
 
-    // let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
-
     useEffect(() => {
         onChangeImage()
         getCurrentVariationBySize()
@@ -202,39 +203,9 @@ function ProductSlug({ data }) {
         onLoadInitialValues()
         setUniqueImages()
 
-        // test()
     }, [])
 
-
-    async function test() {
-        const data = {
-            "line_items": [
-                {
-                    "product_id": 17,
-                    "variation_id": 28,
-                    "quantity": 1
-                }
-            ]
-        }
-        // const res = await WooCommerce.post('orders', data).then(res => res).catch(e => e)
-
-        // console.log("SSS", res)
-
-
-        // const res = await WooCommerce.post("orders", data)
-        //     .then((response) => {
-        //         console.log("Then", response);
-        //     })
-        //     .catch((error) => {
-        //         console.log("Error:", error.response);
-        //     });
-
-        // console.log("SSS", res)
-    }
-
-
-
-    // let productTotalPrice = productQuantity * currentProduct.display_price
+    let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
 
     return (
         <Layout title={product.name}>
@@ -254,7 +225,7 @@ function ProductSlug({ data }) {
                         </div>
 
                         <div className="my-4">
-                            {/* <span className="text-xl text-gray-700">£{currentProduct && currentProduct.display_price.toFixed(2)}</span> */}
+                            <span className="text-xl text-gray-700">£{currentProduct && currentProduct.display_price && currentProduct.display_price.toFixed(2)}</span>
                         </div>
 
                         <div>
@@ -269,13 +240,13 @@ function ProductSlug({ data }) {
                         </div>
 
                         <div>
-                            {/* <ProductSizeList
+                            <ProductSizeList
                                 product={product}
                                 onSizeChange={(size) => onSizeChange(size)}
                                 currentProduct={currentProduct}
                                 selectedSize={selectedSize}
                                 currentProductVariations={currentProductVariations}
-                            /> */}
+                            />
                         </div>
 
                         <div>
@@ -297,7 +268,7 @@ function ProductSlug({ data }) {
                                 </div>
                             </div>
                             <div className="flex md:ml-2 items-center">
-                                {/* <p className="font-bold mr-2 ">Total:</p><span>£{totalPrice.toFixed(2)}GBP</span> */}
+                                <p className="font-bold mr-2 ">Total:</p><span>£{totalPrice && totalPrice.toFixed(2)}GBP</span>
                             </div>
                         </div>
 

@@ -1,7 +1,3 @@
-
-
-
-
 function Select() {
     return (
         <button className="flex items-center justify-between w-full bg-white rounded-md border-2 border-blue-500 p-4 focus:outline-none">

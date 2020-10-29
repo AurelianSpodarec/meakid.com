@@ -142,12 +142,12 @@ const ProductItem = ({ product, productListStatus, key }: any) => {
             <p className="text-gray-900 font-semi-bold text-base">
                 {
                     product.variation_price === "" ?
-                        <span dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }} />
+                        <span dangerouslySetInnerHTML={{ __html: `${product.currency}${parseFloat(product.price).toFixed(2)}` }} />
                         :
                         product.variation_price.min == product.variation_price.max ?
-                            <span dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.variation_price.min).toFixed(2)}` }} />
+                            <span dangerouslySetInnerHTML={{ __html: `${product.currency}${parseFloat(product.variation_price.min).toFixed(2)}` }} />
                             :
-                            <span dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.variation_price.min).toFixed(2)} - ${product.currency}${parseInt(product.variation_price.min).toFixed(2)}` }} />
+                            <span dangerouslySetInnerHTML={{ __html: `${product.currency}${parseFloat(product.variation_price.min).toFixed(2)} - ${product.currency}${parseFloat(product.variation_price.max).toFixed(2)}` }} />
                 }
 
             </p>

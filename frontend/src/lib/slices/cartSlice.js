@@ -35,7 +35,7 @@ export const increaseItemQuantity = createAsyncThunk(
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
     async (itemKey, itemQuantity, thunkAPI) => {
-        const res = await fetch("http://localhost:8888/wp-json/cocart/v1/add-item?thumb=true", {
+        const res = await fetch("https://api.meakid.co.uk/wp-json/cocart/v1/add-item?thumb=true", {
             "method": "POST",
             "credentials": 'include',
             "headers": {

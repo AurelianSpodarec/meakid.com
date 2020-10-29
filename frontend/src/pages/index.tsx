@@ -5,20 +5,17 @@ import { Layout, Hero } from '../components'
 
 function Index() {
     return (
-        <Layout>
-            <Head>
-                <title>Create Next App</title>
-            </Head>
+        <Layout title="Meakid">
 
             <section>
-                {/* <Hero
-                    image="https://cdn.pixabay.com/photo/2016/11/19/08/00/towel-1838210_960_720.jpg"
+                <Hero
+                    image="/images/towels.jpg"
                     title="
-                New Adapt 
+                New Adapt  
                 OMBRE SEAMLESS"
                     subTitle="Confidence that never fades."
                     buttonName="Shop"
-                /> */}
+                />
             </section>
         </Layout>
     )
