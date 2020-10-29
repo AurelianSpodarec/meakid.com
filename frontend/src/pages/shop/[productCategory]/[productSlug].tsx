@@ -202,14 +202,13 @@ function ProductSlug({ data }) {
     useEffect(() => {
         onLoadInitialValues()
         setUniqueImages()
-
     }, [])
 
     let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
 
     return (
         <Layout title={product.name}>
-            <section style={{ maxWidth: '1440px' }} className="mx-auto lg:px-12 lg:py-16">
+            <section style={{ maxWidth: '1440px ' }} className="mx-auto lg:px-12 lg:py-16">
                 <div className="block lg:flex">
 
 
