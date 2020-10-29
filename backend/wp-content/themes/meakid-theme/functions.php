@@ -149,8 +149,15 @@ function add_cors_http_header(){
     $method = $_SERVER['REQUEST_METHOD'];
     if ($method == "OPTIONS") {
         // header('Access-Control-Allow-Origin: http://localhost:3000');
+
+ 
+            if (isset($_SERVER['HTTP_ORIGIN']) === "https://meakid.co.uk"){
+                header('Access-Control-Allow-Origin: https://meakid.co.uk');        
+            }else{
+                header('Access-Control-Allow-Origin: http://localhost:3000');
+            }
         // header('Access-Control-Allow-Origin: https://meakid.co.uk');
-        header("Access-Control-Allow-Origin: *");
+        // header("Access-Control-Allow-Origin: *");
         // if ($http_origin == "http://www.domain1.com" || $http_origin == "http://www.domain2.com" || $http_origin == "http://www.domain3.com")
         //     {  
         //         header("Access-Control-Allow-Origin: $http_origin");
