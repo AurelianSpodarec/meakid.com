@@ -148,11 +148,11 @@ function add_cors_http_header(){
 
     if ($method == "OPTIONS") {
 
-        if (!($_SERVER['HTTP_ORIGIN'] == "https://meakid.co.uk")){
+        // if (!($_SERVER['HTTP_ORIGIN'] == "https://meakid.co.uk")){
                 header('Access-Control-Allow-Origin: http://localhost:3000');
-        } else {
-                header('Access-Control-Allow-Origin: https://meakid.co.uk');        
-        }
+        // } else {
+        //         header('Access-Control-Allow-Origin: https://meakid.co.uk');        
+        // }
        
         // header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
         // header("Access-Control-Allow-Headers: true");
