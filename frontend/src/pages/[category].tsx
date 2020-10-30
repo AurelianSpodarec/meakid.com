@@ -30,6 +30,7 @@ function Category() {
 
         const response = await WooCommerce.get(`products-list?category=${category}`);
 
+        console.log("PORDUCT FETCHEDDDDD@@@@@@@@@@@@", response.data)
         if (response.data.products.length === 0) {
             setProductListStatus(PRODUCT_LIST_STATES.failure);
         } else {
@@ -43,8 +44,8 @@ function Category() {
     }, [category])
 
     return (
-        // <Layout title={category}>
-        <Layout>
+        <Layout title={category}>
+            {/* <Layout> */}
             <section>
 
                 <h1 className="text-5xl text-center text-accent-1">

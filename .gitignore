@@ -28,4 +28,6 @@ yarn-error.log*
 
 # IGNORING WP DEFAULT CODE and just getting the theme
 # backend/*
-# !backend/wp-content/themes/level5-theme
+# !backend/wp-content/ - don't ignore wp-contents
+# inside wp-contents, ignore uploads, upgrade, languages
+# inside wp content, don't ignore themes, plugins
