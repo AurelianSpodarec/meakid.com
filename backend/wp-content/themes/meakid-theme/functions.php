@@ -143,10 +143,9 @@
 // add_action('init','add_cors_http_header');
 
 function add_cors_http_header(){
-    // $http_origin = $_SERVER['HTTP_ORIGIN'];
-
 
     $method = $_SERVER['REQUEST_METHOD'];
+
     if ($method == "OPTIONS") {
 
         if (!($_SERVER['HTTP_ORIGIN'] == "https://meakid.co.uk")){
@@ -154,25 +153,12 @@ function add_cors_http_header(){
         } else {
                 header('Access-Control-Allow-Origin: https://meakid.co.uk');        
         }
-        // header('Access-Control-Allow-Origin: http://localhost:3000');
-
- 
-            // if (!$_SERVER['HTTP_ORIGIN'] === "https://meakid.co.uk"){
-            // } else{
-            // }
-
-
-        // header('Access-Control-Allow-Origin: https://meakid.co.uk, http://localhost:3000');
-        // header('Access-Control-Allow-Origin: https://meakid.co.uk');
-        // header("Access-Control-Allow-Origin: *");
-        // if ($http_origin == "http://www.domain1.com" || $http_origin == "http://www.domain2.com" || $http_origin == "http://www.domain3.com")
-        //     {  
-        //         header("Access-Control-Allow-Origin: $http_origin");
-        //     }
+       
         // header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
         // header("Access-Control-Allow-Headers: true");
         header( 'Access-Control-Allow-Credentials: true' );
-		header( 'Access-Control-Allow-Headers: Authorization, Content-Type, X-Requested-With' );
+        header( 'Access-Control-Allow-Headers: Authorization, Content-Type, X-Requested-With' );
+        header( 'Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE' );
         header("HTTP/1.1 200 OK");
         die();
     }

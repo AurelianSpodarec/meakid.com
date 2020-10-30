@@ -15,9 +15,9 @@ function BasketItem({ item }) {
     console.log(item.attributes.pa_colors && item.attributes.pa_colors)
     const dispatch = useDispatch()
 
-    // function removeFromCart() {
-    //     dispatch(deleteCartItem(item.key))
-    // }
+    function removeFromCart() {
+        dispatch(deleteCartItem(item.key))
+    }
 
     // get the current product and update its quantity +/- 1
     // function increaseQuantity() {
@@ -53,7 +53,7 @@ function BasketItem({ item }) {
                                 </div>
                         </div>
 
-                        {/* <p className="text-xs" onClick={() => removeFromCart()}>Remove</p> */}
+                        <p className="text-xs" onClick={() => removeFromCart()}>Remove</p>
                     </a>
                     {/* <p>Total Price: {item.currency + productTotalPrice.toFixed(2)}</p> */}
                     {/* <div dangerouslySetInnerHTML={{ __html: `${product.currency}${parseInt(product.price).toFixed(2)}` }}></div> */}

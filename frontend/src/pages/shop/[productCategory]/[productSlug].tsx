@@ -93,7 +93,7 @@ function ProductSlug({ data }) {
                 "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
             }
         }
-        if (itemOptions.variation_id) {
+        if (hasVariations) {
             itemOptions.variation_id = currentProduct.variation_id
         }
 
