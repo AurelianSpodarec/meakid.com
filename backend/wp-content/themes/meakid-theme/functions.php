@@ -144,11 +144,7 @@
 
 function add_cors_http_header(){
 
-    if (!($_SERVER['HTTP_ORIGIN'] == "https://meakid.co.uk")){
-        header('Access-Control-Allow-Origin: http://localhost:3000');
-    } else {
-            header('Access-Control-Allow-Origin: https://meakid.co.uk');        
-    }
+   
 
     $method = $_SERVER['REQUEST_METHOD'];
 
