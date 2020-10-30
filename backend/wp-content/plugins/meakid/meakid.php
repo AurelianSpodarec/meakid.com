@@ -76,8 +76,8 @@ function getProductBySlug( $slug ) {
 function getProductsList( $args ) {
     global $product;
 
-    $limit = 9;
     $offset = 0;
+    $limit = 9;
     $orderby = 'date';
     $order = 'DESC';
     
@@ -86,8 +86,15 @@ function getProductsList( $args ) {
         $category_slug = $args['category'];
     }
 
+    if ( isset( $args['page'])) {
+        $custom_page = $args['page'];
+    } else {
+        $custom_page = 1;
+    }
+
 
     $query = new WC_Product_Query( array(
+        'page' => $custom_page,
         'limit' => $limit,
         'orderby' => $orderby,
         'order' => $order,
@@ -98,6 +105,9 @@ function getProductsList( $args ) {
 
 
     $productResults = array(
+        "totalProducts"    => $products->total,
+        "totalPages" => floor(($limit / $products->total) * 10),
+        "page"     => $custom_page,
         "products" => [],
         "response" => "ok",
         "status" => 200,

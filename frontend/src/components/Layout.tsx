@@ -6,7 +6,7 @@ import Footer from "./Footer/Footer";
 import { capitalizeFirstLetter } from '../utils/helpers';
 
 type Props = {
-    title?: string;
+    title?: any;
 };
 
 const Layout: React.FunctionComponent<Props> = ({

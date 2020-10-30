@@ -83,7 +83,7 @@ const Header = () => {
                         color: "white",
                         fontWeight: "bold",
                     }}>
-                        We're experiencing problems with the site and we are fix it. Thank you for your patience.
+                        We're experiencing problems with the site and we are working on a fix. Thank you for your patience.
                     </div>
                 </div>
                 <div className="justify-between mx-auto flex flex-wrap p-4 flex-row items-center">

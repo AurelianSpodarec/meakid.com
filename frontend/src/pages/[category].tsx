@@ -60,6 +60,7 @@ function Category() {
 
                     <div className="flex flex-col w-full">
                         <ProductListing data={productList} productListStatus={productListStatus} />
+
                     </div>
 
                 </div>

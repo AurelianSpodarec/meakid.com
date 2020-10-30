@@ -48,6 +48,7 @@ interface ProductModel {
     product_id?: number,
     quantity?: number,
     variation_id?: number,
+    max_qty?: number,
     image?: {
         src?: string,
     }
@@ -173,7 +174,8 @@ function ProductSlug({ data }) {
 
     function increaseProductQuantity() {
         if (selectedSize) {
-            if (productQuantity !== 99) {
+
+            if (productQuantity !== currentProduct.max_qty) {
                 setProductQuantity(productQuantity + 1)
             }
         }
