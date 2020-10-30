@@ -101,13 +101,13 @@ function getProductsList( $args ) {
     //     $custom_operator = "OUT"; 
     // }
 
-    // if ( isset( $args['price'])) {
-    //     $min_price = intval($args['price']['min']);
-    //     $max_price = intval($args['price']['max']);
-    // } else {
-    //     $min_price = 0;
-    //     $max_price = 99999;
-    // };
+    if ( isset( $args['price'])) {
+        $min_price = intval($args['price']['min']);
+        $max_price = intval($args['price']['max']);
+    } else {
+        $min_price = 0;
+        $max_price = 99999;
+    };
 
 
     $query = new WC_Product_Query( array(
@@ -116,7 +116,7 @@ function getProductsList( $args ) {
         // 'paginate' => true,
         'orderby' => $orderby,
         'order' => $order,
-        // 'price_between' => array($min_price, $max_price),
+        'price_between' => array($min_price, $max_price),
         // 'tax_query' => array( 
         //     array(
         //         'taxonomy'      => 'pa_color',
@@ -211,22 +211,22 @@ function getProductsList( $args ) {
 
 
 
-// add_filter( 
-//     'woocommerce_product_data_store_cpt_get_products_query', 
-//     function ( $query, $query_vars ) {
-//         if ( ! empty( $query_vars['price_between'] ) ) {
-//             $query['meta_query'][] = array(
-//                 'key'     => '_price',
-//                 'value'   => $query_vars['price_between'],
-//                 'type'    => 'NUMERIC',
-//                 'compare' => 'BETWEEN',
-//             );
-//         }
-//         return $query;
-//     },
-//     10,
-//     2
-// );
+add_filter( 
+    'woocommerce_product_data_store_cpt_get_products_query', 
+    function ( $query, $query_vars ) {
+        if ( ! empty( $query_vars['price_between'] ) ) {
+            $query['meta_query'][] = array(
+                'key'     => '_price',
+                'value'   => $query_vars['price_between'],
+                'type'    => 'NUMERIC',
+                'compare' => 'BETWEEN',
+            );
+        }
+        return $query;
+    },
+    10,
+    2
+);
 
 // function filter_options() {
 //     global $product;
