@@ -99,32 +99,7 @@ function ProductSlug({ data }) {
         }
 
         dispatch(sliceAddItem(itemOptions))
-
-        // if (hasVariations) {
-        //     let itemOptions = {
-        //         "product_id": product.id,
-        //         "quantity": productQuantity,
-        //         "variation_id": currentProduct.variation_id,
-        //         "variation": {
-        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-        //         }
-        //     }
-        //     dispatch(sliceAddItem(itemOptions))
-
-        // } else {
-        //     let itemOptions = {
-        //         "product_id": product.id,
-        //         "quantity": productQuantity,
-        //         "variation": {
-        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-        //         }
-        //     }
-        //     dispatch(sliceAddItem(itemOptions))
-        // }
     }
-    // console.log("QWWQW", dispatch(selectProducts))
 
     function onLoadInitialValues() {
         setFeaturedImage(hasVariations ? product.variations[0].image.url : product.featured_image)
@@ -189,6 +164,7 @@ function ProductSlug({ data }) {
             }
         }
     }
+
 
     useEffect(() => {
         onChangeImage()

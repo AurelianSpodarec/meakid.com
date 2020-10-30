@@ -28,7 +28,7 @@ function Category() {
     const fetchProducts = async () => {
         setProductListStatus(PRODUCT_LIST_STATES.fetching)
 
-        const response = await WooCommerce.get(`products-list?category=${category}`);
+        const response = await WooCommerce.get(`products-list?category=${category}&page=2`);
 
         console.log("PORDUCT FETCHEDDDDD@@@@@@@@@@@@", response.data)
         if (response.data.products.length === 0) {
