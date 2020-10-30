@@ -101,13 +101,13 @@ function getProductsList( $args ) {
         $custom_operator = "OUT"; 
     }
 
-    if ( isset( $args['price'])) {
-        $min_price = intval($args['price']['min']);
-        $max_price = intval($args['price']['max']);
-    } else {
-        $min_price = 0;
-        $max_price = 99999;
-    };
+    // if ( isset( $args['price'])) {
+    //     $min_price = intval($args['price']['min']);
+    //     $max_price = intval($args['price']['max']);
+    // } else {
+    //     $min_price = 0;
+    //     $max_price = 99999;
+    // };
 
 
     $query = new WC_Product_Query( array(
@@ -116,7 +116,7 @@ function getProductsList( $args ) {
         // 'paginate' => true,
         'orderby' => $orderby,
         'order' => $order,
-        'price_between' => array($min_price, $max_price),
+        // 'price_between' => array($min_price, $max_price),
         'tax_query' => array( 
             array(
                 'taxonomy'      => 'pa_color',
