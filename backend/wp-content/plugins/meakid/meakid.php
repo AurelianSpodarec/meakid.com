@@ -93,13 +93,13 @@ function getProductsList( $args ) {
         $custom_page = 1;
     }
 
-    if ( isset( $args['colors']) && !empty( $args['colors'])) {
-        $custom_colors = explode(',', $args['colors']);
-        $custom_operator = "IN"; 
-    } else {
-        $custom_colors = '';
-        $custom_operator = "OUT"; 
-    }
+    // if ( isset( $args['colors']) && !empty( $args['colors'])) {
+    //     $custom_colors = explode(',', $args['colors']);
+    //     $custom_operator = "IN"; 
+    // } else {
+    //     $custom_colors = '';
+    //     $custom_operator = "OUT"; 
+    // }
 
     // if ( isset( $args['price'])) {
     //     $min_price = intval($args['price']['min']);
@@ -117,14 +117,14 @@ function getProductsList( $args ) {
         'orderby' => $orderby,
         'order' => $order,
         // 'price_between' => array($min_price, $max_price),
-        'tax_query' => array( 
-            array(
-                'taxonomy'      => 'pa_color',
-                'field'         => 'slug',
-                'terms'         => $custom_colors,
-                'operator'      => $custom_operator
-            ),
-        ),
+        // 'tax_query' => array( 
+        //     array(
+        //         'taxonomy'      => 'pa_color',
+        //         'field'         => 'slug',
+        //         'terms'         => $custom_colors,
+        //         'operator'      => $custom_operator
+        //     ),
+        // ),
         'product_cat' => $category_slug,
         'return' => 'ids',
     ) ); 
@@ -211,22 +211,22 @@ function getProductsList( $args ) {
 
 
 
-add_filter( 
-    'woocommerce_product_data_store_cpt_get_products_query', 
-    function ( $query, $query_vars ) {
-        if ( ! empty( $query_vars['price_between'] ) ) {
-            $query['meta_query'][] = array(
-                'key'     => '_price',
-                'value'   => $query_vars['price_between'],
-                'type'    => 'NUMERIC',
-                'compare' => 'BETWEEN',
-            );
-        }
-        return $query;
-    },
-    10,
-    2
-);
+// add_filter( 
+//     'woocommerce_product_data_store_cpt_get_products_query', 
+//     function ( $query, $query_vars ) {
+//         if ( ! empty( $query_vars['price_between'] ) ) {
+//             $query['meta_query'][] = array(
+//                 'key'     => '_price',
+//                 'value'   => $query_vars['price_between'],
+//                 'type'    => 'NUMERIC',
+//                 'compare' => 'BETWEEN',
+//             );
+//         }
+//         return $query;
+//     },
+//     10,
+//     2
+// );
 
 // function filter_options() {
 //     global $product;
