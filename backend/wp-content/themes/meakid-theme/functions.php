@@ -162,7 +162,7 @@ function add_cors_http_header(){
             // }
 
 
-        header('Access-Control-Allow-Origin: https://meakid.co.uk, http://localhost:3000');
+        // header('Access-Control-Allow-Origin: https://meakid.co.uk, http://localhost:3000');
         // header('Access-Control-Allow-Origin: https://meakid.co.uk');
         // header("Access-Control-Allow-Origin: *");
         // if ($http_origin == "http://www.domain1.com" || $http_origin == "http://www.domain2.com" || $http_origin == "http://www.domain3.com")
