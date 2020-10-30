@@ -76,6 +76,7 @@ function getProductBySlug( $slug ) {
 function getProductsList( $args ) {
     global $product;
 
+
     $offset = 0;
     $limit = 9;
     $orderby = 'date';
@@ -92,6 +93,22 @@ function getProductsList( $args ) {
         $custom_page = 1;
     }
 
+    if ( isset( $args['colors']) && !empty( $args['colors'])) {
+        $custom_colors = explode(',', $args['colors']);
+        $custom_operator = "IN"; 
+    } else {
+        $custom_colors = '';
+        $custom_operator = "OUT"; 
+    }
+
+    if ( isset( $args['price'])) {
+        $min_price = intval($args['price']['min']);
+        $max_price = intval($args['price']['max']);
+    } else {
+        $min_price = 0;
+        $max_price = 99999;
+    };
+
 
     $query = new WC_Product_Query( array(
         'page' => $custom_page,
@@ -99,6 +116,15 @@ function getProductsList( $args ) {
         // 'paginate' => true,
         'orderby' => $orderby,
         'order' => $order,
+        'price_between' => array($min_price, $max_price),
+        'tax_query' => array( 
+            array(
+                'taxonomy'      => 'pa_color',
+                'field'         => 'slug',
+                'terms'         => $custom_colors,
+                'operator'      => $custom_operator
+            ),
+        ),
         'product_cat' => $category_slug,
         'return' => 'ids',
     ) ); 
@@ -159,14 +185,17 @@ function getProductsList( $args ) {
             $product_category_fetch = get_the_terms($custom_product->get_id(), 'product_cat');
             $product_cat = $product_category_fetch[0]->slug;
 
+            // get total colors
+
             array_push( $productResults['products'], [
                 'id'                => $custom_product->get_id(),
                 'slug'              => $custom_product->get_slug(),
                 'name'              => $custom_product->get_name(),
                 'price'             => $custom_product->get_price(),
                 'currency'          => get_woocommerce_currency_symbol(),
-                'variation_price'    => $variationPrice,
+                'variation_price'   => $variationPrice,
                 'color'             => $color,
+                // 'total_colors'      => 1,
                 'category'          => $product_cat,
                 'featured_image'    => $attachment[0],
                 'product_variation' => $product_variation
@@ -181,6 +210,34 @@ function getProductsList( $args ) {
 }
 
 
+
+add_filter( 
+    'woocommerce_product_data_store_cpt_get_products_query', 
+    function ( $query, $query_vars ) {
+        if ( ! empty( $query_vars['price_between'] ) ) {
+            $query['meta_query'][] = array(
+                'key'     => '_price',
+                'value'   => $query_vars['price_between'],
+                'type'    => 'NUMERIC',
+                'compare' => 'BETWEEN',
+            );
+        }
+        return $query;
+    },
+    10,
+    2
+);
+
+function filter_options() {
+    global $product;
+
+    $response = [
+        "colors" => get_terms("pa_color"),
+        // "max-price" => woocommerce_price()
+    ];
+
+    return rest_ensure_response($response);
+}
 
 
 ///////////////////////////////////////////////////
@@ -225,7 +282,6 @@ function getImage( $args ) {
 
 // return paypal token
 function proceedOrderWithPayPal( $args ) {
-
     // User sends order ID
     // Take the order total price, and create a paypal token with that price
     // send it back to the user
@@ -257,56 +313,10 @@ function register_routes() {
     register_rest_route( 'wc/v3', '/pay/order/(?P<id>[0-9-]+)/paypal', array(
         'method' => 'GET',
         'callback' => 'proceedOrderWithPayPal'
-    ));   
+    ));
+    register_rest_route( 'wc/v3', '/filter-options', array(
+        'method' => 'GET',
+        'callback' => 'filter_options'
+    ));
 }
 add_action('rest_api_init', 'register_routes');
-
-
-
-
-
-
-
-
-// REMOVE ONCE DEPLOYED
-
-// add_filter( 'allowed_http_origins', 'add_localhost_origin' );
-// function add_localhost_origin( $origins ) {
-//     $origins[] = 'http://localhost:3000/';
-//     return $origins;
-// }
- 
-// function add_cors_http_header(){
-//     $method = $_SERVER['REQUEST_METHOD'];
-//     if ($method == "OPTIONS") {
-//         header('Access-Control-Allow-Origin: *');
-//         header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization, OTHER HEADERS YOU WANT");
-//         header("HTTP/1.1 200 OK");
-//         die();
-//     }
-// }
-
-// add_action('init','add_cors_http_header');
-
- 
-// add_filter( 'allowed_http_origins', 'add_localhost_origin' );
-// function add_localhost_origin( $origins ) {
-//     $origins[] = 'http://localhost:3000/';
-//     header("HTTP/1.1 200 OK");
-//     return $origins;
-// }
- 
-
-// function add_cors_http_header(){
-//     $method = $_SERVER['REQUEST_METHOD'];
-//     if ($method == "OPTIONS") {
-//         // header('Access-Control-Allow-Origin: http://localhost:3000');
-//         header("Access-Control-Allow-Origin: http://localhost:3000");
-//         header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization, OTHER HEADERS YOU WANT");
-//         header("HTTP/1.1 200 OK");
-//         die();
-//     }
-// }
-
-// add_action('init','add_cors_http_header');
-
