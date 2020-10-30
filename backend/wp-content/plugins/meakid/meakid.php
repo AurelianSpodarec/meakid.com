@@ -86,15 +86,15 @@ function getProductsList( $args ) {
         $category_slug = $args['category'];
     }
 
-    // if ( isset( $args['page'])) {
-    //     $custom_page = $args['page'];
-    // } else {
-    //     $custom_page = 1;
-    // }
+    if ( isset( $args['page'])) {
+        $custom_page = $args['page'];
+    } else {
+        $custom_page = 1;
+    }
 
 
     $query = new WC_Product_Query( array(
-        'page' => 2,//$custom_page,
+        'page' => $custom_page,
         'limit' => $limit,
         // 'paginate' => true,
         'orderby' => $orderby,
