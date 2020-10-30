@@ -93,6 +93,7 @@ function getProductsList( $args ) {
         $custom_page = 1;
     }
 
+
     if ( isset( $args['colors']) && !empty( $args['colors'])) {
         $custom_colors = explode(',', $args['colors']);
         $custom_operator = "IN"; 
@@ -100,6 +101,8 @@ function getProductsList( $args ) {
         $custom_colors = '';
         $custom_operator = "OUT"; 
     }
+
+
 
     if ( isset( $args['price'])) {
         $min_price = intval($args['price']['min']);
@@ -119,7 +122,7 @@ function getProductsList( $args ) {
         'price_between' => array($min_price, $max_price),
         'tax_query' => array( 
             array(
-                'taxonomy'      => 'pa_color',
+                'taxonomy'      => 'pa_colors',
                 'field'         => 'slug',
                 'terms'         => $custom_colors,
                 'operator'      => $custom_operator
