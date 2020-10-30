@@ -10,7 +10,7 @@ const WooCommerce = new WooCommerceRestApi({
     //     headers: {
     //         Accept: "application/json"
     //     }
-    // }
+    // } 
 });
 
 export default WooCommerce;
