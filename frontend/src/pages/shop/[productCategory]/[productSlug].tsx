@@ -48,6 +48,9 @@ interface ProductModel {
     product_id?: number,
     quantity?: number,
     variation_id?: number,
+    image?: {
+        src?: string,
+    }
     attributes?: {
         attribute_pa_colors?: string,
         attribute_pa_size?: string
@@ -61,7 +64,7 @@ function ProductSlug({ data }) {
     const dispatch = useDispatch()
     const router = useRouter();
 
-    const [currentProduct, setCurrentProduct] = useState({});
+    const [currentProduct, setCurrentProduct] = useState<ProductModel>({});
     const [currentProductVariations, setCurrentProductVariations] = useState(null);
     const [productQuantity, setProductQuantity] = useState(1);
 
@@ -75,48 +78,50 @@ function ProductSlug({ data }) {
     const productCategory = router.query.productCategory
 
 
-    // console.log("s", product, currentProduct)
+    console.log("s", product, currentProduct)
 
     function onAddToCart() {
         if (selectedSize) {
             dispatch(openCart())
         }
 
-        // let itemOptions = {
-        //     "product_id": product.id,
-        //     "quantity": productQuantity,
-        //     "variation": {
-        //         "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-        //         "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-        //     }
-        // }
-        // if (itemOptions.variation_id) itemOptions.variation_id = variation_id
-
-        // dispatch(sliceAddItem(itemOptions))
-
-        if (hasVariations) {
-            let itemOptions = {
-                "product_id": product.id,
-                "quantity": productQuantity,
-                "variation_id": currentProduct.variation_id,
-                "variation": {
-                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-                }
+        let itemOptions: any = {
+            "product_id": product.id,
+            "quantity": productQuantity,
+            "variation": {
+                "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+                "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
             }
-            dispatch(sliceAddItem(itemOptions))
-
-        } else {
-            let itemOptions = {
-                "product_id": product.id,
-                "quantity": productQuantity,
-                "variation": {
-                    "attribute_colors": currentProduct.attributes.attribute_pa_colors,
-                    "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
-                }
-            }
-            dispatch(sliceAddItem(itemOptions))
         }
+        if (itemOptions.variation_id) {
+            itemOptions.variation_id = currentProduct.variation_id
+        }
+
+        dispatch(sliceAddItem(itemOptions))
+
+        // if (hasVariations) {
+        //     let itemOptions = {
+        //         "product_id": product.id,
+        //         "quantity": productQuantity,
+        //         "variation_id": currentProduct.variation_id,
+        //         "variation": {
+        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+        //         }
+        //     }
+        //     dispatch(sliceAddItem(itemOptions))
+
+        // } else {
+        //     let itemOptions = {
+        //         "product_id": product.id,
+        //         "quantity": productQuantity,
+        //         "variation": {
+        //             "attribute_colors": currentProduct.attributes.attribute_pa_colors,
+        //             "attribute_pa_size:": currentProduct.attributes.attribute_pa_size
+        //         }
+        //     }
+        //     dispatch(sliceAddItem(itemOptions))
+        // }
     }
     // console.log("QWWQW", dispatch(selectProducts))
 
@@ -138,9 +143,9 @@ function ProductSlug({ data }) {
     }
 
     function onChangeImage() {
-        // if (hasVariations) {
-        //     setFeaturedImage(currentProduct && currentProduct.image.src)
-        // }
+        if (hasVariations) {
+            setFeaturedImage(currentProduct && currentProduct.image && currentProduct.image.src)
+        }
     }
 
     function setUniqueImages() {

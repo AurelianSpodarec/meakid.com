@@ -1,4 +1,4 @@
-function ProductFeaturedImage({ image }) {
+function ProductFeaturedImage({ image }: any) {
     return (
         <img src={image} className="w-full" />
     )

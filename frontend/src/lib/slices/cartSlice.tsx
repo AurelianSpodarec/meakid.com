@@ -10,7 +10,7 @@ import { getCart } from '../../services/meakid-cocart/api/cart';
 
 export const fetchCart = createAsyncThunk(
     'cart/fetchCartStatus',
-    async (thunkAPI) => {
+    async () => {
         const res = await getCart();
         return res;
     }
@@ -18,15 +18,15 @@ export const fetchCart = createAsyncThunk(
 
 export const sliceAddItem = createAsyncThunk(
     'cart/sliceAddItem',
-    async (data, thunkAPI) => {
+    async (data: string) => {
         return addItem(data)
     }
 )
 
 export const increaseItemQuantity = createAsyncThunk(
     'item/increaseItemQuantity',
-    async (itemKey, itemQuantity, thunkAPI) => {
-        const res = await fetch();
+    async (itemKey, itemQuantity) => {
+        const res = {}//await fetch();
         return res;
     }
 
@@ -34,7 +34,7 @@ export const increaseItemQuantity = createAsyncThunk(
 
 export const updateCartItem = createAsyncThunk(
     'cart/updateCartItem',
-    async (itemKey, itemQuantity, thunkAPI) => {
+    async (itemKey, itemQuantity) => {
         const res = await fetch("https://api.meakid.co.uk/wp-json/cocart/v1/add-item?thumb=true", {
             "method": "POST",
             "credentials": 'include',
@@ -91,30 +91,30 @@ const cartSlice = createSlice({
         removeItemFromCart: (state, key) => {
 
         },
-        increaseItemQuantity: (state, id, quantity) => {
-            // increase up to the product in stock limit
-        },
-        decreaseItemQuantity: (state, id, quantity) => {
-            // if quantity is 1 and you decrease it, stop at 1
-        },
+        // increaseItemQuantity: (state, id, quantity) => {
+        //     // increase up to the product in stock limit
+        // },
+        // decreaseItemQuantity: (state, id, quantity) => {
+        // if quantity is 1 and you decrease it, stop at 1
+        // },
         clearCart: (state) => {
 
         },
 
     },
     extraReducers: {
-        [fetchCart.fulfilled]: (state, action) => {
+        [fetchCart.fulfilled.type]: (state, action) => {
             let arr = [];
             Object.entries(action.payload).forEach(item => arr.push(item[1]))
             state.products = arr.reverse();
         },
-        [sliceAddItem.pending]: (state, action) => {
+        [sliceAddItem.pending.type]: (state, action) => {
             const index = state.products.findIndex(item => item.product_id === action.meta.arg.product_id);
             if (index >= 0) {
                 state.products[index].quantity += 1
             }
         },
-        [sliceAddItem.fulfilled]: (state, action) => {
+        [sliceAddItem.fulfilled.type]: (state, action) => {
             const index = state.products.findIndex(item => item.key === action.payload.key);
             if (index >= 0) {
                 state.products[index].quantity = action.payload.quantity
@@ -122,7 +122,7 @@ const cartSlice = createSlice({
                 state.products.unshift(action.payload)
             }
         },
-        [deleteCartItem.fulfilled]: (state, action) => {
+        [deleteCartItem.fulfilled.type]: (state, action) => {
             const filteredProducts = state.products.filter(item => {
                 return item.key !== action.meta.arg
 
@@ -137,9 +137,8 @@ export const {
     closeCart,
     addItemToCart,
     removeItemFromCart,
-    decreaseItemQuantity,
+    // decreaseItemQuantity,
     clearCart,
-    loadCard,
 } = cartSlice.actions
 
 
