@@ -103,6 +103,7 @@ function getProductsList( $args ) {
     }
 
 
+
     if ( isset( $args['price'])) {
         $min_price = intval($args['price']['min']);
         $max_price = intval($args['price']['max']);
@@ -134,7 +135,7 @@ function getProductsList( $args ) {
 
 
     $productResults = array(
-        "totalProducts"    => $products->total,
+        // "totalProducts"    => $products->total,
         // "totalPages" => floor(($limit / $products->total) * 10),
         "page"     => $custom_page,
         "products" => [],
