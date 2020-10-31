@@ -131,17 +131,17 @@ function getProductsList( $args ) {
 
 
     $all_products_query = new WC_Product_Query($args); 
-    $all_products = $all_products_query->get_products();
+    // $all_products = $all_products_query->get_products();
 
-    // $args['limit'] = $limit;
-    // $args['page'] = $custom_page;
+    $args['limit'] = $limit;
+    $args['page'] = $custom_page;
 
     $query = new WC_Product_Query($args); 
     $products = $query->get_products();
      
 
     $productResults = array(
-        "totalProducts"    => count($all_products),
+        "totalProducts"    =>$all_products_query, //count($all_products),
         // "totalPages" => floor(($limit / $products->total) * 10),
         "page"     => $custom_page,
         "products" => [],
