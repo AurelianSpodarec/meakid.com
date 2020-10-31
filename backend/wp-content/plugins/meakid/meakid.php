@@ -115,7 +115,7 @@ function getProductsList( $args ) {
 
     $query = new WC_Product_Query( array(
         'page' => $custom_page,
-        'limit' => $limit,
+        'limit' => -1, 'type' => 'variable'
         // 'paginate' => true,
         'orderby' => $orderby,
         'order' => $order,
