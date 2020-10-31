@@ -135,7 +135,7 @@ function getProductsList( $args ) {
 
 
     $productResults = array(
-        "totalProducts"    => $products->total,
+        "totalProducts"    => $products->post_count,
         // "totalPages" => floor(($limit / $products->total) * 10),
         "page"     => $custom_page,
         "products" => [],
