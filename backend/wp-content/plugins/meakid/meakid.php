@@ -113,7 +113,6 @@ function getProductsList( $args ) {
     };
 
     $args = array(
-        'page' => $custom_page,
         // 'paginate' => true,
         'orderby' => $orderby,
         'order' => $order,
