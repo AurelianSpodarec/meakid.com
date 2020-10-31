@@ -133,8 +133,8 @@ function getProductsList( $args ) {
     $all_products_query = new WC_Product_Query($args); 
     $all_products = $all_products_query->get_products();
 
-    $args['limit'] = $limit;
-    $args['page'] = $custom_page;
+    // $args['limit'] = $limit;
+    // $args['page'] = $custom_page;
 
     $query = new WC_Product_Query($args); 
     $products = $query->get_products();
