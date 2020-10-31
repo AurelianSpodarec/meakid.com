@@ -116,7 +116,6 @@ function getProductsList( $args ) {
     $query = new WC_Product_Query( array(
         'page' => $custom_page,
         'limit' => $limit,
-         'type' => 'variable',
         'paginate' => true,
         'orderby' => $orderby,
         'order' => $order,
@@ -136,7 +135,7 @@ function getProductsList( $args ) {
 
 
     $productResults = array(
-        "totalProducts"    => $products->post_count,
+        "totalProducts"    => $query->total,
         // "totalPages" => floor(($limit / $products->total) * 10),
         "page"     => $custom_page,
         "products" => [],
