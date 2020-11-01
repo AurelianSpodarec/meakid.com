@@ -72,7 +72,8 @@ const cartSlice = createSlice({
         cartData: [],
         loading: true,
         error: null,
-        open: false
+        open: false,
+        openFilter: false,
     },
     reducers: {
         getCurrentProduct: (state, key) => {
@@ -100,6 +101,14 @@ const cartSlice = createSlice({
         clearCart: (state) => {
 
         },
+
+        // to be refactored and put outside here
+        openFilter: (state) => {
+            state.openFilter = true
+        },
+        closeFilter: (state) => {
+            state.openFilter = false
+        }
 
     },
     extraReducers: {
@@ -139,12 +148,16 @@ export const {
     removeItemFromCart,
     // decreaseItemQuantity,
     clearCart,
+    openFilter,
+    closeFilter,
 } = cartSlice.actions
 
 
 export const selectProducts = (state) => state.cart.products
 
 export const cartOpenState = (state) => state.cart.open
+
+export const filterOpenState = (state) => state.cart.openFilter;
 
 export const selectTotalPrice = state =>
     state.cart.products ?
