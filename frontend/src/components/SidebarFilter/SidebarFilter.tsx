@@ -25,7 +25,7 @@ const SidebarFilter = ({ filterOptions }) => {
 
             <div>
                 <h3 className="font-bold py-4">Style</h3>
-                <div className="flex flex-wrap py-2 ">
+                <div className="flex-wrap py-2 ">
 
                     <div className="md:flex md:items-center mb-6">
                         <div className=""></div>
@@ -48,7 +48,6 @@ const SidebarFilter = ({ filterOptions }) => {
                     </div>
 
                 </div>
-
             </div>
 
 
@@ -56,7 +55,7 @@ const SidebarFilter = ({ filterOptions }) => {
                 <h3 className="font-bold py-4">Colors</h3>
                 <div className="flex flex-wrap py-2 ">
                     {
-                        filterOptions.colors.map((item, x) =>
+                        filterOptions.dataFilterOptions.colors.map((item, x) =>
 
                             <div className="w-1/3 cursor-pointer text-center items-center flex flex-col h-16 text-gray-800 hover:text-gray-600">
                                 <div
@@ -78,13 +77,9 @@ const SidebarFilter = ({ filterOptions }) => {
                         )
                     }
                 </div>
-                {/* <div>
-                        Min Price: <input onChange={(e) => updateValue(e)} value={text} />
-                    </div>
-                    <div>
-                        Max Price: <input onChange={updateValue} value={3} />
-                    </div> */}
+
             </div>
+
         </div >
     )
 }

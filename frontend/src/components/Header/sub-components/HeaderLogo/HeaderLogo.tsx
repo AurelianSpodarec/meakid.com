@@ -7,7 +7,10 @@ const HeaderLogo = () => {
         <div className="flex title-font items-center mb-4 md:mb-0">
             <Link href="/">
                 <a title="Meakid">
-                    <span>Meakid</span>
+                    <span style={{
+                        fontWeight: "bold",
+                        fontSize: "20px"
+                    }}>Meakid</span>
                 </a>
             </Link>
         </div>

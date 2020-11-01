@@ -9,7 +9,7 @@ const ProductListing = ({ data, productListStatus }) => {
 
     const router = useRouter()
 
-    let currentPage = router.query.page ? parseInt(router.query.page) : 1;
+    let currentPage = router.query.page ? Number(router.query.page) : 1;
     const lastPage = Math.ceil(data.totalProducts / 9);
 
 

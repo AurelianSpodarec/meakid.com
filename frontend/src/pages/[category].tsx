@@ -19,6 +19,8 @@ const PRODUCT_LIST_STATES = {
 
 function Category({ dataFilterOptions }) {
 
+    console.log("@@@", dataFilterOptions)
+
     const [productList, setProductList] = useState([])
     const [productListStatus, setProductListStatus] = useState(PRODUCT_LIST_STATES.fetching)
 

@@ -7,7 +7,11 @@ const customColors = {
     "grey": "#ccc",
     "orange": "#F36B26",
     "green": "#7BBA3C",
-    "red": "#E7352B"
+    "red": "#E7352B",
+
+    "blue": "#1e90ff",
+    "cream": "#dfc99c",
+    "mint": '#98ff98'
 }
 
 const getCustomColor = (color) => {

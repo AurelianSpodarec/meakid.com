@@ -56,7 +56,7 @@ const ImageList = ({ imageVariation, changeFeaturedImage }: any) => {
 
 
 const ProductItem = ({ product, productListStatus, key }: any) => {
-    // console.log("Product Data", product)
+    console.log("Product Data", product)
 
     const [productVariations, setProductVariations] = useState([])
     const [imageVariation, setImageVariation] = useState([])
