@@ -170,7 +170,10 @@ function getProductsList( $args ) {
 
                 $variations = $custom_product->get_available_variations();
                 $custom_variations = $product_variation;
-                $color = "";
+                // $color = "";
+                $colors = $custom_product->get_attribute('colors');
+                $colors_arr = explode(",", $colors); 
+                $colors_count = count($colors_arr);
 
                 $variationPrice = [
                     'min' => $custom_product->get_variation_price(),
@@ -189,7 +192,7 @@ function getProductsList( $args ) {
             } else {
                 $variationPrice = "";
                 $custom_variations = [];
-                $color = $custom_product->get_attribute('Colors');
+                $color = "";
             }
 
             $product_category_fetch = get_the_terms($custom_product->get_id(), 'product_cat');
@@ -205,8 +208,8 @@ function getProductsList( $args ) {
                 'price'             => $custom_product->get_price(),
                 'currency'          => get_woocommerce_currency_symbol(),
                 'variation_price'   => $variationPrice,
-                'color'             => $color,
-                'total_colors'      => $custom_product->get_attribute('colors'),
+                'colors'            => $colors,
+                'colors_count'      => $colors_count,
                 'category'          => $product_cat,
                 'featured_image'    => $attachment[0],
                 'product_variation' => $product_variation
