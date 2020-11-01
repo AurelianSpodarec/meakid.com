@@ -99,10 +99,12 @@ const ProductItem = ({ product, productListStatus, key }: any) => {
         fetchProductImages()
     }, [productVariations])
 
-    async function fetchProductImages() {
-        for (const i in productVariations) {
-            let res = await WooCommerce.get(`image/${productVariations[i].image_id}`)
-            setImageVariation(imageVariation => [...imageVariation, res.data[0]])
+    const fetchProductImages = async () => {
+        if (product && product.colors_count && product.colors_count !== 1) {
+            for (const i in productVariations) {
+                let res = await WooCommerce.get(`image/${productVariations[i].image_id}`)
+                setImageVariation(imageVariation => [...imageVariation, res.data[0]])
+            }
         }
 
     }
@@ -115,7 +117,9 @@ const ProductItem = ({ product, productListStatus, key }: any) => {
     const renderImagesVariation = () => {
         return (
             <div>
-                <p>Colors: {productVariations.length}</p>
+
+
+                {product.colors_count === 1 ? "" : <p>Colors: {product.colors_count}</p>}
                 {/* <ImageList imageVariation={imageVariation} changeFeaturedImage={changeFeaturedImage} /> */}
 
                 <div className="bg-gray-500 inline-block mr-1">
