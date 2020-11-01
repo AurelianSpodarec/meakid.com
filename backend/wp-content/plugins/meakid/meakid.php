@@ -238,16 +238,16 @@ add_filter(
     2
 );
 
-// function filter_options() {
-//     global $product;
+function filter_options() {
+    global $product;
 
-//     $response = [
-//         "colors" => get_terms("pa_color"),
-//         // "max-price" => woocommerce_price()
-//     ];
+    $response = [
+        "colors" => get_terms("pa_colors"),
+        // "max-price" => woocommerce_price()
+    ];
 
-//     return rest_ensure_response($response);
-// }
+    return rest_ensure_response($response);
+}
 
 
 ///////////////////////////////////////////////////
@@ -324,9 +324,9 @@ function register_routes() {
         'method' => 'GET',
         'callback' => 'proceedOrderWithPayPal'
     ));
-    // register_rest_route( 'wc/v3', '/filter-options', array(
-    //     'method' => 'GET',
-    //     'callback' => 'filter_options'
-    // ));
+    register_rest_route( 'wc/v3', '/filter-options', array(
+        'method' => 'GET',
+        'callback' => 'filter_options'
+    ));
 }
 add_action('rest_api_init', 'register_routes');
