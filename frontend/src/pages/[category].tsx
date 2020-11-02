@@ -90,7 +90,7 @@ export default Category;
 Category.getInitialProps = async (ctx) => {
 
     const [dataFilterOptions] = await Promise.all([
-        WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })),
+        WooCommerce.get("filter-options").then(response => ({ dataFilterOptions: response.data })).catch(e => console.log("Error cateogyr", e)),
     ]);
 
     return { dataFilterOptions };
