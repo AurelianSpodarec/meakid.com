@@ -38,7 +38,7 @@ function Category({ dataFilterOptions }) {
         const url = "https://meakid.co.uk";
         let bbb = Object.entries(router.query).reduce((acc, [key, value]) => `${acc}${key}=${value}&`, `${url.length ? "?" : "&"}`).slice(0, -1);
 
-        const response = await WooCommerce.get(`products-list${bbb}`);
+        const response = await WooCommerce.get(`products-list${bbb}`).catch(e => console.log("Error", e));
 
         // console.log("@@", bbb)
 
