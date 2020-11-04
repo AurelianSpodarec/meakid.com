@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
+import WooCommerce from '../../services/meakid-wordpress/config_meakid_woocommerce'
 const checkoutSteps = [
     {
         step: 1,
@@ -33,10 +34,24 @@ const checkoutSteps = [
     }
 ]
 
+const createOrder = () => {
+    WooCommerce.post("orders", data)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error.response.data);
+        });
+}
+
+
+// const updateOrder
+
 const checkoutSlice = createSlice({
     name: 'checkout',
     initialState: {
         products: [],
+        orderProducts: [],
         billingAddressAsDelivery: true,
         step: 2,
         order: {
@@ -114,6 +129,8 @@ export const {
     prevStep
 } = checkoutSlice.actions
 
+
+// create order
 
 
 export default checkoutSlice.reducer

@@ -9,6 +9,8 @@ import CheckoutStepPayment from '../../components/Checkout/steps/CheckoutStepPay
 import CheckoutProductList from '../../components/Checkout/CheckoutProducts/CheckoutProductList';
 
 
+import { PayPalButton } from "react-paypal-button-v2";
+
 import {
     prevStep,
     nextStep,
@@ -18,46 +20,22 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { current } from 'immer';
 
-const checkoutSteps = [
-    {
-        step: 1,
-        name: "Cart",
-        completed: false,
-        route: "/cart"
+import {
+    selectProducts,
+    selectTotalPrice
+} from './../../lib/slices/cartSlice'
 
-    },
-    {
-        step: 2,
-        name: "Information",
-        completed: false,
-        route: "/contact-info"
-    },
-    {
-        step: 3,
-        name: "Shipping",
-        completed: false,
-        route: "/checkout-shipping"
-    },
-    {
-        step: 4,
-        name: "Payment",
-        completed: false,
-        route: "/checkout-payment"
-    },
-    {
-        step: 5,
-        name: "Complete",
-        completed: false,
-        route: "/checkout-complete"
-    }
-]
+
 
 // Create an order with the items and put in the checkout
 
 
 function Checkout() {
-
+    const [paypalLoaded, setPaypalLoaded] = useState(false);
     const dispatch = useDispatch();
+
+    const products = useSelector(selectProducts)
+    const totalPrice = useSelector(selectTotalPrice)
 
     const currentStep = useSelector(selectCheckoutStep)
     console.log(currentStep)
@@ -89,33 +67,34 @@ function Checkout() {
                 <div className="grid grid-cols-12 gap-4">
 
                     <section className="col-span-12 lg:col-span-7 lg:pr-20">
-                        <div style={{ marginLeft: "-10%", width: '120%' }}>
+                        {/* <div style={{ marginLeft: "-10%", width: '120%' }}>
                             <CheckoutProgressBar checkoutSteps={checkoutSteps} currentStep={currentStep} />
                         </div>
 
                         <div>
                             {renderStep()}
-                        </div>
+                        </div> */}
+                        <CheckoutProductList />
                     </section>
 
                     <aside className="checkout-sidebar  col-span-12 lg:col-span-5  pl-10 border-l" style={{ background: "#fafafa" }}>
                         <div>
                             <div className="mb-4 pb-4 border-b">
-                                <CheckoutProductList />
+                                {/* <CheckoutProductList /> */}
                             </div>
 
-                            <div className="flex mb-4 pb-4 border-b">
+                            {/* <div className="flex mb-4 pb-4 border-b">
                                 <Input placeholder="Discount code" />
                                 <button
                                     style={{ backgroundColor: "#ebebeb", color: "#6E6E6E" }}
                                     disabled={true}
                                     className="rounded-full uppercase font-bold text-sm my-2 ml-3 px-8 disabled">Apply</button>
-                            </div>
+                            </div> */}
 
                             <div className="mb-4 pb-4 border-b">
                                 <div className="flex justify-between">
                                     <p>Subtotal</p>
-                                    <p>$202.00</p>
+                                    <p>£{totalPrice.toFixed(2)} GBP</p>
                                 </div>
                                 <div className="flex justify-between">
                                     <p>Shipping</p>
@@ -126,10 +105,52 @@ function Checkout() {
                             <div className="flex justify-between">
                                 <div>
                                     <p className="text-sm font-bold">Total</p>
-                                    <p className="text-xs">Including £24.54 in taxes</p>
+                                    {/* <p className="text-xs">Including £24.54 in taxes</p> */}
+                                    <p className="text-xs">Including £2.00 in shipping</p>
                                 </div>
-                                <p className="text-black font-bold text-2xl">$202.00</p>
+                                <p className="text-black font-bold text-2xl"></p>
                             </div>
+                            {/* {paypalLoaded
+                                ?
+
+                                <PayPalButton
+                                    onButtonReady={() => {
+                                        setPaypalLoaded(true);
+                                    }}
+                                    // amount={totalPrice}
+                                    //     options={{
+                                    //         clientId: PAYPAL_CLIENT_ID,
+                                    // }}
+                                    client-id="sb"
+                                    amount="1"
+                                    // client-id="AitrTCFT4OMoUacOiZjcQMGiIe1GAoupsPAP.yEseCv8dcL9dDNKGVsF"
+                                    currency="GBP"
+                                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                                    onSuccess={(details, data) => {
+                                        alert("Transaction completed by " + details.payer.name.given_name);
+
+                                        // OPTIONAL: Call your server to save the transaction
+                                        console.log(details)
+                                    }}
+                                /> : null} */}
+                            <PayPalButton
+
+                                // amount={totalPrice}
+                                //     options={{
+                                //         clientId: PAYPAL_CLIENT_ID,
+                                // }}
+                                // client-id="sb"
+                                amount="1"
+                                client-id="AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu"
+                                // currency="GBP"
+                                // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                                onSuccess={(details, data) => {
+                                    alert("Transaction completed by " + details.payer.name.given_name);
+
+                                    // OPTIONAL: Call your server to save the transaction
+                                    console.log(details)
+                                }}
+                            />
                         </div>
                     </aside>
 

@@ -48,7 +48,7 @@ const Basket = () => {
 
     const open = useSelector(cartOpenState)
 
-    // console.log("basket total price", totalPrice)
+
     return (
         <div ref={ref} className={`${open ? "translate-x-0" : "translate-x-full"} overflow-y-hidden transform transition duration-500 ease-in-out min-h-screen fixed overflow-auto z-50 inset-y-0 bottom-0 right-0 bg-white w-full md:w-106`}>
 
@@ -80,11 +80,13 @@ const Basket = () => {
                     </div>
 
                     <div className="">
-                        <Link href="/checkout">
-                            <button className="mb-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Checkout</button>
+                        <Link href="/checkout" >
+                            <button onClick={() => dispatch(closeCart())} className="mb-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                Checkout
+                            </button>
                         </Link>
                         <Link href="/cart">
-                            <button className="mb-2 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">
+                            <button onClick={() => dispatch(closeCart())} className="mb-2 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">
                                 Your Cart
                             </button>
                         </Link>

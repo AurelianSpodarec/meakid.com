@@ -22,6 +22,10 @@ const Layout: React.FunctionComponent<Props> = ({
 
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+
+                {/* <script src="https://www.paypal.com/sdk/js?client-id=AitrTCFT4OMoUacOiZjcQMGiIe1GAoupsPAP.yEseCv8dcL9dDNKGVsF" /> */}
+
             </Head>
 
             <Header />

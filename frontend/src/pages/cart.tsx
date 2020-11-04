@@ -14,7 +14,6 @@ function Cart() {
                     <h3 className="uppercase font-bold text-3xl">Shopping Cart</h3>
                 </div>
 
-
                 <CartList />
             </div>
         </Layout>
