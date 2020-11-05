@@ -44,6 +44,8 @@ function Checkout() {
     // const [currentStep, setCurrentStep] = useState(2);
     const [currentStepObject, setCurrentStepObject] = useState()
 
+    const [a, setA] = useState(false)
+
     function renderStep() {
         switch (currentStep) {
             case 2:
@@ -61,6 +63,12 @@ function Checkout() {
             default:
                 return <CheckoutStepInformation />
         }
+    }
+
+    let env = 'sandbox';
+    const client = {
+        sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu',
+        // production: 'YOUR-PRODUCTION-APP-ID',
     }
 
     return (
@@ -154,7 +162,10 @@ function Checkout() {
                                 }}
                             /> */}
                             {/* <PaypalExpressBtn client={{ sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu' }} currency={'USD'} total={1.00} /> */}
-                            <PaypalExpressBtn client={{ sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu' }} currency={'GBP'} total={100.00} />
+                            {/* <div onClick={() => setA(true)}>a</div> */}
+                            {/* {a ? */}
+                            <PaypalExpressBtn env={env} client={client} currency={'GBP'} total={100.00} />
+                            {/* : null} */}
                         </div>
                     </aside>
 
