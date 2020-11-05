@@ -150,17 +150,15 @@ function add_cors_http_header(){
 
     if ($method == "OPTIONS") {
 
-        if (!($_SERVER['HTTP_ORIGIN'] == "https://meakid.co.uk")){
+        if ($_SERVER['HTTP_ORIGIN'] != "https://meakid.co.uk"){
                 header('Access-Control-Allow-Origin: http://localhost:3000');
         } else {
                 header('Access-Control-Allow-Origin: https://meakid.co.uk');        
         }
-       
-        // header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
-        // header("Access-Control-Allow-Headers: true");
+     
         header( 'Access-Control-Allow-Credentials: true' );
         header( 'Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE' );
-        header( 'Access-Control-Allow-Headers: Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers' );
+        header( 'Access-Control-Allow-Headers: Origin, User-Agent, X-API-KEY, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers' );
         header("HTTP/1.1 200 OK");
         die();
     }
