@@ -85,7 +85,7 @@ function Category({ dataFilterOptions }) {
                         <h1 className="text-3xl font-bold text-center text-accent-1">
                             {capitalizeFirstLetter(category)}
                         </h1>
-                        <span>({productList.totalProducts})</span>
+                        <span>({productList && productList.totalProducts})</span>
                     </div>
 
                     <div className="lg:hidden" onClick={() => toggleFilter()}>
