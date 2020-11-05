@@ -9,7 +9,10 @@ import {
     openCart,
     closeCart,
     cartOpenState,
-    selectTotalProductsQuantity
+    selectTotalProductsQuantity,
+    closeFilter,
+    openFilter,
+    filterOpenState
 } from './../../lib/slices/cartSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router';
@@ -25,7 +28,7 @@ const Header = () => {
 
     const open = useSelector(cartOpenState)
     const productInCart = useSelector(selectTotalProductsQuantity)
-
+    const openFilterState = useSelector(filterOpenState)
 
     const [openMenu, setOpenMenu] = useState(false);
 
@@ -39,9 +42,9 @@ const Header = () => {
 
     function toggleMenu() {
         if (openMenu) {
-            setOpenMenu(false)
-        } else {
             setOpenMenu(true)
+        } else {
+            setOpenMenu(false)
         }
     }
 
@@ -74,8 +77,13 @@ const Header = () => {
     }, [open])
 
 
-    function openFilter() {
-
+    function toggleFilter() {
+        console.log("fire")
+        if (openFilterState) {
+            dispatch(closeFilter())
+        } else {
+            dispatch(openFilter())
+        }
     }
 
     return (
@@ -96,7 +104,7 @@ const Header = () => {
                 <div className="justify-between mx-auto flex flex-wrap p-4 flex-row items-center">
 
 
-                    <div className="lg:hidden " onClick={() => openFilter()}>
+                    <div className="lg:hidden " onClick={() => toggleFilter()}>
                         <svg style={{ height: "20px" }} aria-hidden="true" viewBox="0 0 512 512"><path fill="currentColor" d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"  ></path></svg>
                     </div>
 

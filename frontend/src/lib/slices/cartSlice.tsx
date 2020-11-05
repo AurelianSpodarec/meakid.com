@@ -74,7 +74,6 @@ const cartSlice = createSlice({
         error: null,
         open: false,
         openFilter: false,
-        cartKey: "Test-key"
     },
     reducers: {
         getCurrentProduct: (state, key) => {

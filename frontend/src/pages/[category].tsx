@@ -7,13 +7,17 @@ import { Layout, ProductListing, SidebarFilter } from '../components'
 
 import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce';
 import queryString from 'query-string';
-
+import { useDispatch, useSelector } from 'react-redux'
 
 const PRODUCT_LIST_STATES = {
     fetching: 'fetching',
     success: 'success',
     failure: 'failure',
 }
+
+import {
+    filterOpenState
+} from './../lib/slices/cartSlice';
 
 // Good Article about fetching: https://kyleshevlin.com/enumerate-dont-booleanate
 
@@ -23,6 +27,8 @@ function Category({ dataFilterOptions }) {
 
     const [productList, setProductList] = useState([])
     const [productListStatus, setProductListStatus] = useState(PRODUCT_LIST_STATES.fetching)
+
+    const openFilterState = useSelector(filterOpenState)
 
     const router = useRouter()
     let category = router.query.category;
@@ -67,7 +73,7 @@ function Category({ dataFilterOptions }) {
 
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className="transform translate-y-full lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative">
+                    <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
                         <SidebarFilter filterOptions={dataFilterOptions} />
                     </aside>
 
