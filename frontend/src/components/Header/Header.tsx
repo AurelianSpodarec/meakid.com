@@ -77,20 +77,13 @@ const Header = () => {
     }, [open])
 
 
-    function toggleFilter() {
-        console.log("fire")
-        if (openFilterState) {
-            dispatch(closeFilter())
-        } else {
-            dispatch(openFilter())
-        }
-    }
+
 
     return (
         <>
 
 
-            <header className={`fixed z-20 left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full`}>
+            <header style={{ maxHeight: "63px" }} className={`fixed z-20 left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full`}>
                 {/* <div className="text-center">
                     <div style={{
                         padding: "10px 0px",
@@ -102,11 +95,6 @@ const Header = () => {
                     </div>
                 </div> */}
                 <div className="justify-between mx-auto flex flex-wrap p-4 flex-row items-center">
-
-
-                    <div className="lg:hidden " onClick={() => toggleFilter()}>
-                        <svg style={{ height: "20px" }} aria-hidden="true" viewBox="0 0 512 512"><path fill="currentColor" d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"  ></path></svg>
-                    </div>
 
                     <HeaderLogo />
 

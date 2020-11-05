@@ -79,7 +79,7 @@ const ProductListing = ({ data, productListStatus }) => {
     return (
 
         <div className="container px-5 mx-auto">
-            <div className="flex flex-wrap -m-4">
+            <div className="flex flex-wrap">
                 {renderProductList()}
             </div>
             {/* pagination */}

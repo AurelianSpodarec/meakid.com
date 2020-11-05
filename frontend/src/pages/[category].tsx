@@ -17,8 +17,10 @@ const PRODUCT_LIST_STATES = {
 
 import {
     closeFilter,
+    openFilter,
     filterOpenState
 } from './../lib/slices/cartSlice';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 // Good Article about fetching: https://kyleshevlin.com/enumerate-dont-booleanate
 
@@ -60,6 +62,15 @@ function Category({ dataFilterOptions }) {
         }
     }
 
+    function toggleFilter() {
+        console.log("fire")
+        if (openFilterState) {
+            dispatch(closeFilter())
+        } else {
+            dispatch(openFilter())
+        }
+    }
+
     useEffect(() => {
         fetchProducts()
     }, [category, router.query])
@@ -69,15 +80,24 @@ function Category({ dataFilterOptions }) {
             {/* <Layout> */}
             <section>
 
-                <h1 className="text-5xl text-center text-accent-1">
-                    {category}
-                </h1>
+                <div className="flex flex-row justify-between">
+                    <div className="flex">
+                        <h1 className="text-3xl font-bold text-center text-accent-1">
+                            {capitalizeFirstLetter(category)}
+                        </h1>
+                        <span>({productList.totalProducts})</span>
+                    </div>
+
+                    <div className="lg:hidden" onClick={() => toggleFilter()}>
+                        <svg style={{ height: "20px" }} aria-hidden="true" viewBox="0 0 512 512"><path fill="currentColor" d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"  ></path></svg>
+                    </div>
+                </div>
 
 
                 <div className="flex flex-row">
 
                     <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} z-50 transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
-                        <div className="flex justify-between w-full">
+                        <div className="lg:hidden flex justify-between w-full">
                             <div></div>
                             <div onClick={() => dispatch(closeFilter())}>X</div>
                         </div>
