@@ -16,6 +16,7 @@ const PRODUCT_LIST_STATES = {
 }
 
 import {
+    closeFilter,
     filterOpenState
 } from './../lib/slices/cartSlice';
 
@@ -24,6 +25,8 @@ import {
 function Category({ dataFilterOptions }) {
 
     console.log("@@@", dataFilterOptions)
+
+    const dispatch = useDispatch()
 
     const [productList, setProductList] = useState([])
     const [productListStatus, setProductListStatus] = useState(PRODUCT_LIST_STATES.fetching)
@@ -73,7 +76,11 @@ function Category({ dataFilterOptions }) {
 
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
+                    <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} z-50 transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
+                        <div className="flex justify-between w-full">
+                            <div></div>
+                            <div onClick={() => dispatch(closeFilter())}>X</div>
+                        </div>
                         <SidebarFilter filterOptions={dataFilterOptions} />
                     </aside>
 
