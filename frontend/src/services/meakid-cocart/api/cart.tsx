@@ -6,6 +6,12 @@ async function getCart() {
     return res;
 }
 
+async function clearCart() {
+    const res = await CoCartRequest("clear", 'POST')
+    return res;
+}
+
 export {
-    getCart
+    getCart,
+    clearCart
 }

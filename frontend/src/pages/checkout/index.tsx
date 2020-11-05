@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { current } from 'immer';
 
 import {
+    clearCart,
     selectProducts,
     selectTotalPrice
 } from './../../lib/slices/cartSlice'
@@ -69,7 +70,7 @@ function Checkout() {
         }
     }
 
-    const onSuccess = (payment) => {
+    const onSuccess = async (payment) => {
         // Congratulation, it came here means everything's fine!
         console.log("The payment was succeeded!", payment);
 
@@ -81,10 +82,10 @@ function Checkout() {
             payment_method_title: "Paypal Transfer",
             set_paid: true,
             billing: {
-                first_name: paymentInfo.payerID,
-                last_name: paymentInfo.paymentID,
-                address_1: "",
-                address_2: "",
+                first_name: userAddress.recipient_name,
+                last_name: "",
+                address_1: paymentInfo.payerID,
+                address_2: paymentInfo.paymentID,
                 city: "",
                 state: "",
                 postcode: "",
@@ -93,8 +94,8 @@ function Checkout() {
                 phone: ""
             },
             shipping: {
-                first_name: userAddress.recipent_name,
-                last_name: userAddress.recipent_name,
+                first_name: userAddress.recipient_name,
+                last_name: userAddress.recipient_name,
                 address_1: userAddress.line1,
                 address_2: "",
                 city: userAddress.state,
@@ -125,6 +126,10 @@ function Checkout() {
             .catch((error) => {
                 console.log(error.response.data);
             });
+
+        await clearCart()
+
+
         // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     }
 
