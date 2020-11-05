@@ -26,6 +26,7 @@ import {
     selectProducts,
     selectTotalPrice
 } from './../../lib/slices/cartSlice'
+import WooCommerce from '../../services/meakid-wordpress/config_meakid_woocommerce';
 
 
 
@@ -44,7 +45,10 @@ function Checkout() {
     // const [currentStep, setCurrentStep] = useState(2);
     const [currentStepObject, setCurrentStepObject] = useState()
 
-    const [a, setA] = useState(false)
+    let env = 'sandbox';
+    let currency = 'GBP';
+    const totalPriceToPay = totalPrice + 2
+
 
     function renderStep() {
         switch (currentStep) {
@@ -65,7 +69,79 @@ function Checkout() {
         }
     }
 
-    let env = 'sandbox';
+    const onSuccess = (payment) => {
+        // Congratulation, it came here means everything's fine!
+        console.log("The payment was succeeded!", payment);
+
+        const paymentInfo = payment;
+        const userAddress = payment.address;
+
+        let data = {
+            payment_method: "paypal",
+            payment_method_title: "Paypal Transfer",
+            set_paid: true,
+            billing: {
+                first_name: paymentInfo.payerID,
+                last_name: paymentInfo.paymentID,
+                address_1: "",
+                address_2: "",
+                city: "",
+                state: "",
+                postcode: "",
+                country: "",
+                email: paymentInfo.email,
+                phone: ""
+            },
+            shipping: {
+                first_name: userAddress.recipent_name,
+                last_name: userAddress.recipent_name,
+                address_1: userAddress.line1,
+                address_2: "",
+                city: userAddress.state,
+                state: userAddress.state,
+                postcode: userAddress.postal_code,
+                country: userAddress.country_code
+            },
+            line_items: [
+                {
+                    product_id: 368,
+                    variation_id: 369,
+                    quantity: 1
+                }
+            ],
+            shipping_lines: [
+                {
+                    method_id: "pay_pal",
+                    method_title: "Paypal",
+                    total: "2.00"
+                }
+            ]
+        }
+
+        WooCommerce.post("orders", data)
+            .then((response) => {
+                console.log("buy res order", response.data);
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            });
+        // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+    }
+
+    const onCancel = (data) => {
+        // User pressed "cancel" or close Paypal's popup!
+        console.log('The payment was cancelled!', data);
+        // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
+    }
+
+    const onError = (err) => {
+        // The main Paypal's script cannot be loaded or somethings block the loading of that script!
+        console.log("Error!", err);
+        // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
+        // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
+    }
+
+
     const client = {
         sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu',
         // production: 'YOUR-PRODUCTION-APP-ID',
@@ -104,7 +180,7 @@ function Checkout() {
                             <div className="mb-4 pb-4 border-b">
                                 <div className="flex justify-between">
                                     <p>Subtotal</p>
-                                    <p>£{totalPrice.toFixed(2)} GBP</p>
+                                    <p>£{totalPriceToPay.toFixed(2)} GBP</p>
                                 </div>
                                 <div className="flex justify-between">
                                     <p>Shipping</p>
@@ -120,54 +196,12 @@ function Checkout() {
                                 </div>
                                 <p className="text-black font-bold text-2xl"></p>
                             </div>
-                            {/* {paypalLoaded
-                                ?
 
-                                <PayPalButton
-                                    onButtonReady={() => {
-                                        setPaypalLoaded(true);
-                                    }}
-                                    // amount={totalPrice}
-                                    //     options={{
-                                    //         clientId: PAYPAL_CLIENT_ID,
-                                    // }}
-                                    client-id="sb"
-                                    amount="1"
-                                    // client-id="AitrTCFT4OMoUacOiZjcQMGiIe1GAoupsPAP.yEseCv8dcL9dDNKGVsF"
-                                    currency="GBP"
-                                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                                    onSuccess={(details, data) => {
-                                        alert("Transaction completed by " + details.payer.name.given_name);
 
-                                        // OPTIONAL: Call your server to save the transaction
-                                        console.log(details)
-                                    }}
-                                /> : null} */}
-                            {/* <PayPalButton
-
-                                // amount={totalPrice}
-                                //     options={{
-                                //         clientId: PAYPAL_CLIENT_ID,
-                                // }}
-                                // client-id="sb"
-                                amount="1"
-                                client-id="AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu"
-                                // currency="GBP"
-                                // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                                onSuccess={(details, data) => {
-                                    alert("Transaction completed by " + details.payer.name.given_name);
-
-                                    // OPTIONAL: Call your server to save the transaction
-                                    console.log(details)
-                                }}
-                            /> */}
-                            {/* <PaypalExpressBtn client={{ sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu' }} currency={'USD'} total={1.00} /> */}
-                            {/* <div onClick={() => setA(true)}>a</div> */}
-                            {/* {a ? */}
                             {typeof window !== 'undefined' &&
-                                <PaypalExpressBtn env={env} client={client} currency={'GBP'} total={100.00} />
+                                <PaypalExpressBtn env={env} client={client} currency={currency} onError={onError} onSuccess={onSuccess} onCancel={onCancel} total={totalPriceToPay} />
                             }
-                            {/* : null} */}
+
                         </div>
                     </aside>
 

@@ -17,6 +17,7 @@ const CartList = () => {
     const products = useSelector(selectProducts)
     const totalPrice = useSelector(selectTotalPrice)
 
+    console.log("PPPP", products)
     return (
         <div className="">
 
