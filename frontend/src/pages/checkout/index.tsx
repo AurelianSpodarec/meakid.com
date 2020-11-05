@@ -110,13 +110,13 @@ function Checkout() {
 
         let data = {
             payment_method: "paypal",
-            payment_method_title: "Paypal Transfer",
+            payment_method_title: "PayPal Transfer",
             set_paid: true,
             billing: {
                 first_name: userAddress.recipient_name,
                 last_name: "",
-                address_1: paymentInfo.payerID,
-                address_2: paymentInfo.paymentID,
+                address_1: "Payer ID: " + paymentInfo.payerID,
+                address_2: "PaymentID: " + paymentInfo.paymentID,
                 city: "",
                 state: "",
                 postcode: "",
@@ -138,8 +138,8 @@ function Checkout() {
             shipping_lines: [
                 {
                     method_id: "pay_pal",
-                    method_title: "Paypal",
-                    total: "2.00"
+                    method_title: "PayPal",
+                    total: "0.00"
                 }
             ]
         }
