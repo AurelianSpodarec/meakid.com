@@ -12,6 +12,8 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 
 // import { PayPalButton } from "react-paypal-button-v2";
+import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 import {
     prevStep,
@@ -23,16 +25,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { current } from 'immer';
 
 import {
-    clearCart,
+    clearCartProducts,
     selectProducts,
     selectTotalPrice
 } from './../../lib/slices/cartSlice'
 import WooCommerce from '../../services/meakid-wordpress/config_meakid_woocommerce';
+import { clearCart } from '../../services/meakid-cocart/api/cart';
 
 
 
 // Create an order with the items and put in the checkout
 
+interface ProductData {
+    product_id: number,
+    quantity: number,
+    variation_id: number
+}
 
 function Checkout() {
     const [paypalLoaded, setPaypalLoaded] = useState(false);
@@ -41,14 +49,36 @@ function Checkout() {
     const products = useSelector(selectProducts)
     const totalPrice = useSelector(selectTotalPrice)
 
+    const [productsToBuy, setProductsToBuy] = useState([])
+
     const currentStep = useSelector(selectCheckoutStep)
-    console.log(currentStep)
-    // const [currentStep, setCurrentStep] = useState(2);
+
+    console.log("prorororoo", products)
+
+    useEffect(() => {
+        if (products.length !== 0) {
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+
+                const obj: any = {
+                    product_id: product.product_id,
+                    quantity: product.quantity
+                }
+
+                if (product && product.variation_id && product.variation_id) {
+                    obj.variation_id = product.variation_id
+                }
+
+                setProductsToBuy(productsToBuy => [...productsToBuy, obj]);
+            }
+        }
+    }, [])
+
     const [currentStepObject, setCurrentStepObject] = useState()
 
     let env = 'sandbox';
     let currency = 'GBP';
-    const totalPriceToPay = totalPrice + 2
+    const totalPriceToPay = totalPrice
 
 
     function renderStep() {
@@ -103,13 +133,7 @@ function Checkout() {
                 postcode: userAddress.postal_code,
                 country: userAddress.country_code
             },
-            line_items: [
-                {
-                    product_id: 368,
-                    variation_id: 369,
-                    quantity: 1
-                }
-            ],
+            line_items: productsToBuy,
             shipping_lines: [
                 {
                     method_id: "pay_pal",
@@ -122,34 +146,31 @@ function Checkout() {
         WooCommerce.post("orders", data)
             .then((response) => {
                 console.log("buy res order", response.data);
+
+                Router.push('/thankyou')
+                // go to thank you page 
             })
             .catch((error) => {
                 console.log(error.response.data);
             });
 
-        await clearCart()
-
-
-        // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+        const a = await clearCart()
+        dispatch(clearCartProducts())
+        console.log("clear cart", a)
     }
 
     const onCancel = (data) => {
-        // User pressed "cancel" or close Paypal's popup!
         console.log('The payment was cancelled!', data);
-        // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     }
 
     const onError = (err) => {
-        // The main Paypal's script cannot be loaded or somethings block the loading of that script!
         console.log("Error!", err);
-        // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
-        // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
     }
 
 
     const client = {
-        sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu',
-        // production: 'YOUR-PRODUCTION-APP-ID',
+        // sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu',
+        production: 'AdWCUQrRMynYqpUHYJisJV7M1wJ4R6BmkNS26I9vo0p8XFU25lIcAtS4-f6c1HuDffFmqbr9CBsiWMdJ',
     }
 
     return (
@@ -187,17 +208,18 @@ function Checkout() {
                                     <p>Subtotal</p>
                                     <p>£{totalPriceToPay.toFixed(2)} GBP</p>
                                 </div>
-                                <div className="flex justify-between">
+                                {/* <div className="flex justify-between">
                                     <p>Shipping</p>
                                     <p className="text-xs">Calculated at next step</p>
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="flex justify-between">
                                 <div>
                                     <p className="text-sm font-bold">Total</p>
                                     {/* <p className="text-xs">Including £24.54 in taxes</p> */}
-                                    <p className="text-xs">Including £2.00 in shipping</p>
+                                    {/* <p className="text-xs">Including £2.00 in shipping</p> */}
+                                    <p className="text-xs">FREE Shipping</p>
                                 </div>
                                 <p className="text-black font-bold text-2xl"></p>
                             </div>

@@ -26,6 +26,7 @@ yarn-debug.log*
 yarn-error.log*
 
 
+
 # IGNORING WP DEFAULT CODE and just getting the theme
 # backend/*
 # !backend/wp-content/ - don't ignore wp-contents
