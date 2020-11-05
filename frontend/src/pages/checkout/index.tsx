@@ -76,7 +76,8 @@ function Checkout() {
 
     const [currentStepObject, setCurrentStepObject] = useState()
 
-    let env = 'sandbox';
+    // let env = 'sandbox';
+    let env = 'production';
     let currency = 'GBP';
     const totalPriceToPay = totalPrice
 
