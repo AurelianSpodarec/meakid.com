@@ -8,8 +8,10 @@ import CheckoutStepComplete from '../../components/Checkout/steps/CheckoutStepCo
 import CheckoutStepPayment from '../../components/Checkout/steps/CheckoutStepPayment';
 import CheckoutProductList from '../../components/Checkout/CheckoutProducts/CheckoutProductList';
 
+import PaypalExpressBtn from 'react-paypal-express-checkout';
 
-import { PayPalButton } from "react-paypal-button-v2";
+
+// import { PayPalButton } from "react-paypal-button-v2";
 
 import {
     prevStep,
@@ -133,7 +135,7 @@ function Checkout() {
                                         console.log(details)
                                     }}
                                 /> : null} */}
-                            <PayPalButton
+                            {/* <PayPalButton
 
                                 // amount={totalPrice}
                                 //     options={{
@@ -150,7 +152,9 @@ function Checkout() {
                                     // OPTIONAL: Call your server to save the transaction
                                     console.log(details)
                                 }}
-                            />
+                            /> */}
+                            {/* <PaypalExpressBtn client={{ sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu' }} currency={'USD'} total={1.00} /> */}
+                            <PaypalExpressBtn client={{ sandbox: 'AThdpf2emcPZ1oqK01u4sYDShPqaTxBxl3PFqRruAuFJu0k0NX6r9Bb-4f0zy78-Dn7RsZRNVF9AUBWu' }} currency={'GBP'} total={100.00} />
                         </div>
                     </aside>
 
