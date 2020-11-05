@@ -158,7 +158,7 @@ function add_cors_http_header(){
      
         header( 'Access-Control-Allow-Credentials: true' );
         header( 'Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE' );
-        header( 'Access-Control-Allow-Headers: Origin, User-Agent, X-API-KEY, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers' );
+        header( 'Access-Control-Allow-Headers: Origin, User-Agent, X-API-KEY, Accept, Authorization, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers' );
         header("HTTP/1.1 200 OK");
         die();
     }
