@@ -4,7 +4,7 @@ import ProductSizeItem from "./sub-components/ProductSizeItem"
 
 function ProductSizeList({ product, selectedColor, onSizeChange, currentProduct, currentProductVariations, selectedSize }: any) {
     // const fabricsAllSizes = ["50x80", "50x160", "100x160"];
-    const fabricsAllSizes = ["fat-qauarter", "half-meter", "meter"]
+    const fabricsAllSizes = ["fat-quarter", "half-meter", "meter"]
     const [sortedProductVariation, setSortedProductVariation] = useState([])
 
     function abc() {
