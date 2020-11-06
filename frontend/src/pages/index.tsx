@@ -15,6 +15,7 @@ function Index() {
                 OMBRE SEAMLESS"
                     subTitle="Confidence that never fades."
                     buttonName="Shop"
+                    buttonLink="/fabrics"
                 />
             </section>
         </Layout>

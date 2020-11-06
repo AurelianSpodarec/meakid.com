@@ -19,7 +19,7 @@ const HeaderMenu = () => {
                 title="Fabrics"
                 label="Fabrics"
             />
-            <HeaderLink
+            {/* <HeaderLink
                 as="/uncategorized"
                 href="/[category]"
                 title="Uncategorized"
@@ -30,7 +30,7 @@ const HeaderMenu = () => {
                 href="/[category]"
                 title="test"
                 label="test"
-            />
+            /> */}
             <HeaderLink
                 href="/contact"
                 title="Contact"

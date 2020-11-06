@@ -215,19 +215,19 @@ function Checkout() {
                                 </div> */}
                             </div>
 
-                            <div className="flex justify-between">
+                            <div className="flex justify-between mb-4">
                                 <div>
                                     <p className="text-sm font-bold">Total</p>
                                     {/* <p className="text-xs">Including £24.54 in taxes</p> */}
                                     {/* <p className="text-xs">Including £2.00 in shipping</p> */}
                                     <p className="text-xs">FREE Shipping</p>
                                 </div>
-                                <p className="text-black font-bold text-2xl"></p>
+                                <p className="text-black font-bold text-2xl">£{totalPriceToPay.toFixed(2)} GBP</p>
                             </div>
 
 
                             {typeof window !== 'undefined' &&
-                                <PaypalExpressBtn env={env} client={client} currency={currency} onError={onError} onSuccess={onSuccess} onCancel={onCancel} total={totalPriceToPay} />
+                                <PaypalExpressBtn style={{ size: "responsive" }} env={env} client={client} currency={currency} onError={onError} onSuccess={onSuccess} onCancel={onCancel} total={totalPriceToPay} />
                             }
 
                         </div>

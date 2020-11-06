@@ -8,9 +8,10 @@ interface Hero {
     subTitle?: string,
     buttonName?: string,
     image?: string
+    buttonLink?: string
 }
 
-const Hero: React.FC<Hero> = ({ title, subTitle, buttonName, image }) => {
+const Hero: React.FC<Hero> = ({ title, subTitle, buttonName, image, buttonLink = "fabrics" }) => {
 
     return (
 
@@ -31,7 +32,9 @@ const Hero: React.FC<Hero> = ({ title, subTitle, buttonName, image }) => {
                 <figcaption className="absolute top-1/2 z-10 text-gray-100 pl-12 transform -translate-y-1/2">
                     <h3 className="mb-4 leading-tight uppercase font-bold text-bold text-2xl md:text-3xl lg:text-4xl">{title}</h3>
                     <p className="text-sm mb-4">{subTitle}</p>
-                    <button className="text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">{buttonName}</button>
+                    <Link href={buttonLink}>
+                        <button className="text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">{buttonName}</button>
+                    </Link>
                 </figcaption>
 
 

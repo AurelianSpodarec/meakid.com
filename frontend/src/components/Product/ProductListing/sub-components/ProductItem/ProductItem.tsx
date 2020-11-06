@@ -20,7 +20,7 @@ const ImageItem = ({ id, url, productVariations, onMouseEnter }: any) => {
     return (
 
 
-        <div onMouseEnter={onMouseEnter} className="bg-gray-500 inline-block mr-1">
+        <div onMouseEnter={onMouseEnter} className="inline-block mr-1">
 
             {
                 loading ?
@@ -31,7 +31,11 @@ const ImageItem = ({ id, url, productVariations, onMouseEnter }: any) => {
                     </svg>
                     :
                     <div className="h-8 w-8">
-                        <img src={url} />
+                        <img style={{
+                            height: "100%",
+                            width: "100%",
+                            objectFit: "cover"
+                        }} src={url} />
                     </div>
             }
 
@@ -44,7 +48,7 @@ const ImageItem = ({ id, url, productVariations, onMouseEnter }: any) => {
 
 const ImageList = ({ imageVariation, changeFeaturedImage }: any) => {
     return (
-        <div className="bg-gray-500 inline-block mr-1">
+        <div className="inline-block mr-1">
             {
                 imageVariation.map(url => {
                     return <ImageItem url={url} onMouseEnter={() => changeFeaturedImage(url)} />
@@ -122,7 +126,7 @@ const ProductItem = ({ product, productListStatus, key }: any) => {
                 {product.colors_count === 1 ? "" : <p>Colors: {product.colors_count}</p>}
                 {/* <ImageList imageVariation={imageVariation} changeFeaturedImage={changeFeaturedImage} /> */}
 
-                <div className="bg-gray-500 inline-block mr-1">
+                <div className="inline-block mr-1">
                     {
                         imageVariation.map((url, index) => {
                             return <ImageItem key={index} url={url} onMouseEnter={() => changeFeaturedImage(url)} />

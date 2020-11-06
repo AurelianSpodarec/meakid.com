@@ -20,6 +20,7 @@ import Head from 'next/head';
 import cxs from 'cxs'
 
 import Swiper from 'react-id-swiper';
+import HeaderSlider from './sub-components/HeaderSlider/HeaderSlider';
 
 const Header = () => {
 
@@ -28,7 +29,6 @@ const Header = () => {
 
     const open = useSelector(cartOpenState)
     const productInCart = useSelector(selectTotalProductsQuantity)
-    const openFilterState = useSelector(filterOpenState)
 
     const [openMenu, setOpenMenu] = useState(false);
 
@@ -162,19 +162,8 @@ const Header = () => {
 
 
             </header>
-            <div className=" bg-gray-100">
-                <div style={{ width: '50%' }} className="py-4  mx-auto overflow-hidden mb-16">
-                    <div className="w-full text-center relative mx-auto">
 
-                        <Swiper {...params} containerClass="h-4 px-2 flex content-center text-xs uppercase">
-                            <div>FREE delivery!</div>
-                            <div>2-5 day delivery*</div>
-                            <div>Good news! We are dispatching normally!</div>
-                        </Swiper>
-
-                    </div>
-                </div>
-            </div>
+            <HeaderSlider />
 
             <Basket />
         </>

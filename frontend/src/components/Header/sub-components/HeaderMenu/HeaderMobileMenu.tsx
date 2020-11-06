@@ -39,7 +39,7 @@ const HeaderMenu = ({ openMenu }) => {
                 label="Fabrics"
                 className="block"
             />
-            <HeaderLink
+            {/* <HeaderLink
                 as="/uncategorized"
                 href="/[category]"
                 title="Uncategorized"
@@ -52,7 +52,7 @@ const HeaderMenu = ({ openMenu }) => {
                 title="test"
                 label="test"
                 className="block"
-            />
+            /> */}
             <HeaderLink
                 href="/contact"
                 title="Contact"

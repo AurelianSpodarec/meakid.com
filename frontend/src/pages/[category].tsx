@@ -24,13 +24,15 @@ import { capitalizeFirstLetter } from '../utils/helpers';
 
 // Good Article about fetching: https://kyleshevlin.com/enumerate-dont-booleanate
 
+
+
 function Category({ dataFilterOptions }) {
 
     console.log("@@@", dataFilterOptions)
 
     const dispatch = useDispatch()
 
-    const [productList, setProductList] = useState([])
+    const [productList, setProductList] = useState<any>([])
     const [productListStatus, setProductListStatus] = useState(PRODUCT_LIST_STATES.fetching)
 
     const openFilterState = useSelector(filterOpenState)
@@ -51,9 +53,6 @@ function Category({ dataFilterOptions }) {
 
         const response = await WooCommerce.get(`products-list${bbb}`).catch(e => console.log("Error", e));
 
-        // console.log("@@", bbb)
-
-        console.log("PORDUCT FETCHEDDDDD@@@@@@@@@@@@", response.data)
         if (response.data.products.length === 0) {
             setProductListStatus(PRODUCT_LIST_STATES.failure);
         } else {
@@ -80,9 +79,9 @@ function Category({ dataFilterOptions }) {
             {/* <Layout> */}
             <section>
 
-                <div className="flex flex-row justify-between">
-                    <div className="flex">
-                        <h1 className="text-3xl font-bold text-center text-accent-1">
+                <div className="flex flex-row justify-between pl-12">
+                    <div className="flex items-center">
+                        <h1 className="text-3xl mr-3 font-bold text-center text-accent-1">
                             {capitalizeFirstLetter(category)}
                         </h1>
                         <span>({productList && productList.totalProducts})</span>
