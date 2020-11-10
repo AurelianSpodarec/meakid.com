@@ -50,7 +50,16 @@ function getProductBySlug( $slug ) {
         'sale_from' => $product->get_date_on_sale_from(),
         'sale_to' => $product->get_date_on_sale_to(),
 
+        'description' => $product->get_description(),
+
         'stock_quantity' => $product->get_stock_quantity(),
+        'backorders' => $product->get_backorders(),
+
+        'weight' => $product->get_weight(),
+        'length' => $product->get_length(),
+        'width' => $product->get_width(),
+        'height' => $product->get_height(),
+        'dimensions' => $product->get_dimensions(),
         
         'colors' => array($product->get_attribute( 'colors' )),
         'images' => $product->get_image(),

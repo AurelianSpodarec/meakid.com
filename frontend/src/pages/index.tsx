@@ -18,6 +18,14 @@ function Index() {
                     buttonLink="/fabrics"
                 />
             </section>
+
+            <section>
+                <div>
+
+                </div>
+
+                <button>View More</button>
+            </section>
         </Layout>
     )
 }

@@ -79,7 +79,7 @@ function ProductSlug({ data }) {
     const productCategory = router.query.productCategory
 
 
-    // console.log("s", product, currentProduct)
+    console.log("s", product, currentProduct)
 
     function onAddToCart() {
         if (selectedSize) {
@@ -257,6 +257,17 @@ function ProductSlug({ data }) {
 
                         <div className="flex flex-row">
                             <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
+                        </div>
+
+                        <div>
+                            <div>
+                                <h3>Description</h3>
+
+                            </div>
+                            <div>
+                                <h3>Delivery & Returns</h3>
+
+                            </div>
                         </div>
                     </aside>
 
