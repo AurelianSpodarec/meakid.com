@@ -3,7 +3,13 @@ module.exports = {
         removeDeprecatedGapUtilities: true,
         purgeLayersByDefault: true,
     },
-    purge: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
+    purge: {
+    content: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
+    options: {
+        whitelist: ['/lg:w-/:'],
+      }
+    }
+    ,
     theme: {
         extend: {
             width: {
