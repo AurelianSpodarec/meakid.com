@@ -69,6 +69,7 @@ function Index() {
                         <p>All</p>
                         <h3 className="font-bold text-3xl">New Releases</h3>
                     </div>
+
                     <ProductListing
                         data={productList}
                         productListStatus={productListStatus}

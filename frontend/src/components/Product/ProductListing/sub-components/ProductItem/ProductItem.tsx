@@ -59,7 +59,7 @@ const ImageList = ({ imageVariation, changeFeaturedImage }: any) => {
 }
 
 
-const ProductItem = ({ product, productListStatus, key, row }: any) => {
+const ProductItem = ({ product, productListStatus, key, row = 3 }: any) => {
     console.log("Product Data", product)
 
     const [productVariations, setProductVariations] = useState([])

@@ -4,7 +4,7 @@ import ProductItem from "./sub-components/ProductItem/ProductItem";
 import { useRouter } from 'next/router'
 import Router from 'next/router'
 
-const ProductListing = ({ data, productListStatus, pagination = true, container = true, row = 3 }) => {
+const ProductListing = ({ data, productListStatus, pagination = true, container = true, row }) => {
 
 
     const router = useRouter()
