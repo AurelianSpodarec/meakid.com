@@ -4,7 +4,7 @@ import Link from 'next/link';
 const HeaderLogo = () => {
 
     return (
-        <div className="flex title-font items-center mb-4 md:mb-0">
+        <div className="sm:p-0 p-2 title-font items-center sm:mb-4 md:mb-0">
             <Link href="/">
                 <a title="Meakid">
                     <span style={{

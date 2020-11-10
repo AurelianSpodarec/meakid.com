@@ -123,7 +123,7 @@ const Header = () => {
                         We're experiencing problem with the checkout and we are working on a fix. Thank you for your patience.
                     </div>
                 </div> */}
-                <div className="justify-between mx-auto flex flex-wrap p-4 flex-row items-center">
+                <div className="justify-between mx-auto flex flex-wrap sm:p-4 flex-row items-center relative">
 
                     <HeaderLogo />
 

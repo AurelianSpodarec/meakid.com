@@ -87,10 +87,15 @@ function getProductsList( $args ) {
 
 
     $offset = 0;
-    $limit = 9;
+   
     $orderby = 'date';
     $order = 'DESC';
-    
+
+    if ( isset( $args['limit'])) {
+        $limit_slug = $args['limit'];
+    } else {
+        $limit = 9;
+    }
 
     if ( isset( $args['category'])) {
         $category_slug = $args['category'];
