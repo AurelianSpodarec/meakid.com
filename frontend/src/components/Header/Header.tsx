@@ -42,9 +42,9 @@ const Header = () => {
 
     function toggleMenu() {
         if (openMenu) {
-            setOpenMenu(true)
-        } else {
             setOpenMenu(false)
+        } else {
+            setOpenMenu(true)
         }
     }
 

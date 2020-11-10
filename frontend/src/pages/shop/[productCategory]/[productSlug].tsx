@@ -48,7 +48,9 @@ interface ProductModel {
     product_id?: number,
     quantity?: number,
     variation_id?: number,
+    dimensions?: any,
     max_qty?: number,
+    variation_description?: string,
     image?: {
         src?: string,
     }
@@ -79,7 +81,7 @@ function ProductSlug({ data }) {
     const productCategory = router.query.productCategory
 
 
-    console.log("s", product, currentProduct)
+    // console.log("s", currentProduct)
 
     function onAddToCart() {
         if (selectedSize) {
@@ -188,7 +190,7 @@ function ProductSlug({ data }) {
     }, [])
 
     let totalPrice = currentProduct ? !selectedSize ? currentProduct && currentProduct.display_price && currentProduct.display_price * productQuantity : currentProduct && currentProduct.display_price * productQuantity : 0
-
+    const removeHTMLtags = /(<([^>]+)>)/ig;
     return (
         <Layout title={product.name}>
             <section style={{ maxWidth: '1440px ' }} className="mx-auto lg:px-12 lg:py-16">
@@ -259,16 +261,36 @@ function ProductSlug({ data }) {
                             <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                         </div>
 
-                        <div>
-                            <div>
-                                <h3>Description</h3>
+                        {selectedSize ?
+                            <div className="mt-8">
+                                <div className="mb-3">
+                                    <h3 className="font-bold">Description</h3>
 
-                            </div>
-                            <div>
-                                <h3>Delivery & Returns</h3>
+                                    <div className="mb-2">
+                                        {currentProduct.dimensions.width &&
+                                            <p>Width: {currentProduct.dimensions.width}cm</p>
+                                        }
 
+                                        {currentProduct.dimensions.weight &&
+                                            <p>Weight: {currentProduct.dimensions.weight}</p>
+                                        }
+                                    </div>
+
+                                    {currentProduct.variation_description &&
+                                        <p>{currentProduct.variation_description && currentProduct.variation_description.replace(removeHTMLtags, '')}</p>
+                                    }
+                                </div>
+
+                                <div>
+                                    <h3 className="font-bold">Delivery & Returns</h3>
+                                    <ul className="list-disc pl-4">
+                                        <li>Good News! We are dispatching as normal.</li>
+                                        <li>Returns allowed up to 14days.</li>
+                                        <li>Delivery counted on checkout</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                            : ""}
                     </aside>
 
 
