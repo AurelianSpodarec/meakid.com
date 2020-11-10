@@ -4,7 +4,7 @@ import ProductItem from "./sub-components/ProductItem/ProductItem";
 import { useRouter } from 'next/router'
 import Router from 'next/router'
 
-const ProductListing = ({ data, productListStatus }) => {
+const ProductListing = ({ data, productListStatus, pagination = true }) => {
 
 
     const router = useRouter()
@@ -84,41 +84,43 @@ const ProductListing = ({ data, productListStatus }) => {
             </div>
             {/* pagination */}
 
-            <div className="flex justify-between">
-                {/* if page is non existent or page = 1, don't display this */}
+            {pagination ?
+                <div className="flex justify-between">
+                    {/* if page is non existent or page = 1, don't display this */}
 
-                <div onClick={() => goToPrevPage()}>
-                    {currentPage == 1 ? "" : "Prev"}
-                </div>
+                    <div onClick={() => goToPrevPage()}>
+                        {currentPage == 1 ? "" : "Prev"}
+                    </div>
 
-                <div onClick={() => goToPage(1)}>
-                    1
+                    <div onClick={() => goToPage(1)}>
+                        1
                 </div>
-                <div>
-                    ...
+                    <div>
+                        ...
                 </div>
-                <div className="flex">
-                    <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                        {renderPrevPageNumber()}
+                    <div className="flex">
+                        <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                            {renderPrevPageNumber()}
+                        </div>
+                        <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                            {currentPage}
+                        </div>
+                        <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                            {renderNextPageNumber()}
+                        </div>
                     </div>
-                    <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                        {currentPage}
+                    <div>
+                        ...
+                </div>
+                    <div onClick={() => goToPage(lastPage)}>
+                        {lastPage}
                     </div>
-                    <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                        {renderNextPageNumber()}
-                    </div>
-                </div>
-                <div>
-                    ...
-                </div>
-                <div onClick={() => goToPage(lastPage)}>
-                    {lastPage}
-                </div>
 
-                <div onClick={() => goToNextPage()}>
-                    {currentPage == lastPage ? "" : "Next"}
+                    <div onClick={() => goToNextPage()}>
+                        {currentPage == lastPage ? "" : "Next"}
+                    </div>
                 </div>
-            </div>
+                : ""}
         </div>
     )
 };

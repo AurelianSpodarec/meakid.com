@@ -92,7 +92,7 @@ function getProductsList( $args ) {
     $order = 'DESC';
 
     if ( isset( $args['limit'])) {
-        $limit_slug = $args['limit'];
+        $limit = $args['limit'];
     } else {
         $limit = 9;
     }

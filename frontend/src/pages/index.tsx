@@ -2,7 +2,7 @@ import react, { useState, useEffect } from 'react';
 
 import Head from 'next/head'
 import Link from 'next/link'
-import { Layout, Hero } from '../components'
+import { Layout, Hero, ProductListing } from '../components'
 
 import WooCommerce from '../services/meakid-wordpress/config_meakid_woocommerce';
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,6 +38,11 @@ function Index() {
         }
     }
 
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+
     return (
         <Layout title="Meakid">
 
@@ -53,17 +58,27 @@ function Index() {
                 />
             </section>
 
+            <div className="flex flex-row">
+
+
+                <div className="flex flex-col w-full">
+                    <ProductListing data={productList} productListStatus={productListStatus} pagination={false} />
+
+                </div>
+
+            </div>
+
             {/* <section className="container mx-auto px-4 my-8">
-                <div>
                     <div>
-                        <p>All</p>
-                        <h3>New Releases</h3>
-                    </div>
+                        <div>
+                            <p>All</p>
+                            <h3>New Releases</h3>
+                        </div>
 
                     products
                 </div>
 
-                <button>View More</button>
+                    <button>View More</button>
             </section> */}
 
 
