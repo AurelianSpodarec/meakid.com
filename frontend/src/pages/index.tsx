@@ -58,53 +58,66 @@ function Index() {
                 />
             </section>
 
-            <div className="flex flex-row">
+
+
+            <div className="flex flex-row mt-6">
 
 
                 <div className="flex flex-col w-full">
-                    <ProductListing data={productList} productListStatus={productListStatus} pagination={false} />
 
-                </div>
+                    <div className="p-8">
+                        <p>All</p>
+                        <h3 className="font-bold text-3xl">New Releases</h3>
+                    </div>
+                    <ProductListing
+                        data={productList}
+                        productListStatus={productListStatus}
+                        pagination={false}
+                        row={4}
+                        container={false}
+                    />
 
-            </div>
-
-            {/* <section className="container mx-auto px-4 my-8">
-                    <div>
-                        <div>
-                            <p>All</p>
-                            <h3>New Releases</h3>
-                        </div>
-
-                    products
-                </div>
-
-                    <button>View More</button>
-            </section> */}
-
-
-            <section className="flex container mx-auto my-16">
-                <div className="w-1/2 lg:1/3 rounded overflow-hidden px-3 mb-8">
-                    <div style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/10/flamingos1.jpg')", minHeight: "250px", maxHeight: "650px" }}>
-                        <h3>Shop Fabrics</h3>
+                    <div className="px-8 w-full text-center">
                         <Link href="/fabrics">
-                            <a title="Fabrics" className="text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
-                                Shop
-                        </a>
+                            <a title="fabrics" className="transition-all duration-200 ease-in-out text-xs md:text-base bg-gray-900 hover:bg-gray-700 text-gray-100 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
+                                View More
+                            </a>
                         </Link>
                     </div>
                 </div>
+            </div>
 
-                <div className="w-1/2 lg:1/3 rounded overflow-hidden px-3 mb-8">
-                    <div style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/11/DISNEY-FROZEN-ANNA-ELSA-LITTLE-JOHNNY-DIGITAL-COTTON-800x640-1-600x480.jpg')", minHeight: "250px", maxHeight: "650px" }}>
-                        <h3>Shop Jersey</h3>
-                        <Link href="/fabrics">
-                            <a title="Fabrics" className="text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
-                                Shop
-                        </a>
-                        </Link>
+
+            <section className="flex m my-16">
+                <div className="w-full lg:1/2 rounded overflow-hidden px-8 mb-8">
+                    <div className="flex justify-center items-center text-center relative" style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/10/flamingos1.jpg')", maxHeight: "650px", minHeight: "400px", objectFit: "cover" }}>
+                        <div className="absolute top-0 right-0 bottom-0 left-0" style={{ backgroundColor: "rgba(0,0,0, .3)" }}></div>
+                        <div className="z-10">
+                            <h3 className="text-white mb-3 uppercase text-3xl font-bold">Shop Fabrics</h3>
+                            <Link href="/fabrics">
+                                <a title="Fabrics" className="transition-all duration-200 ease-in-out text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
+                                    Shop
+                                </a>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="w-full lg:1/2 rounded overflow-hidden px-8 mb-8">
+                    <div className="flex justify-center items-center text-center relative" style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/11/DISNEY-FROZEN-ANNA-ELSA-LITTLE-JOHNNY-DIGITAL-COTTON-800x640-1-600x480.jpg')", minHeight: "400px", maxHeight: "650px", objectFit: "cover", }}>
+                        <div className="absolute top-0 right-0 bottom-0 left-0" style={{ backgroundColor: "rgba(0,0,0, .3)" }}></div>
+                        <div className="z-10">
+                            <h3 className="text-white mb-3 uppercase text-3xl font-bold">Shop Jersey</h3>
+                            <Link href="/fabrics">
+                                <a title="Fabrics" className="transition-all duration-200 ease-in-out text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
+                                    Shop
+                                </a>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
+
         </Layout>
     )
 }

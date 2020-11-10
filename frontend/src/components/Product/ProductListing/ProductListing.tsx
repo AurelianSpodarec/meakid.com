@@ -4,7 +4,7 @@ import ProductItem from "./sub-components/ProductItem/ProductItem";
 import { useRouter } from 'next/router'
 import Router from 'next/router'
 
-const ProductListing = ({ data, productListStatus, pagination = true }) => {
+const ProductListing = ({ data, productListStatus, pagination = true, container = true, row = 3 }) => {
 
 
     const router = useRouter()
@@ -16,11 +16,11 @@ const ProductListing = ({ data, productListStatus, pagination = true }) => {
     function renderProductList() {
         if (productListStatus === 'fetching') {
             return [...Array(9)].map((x, i) => {
-                return <ProductItem key={i} productListStatus={productListStatus} />
+                return <ProductItem key={i} row={row} productListStatus={productListStatus} />
             })
         } else if (productListStatus === 'success') {
             return data && data.products.map(product => {
-                return <ProductItem key={product.slug} product={product} productListStatus={productListStatus} />
+                return <ProductItem key={product.slug} row={row} product={product} productListStatus={productListStatus} />
             })
         } else if (productListStatus === 'failure') {
             return <h1>No Products found ;-(</h1>
@@ -78,7 +78,7 @@ const ProductListing = ({ data, productListStatus, pagination = true }) => {
 
     return (
 
-        <div className="container px-5 mx-auto">
+        <div className={`${container ? 'container mx-auto' : ""} px-5 `}>
             <div className="flex flex-wrap">
                 {renderProductList()}
             </div>

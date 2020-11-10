@@ -59,7 +59,7 @@ const ImageList = ({ imageVariation, changeFeaturedImage }: any) => {
 }
 
 
-const ProductItem = ({ product, productListStatus, key }: any) => {
+const ProductItem = ({ product, productListStatus, key, row }: any) => {
     console.log("Product Data", product)
 
     const [productVariations, setProductVariations] = useState([])
@@ -167,7 +167,7 @@ const ProductItem = ({ product, productListStatus, key }: any) => {
 
     if (productListStatus === 'fetching') {
         return (
-            <div key={key} className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
+            <div key={key} className={`w-1/2 lg:w-1/${row} rounded overflow-hidden px-2 mb-8`}>
                 <section className="flex flex-wrap justify-center max-w-xl mx-auto">
                     <div className=" w-full animate-pulse">
                         <figure style={{ paddingBottom: '100%' }} className="shadow rounded-md hover:shadow-lg h-48 bg-gray-400 transform transition-all duration-500 hover:scale-110 hover:ease-out"></figure>
@@ -184,7 +184,7 @@ const ProductItem = ({ product, productListStatus, key }: any) => {
 
     else {
         return (
-            <div onMouseEnter={onHover} key={product.id} className="w-1/2 lg:w-1/3 rounded overflow-hidden px-2 mb-8">
+            <div onMouseEnter={onHover} key={product.id} className={`w-1/2 lg:w-1/${row} rounded overflow-hidden px-2 mb-8`}>
                 <Link as={`/shop/${product.category}/${product.slug}`} href="/shop/[productCategory]/[productSlug]">
                     <a title={`/${product.category}/${product.slug}`}>
 
