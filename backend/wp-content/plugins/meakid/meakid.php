@@ -97,6 +97,10 @@ function getProductsList( $args ) {
         $limit = 9;
     }
 
+    if ( isset( $args['sub_category'])) {
+        $sub_category = $args['sub_category'];
+    }  
+
     if ( isset( $args['category'])) {
         $category_slug = $args['category'];
     }
@@ -139,10 +143,20 @@ function getProductsList( $args ) {
                 'terms'         => $custom_colors,
                 'operator'      => $custom_operator
             ),
+            array(
+                'taxonomy' => $category_slug,
+                'field'    => 'slug',
+                'terms'    => $args['sub_category'] ? array($category_slug => $args['sub_category']) : $category_slug, 
+            )
         ),
         'product_cat' => $category_slug,
         'return' => 'ids',
     );
+
+    // if ( isset( $args['sub_category'])) {
+    //     $args['tax_query'] = 
+    // };
+    
 
 
     $all_products_query = new WC_Product_Query($args); 
@@ -156,18 +170,13 @@ function getProductsList( $args ) {
      
 
     $productResults = array(
-        "totalProducts"    =>count($all_products_query->get_products()), //count($all_products),
-        // "totalPages" => floor(($limit / $products->total) * 10),
+        "totalProducts"    =>count($all_products_query->get_products()),
         "page"     => $custom_page,
         "products" => [],
         "response" => "ok",
         "status" => 200,
       
     );
-
-    // TODO: If there is a variation, set the featured image to be first image of the variation image
-    // e.g. featured image, if variation exist, set the first variation image as featured image and send the response
-
 
     if ( !empty($products)) :
         foreach($products as $productID) :
