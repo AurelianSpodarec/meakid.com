@@ -66,7 +66,7 @@ function getProductBySlug( $slug ) {
         
         'colors' => array($product->get_attribute( 'colors' )),
         'images' => $product->get_image(),
-        // 'variations' => $product->get_children(),
+        // 'variations' => $product->get_children()
         "variations" => $variations,
     ]);
       
