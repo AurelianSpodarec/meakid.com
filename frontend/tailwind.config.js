@@ -6,7 +6,7 @@ module.exports = {
     purge: {
     content: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
     options: {
-        safelist: [/lg:w-/,'lg:w-1/4','lg:w-1/3'],
+        whitelistPatterns: [/lg:w-/,'lg:w-1/4','lg:w-1/3'],
       }
     },
     theme: {

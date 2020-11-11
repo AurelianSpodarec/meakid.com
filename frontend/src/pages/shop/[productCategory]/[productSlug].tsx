@@ -284,9 +284,9 @@ function ProductSlug({ data }) {
                                 <div>
                                     <h3 className="font-bold">Delivery & Returns</h3>
                                     <ul className="list-disc pl-4">
-                                        <li>Good News! We are dispatching as normal.</li>
-                                        <li>Returns allowed up to 14days.</li>
-                                        <li>Delivery counted on checkout</li>
+                                        <li>Good News! We are dispatching as normal</li>
+                                        <li>Returns allowed up to 14days</li>
+                                        <li>Delivery price counted on checkout</li>
                                     </ul>
                                 </div>
                             </div>

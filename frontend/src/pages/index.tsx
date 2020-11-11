@@ -65,9 +65,19 @@ function Index() {
 
                 <div className="flex flex-col w-full">
 
-                    <div className="p-8">
-                        <p>All</p>
-                        <h3 className="font-bold text-3xl">New Releases</h3>
+                    <div className="p-8 flex justify-between items-end">
+                        <div>
+                            <p>All</p>
+                            <h3 className="font-bold text-3xl">New Releases</h3>
+                        </div>
+
+                        <div className="mb-2 text-center">
+                            <Link href="/fabrics">
+                                <a title="fabrics" className=" text-xs md:text-base underline font-semibold py-3">
+                                    View All
+                            </a>
+                            </Link>
+                        </div>
                     </div>
 
                     <ProductListing
@@ -78,13 +88,7 @@ function Index() {
                         container={false}
                     />
 
-                    <div className="px-8 w-full text-center">
-                        <Link href="/fabrics">
-                            <a title="fabrics" className="transition-all duration-200 ease-in-out text-xs md:text-base bg-gray-900 hover:bg-gray-700 text-gray-100 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
-                                View More
-                            </a>
-                        </Link>
-                    </div>
+
                 </div>
             </div>
 
@@ -95,7 +99,7 @@ function Index() {
                         <div className="absolute top-0 right-0 bottom-0 left-0" style={{ backgroundColor: "rgba(0,0,0, .3)" }}></div>
                         <div className="z-10">
                             <h3 className="text-white mb-3 uppercase text-3xl font-bold">Shop Fabrics</h3>
-                            <Link href="/fabrics">
+                            <Link href="/fabrics?sub_category=cotton">
                                 <a title="Fabrics" className="transition-all duration-200 ease-in-out text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
                                     Shop
                                 </a>
@@ -105,11 +109,11 @@ function Index() {
                 </div>
 
                 <div className="w-full lg:w-1/2 rounded overflow-hidden px-8 mb-8">
-                    <div className="flex justify-center items-center text-center relative" style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/11/DISNEY-FROZEN-ANNA-ELSA-LITTLE-JOHNNY-DIGITAL-COTTON-800x640-1-600x480.jpg')", minHeight: "400px", maxHeight: "650px", objectFit: "cover", }}>
+                    <div className="flex justify-center items-center text-center relative" style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/11/DINOSAUR-VOLCANO-COTTON-JERSEY-0620-NAVY-315-800x640-1.png')", minHeight: "400px", maxHeight: "650px", objectFit: "cover", }}>
                         <div className="absolute top-0 right-0 bottom-0 left-0" style={{ backgroundColor: "rgba(0,0,0, .3)" }}></div>
                         <div className="z-10">
                             <h3 className="text-white mb-3 uppercase text-3xl font-bold">Shop Jersey</h3>
-                            <Link href="/fabrics">
+                            <Link href="/fabrics?sub_category=jersey">
                                 <a title="Fabrics" className="transition-all duration-200 ease-in-out text-xs md:text-base bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 px-8 text-xs border border-gray-400 rounded-full shadow">
                                     Shop
                                 </a>

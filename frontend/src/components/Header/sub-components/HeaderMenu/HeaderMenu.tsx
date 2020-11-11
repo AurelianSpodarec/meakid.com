@@ -21,13 +21,13 @@ const HeaderMenu = () => {
             />
             <HeaderLink
                 as="/fabrics"
-                href="/[category]"
+                href="/[category]?sub_category=cotton"
                 title="Cotton"
                 label="cotton"
             />
             <HeaderLink
-                as="/fabrics"
-                href="/[category]"
+                as="/fabrics?category=fabrics&sub_category=jersey"
+                href="/[category]?sub_category=jersey"
                 title="Jersey"
                 label="jersey"
             />

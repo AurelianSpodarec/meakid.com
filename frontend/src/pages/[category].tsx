@@ -81,7 +81,7 @@ function Category({ dataFilterOptions }) {
 
                 <div className="flex flex-row justify-between pl-12">
                     <div className="">
-                        <span>Cotton</span>
+                        <span>{router.query.sub_category ? capitalizeFirstLetter(router.query.sub_category) : "All"}</span>
                         <div className="flex items-center">
                             <h1 className="text-3xl mr-3 font-bold text-center text-accent-1">
                                 {capitalizeFirstLetter(category)}
