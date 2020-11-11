@@ -81,7 +81,7 @@ function ProductSlug({ data }) {
     const productCategory = router.query.productCategory
 
 
-    // console.log("s", currentProduct)
+    console.log("currentProduct", currentProduct)
 
     function onAddToCart() {
         if (selectedSize) {

@@ -98,7 +98,7 @@ function Category({ dataFilterOptions }) {
 
                 <div className="flex flex-row">
 
-                    <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} z-50 transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
+                    <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} z-20 transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
                         <div className="lg:hidden flex justify-between w-full">
                             <div></div>
                             <div onClick={() => dispatch(closeFilter())}>X</div>

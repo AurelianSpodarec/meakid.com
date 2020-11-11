@@ -76,7 +76,7 @@ const Basket = () => {
                 <div style={{ "paddingBottom": "100px" }}>
                     <div className="flex justify-between border-b pb-4 mb-8">
                         <p className="text-sm font-bold uppercase">Total</p>
-                        <p className="font-bold">£{totalPrice}</p>
+                        <p className="font-bold">£{totalPrice.toFixed(2)}</p>
                     </div>
 
                     <div className="">
