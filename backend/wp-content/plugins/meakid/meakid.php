@@ -144,9 +144,10 @@ function getProductsList( $args ) {
                 'operator'      => $custom_operator
             ),
             array(
-                'taxonomy' => 'category',
+                'taxonomy' => 'product_cat',
                 'include_children' => false,
-                'terms'    => 34//$args['sub_category'],
+                // 'terms'    => 34//$args['sub_category'],
+                'terms'    => array('fabrics', 'cotton')
             )
         ),
         'product_cat' => $category_slug,
