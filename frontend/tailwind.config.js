@@ -6,17 +6,16 @@ module.exports = {
     purge: {
     content: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
     options: {
-        safelist: [/lg:w-/],
+        safelist: [/lg:w-/,'lg:w-1/4','lg:w-1/3'],
       }
-    }
-    ,
+    },
     theme: {
         extend: {
             width: {
                 "68": "17rem",
                 "94": "23.5rem",
                 "100": "25rem",
-                "104": "26rem",
+                "104": "26rem", 
                 "106": "26.5rem"
             },
             spacing: {
