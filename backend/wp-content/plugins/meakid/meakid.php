@@ -45,8 +45,8 @@ function getProductBySlug( $slug ) {
         'price' => $product->get_price(),
         'featured_image' => $attachment,
 
-        'categories' => $product->get_categories(),
-        'categories_ids' => $product->get_category_ids(),
+        // 'categories' => $product->get_categories(),
+        // 'categories_ids' => $product->get_category_ids(),
 
         'regular_price' => $product->get_regular_price(),
         'sale_price' => $product->get_sale_price(),
@@ -66,7 +66,7 @@ function getProductBySlug( $slug ) {
         
         'colors' => array($product->get_attribute( 'colors' )),
         'images' => $product->get_image(),
-        // 'variations' => $product->get_children()
+        // 'variations' => $product->get_children(),
         "variations" => $variations,
     ]);
       
