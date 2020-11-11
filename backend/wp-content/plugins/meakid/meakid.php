@@ -138,7 +138,7 @@ function getProductsList( $args ) {
         $max_price = 99999;
     };
 
-    if ( isset( $args['sub_category'])) {
+    if ( isset( $args['sub_category']) && !(empty($args['sub_category']))) {
     $args = array(
         // 'paginate' => true,
         'limit' => -1,
