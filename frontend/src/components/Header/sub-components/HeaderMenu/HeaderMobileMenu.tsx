@@ -37,7 +37,18 @@ const HeaderMenu = ({ openMenu }) => {
                 href="/[category]"
                 title="Fabrics"
                 label="Fabrics"
-                className="block"
+            />
+            <HeaderLink
+                as="/fabrics"
+                href="/[category]?sub_category=cotton"
+                title="Cotton"
+                label="cotton"
+            />
+            <HeaderLink
+                as="/fabrics?category=fabrics&sub_category=jersey"
+                href="/[category]?sub_category=jersey"
+                title="Jersey"
+                label="jersey"
             />
             {/* <HeaderLink
                 as="/uncategorized"
