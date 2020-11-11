@@ -89,8 +89,8 @@ function Index() {
             </div>
 
 
-            <section className="flex m my-16">
-                <div className="w-full lg:1/2 rounded overflow-hidden px-8 mb-8">
+            <section className="flex m my-16 flex-wrap">
+                <div className="w-full lg:w-1/2 rounded overflow-hidden px-8 mb-8">
                     <div className="flex justify-center items-center text-center relative" style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/10/flamingos1.jpg')", maxHeight: "650px", minHeight: "400px", objectFit: "cover" }}>
                         <div className="absolute top-0 right-0 bottom-0 left-0" style={{ backgroundColor: "rgba(0,0,0, .3)" }}></div>
                         <div className="z-10">
@@ -104,7 +104,7 @@ function Index() {
                     </div>
                 </div>
 
-                <div className="w-full lg:1/2 rounded overflow-hidden px-8 mb-8">
+                <div className="w-full lg:w-1/2 rounded overflow-hidden px-8 mb-8">
                     <div className="flex justify-center items-center text-center relative" style={{ backgroundImage: "url('https://api.meakid.co.uk/wp-content/uploads/2020/11/DISNEY-FROZEN-ANNA-ELSA-LITTLE-JOHNNY-DIGITAL-COTTON-800x640-1-600x480.jpg')", minHeight: "400px", maxHeight: "650px", objectFit: "cover", }}>
                         <div className="absolute top-0 right-0 bottom-0 left-0" style={{ backgroundColor: "rgba(0,0,0, .3)" }}></div>
                         <div className="z-10">
