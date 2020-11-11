@@ -149,7 +149,6 @@ function Checkout() {
                 console.log("buy res order", response.data);
 
                 Router.push('/thankyou')
-                // go to thank you page 
             })
             .catch((error) => {
                 console.log(error.response.data);
