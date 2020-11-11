@@ -110,19 +110,8 @@ const Header = () => {
 
     return (
         <>
-
-
             <header style={{ maxHeight: "63px" }} className={`fixed z-20 left-0 right-0 top-0 bg-white border-solid border-1 border-b border-gray-300 w-full`}>
-                {/* <div className="text-center">
-                    <div style={{
-                        padding: "10px 0px",
-                        background: "#e85541",
-                        color: "white",
-                        fontWeight: "bold",
-                    }}>
-                        We're experiencing problem with the checkout and we are working on a fix. Thank you for your patience.
-                    </div>
-                </div> */}
+
                 <div className="justify-between mx-auto flex flex-wrap sm:p-4 flex-row items-center relative">
 
                     <HeaderLogo />
@@ -157,8 +146,8 @@ const Header = () => {
                             </div>
                         </>
                     }
-                    <HeaderMobileMenu openMenu={openMenu} />
                 </div>
+                <HeaderMobileMenu openMenu={openMenu} />
 
 
             </header>

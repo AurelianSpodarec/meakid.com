@@ -88,9 +88,7 @@ function getProductBySlug( $slug ) {
 function getProductsList( $args ) {
     global $product;
 
-
     $offset = 0;
-   
     $orderby = 'date';
     $order = 'DESC';
 
@@ -106,14 +104,6 @@ function getProductsList( $args ) {
 
     if ( isset( $args['category'])) {
         $category_slug = $args['category'];
-
-        // $args = array('child_of' => 17);
-        // $categories = get_categories( $args );
-        // foreach($categories as $category) { 
-        //     echo '<p>Category: <a href="' . get_category_link( $category->term_id ) . '" title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '" ' . '>' . $category->name.'</a> </p> ';
-        //     echo '<p> Description:'. $category->description . '</p>';
-        //     echo '<p> Post Count: '. $category->count . '</p>';  
-        // }
     }
 
     if ( isset( $args['page'])) {
@@ -132,7 +122,6 @@ function getProductsList( $args ) {
     }
 
 
-
     if ( isset( $args['price'])) {
         $min_price = intval($args['price']['min']);
         $max_price = intval($args['price']['max']);
@@ -142,33 +131,31 @@ function getProductsList( $args ) {
     };
 
     if ( isset( $args['sub_category']) && !(empty($args['sub_category']))) {
-    $args = array(
-        // 'paginate' => true,
-        'limit' => -1,
-        'orderby' => $orderby,
-        'order' => $order,
-        'price_between' => array($min_price, $max_price),
-        'tax_query' => array( 
-            array(
-                'taxonomy'      => 'pa_colors',
-                'field'         => 'slug',
-                'terms'         => $custom_colors,
-                'operator'      => $custom_operator
-            ),
-            array(
-                'taxonomy' => 'product_cat',
-                'include_children' => false,
-                'field' => 'slug',
-                // 'terms'    => 34//$args['sub_category'],
-                'terms'    => $sub_category
-            )
-        ),
-        'product_cat' => $category_slug,
-        'return' => 'ids',
-    );
-    } else {
         $args = array(
             // 'paginate' => true,
+            'limit' => -1,
+            'orderby' => $orderby,
+            'order' => $order,
+            'price_between' => array($min_price, $max_price),
+            'tax_query' => array( 
+                array(
+                    'taxonomy'      => 'pa_colors',
+                    'field'         => 'slug',
+                    'terms'         => $custom_colors,
+                    'operator'      => $custom_operator
+                ),
+                array(
+                    'taxonomy' => 'product_cat',
+                    'include_children' => false,
+                    'field' => 'slug',
+                    'terms'    => $sub_category
+                )
+            ),
+            'product_cat' => $category_slug,
+            'return' => 'ids',
+        );
+    } else {
+        $args = array(
             'limit' => -1,
             'orderby' => $orderby,
             'order' => $order,
@@ -186,14 +173,8 @@ function getProductsList( $args ) {
         );
     }
 
-    // 
-    //     $args['tax_query'] = 
-    // };
-    
-
 
     $all_products_query = new WC_Product_Query($args); 
-    // $all_products = $all_products_query->get_products();
 
     $args['limit'] = $limit;
     $args['page'] = $custom_page;
