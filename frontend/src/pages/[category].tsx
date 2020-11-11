@@ -51,8 +51,8 @@ function Category({ dataFilterOptions }) {
         const url = "https://meakid.co.uk";
         let bbb = Object.entries(router.query).reduce((acc, [key, value]) => `${acc}${key}=${value}&`, `${url.length ? "?" : "&"}`).slice(0, -1);
 
-        const response = await WooCommerce.get(`products-list${bbb}&sub_category=cotton`).catch(e => console.log("Error", e));
-
+        const response = await WooCommerce.get(`products-list${bbb}&sub_category=Cotton`).catch(e => console.log("Error", e));
+        console.log(response)
         if (response.data.products.length === 0) {
             setProductListStatus(PRODUCT_LIST_STATES.failure);
         } else {

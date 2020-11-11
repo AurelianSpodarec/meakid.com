@@ -146,8 +146,8 @@ function getProductsList( $args ) {
             array(
                 'taxonomy' => $category_slug,
                 'include_children' => false,
-                'field'    => 'name',
-                'terms'    => $args['sub_category'],
+                'field'    => 'id',
+                'terms'    => 34//$args['sub_category'],
             )
         ),
         'product_cat' => $category_slug,
