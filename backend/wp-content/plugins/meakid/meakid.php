@@ -236,7 +236,7 @@ function getProductsList( $args ) {
                 'colors'            => $colors,
                 'colors_count'      => $colors_count,
                 'category'          => $product_cat,
-                'categories_test'        => $product_category_fetch,
+                // 'categories_test'        => $product_category_fetch,
                 'featured_image'    => $attachment[0],
                 'product_variation' => $product_variation
             ]);
