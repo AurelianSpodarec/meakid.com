@@ -79,7 +79,7 @@ function Category({ dataFilterOptions }) {
             {/* <Layout> */}
             <section>
 
-                <div className="flex flex-row justify-between pl-12">
+                <div className="flex flex-row justify-between pl-12 pr-8">
                     <div className="">
                         <span>{router.query.sub_category ? capitalizeFirstLetter(router.query.sub_category) : "All"}</span>
                         <div className="flex items-center">
