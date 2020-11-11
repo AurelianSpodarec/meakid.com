@@ -62,7 +62,6 @@ function Category({ dataFilterOptions }) {
     }
 
     function toggleFilter() {
-        console.log("fire")
         if (openFilterState) {
             dispatch(closeFilter())
         } else {
@@ -101,14 +100,15 @@ function Category({ dataFilterOptions }) {
                     <aside style={{ minWidth: '240px' }} className={`${openFilterState ? 'translate-y-0' : 'translate-y-full'} z-20 transform lg:translate-y-0 transition ease-in-out duration-500 fixed overflow-y-auto bg-white left-0 right-0 h-screen z-10 bottom-0 lg:block pl-4 lg:pl-12  lg:relative`}>
                         <div className="lg:hidden flex justify-between w-full">
                             <div></div>
-                            <div onClick={() => dispatch(closeFilter())}>X</div>
+                            <div className="pt-8 pr-8 font-bold text-3xl" onClick={() => dispatch(closeFilter())}>
+                                <svg height="30px" width="30px" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                            </div>
                         </div>
                         <SidebarFilter filterOptions={dataFilterOptions} />
                     </aside>
 
                     <div className="flex flex-col w-full">
                         <ProductListing data={productList} productListStatus={productListStatus} />
-
                     </div>
 
                 </div>
