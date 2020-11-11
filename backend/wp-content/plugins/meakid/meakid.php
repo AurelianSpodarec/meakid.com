@@ -148,7 +148,7 @@ function getProductsList( $args ) {
                 'include_children' => false,
                 'field' => 'slug',
                 // 'terms'    => 34//$args['sub_category'],
-                'terms'    => array('jersey')
+                'terms'    => array($args['sub_category'])
             )
         ),
         'product_cat' => $category_slug,
