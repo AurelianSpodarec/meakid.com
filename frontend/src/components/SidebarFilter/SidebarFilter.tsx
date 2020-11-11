@@ -15,6 +15,7 @@ const SidebarFilter = ({ filterOptions }) => {
 
     const [urlColors, setUrlColors] = useState([]);
 
+
     const checkBox = cxs({
         width: '13px',
         height: '13px',
@@ -50,6 +51,13 @@ const SidebarFilter = ({ filterOptions }) => {
 
             setSelectedColorsNumber(activeColorsArray.length)
         }
+
+        if (router.query.category) {
+            const activeColors: any = router.query.category;
+            // const activeColorsArray = activeColors ? activeColors.split(',') : false;
+
+            // setSelectedColorsNumber(activeColorsArray.length)
+        }
     }, [router.query.colors])
     // Get the old url, and replace with new url
 
@@ -59,17 +67,9 @@ const SidebarFilter = ({ filterOptions }) => {
 
         let newQuery;
 
-
-        // If colors empty, create colors with the new value
-        // If there are no colors, error check that so it doesn't return the colors
-
         const activeColors: any = router.query.colors;
-
-
         const activeColorsArray = activeColors ? activeColors.split(',') : false;
-
         const exist = activeColors ? activeColorsArray.filter(color => color === clickedColor) : false;
-
 
         if (exist.length === 0) {
             const b = [...activeColorsArray, clickedColor]
@@ -95,6 +95,51 @@ const SidebarFilter = ({ filterOptions }) => {
 
     }
 
+    const onChangeSubCategory = (clickedCategoryName) => {
+        let newQuery;
+        const activeSubCategories: any = router.query.sub_category;
+        const activeSubCategoriesArray = activeSubCategories ? activeSubCategories.split(',') : false;
+
+        const exist = activeSubCategories ? activeSubCategoriesArray.filter(cat => cat === clickedCategoryName) : false;
+
+
+        console.log("newQuery", router.query.sub_categories)
+
+        // if it exist, take it out
+        if (clickedCategoryName === "all") {
+
+            Router.push({
+                pathname: '/fabrics',
+                query: { ...Router.query, sub_category: "" }
+            })
+        } else {
+
+
+            if (exist.length === 0) {
+                Router.push({
+                    pathname: '/fabrics',
+                    query: { ...Router.query, sub_category: clickedCategoryName }
+                })
+            } else if (exist) {
+                const newActiveColorsArray = activeSubCategoriesArray.filter(colors => colors !== clickedCategoryName)
+                newQuery = newActiveColorsArray.join(',')
+
+                Router.push({
+                    pathname: '/fabrics',
+                    query: { ...Router.query, sub_category: newQuery }
+                })
+
+
+            } else {
+                Router.push({
+                    pathname: '/fabrics',
+                    query: { ...Router.query, sub_category: clickedCategoryName }
+                })
+            }
+        }
+
+    }
+
 
     if (!filterOptions) {
         return <div>Loading</div>
@@ -104,25 +149,35 @@ const SidebarFilter = ({ filterOptions }) => {
         <div>
 
             <div>
-                <h3 className="font-bold py-4">Style</h3>
+                <h3 className="font-bold py-4">Material Type</h3>
                 <div className="flex-wrap py-2 ">
 
                     <div className="md:flex md:items-center mb-6">
                         <div className=""></div>
-                        <label className="block text-gray-500 font-bold">
-                            <input className="mr-2 leading-tight" type="checkbox" />
+                        <label onClick={() => onChangeSubCategory('all')} className="block text-gray-500 font-bold">
+                            <input className="mr-2 leading-tight" type="radio" id="sub_category" checked={router.query.sub_category === ""} />
                             <span className="text-sm">
-                                Fabrics
+                                All
                             </span>
                         </label>
                     </div>
 
                     <div className="md:flex md:items-center mb-6">
                         <div className=""></div>
-                        <label className="block text-gray-500 font-bold">
-                            <input className="mr-2 leading-tight" type="checkbox" />
+                        <label onClick={() => onChangeSubCategory('cotton')} className="block text-gray-500 font-bold">
+                            <input className="mr-2 leading-tight" type="radio" id="sub_category" checked={router.query.sub_category === "cotton"} />
                             <span className="text-sm">
-                                Uncategorised
+                                Cotton
+                            </span>
+                        </label>
+                    </div>
+
+                    <div className="md:flex md:items-center mb-6">
+                        <div className=""></div>
+                        <label onClick={() => onChangeSubCategory('jersey')} className="block text-gray-500 font-bold">
+                            <input className="mr-2 leading-tight" type="radio" id="sub_category" checked={router.query.sub_category === "jersey"} />
+                            <span className="text-sm">
+                                Jersey
                             </span>
                         </label>
                     </div>

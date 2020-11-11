@@ -51,7 +51,7 @@ function Category({ dataFilterOptions }) {
         const url = "https://meakid.co.uk";
         let bbb = Object.entries(router.query).reduce((acc, [key, value]) => `${acc}${key}=${value}&`, `${url.length ? "?" : "&"}`).slice(0, -1);
 
-        const response = await WooCommerce.get(`products-list${bbb}&sub_category=`).catch(e => console.log("Error", e));
+        const response = await WooCommerce.get(`products-list${bbb}`).catch(e => console.log("Error", e));
         console.log(response)
         if (response.data.products.length === 0) {
             setProductListStatus(PRODUCT_LIST_STATES.failure);
@@ -80,11 +80,14 @@ function Category({ dataFilterOptions }) {
             <section>
 
                 <div className="flex flex-row justify-between pl-12">
-                    <div className="flex items-center">
-                        <h1 className="text-3xl mr-3 font-bold text-center text-accent-1">
-                            {capitalizeFirstLetter(category)}
-                        </h1>
-                        <span>({productList && productList.totalProducts})</span>
+                    <div className="">
+                        <span>Cotton</span>
+                        <div className="flex items-center">
+                            <h1 className="text-3xl mr-3 font-bold text-center text-accent-1">
+                                {capitalizeFirstLetter(category)}
+                            </h1>
+                            <span className="text-2xl font-bold">({productList && productList.totalProducts})</span>
+                        </div>
                     </div>
 
                     <div className="lg:hidden" onClick={() => toggleFilter()}>

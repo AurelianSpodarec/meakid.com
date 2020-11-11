@@ -19,6 +19,19 @@ const HeaderMenu = () => {
                 title="Fabrics"
                 label="Fabrics"
             />
+            <HeaderLink
+                as="/fabrics"
+                href="/[category]"
+                title="Cotton"
+                label="cotton"
+            />
+            <HeaderLink
+                as="/fabrics"
+                href="/[category]"
+                title="Jersey"
+                label="jersey"
+            />
+
             {/* <HeaderLink
                 as="/uncategorized"
                 href="/[category]"
