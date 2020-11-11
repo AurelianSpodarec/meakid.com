@@ -138,6 +138,7 @@ function getProductsList( $args ) {
         $max_price = 99999;
     };
 
+    if ( isset( $args['sub_category'])) {
     $args = array(
         // 'paginate' => true,
         'limit' => -1,
@@ -162,8 +163,27 @@ function getProductsList( $args ) {
         'product_cat' => $category_slug,
         'return' => 'ids',
     );
+    } else {
+        $args = array(
+            // 'paginate' => true,
+            'limit' => -1,
+            'orderby' => $orderby,
+            'order' => $order,
+            'price_between' => array($min_price, $max_price),
+            'tax_query' => array( 
+                array(
+                    'taxonomy'      => 'pa_colors',
+                    'field'         => 'slug',
+                    'terms'         => $custom_colors,
+                    'operator'      => $custom_operator
+                )
+            ),
+            'product_cat' => $category_slug,
+            'return' => 'ids',
+        );
+    }
 
-    // if ( isset( $args['sub_category'])) {
+    // 
     //     $args['tax_query'] = 
     // };
     
