@@ -144,11 +144,11 @@ function getProductsList( $args ) {
                 'operator'      => $custom_operator
             ),
             array(
-                'taxonomy' => 'product_cat',
+                'taxonomy' => 'category',
                 'include_children' => false,
                 'field' => 'slug',
                 // 'terms'    => 34//$args['sub_category'],
-                'terms'    => array('fabrics', 'jersey')
+                'terms'    => array('jersey')
             )
         ),
         'product_cat' => $category_slug,
@@ -236,6 +236,7 @@ function getProductsList( $args ) {
                 'colors'            => $colors,
                 'colors_count'      => $colors_count,
                 'category'          => $product_cat,
+                'categories_test'        => $product_category_fetch,
                 'featured_image'    => $attachment[0],
                 'product_variation' => $product_variation
             ]);
