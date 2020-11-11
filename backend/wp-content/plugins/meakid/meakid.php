@@ -146,8 +146,9 @@ function getProductsList( $args ) {
             array(
                 'taxonomy' => 'product_cat',
                 'include_children' => false,
+                'field' => 'slug',
                 // 'terms'    => 34//$args['sub_category'],
-                'terms'    => array('fabrics', 'cotton')
+                'terms'    => array('fabrics', 'jersey')
             )
         ),
         'product_cat' => $category_slug,
