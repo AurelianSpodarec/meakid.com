@@ -2,7 +2,7 @@
  
 ## Instructions
 
-Frontend Folder
+Frontend Folders
 
 Backend Folders
  
