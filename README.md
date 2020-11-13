@@ -1,4 +1,4 @@
-# Meakid website
+# Meakid website info
  
 ## Instructions
 
