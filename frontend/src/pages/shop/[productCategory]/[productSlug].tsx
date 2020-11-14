@@ -261,36 +261,37 @@ function ProductSlug({ data }) {
                             <button onClick={() => onAddToCart()} className="bg-blue-600 w-full rounded-full uppercase py-4 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Add to cart</button>
                         </div>
 
-                        {selectedSize ?
-                            <div className="mt-8">
-                                <div className="mb-3">
-                                    <h3 className="font-bold">Description</h3>
 
-                                    <div className="mb-2">
-                                        {currentProduct.dimensions.width &&
-                                            <p>Width: {currentProduct.dimensions.width}cm</p>
-                                        }
+                        <div className="mt-8">
+                            <div className="mb-3">
+                                <h3 className="font-bold">Description</h3>
 
-                                        {currentProduct.dimensions.weight &&
-                                            <p>Weight: {currentProduct.dimensions.weight}</p>
-                                        }
-                                    </div>
+                                <div className="mb-2">
 
-                                    {currentProduct.variation_description &&
-                                        <p>{currentProduct.variation_description && currentProduct.variation_description.replace(removeHTMLtags, '')}</p>
+                                    {selectedSize && currentProduct.dimensions.width &&
+                                        <p>Width: {currentProduct.dimensions.width}cm</p>
+                                    }
+
+                                    {selectedSize && currentProduct.dimensions.weight &&
+                                        <p>Weight: {currentProduct.dimensions.weight}</p>
                                     }
                                 </div>
-
-                                <div>
-                                    <h3 className="font-bold">Delivery & Returns</h3>
-                                    <ul className="list-disc pl-4">
-                                        <li>Good News! We are dispatching as normal</li>
-                                        <li>Returns allowed up to 14days</li>
-                                        <li>Delivery price counted on checkout</li>
-                                    </ul>
-                                </div>
+                                {selectedSize ?
+                                    currentProduct.variation_description &&
+                                    <p>{currentProduct.variation_description && currentProduct.variation_description.replace(removeHTMLtags, '')}</p>
+                                    : "Please select a size to see description"}
                             </div>
-                            : ""}
+
+                            <div>
+                                <h3 className="font-bold">Delivery & Returns</h3>
+                                <ul className="list-disc pl-4">
+                                    <li>Good News! We are dispatching as normal</li>
+                                    <li>Returns allowed up to 14days</li>
+                                    <li>Delivery price counted on checkout</li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </aside>
 
 
