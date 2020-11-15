@@ -252,7 +252,7 @@ function ProductSlug({ data }) {
                                 </div>
                             </div>
                             <div className="flex md:ml-2 items-center">
-                                <p className="font-bold mr-2 ">Total:</p><span>£{totalPrice && totalPrice.toFixed(2)}GBP</span>
+                                <p className="font-bold mr-2 ">Total: </p><span>£{totalPrice && totalPrice.toFixed(2)}GBP</span>
                             </div>
                         </div>
 
