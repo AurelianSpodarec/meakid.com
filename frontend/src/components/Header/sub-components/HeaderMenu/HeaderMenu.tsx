@@ -32,9 +32,9 @@ const HeaderMenu = () => {
                 label="jersey"
             />
             <HeaderLink
-                href="/privacy-policy"
-                title="Privacy Policy"
-                label="Privacy Policy"
+                href="/policy"
+                title="Policy"
+                label="Policy"
             />
         </nav>
 
