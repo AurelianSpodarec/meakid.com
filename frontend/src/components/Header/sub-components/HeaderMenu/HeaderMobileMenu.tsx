@@ -65,9 +65,9 @@ const HeaderMenu = ({ openMenu }) => {
                 className="block"
             /> */}
             <HeaderLink
-                href="/contact"
-                title="Contact"
-                label="Contact"
+                href="/privacy-policy"
+                title="Privacy Policy"
+                label="Privacy Policy"
                 className="block"
             />
         </nav>
