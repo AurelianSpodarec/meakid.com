@@ -51,12 +51,7 @@ const HeaderMenu = ({ openMenu }) => {
                 label="jersey"
             />
 
-            <HeaderLink
-                href="/policy"
-                title="Policy"
-                label="Policy"
-                className="block"
-            />
+           
         </nav>
 
     )
