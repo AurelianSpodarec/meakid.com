@@ -50,22 +50,9 @@ const HeaderMenu = ({ openMenu }) => {
                 title="Jersey"
                 label="jersey"
             />
-            {/* <HeaderLink
-                as="/uncategorized"
-                href="/[category]"
-                title="Uncategorized"
-                label="Uncategorized"
-                className="block"
-            />
+
             <HeaderLink
-                as="/test"
-                href="/[category]"
-                title="test"
-                label="test"
-                className="block"
-            /> */}
-            <HeaderLink
-                  href="/policy"
+                href="/policy"
                 title="Policy"
                 label="Policy"
                 className="block"
