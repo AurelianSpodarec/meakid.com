@@ -9,7 +9,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.4.0",
-        "@woocommerce/woocommerce-rest-api": "^1.0.1",
+        "@woocommerce/woocommerce-rest-api": "^1.0.2",
         "cxs": "^6.2.0",
         "immer": "^7.0.9",
         "next": "^10.0.1",
