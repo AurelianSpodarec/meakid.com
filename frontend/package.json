@@ -12,7 +12,7 @@
         "@woocommerce/woocommerce-rest-api": "^1.0.1",
         "cxs": "^6.2.0",
         "immer": "^7.0.9",
-        "next": "^10.0.1",
+        "next": "^16.4.2",
         "query-string": "^6.13.1",
         "react": "16.13.1",
         "react-dom": "^16.13.1",
